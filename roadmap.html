@@ -710,6 +710,12 @@
   }
   .qhead .pct { line-height:1.15; margin-bottom:3px; }
   @media screen and (max-width: 700px) and (orientation: portrait) { .hero .grid-4 { grid-template-columns:1fr !important; } .tag { white-space:normal; } }
+  /* portrait reflow fix (2026-10-27): the v2 add-on .stage .slide padding (88px sides) was overriding the portrait padding */
+  @media screen and (max-width: 700px) and (orientation: portrait) {
+    .stage .slide, .stage .slide.bo-slide { padding:18px 16px 28px; }
+    .stage .slide.has-ticker { padding:18px 16px 0; }
+    .years > *, .qgrid > *, .kgrid > *, .mgrid > *, .wgrid > *, .ygrid > *, .prompts > *, .grid-4 > * { min-width:0; }
+  }
 </style>
 </head>
 <body>
