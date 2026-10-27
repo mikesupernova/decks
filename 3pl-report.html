@@ -1,0 +1,1146 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="robots" content="noindex,nofollow">
+<meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
+<title>3PL Performance Report · Light Bento Pro · Week ending 2026-10-30 (EXAMPLE WEEK)</title>
+<!-- INTERNAL · Verkada brand elements (logo, colours, type) approved for this internal report only. DO NOT publish to the public GitHub Pages site or /workspace/gh-decks.
+     MODE: SANITIZED (M-01 open). Light Bento Pro (ALTERNATE style, comms/brand/styles/light-bento-pro.md).
+     Content rebuilt from comms/friday-report-deck.html (16 slides, the 3PL performance report). Every figure is copied exactly from that
+     source and is EXAMPLE data: made-up names and numbers, not Verkada data. Chart shapes that the source has no data for are marked
+     "EXAMPLE placeholder". Self-contained: no web fonts, no CDNs, no third-party logos. -->
+<style>
+:root{--cv:#F4F5F4;--cd:#FFFFFF;--tx:#2D2D2D;--sc:#6B6B6B;--sage:#B2C2B5;--aqua:#8BBFBA;--lav:#9898B0;--sand:#CDC8BC;--teal:#1190D7;--vk:#1190D7;--vk2:#4FC3F7;--vkt:#E1F1F9;--vkd:#0B6FA8;--stone:#C9C4C8;--disp:Poppins,Inter,-apple-system,BlinkMacSystemFont,'Segoe UI',system-ui,sans-serif;--ln:#E6E8E6;--miss:#C9826E;--sh:0 18px 48px rgba(0,0,0,.05);--ease:cubic-bezier(.16,1,.3,1)}
+*{box-sizing:border-box}
+html,body{margin:0;height:100%;background:var(--cv);color:var(--tx);font-family:Inter,-apple-system,BlinkMacSystemFont,'Segoe UI',system-ui,Roboto,'Helvetica Neue',Arial,sans-serif;-webkit-font-smoothing:antialiased;font-feature-settings:"tnum" 1,"cv11" 1}
+body{overflow:hidden}
+#viewport{position:fixed;inset:0;overflow:hidden}
+#stage{position:absolute;left:0;top:0;width:1280px;height:720px;transform-origin:0 0}
+.slide{position:absolute;inset:0;padding:26px 72px 30px;display:none;flex-direction:column}
+.slide.active{display:flex}
+/* type */
+.ml{font-size:10px;letter-spacing:.16em;text-transform:uppercase;color:var(--sc);font-weight:600;line-height:1.4}
+.hdr{display:flex;justify-content:space-between;align-items:center;gap:16px}
+.hdr>.ml:first-child{color:var(--vkd);display:flex;align-items:center;gap:8px}
+.vm{width:19px;height:13px;fill:var(--tx);flex:none}
+/* Verkada footer: wordmark, internal label, page number */
+.vfoot{position:absolute;left:72px;right:72px;bottom:9px;display:flex;align-items:center;gap:10px;font-size:9px;letter-spacing:.12em;text-transform:uppercase;color:#9a9a9a;font-weight:600}
+.vfoot svg{width:58px;height:10.4px;fill:#3a3a3a}
+.vfoot .pg{margin-left:auto;font-variant-numeric:tabular-nums}
+.vfoot i{width:3px;height:3px;border-radius:50%;background:#c4c4c4;display:inline-block}
+/* Inventory health slide */
+.phrow{display:flex;align-items:center;gap:12px;margin:0 0 10px;flex-wrap:wrap}
+.phchip{display:inline-flex;align-items:center;gap:8px;font-size:11px;font-weight:700;letter-spacing:.02em;color:#6b4a12;background:#FBEBC8;border:1.5px solid #E7B85A;border-radius:999px;padding:4px 14px}
+.phchip i{width:8px;height:8px;border-radius:50%;background:#D9972B;flex:none}
+.phnote{font-size:11px;color:var(--sc)}
+.fx{font-size:9.6px!important;line-height:1.4;color:var(--sc);margin-top:auto!important;padding-top:6px;border-top:1px solid var(--ln)}
+.fx b{color:var(--tx)}
+table.inv{font-size:10.2px}
+table.inv td{padding-top:2px!important;padding-bottom:2px!important}
+table.inv tr.tot td{font-weight:700;border-top:1px solid var(--ln)}
+.agegrid{display:grid;grid-template-columns:56px 1fr 70px;gap:9px 12px;align-items:center;font-size:11px;margin-top:4px}
+.agegrid .stack{height:18px}
+.agegrid .stack i.ar{box-shadow:inset 0 0 0 1.5px rgba(155,77,56,.55)}
+.agegrid .risk{font-family:var(--disp);font-weight:600;font-size:15px;color:#9b4d38;white-space:nowrap}
+.agegrid .risk small{font-family:Inter,sans-serif;font-size:8.5px;letter-spacing:.12em;text-transform:uppercase;color:var(--sc);margin-left:4px;font-weight:600}
+.agegrid .risk.hi{background:#f7ebe6;border-radius:8px;padding:1px 6px;margin-left:-6px}
+.valgrid,.iragrid{display:grid;grid-template-columns:56px 1fr 62px 70px;gap:8px 12px;align-items:center;font-size:11px;margin-top:2px}
+.iragrid{grid-template-columns:56px 1fr 96px 86px;gap:6px 12px}
+.valgrid .v,.iragrid .v{font-family:var(--disp);font-weight:600;font-size:13px;white-space:nowrap}
+.iragrid .v.s{font-family:Inter,sans-serif;font-weight:600;font-size:11px;color:var(--sc);text-align:right}
+.valgrid .pd{text-align:center}
+.iragrid .ax{font-size:8.5px;letter-spacing:.1em;text-transform:uppercase;color:var(--sc);display:flex;justify-content:space-between;font-weight:600}
+.iragrid .ax.r{justify-content:flex-start}.iragrid .ax.r:last-child{justify-content:flex-end}
+.iragrid .ax em{font-style:normal;color:var(--tx);position:relative;left:12%}
+/* Verkada title treatment: matte stone stage, extruded white mark under soft top-left light */
+.vk-hero{background:#EFEDEB!important;box-shadow:none!important;justify-content:space-between;padding:48px 64px!important}
+.vk-hero .ml,.vk-hero .mode{color:#4a464a}
+.vk-hero p{color:#3b383b}
+.vk-hero .htext{max-width:860px}
+.vk-hero h1{font-size:56px;line-height:1.06}
+.vk-sub{font-size:18px!important;color:#3b383b;margin-top:22px;line-height:1.45}
+.vk-date{margin-top:14px;font-size:12px;letter-spacing:.06em;color:#5a565a;font-weight:600;display:flex;align-items:center;gap:10px;flex-wrap:wrap}
+.vk-date>i{width:3px;height:3px;border-radius:50%;background:#a9a4a8}
+.vk-hero h1::after{content:"";display:block;width:44px;height:4px;border-radius:2px;background:var(--vk);margin-top:16px}
+.vk-logo{height:22px;width:123px;fill:#2a282a;display:block}
+.vk-hero .st{box-shadow:0 1px 0 rgba(255,255,255,.5)}
+.mode{font-size:9px;letter-spacing:.14em;text-transform:uppercase;color:#8a8a8a;font-weight:600;white-space:nowrap}
+h1{font-family:var(--disp);font-size:50px;line-height:1.08;letter-spacing:-.02em;font-weight:600;margin:10px 0 14px}
+h2.t{font-family:var(--disp);font-size:24px;line-height:1.12;letter-spacing:-.015em;font-weight:600;margin:5px 0 4px}
+h2.t::after{content:"";display:block;width:30px;height:3px;border-radius:2px;background:var(--vk);margin-top:6px}
+.sub{font-size:12.5px;color:var(--sc);margin:0 0 12px;line-height:1.45;max-width:1080px}
+h3{font-family:var(--disp);font-size:14.5px;font-weight:500;letter-spacing:-.01em;margin:2px 0 4px;line-height:1.3}
+p{margin:0;color:var(--sc);font-size:12px;line-height:1.5}
+b,strong{color:var(--tx);font-weight:600}
+.fn{font-size:9.5px;color:var(--sc);line-height:1.45;margin-top:9px}
+.fn b{font-weight:600}
+code,.path{font-family:inherit;font-size:.95em;color:#4c4c4c;background:#f1f2f1;border-radius:6px;padding:0 4px}
+/* bento */
+.bento{flex:1;min-height:0;display:grid;grid-template-columns:repeat(12,minmax(0,1fr));gap:14px}
+.card{grid-column:span var(--c,4);grid-row:span var(--r,1);background:var(--cd);border-radius:22px;box-shadow:var(--sh);padding:16px 20px;min-width:0;min-height:0;display:flex;flex-direction:column;position:relative}
+.card>*{flex-shrink:0}.card>.grow1,.card>.tw{flex-shrink:1}
+.roomy p{font-size:13px}.roomy .mid{font-size:30px}.roomy h3{font-size:17px}.roomy table{font-size:13px}.roomy td{padding:9px 8px}.roomy .card>p+p{margin-top:8px!important}
+table.tight td{padding:2.5px 6px}table.tight th{padding:3px 6px 5px}
+.card.tint{background:linear-gradient(160deg,#ffffff 40%,#eef6fb)}
+.hd{display:flex;justify-content:space-between;align-items:flex-start;gap:8px;margin-bottom:8px}
+.hd .r{display:flex;gap:5px;flex-wrap:wrap;justify-content:flex-end}
+.big{white-space:nowrap;font-family:var(--disp);font-size:38px;font-weight:600;letter-spacing:-.025em;line-height:1;color:var(--tx)}
+.big small{font-size:13px;font-weight:600;color:var(--sc);letter-spacing:0;margin-left:6px}
+.mid{font-family:var(--disp);font-size:23px;font-weight:600;letter-spacing:-.02em;line-height:1.05}
+.teal{color:var(--teal)}
+.grow1{flex:1;min-height:0}
+/* chips + pills */
+.ex,.uv,.pd{display:inline-block;font-size:8.5px;letter-spacing:.14em;font-weight:700;border-radius:999px;padding:2px 8px;white-space:nowrap;line-height:1.5;text-transform:uppercase}
+.ex{color:#7d6f4b;background:#f1ede3}
+.uv{color:#5f5f80;background:#ececf3}
+.pd{color:#5f5f80;background:#fff;box-shadow:inset 0 0 0 1px #d6d6e2}
+.st{display:inline-flex;align-items:center;gap:6px;font-size:10.5px;padding:2px 9px;border-radius:999px;background:#e1f1f9;color:#0b6fa8;font-weight:600;white-space:nowrap;line-height:1.6}
+.st i{width:6px;height:6px;border-radius:50%;background:var(--teal);flex:none}
+.st.miss{background:#f7ebe6;color:#9b4d38}.st.miss i{background:var(--miss)}
+.st.risk{background:#f3efe5;color:#7d6c43}.st.risk i{background:#b9a77a}
+.st.unv{background:#efeff4;color:#5f5f80}.st.unv i{background:var(--lav)}
+.st.off{background:#f1f2f1;color:#7b7b7b}.st.off i{background:#c4c6c4}
+.pills{display:inline-flex;background:var(--cv);border-radius:999px;padding:3px;gap:0;flex:none}
+.pills span{font-size:10px;padding:2px 9px;border-radius:999px;color:#9a9a9a;white-space:nowrap;line-height:1.6;font-weight:500}
+.pills .on{background:#fff;color:#0b6fa8;box-shadow:0 2px 8px rgba(0,0,0,.07);font-weight:600}
+.pills .on.miss{color:#9b4d38}.pills .on.risk{color:#7d6c43}.pills .on.unv{color:#5f5f80}
+.pills button{font:inherit;font-size:10.5px;padding:3px 11px;border-radius:999px;border:0;background:transparent;color:var(--sc);cursor:pointer;line-height:1.5}
+.pills button.on{background:#fff;color:var(--tx);box-shadow:0 2px 8px rgba(0,0,0,.07);font-weight:600}
+.up{color:#0b6fa8}.dn{color:#9b4d38}.eq{color:#8a8a8a}
+/* rows + tables */
+.row{display:flex;justify-content:space-between;align-items:center;gap:10px;padding:6px 0;border-top:1px solid var(--ln);font-size:12px}
+.row:first-of-type{border-top:0}
+.tw{overflow:auto;min-height:0}
+table{border-collapse:collapse;width:100%;font-size:11px;line-height:1.35}
+th{font-size:8.5px;letter-spacing:.14em;text-transform:uppercase;color:var(--sc);font-weight:600;text-align:left;padding:4px 7px 6px;border-bottom:1px solid var(--ln);vertical-align:bottom}
+td{padding:5px 7px;border-top:1px solid var(--ln);vertical-align:top;color:#444}
+tr:first-child td{border-top:0}
+td.n{font-weight:600;color:var(--tx);white-space:nowrap}
+td .s{display:block;font-size:9.5px;color:#8a8a8a}
+tr.sum td{background:#f3f8fc;font-weight:600}
+tr.dim td{color:#8a8a8a}
+/* bars */
+.bars{display:flex;align-items:flex-end;gap:12px;position:relative;border-bottom:1px solid var(--ln)}
+.bcol{flex:1;height:100%;display:flex;flex-direction:column;justify-content:flex-end;align-items:center;position:relative;min-width:0}
+.bgrp{flex:1;height:100%;display:flex;align-items:flex-end;gap:4px;justify-content:center;position:relative}
+.bar{width:100%;max-width:46px;border-radius:12px 12px 6px 6px;transform-origin:bottom;position:relative}
+.bgrp .bar{max-width:22px;border-radius:8px 8px 4px 4px}
+.bar .v{position:absolute;bottom:100%;left:50%;transform:translateX(-50%);font-size:10.5px;font-weight:600;white-space:nowrap;padding-bottom:3px;color:var(--tx)}
+.bgrp .bar .v{font-size:9px}
+.bar.ghost{background:repeating-linear-gradient(135deg,#e9e9f0 0 6px,#f4f4f8 6px 12px)!important;box-shadow:inset 0 0 0 1px #d9d9e4}
+.tick{position:absolute;left:0;right:0;height:1.5px;--tc:var(--teal);background:repeating-linear-gradient(90deg,var(--tc) 0 5px,transparent 5px 9px);z-index:6;pointer-events:none}
+.bar{z-index:1}
+.tick span{position:absolute;right:0;top:-15px;font-size:9px;color:#0b6fa8;font-weight:600;background:#fff;padding:0 3px;border-radius:4px}
+.blab{display:flex;gap:12px;margin-top:5px}
+.blab div{flex:1;text-align:center;font-size:9.5px;color:var(--sc);font-weight:600;letter-spacing:.04em;min-width:0}
+.hbar{height:12px;border-radius:999px;background:#f1f2f1;position:relative;overflow:visible;margin:4px 0 2px}
+.hbar>i{position:absolute;left:0;top:0;bottom:0;border-radius:999px;transform-origin:left}
+.hbar>b{position:absolute;top:-4px;bottom:-4px;width:2px;background:var(--tx);border-radius:2px}
+.stack{display:flex;height:16px;border-radius:999px;overflow:hidden;transform-origin:left;background:#f1f2f1}
+.stack i{display:block;height:100%}
+.lg{display:flex;flex-wrap:wrap;gap:4px 12px;font-size:10px;color:var(--sc)}
+.lg i{display:inline-block;width:8px;height:8px;border-radius:3px;margin-right:5px;vertical-align:-1px}
+/* svg charts */
+svg text{font-family:inherit}
+.gridl{stroke:var(--ln);stroke-width:1}
+.draw{stroke-dasharray:1;stroke-dashoffset:0}
+/* avatars */
+.av{width:34px;height:34px;border-radius:50%;flex:none;display:flex;align-items:center;justify-content:center;font-size:8.5px;font-weight:700;letter-spacing:.06em;color:#fff}
+/* title slides */
+.hero{grid-column:1/-1;grid-row:1/-1;overflow:hidden;padding:40px 56px;background:radial-gradient(120% 90% at 8% 0%,#ffffff 0%,#ffffff 45%,#f3f6f4 100%)}
+.mk{display:flex;align-items:center;gap:10px}
+/* motion */
+@keyframes cin{from{opacity:0;transform:translateY(12px)}to{opacity:1;transform:none}}
+@keyframes grow{from{transform:scaleY(0)}to{transform:scaleY(1)}}
+@keyframes growx{from{transform:scaleX(0)}to{transform:scaleX(1)}}
+@keyframes dr{from{stroke-dashoffset:1}to{stroke-dashoffset:0}}
+@keyframes fade{from{opacity:0}to{opacity:1}}
+@keyframes pop{from{opacity:0;transform:scale(.25)}to{opacity:1;transform:none}}
+.js .slide:not(.play) .card,.js .slide:not(.play) .bar,.js .slide:not(.play) .area,.js .slide:not(.play) .rp{opacity:0}
+.js .slide:not(.play) .draw{stroke-dashoffset:1}
+.slide.play .card{animation:cin .45s var(--ease) both;animation-delay:var(--d,0ms)}
+.slide.play .bar{animation:grow .6s var(--ease) both;animation-delay:calc(var(--d,0ms) + 220ms + var(--k,0)*70ms)}
+.slide.play .bar.done,.slide.play .stack.done,.slide.play .hbar>i.done{animation:none}
+.slide.play .hbar>i,.slide.play .stack{animation:growx .7s var(--ease) both;animation-delay:calc(var(--d,0ms) + 220ms + var(--k,0)*70ms)}
+.slide.play .draw{animation:dr 1.3s var(--ease) both;animation-delay:calc(var(--d,0ms) + 300ms + var(--k,0)*150ms)}
+.slide.play .area{animation:fade .9s ease both;animation-delay:calc(var(--d,0ms) + 650ms)}
+.slide.play .rp{animation:pop .7s var(--ease) both;animation-delay:calc(var(--d,0ms) + 300ms + var(--k,0)*120ms);transform-box:view-box;transform-origin:110px 106px}
+/* chrome */
+.nav{position:fixed;left:50%;bottom:16px;transform:translateX(-50%);display:flex;align-items:center;gap:6px;background:rgba(255,255,255,.85);backdrop-filter:blur(10px);-webkit-backdrop-filter:blur(10px);border-radius:999px;padding:5px;box-shadow:0 10px 30px rgba(0,0,0,.08);z-index:20}
+.nav button{font:inherit;font-size:11.5px;border:0;background:transparent;color:var(--tx);padding:6px 13px;border-radius:999px;cursor:pointer;font-weight:500}
+.nav button:hover:not(:disabled){background:var(--cv)}
+.nav button:disabled{color:#bbb;cursor:default}
+.nav #auto.on{background:#e1f1f9;color:#0b6fa8;font-weight:600}
+#counter{font-size:10px;letter-spacing:.14em;color:var(--sc);font-weight:600;min-width:58px;text-align:center}
+#dots{position:fixed;top:12px;right:16px;display:flex;gap:5px;z-index:20}
+#dots .dot{width:6px;height:6px;border-radius:999px;background:#d3d6d3;cursor:pointer;transition:width .3s var(--ease),background .3s}
+#dots .dot.active{width:18px;background:var(--vk)}
+.nav .vm{margin:0 4px 0 8px;width:17px;height:12px}
+/* phone: reflowed vertical page */
+@media screen and (max-width:700px) and (orientation:portrait){
+  body{overflow:auto;height:auto}
+  #viewport{position:static;overflow:visible}
+  #stage{position:static;width:auto;height:auto;transform:none!important}
+  .slide{position:relative;display:flex;padding:26px 16px 30px;inset:auto;border-bottom:1px solid var(--ln)}
+  .slide:last-child{padding-bottom:96px}
+  .hdr{flex-direction:column;align-items:flex-start;gap:4px}
+  .mode{white-space:normal;font-size:8.5px}
+  h1{font-size:38px}
+  h2.t{font-size:23px}
+  .sub{font-size:13.5px}
+  .bento{display:flex;flex-direction:column;gap:12px}
+  .card{padding:16px 16px}
+  .card.hero{padding:22px 20px}
+  p{font-size:13.5px}
+  table{font-size:12px}
+  .tw{overflow-x:auto;-webkit-overflow-scrolling:touch}
+  .tw table{min-width:640px}
+  .fn{font-size:11px}
+  .ml{font-size:10px}
+  .stk3{grid-template-columns:56px 1fr!important}.stk3>span{grid-column:1/-1;margin:-4px 0 4px}
+  .kpi6{grid-template-columns:repeat(3,1fr)!important;row-gap:10px!important;margin-top:10px!important}
+  .vfoot{position:static;margin-top:14px}
+  .card .grow1{flex:none}
+  .bars.grow1{height:180px;margin-top:22px!important}
+  svg.grow1{height:auto}
+  .ph-h{height:auto!important}
+  .ph-160{height:160px!important}
+  #dots{display:none}
+  .nav{bottom:12px}
+  .nav button{padding:7px 12px}
+  .card.hero{min-height:0!important;overflow:hidden}
+  .card.hero.vk-hero{padding:28px 22px!important;min-height:560px!important;gap:28px}
+  .vk-date>i{display:none}
+  .vk-hero h1{font-size:38px}
+  .vk-sub{font-size:15px!important}
+  .agegrid{grid-template-columns:50px 1fr 58px}
+  .valgrid{grid-template-columns:50px 1fr 50px 62px}
+  .iragrid{grid-template-columns:50px 1fr 78px;}
+  .iragrid>*:nth-child(4n){grid-column:2/-1;text-align:left!important;margin-top:-4px}
+  .iragrid .ax.r:last-child{display:none}
+}
+@media (prefers-reduced-motion:reduce){
+  .slide .card,.slide .bar,.slide .hbar>i,.slide .stack,.slide .draw,.slide .area,.slide .rp{animation:none!important;opacity:1!important;transform:none;stroke-dashoffset:0!important}
+}
+@media print{body{overflow:visible}.nav,#dots{display:none}#stage{position:static;transform:none!important}.slide{display:flex;position:relative;width:1280px;height:720px;page-break-after:always}.slide .card,.slide .bar,.slide .area,.slide .rp{opacity:1!important;animation:none!important}.draw{stroke-dashoffset:0!important}}
+</style>
+</head>
+<body>
+<svg width="0" height="0" style="position:absolute" aria-hidden="true" focusable="false"><defs>
+<symbol id="vk-logo" viewBox="0 0 1695 303"><path fill-rule="evenodd" d="M213 294.3C212.2 294 194.1 276.4 172.7 255.1L134 216.5L237.7 112.8C346.4 4.1 343.7 6.6 350.2 8.5C351.4 8.9 368.6 25.2 388.2 44.8C425.8 82.3 426.2 82.8 424.6 89.7C423.7 93.3 226 291.6 221.3 293.6C218 295 215.6 295.2 213 294.3ZM833.5 269C813.5 266.4 797.4 258.3 783.9 244.3C773.5 233.6 767.5 223 763.4 208C760.7 198.2 760.9 179 763.9 168.6C768.1 153.4 775.2 141.8 786.9 130.7C795.6 122.5 804.8 117 817 112.8C826.1 109.7 827.1 109.5 842 109.5C856.8 109.5 857.9 109.7 866.3 112.6C878.6 117.1 885.2 121.3 895 131C904.5 140.4 910 149.6 914.2 163C916.2 169.5 916.5 172.6 916.5 185.5C916.5 193.8 916.2 201.3 915.8 202.2C915.1 203.9 911.4 204 858 204L800.9 204L801.5 206.2C801.9 207.5 803.6 211.1 805.3 214.3C818.7 239.8 857.5 243.5 882.6 221.6L887.6 217.2L897.8 229.8L908 242.5L901.3 248.8C896.3 253.5 892 256.4 884.5 260C872.9 265.5 866 267.5 853.5 269C843.5 270.1 842.2 270.1 833.5 269ZM1253.4 269.1C1241.3 267.2 1231.3 262.1 1223.5 253.9C1199.7 229 1212.6 190.2 1248.6 178.6C1251.3 177.7 1265.8 174.7 1280.9 172C1296 169.3 1308.5 166.8 1308.8 166.5C1310.3 165.1 1306.4 157.3 1302.1 153C1296 146.9 1288.5 144 1278.9 144C1267.4 144 1257.6 148.1 1246.2 157.8L1240.8 162.3L1229.8 151.3L1218.9 140.4L1223.6 135.1C1246.9 109.2 1284.2 101.6 1313.3 116.7C1322.9 121.6 1333.3 132.1 1338.3 141.6C1345.4 155.4 1345.3 154.5 1345.8 213.2L1346.1 266L1327.6 266L1309 266L1309 256C1309 250.5 1308.9 246 1308.7 246C1308.6 246 1305.1 249.3 1301 253.3C1293.2 260.9 1285.1 265.6 1276 267.8C1269.3 269.4 1259.2 270 1253.4 269.1ZM1431 269C1403.6 264.8 1381.4 243.6 1372.8 213.5C1370.8 206.6 1370.5 203.2 1370.5 189.5C1370.5 170.4 1371.8 164.3 1379 149.5C1391.6 123.6 1413.5 109 1439.7 109C1459 109 1477.8 117.4 1486.6 129.9C1488.2 132.1 1489.8 134 1490.2 134C1490.7 134 1491 114.2 1491 90L1491 46L1509.5 46L1528 46L1528 156L1528 266L1509.5 266L1491 266L1491 254.9L1491 243.9L1483.8 251.2C1472.5 262.6 1460.5 268 1443 269.3C1439.4 269.6 1434 269.4 1431 269ZM1593.9 269C1567 264.8 1548.9 242.3 1553 218.1C1556 200.1 1569.1 185.3 1587.5 179.2C1590.8 178.1 1606.1 174.9 1621.4 172.1C1636.7 169.3 1649.5 166.8 1649.8 166.5C1651.1 165.3 1646.3 156.1 1642.5 152.4C1628.6 138.9 1603.5 141.9 1585.2 159.3L1582 162.4L1570.8 151.3L1559.7 140.2L1565.1 134.5C1575.1 123.9 1585.6 117.1 1599.5 112.3C1609.2 108.9 1626.6 108 1637.4 110.4C1655.5 114.5 1671.8 126.8 1679.4 142C1686 155.6 1686 154.8 1686 213.2L1686 266L1668 266L1650 266L1650 256C1650 250.5 1649.8 246 1649.6 246C1649.3 246 1646.6 248.7 1643.4 252C1640.3 255.3 1635.5 259.4 1632.9 261.1C1623 267.4 1606.1 270.8 1593.9 269ZM628.7 206.2C616.2 173.4 597.5 124 587.1 96.5L568.1 46.5L588.3 46.2C599.3 46.1 608.7 46.3 609.1 46.7C609.5 47.2 623.6 84 640.3 128.5C657.1 173.1 671.5 211.1 672.2 213L673.6 216.5L676.4 209.5C677.8 205.6 692.3 167.4 708.4 124.5L737.7 46.5L758.5 46.2C778 46 779.2 46.1 778.5 47.7C778.2 48.7 759.7 97.4 737.5 156C715.3 214.6 696.9 263.3 696.5 264.2C695.8 265.8 693.8 266 673.5 266L651.3 266L628.7 206.2ZM946 189L946 112L964.5 112L983 112L983 123L983 134L990.8 126.3C1002.4 114.6 1014.5 109 1028.2 109L1035 109L1035 128.3L1035 147.5L1023.8 147.5C1013.5 147.5 1012 147.7 1006.3 150.4C995.2 155.5 986.5 167.1 984 180C983.4 183 983 202.7 983 225.6L983 266L964.5 266L946 266L946 189ZM1057 156L1057 46L1075.5 46L1094 46L1094.2 112.2L1094.5 178.4L1124.5 145.2L1154.5 112.1L1177 112L1199.4 112L1195.9 115.8C1193.9 117.8 1181.8 131.2 1169 145.5C1156.2 159.8 1144.6 172.6 1143.3 174.1L1141 176.6L1159.1 203.1C1169.1 217.6 1182.8 237.7 1189.7 247.8L1202.1 266L1181.3 266L1160.5 265.9L1139.1 234.5C1127.4 217.2 1117.4 203 1117 203C1116.6 203 1111.2 208.7 1105.1 215.6L1094 228.1L1094 247.1L1094 266L1075.5 266L1057 266L1057 156ZM1286.8 235.6C1297.2 230.3 1304.2 222 1307.4 211.1C1309.3 204.7 1309.5 196 1307.9 196C1305.7 196 1267.5 203 1264 204C1258.3 205.7 1252.7 209.3 1250.2 213C1244.6 221.3 1251 234.3 1262.6 238C1264.2 238.5 1269.1 238.8 1273.5 238.6C1279.9 238.4 1282.6 237.8 1286.8 235.6ZM1628.1 235.3C1640.3 229.3 1648.5 217 1649.7 203.1C1650.2 197.3 1650 196 1648.9 196C1645.5 196 1607.7 203.1 1603.3 204.6C1590.4 208.9 1585.6 218.6 1591.5 228.6C1595.9 236 1602.6 239 1614 238.7C1620.2 238.5 1622.7 237.9 1628.1 235.3ZM1457.9 231.9C1474.7 228.1 1487.5 213.9 1490.3 196.1C1494 171.7 1478.6 149.8 1454.8 145.8C1437.2 142.9 1419.5 152.1 1411.5 168.3C1402.2 187.2 1405.9 208.7 1420.9 222.3C1430.8 231.2 1444.9 234.9 1457.9 231.9ZM62.3 145.2C4.3 87.6 5.8 89.4 9.4 81.8C10.3 79.9 26.7 62.8 45.8 43.8C83.7 6 83.8 5.9 91.2 9.4C93 10.3 117.9 34.4 146.5 63L198.5 115L157 156.4L115.5 197.9L62.3 145.2ZM877 171.8C877 168.8 871.8 159.7 867.6 155.2C860.7 147.9 853.5 144.7 842.4 144.2C823.3 143.3 810 151.2 803 167.5C801.9 170.1 801 172.4 801 172.6C801 172.8 818.1 173 839 173C868.7 173 877 172.7 877 171.8Z"/></symbol>
+<symbol id="vk-mark" viewBox="0 0 440 303"><path fill-rule="evenodd" d="M213 294.3C212.2 294 194.1 276.4 172.7 255.1L134 216.5L237.7 112.8C346.4 4.1 343.7 6.6 350.2 8.5C351.4 8.9 368.6 25.2 388.2 44.8C425.8 82.3 426.2 82.8 424.6 89.7C423.7 93.3 226 291.6 221.3 293.6C218 295 215.6 295.2 213 294.3ZM62.3 145.2C4.3 87.6 5.8 89.4 9.4 81.8C10.3 79.9 26.7 62.8 45.8 43.8C83.7 6 83.8 5.9 91.2 9.4C93 10.3 117.9 34.4 146.5 63L198.5 115L157 156.4L115.5 197.9L62.3 145.2Z"/></symbol>
+
+</defs></svg>
+<div id="dots" aria-label="Slides"></div>
+<div id="viewport"><div id="stage">
+<!-- ============ T · Title (Verkada title treatment + Light Bento Pro) ============ -->
+<section class="slide" data-title="Title">
+  <div class="bento" style="grid-template-rows:1fr">
+    <div class="card hero vk-hero" style="--c:12">
+      <svg class="vk-logo" viewBox="0 0 1695 303" role="img" aria-label="Verkada"><use href="#vk-logo"/></svg>
+      <div class="htext">
+        <h1>3PL Performance Report</h1>
+        <p class="vk-sub">Friday weekly report · 3PL network performance</p>
+        <div class="vk-date">Week ending 2026-10-30 <span class="ex">EXAMPLE WEEK</span><i></i>Verkada Supply Chain · Mike Feliciano · draft, not sent</div>
+      </div>
+      <div class="mode vk-base">Internal · MODE: SANITIZED (M-01 open) · EXAMPLE WEEK · made-up names &amp; numbers · not Verkada data</div>
+    </div>
+  </div>
+</section>
+
+<!-- ============ 1 · BLUF ============ -->
+<section class="slide" data-title="1 · BLUF">
+  <div class="hdr"><div class="ml"><svg class="vm" viewBox="0 0 440 303" aria-hidden="true"><use href="#vk-mark"/></svg><span>1 · Bottom line up front <span class="ex">EXAMPLE</span></span></div><div class="mode">MODE: SANITIZED (M-01 open) · EXAMPLE WEEK · not Verkada data</div></div>
+  <h2 class="t">OTIF Holds the SLA but Is Down 9 Weeks in a Row</h2>
+  <p class="sub">Data week 2027-03-14 · down 9 weeks in a row. In-stock 96.09% is up but below the 99.0% 12-month target.</p>
+  <div class="bento" style="grid-template-rows:1.18fr .9fr .62fr">
+    <div class="card" style="--c:5;--r:2">
+      <div class="hd"><div class="ml">OTIF (customer) · network excl. EX-UK</div><div class="r"><span class="ex">EXAMPLE</span><span class="uv">UNVERIFIED</span></div></div>
+      <div style="display:flex;align-items:flex-end;gap:12px"><div class="big">98.20%</div><div style="padding-bottom:4px"><span class="ml">SLA ≥98.0%</span></div></div>
+      <div style="display:flex;gap:6px;margin:8px 0 4px;flex-wrap:wrap"><div class="pills" aria-label="SLA status"><span class="on">Meets SLA</span><span>At risk</span><span>Miss</span></div><span class="st risk"><i></i>▼ 9 weeks</span></div>
+      <svg class="grow1" viewBox="0 0 420 130" preserveAspectRatio="none" style="width:100%;min-height:90px" role="img" aria-label="OTIF trend, placeholder shape">
+        <defs><linearGradient id="gA" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="#1190D7" stop-opacity=".26"/><stop offset="1" stop-color="#1190D7" stop-opacity="0"/></linearGradient></defs>
+        <path class="gridl" d="M0 20H420M0 60H420"/>
+        <path d="M0 98H420" stroke="#9898B0" stroke-width="1.3" stroke-dasharray="4 5" fill="none"/>
+        <text x="4" y="93" font-size="9" fill="#6b6b88" font-weight="600">SLA 98.0%</text>
+        <path class="area" d="M0 22C40 24 60 30 95 34S150 44 190 48 250 58 290 62 345 70 375 73 405 76 420 78V130H0Z" fill="url(#gA)"/>
+        <path class="draw" pathLength="1" d="M0 22C40 24 60 30 95 34S150 44 190 48 250 58 290 62 345 70 375 73 405 76 420 78" fill="none" stroke="#1190D7" stroke-width="2.4" stroke-linecap="round" vector-effect="non-scaling-stroke"/>
+      </svg>
+      <div style="display:flex;justify-content:space-between;font-size:10px;color:var(--sc);margin-top:2px"><span>9 weeks earlier</span><span>03-07: <b>98.25%</b> → 03-14: <b>98.20%</b></span></div>
+      <p style="font-size:10.5px;margin-top:6px">▼ from 98.25% (03-07) · down 9 weeks in a row · All sites incl. EX-UK (dashboard): 98.23% · Contract SLA ≥98.0% · glide ≥98.0%: meets SLA. <span class="ex">EXAMPLE placeholder curve</span> only the 03-07 and 03-14 values are from the source.</p>
+    </div>
+    <div class="card" style="--c:4">
+      <div class="hd"><div class="ml">Lead time · excl. EX-UK</div><div class="r"><span class="ex">EXAMPLE</span></div></div>
+      <div style="font-size:11px;display:flex;justify-content:space-between"><span>Median vs ≤2.5 d</span><b>3.8 d</b></div>
+      <div class="hbar"><i style="width:31.7%;background:var(--aqua);--k:0"></i><b style="left:20.8%"></b></div>
+      <div style="font-size:11px;display:flex;justify-content:space-between;margin-top:6px"><span>P90 vs ≤5.0 d</span><b>7.9 d</b></div>
+      <div class="hbar"><i style="width:65.8%;background:var(--lav);--k:1"></i><b style="left:41.7%"></b></div>
+      <div style="margin-top:7px;display:flex;gap:5px"><span class="st risk"><i></i>Above target</span><span class="uv">UNVERIFIED</span></div>
+      <p style="font-size:9.5px;margin-top:5px;line-height:1.4">Order-to-delivery. Above the 12-month glide target on both. All sites incl. EX-UK: 3.9 d · 8.2 d · Day-0: 5.3 d · 11.3 d (all sites 5.6 d · 12.0 d). Bars to scale (0–12 d); dark tick = target.</p>
+    </div>
+    <div class="card" style="--c:3">
+      <div class="hd"><div class="ml">In-stock · excl. EX-UK</div><div class="r"><span class="ex">EXAMPLE</span></div></div>
+      <div class="mid">96.09%</div><div class="ml" style="margin-top:2px">Target ≥99.0%</div>
+      <div class="hbar" style="margin-top:8px"><i style="width:96.09%;background:var(--sage);--k:0"></i><b style="left:99%"></b></div>
+      <div style="margin-top:7px;display:flex;gap:5px;flex-wrap:wrap"><span class="st risk"><i></i>Below target</span><span class="uv">UNVERIFIED</span></div>
+      <p style="font-size:9.5px;margin-top:5px;line-height:1.4">▲ from 95.96% (03-07). All sites incl. EX-UK (dashboard): 95.59%. 12-month glide target ≥99.0%: below target (never a breach).</p>
+    </div>
+    <div class="card tint" style="--c:7">
+      <div class="hd"><div class="ml">BLUF</div><span class="ex">EXAMPLE</span></div>
+      <p style="font-size:13px;color:var(--tx);line-height:1.5">OTIF <b>98.20%</b> holds the contract SLA but has fallen 9 weeks in a row, led by <b>EX-USE (97.25%, below SLA)</b>. In-stock 96.09% is up but below the 99.0% 12-month target. Risk: EX-SG class-A stockout. Decision: approve the G5 evidence request to EX-USE.</p>
+      <p style="font-size:11px;margin-top:6px">Also: 3 contract-SLA misses on other KPIs: EX-USE inventory accuracy; dock-to-stock at EX-USE and EX-SG (Appendix D).</p>
+    </div>
+    <div class="card" style="--c:4">
+      <div class="hd"><span class="st miss"><i></i>Risk</span><span class="ex">EXAMPLE</span></div>
+      <h3>EX-SG class-A stockout</h3><p>11.5 d of supply vs 16.1 d to replenish.</p>
+    </div>
+    <div class="card" style="--c:4">
+      <div class="hd"><span class="st"><i></i>Decision</span><span class="ex">EXAMPLE</span></div>
+      <h3>Approve the G5 evidence request to EX-USE</h3><p>Evidence due 2027-03-30.</p>
+    </div>
+    <div class="card" style="--c:4">
+      <div class="hd"><span class="st risk"><i></i>Watch</span><span class="ex">EXAMPLE</span></div>
+      <h3>EX-USE OTIF 97.25% vs 98.00% contract SLA</h3><p>Worse 8 wk in a row.</p><p style="margin-top:3px;font-size:10px"><b>Inventory health:</b> slide 6 (placeholders, M-01).</p>
+    </div>
+  </div>
+  <div class="fn">Data week: a 2027 EXAMPLE week, 2027-03-14 to 03-20 (the dashboard's latest EXAMPLE week). Not Verkada data. EX-UK excluded: UNVERIFIED (G1). Network = EX-NL + EX-SG + EX-USE + EX-USW. % = Σ numerator ÷ Σ denominator of raw counts in <span class="path">ops/weekly-data-example.csv</span>, shown at the dashboard's 2 dp. Lead time: order-weighted means of site statistics, an approximation; a true pooled P90 can't be derived (3PL Ops Lead pack §5, EXAMPLE). Rule 12 (exclude UNVERIFIED sites; all-sites value beside): APPROVED (hypothesis to test, 2026-10-26). Counts and formulas: Appendix A, A2. Detail: slides 2a–5.</div>
+  <div class="vfoot"><svg viewBox="0 0 1695 303" role="img" aria-label="Verkada"><use href="#vk-logo"/></svg><i></i><span>Internal · 3PL Performance Report · Week ending 2026-10-30 · EXAMPLE data</span><span class="pg"></span></div>
+</section>
+
+<!-- ============ 2a · Network at a glance ============ -->
+<section class="slide" data-title="2a · Network at a glance">
+  <div class="hdr"><div class="ml"><svg class="vm" viewBox="0 0 440 303" aria-hidden="true"><use href="#vk-mark"/></svg><span>2a · Network at a glance: OTIF by site <span class="ex">EXAMPLE</span></span></div><div class="mode">MODE: SANITIZED (M-01 open) · EXAMPLE WEEK · not Verkada data</div></div>
+  <h2 class="t">EX-USE Is the One OTIF Miss; EX-SG Is at Risk; EX-UK Is Unverified</h2>
+  <p class="sub">OTIF by site, week 2027-03-14 (contract SLA ≥98.0%). Region tiles replace the map: broad region only, not addresses.</p>
+  <div class="bento" style="grid-template-rows:1fr 1fr .62fr">
+    <div class="card" style="--c:6;--r:2">
+      <div class="hd"><div><div class="ml">OTIF by site</div><h3>Contract SLA ≥98.0%</h3></div><div class="r"><span class="ex">EXAMPLE</span></div></div>
+      <div class="bars grow1" style="margin-top:18px">
+        <div class="tick" style="bottom:60%"><span>SLA 98.0%</span></div>
+        <div class="bcol"><div class="bar" style="height:87.6%;background:var(--teal);--k:0"><span class="v">98.69%</span></div></div>
+        <div class="bcol"><div class="bar" style="height:78.8%;background:var(--aqua);--k:1"><span class="v">98.47%</span></div></div>
+        <div class="bcol"><div class="bar" style="height:74.8%;background:var(--sage);--k:2"><span class="v">98.37%</span></div></div>
+        <div class="bcol"><div class="bar" style="height:30%;background:var(--miss);--k:3"><span class="v">97.25%</span></div></div>
+        <div class="bcol"><div class="bar ghost" style="height:72%;--k:4"><span class="v" style="color:#6b6b88">UNVERIFIED</span></div></div>
+        <div class="bcol"><div class="bar ghost" style="height:4%;--k:5;opacity:.6"><span class="v" style="color:#8a8a8a">no data</span></div></div>
+      </div>
+      <div class="blab"><div>EX-USW<br><span style="font-weight:400">Americas-W</span></div><div>EX-NL<br><span style="font-weight:400">EMEA</span></div><div>EX-SG<br><span style="font-weight:400">APAC</span></div><div>EX-USE<br><span style="font-weight:400">Americas-E</span></div><div>EX-UK<br><span style="font-weight:400">EMEA</span></div><div>EX-MX<br><span style="font-weight:400">LatAm · pipeline</span></div></div>
+      <p style="font-size:9.5px;margin-top:6px">Axis starts at 96.5% to show the gaps. EX-UK bar is a hatched marker with no value (UNVERIFIED, excluded); EX-MX is not live, no data.</p>
+    </div>
+    <div class="card" style="--c:6;--r:2">
+      <div class="hd"><div><div class="ml">OTIF standings</div><h3>EXAMPLE ranking, week 2027-03-14</h3></div><span class="ex">EXAMPLE</span></div>
+      <div class="row"><span style="display:flex;gap:10px;align-items:center"><span class="ml" style="width:10px">1</span><b>EX-USW</b></span><span style="display:flex;gap:8px;align-items:center"><b>98.69%</b><span class="dn">▼</span><span class="pills"><span class="on">Meets SLA</span><span>At risk</span><span>Miss</span></span></span></div>
+      <div class="row"><span style="display:flex;gap:10px;align-items:center"><span class="ml" style="width:10px">2</span><b>EX-NL</b></span><span style="display:flex;gap:8px;align-items:center"><b>98.47%</b><span class="up">▲</span><span class="pills"><span class="on">Meets SLA</span><span>At risk</span><span>Miss</span></span></span></div>
+      <div class="row"><span style="display:flex;gap:10px;align-items:center"><span class="ml" style="width:10px">3</span><b>EX-SG</b></span><span style="display:flex;gap:8px;align-items:center"><b>98.37%</b><span class="dn">▼</span><span class="pills"><span>Meets SLA</span><span class="on risk">At risk</span><span>Miss</span></span></span></div>
+      <div class="row"><span style="display:flex;gap:10px;align-items:center"><span class="ml" style="width:10px">4</span><b>EX-USE</b></span><span style="display:flex;gap:8px;align-items:center"><b>97.25%</b><span class="dn">▼</span><span class="pills"><span>Meets SLA</span><span>At risk</span><span class="on miss">Miss</span></span></span></div>
+      <div class="row" style="flex-wrap:wrap"><span style="display:flex;gap:6px;flex-wrap:wrap"><span class="st risk"><i></i>Delay risk: EX-USW, EX-NL, EX-UK</span><span class="st risk"><i></i>Cutoff missing: EX-SG</span></span></div>
+      <p style="font-size:10.5px;margin-top:6px">Unranked: EX-UK <span class="uv">UNVERIFIED</span> (G1) · EX-MX pipeline, not live, no data. Real sites get no league-table rank until Eligible to score (<span class="path">ops/network-map-template.md</span>).</p>
+    </div>
+    <div class="card" style="--c:3"><div class="hd"><span class="st risk"><i></i>Delay risk</span><span class="ex">EXAMPLE</span></div><p>Dock strike 2026-10-30: EX-NL, EX-UK, EX-USW (participation by port <span class="uv">UNVERIFIED</span>)</p></div>
+    <div class="card" style="--c:3"><div class="hd"><span class="st miss"><i></i>Watch</span><span class="ex">EXAMPLE</span></div><p>EX-SG OTIF AT RISK: <b>4.38%</b> of orders due in the next 7 days</p></div>
+    <div class="card" style="--c:3"><div class="hd"><span class="st unv"><i></i>Excluded · Pipeline</span></div><p>EX-UK: <span class="uv">UNVERIFIED</span> (G1). EX-MX: not live, no data.</p></div>
+    <div class="card" style="--c:3"><div class="hd"><span class="st off"><i></i>Lanes</span><span class="ex">EXAMPLE</span></div><p>EXAMPLE lanes (<span class="path">freight/example-lanes.csv</span>): ocean and air inbound from EX-ASIA-FACTORY, transfers, parcel out to customer-region nodes, returns</p></div>
+  </div>
+  <div class="fn">OTIF: <span class="path">ops/weekly-data-example.csv</span>, week 2027-03-14 (as slide 2b). DELAY RISK: dock strike 2026-10-30 (EX-NL, EX-UK, EX-USW; participation by port UNVERIFIED; Appendix E). AT RISK: EX-SG OTIF AT RISK, 4.38% of orders due in the next 7 days (Proactive panel). CUTOFF MISSING: rule 13. Ranking is EXAMPLE only; EX-UK excluded: UNVERIFIED (G1). Lanes: EXAMPLE, illustrative only; EX-BR lane omitted (not an Ops site); volumes not shown.</div>
+  <div class="vfoot"><svg viewBox="0 0 1695 303" role="img" aria-label="Verkada"><use href="#vk-logo"/></svg><i></i><span>Internal · 3PL Performance Report · Week ending 2026-10-30 · EXAMPLE data</span><span class="pg"></span></div>
+</section>
+
+<!-- ============ 2b · Network figure ============ -->
+<section class="slide" data-title="2b · What makes up the network figure">
+  <div class="hdr"><div class="ml"><svg class="vm" viewBox="0 0 440 303" aria-hidden="true"><use href="#vk-mark"/></svg><span>2b · What makes up the network figure <span class="ex">EXAMPLE</span></span></div><div class="mode">MODE: SANITIZED (M-01 open) · EXAMPLE WEEK · not Verkada data</div></div>
+  <h2 class="t">EX-USE Is the Only Site Below the OTIF SLA; Every Site Is Short of the Lead-Time and In-Stock Targets</h2>
+  <p class="sub">Week 2027-03-14 to 03-20 vs 2027-03-07, per-site values as given in <span class="path">ops/weekly-data-example.csv</span>. Ranked by OTIF (contract SLA); EXAMPLE ranking. Small print = numerator / denominator.</p>
+  <div class="bento" style="grid-template-rows:1fr 1fr">
+    <div class="card" style="--c:8;--r:2">
+      <div class="hd"><div class="ml">Site composition · network excl. EX-UK</div><span class="ex">EXAMPLE</span></div>
+      <div class="tw"><table>
+        <thead><tr><th>#</th><th>3PL</th><th>OTIF · SLA ≥98.0% + glide ≥98.0%</th><th>Δ vs 03-07</th><th>Lead time median · P90<br>glide ≤2.5 d · ≤5.0 d</th><th>In-stock · glide ≥99.0%</th><th>Status</th></tr></thead>
+        <tbody>
+          <tr><td>1</td><td class="n">EX-USW</td><td class="n">98.69%<span class="s">3905 / 3957</span></td><td><span class="dn">▼</span> −0.06 pts</td><td>3.2 d <span class="eq">▬</span> · 6.8 d <span class="dn">▼</span></td><td class="n">96.76% <span class="up">▲</span><span class="s">12192 / 12600</span></td><td><span class="pills"><span class="on">Meets SLA</span><span>Risk</span><span>Miss</span></span></td></tr>
+          <tr><td>2</td><td class="n">EX-NL</td><td class="n">98.47%<span class="s">3996 / 4058</span></td><td><span class="up">▲</span></td><td>4.2 d <span class="dn">▼</span> · 8.8 d <span class="up">▲</span></td><td class="n">95.6% <span class="up">▲</span><span class="s">12046 / 12600</span></td><td><span class="pills"><span class="on">Meets SLA</span><span>Risk</span><span>Miss</span></span></td></tr>
+          <tr><td>3</td><td class="n">EX-SG</td><td class="n">98.37%<span class="s">3797 / 3860</span></td><td><span class="dn">▼</span></td><td>4 d <span class="eq">▬</span> · 8.3 d <span class="dn">▼</span></td><td class="n">96.17% <span class="up">▲</span><span class="s">12117 / 12600</span></td><td><span class="pills"><span>Meets SLA</span><span class="on risk">At risk</span><span>Miss</span></span></td></tr>
+          <tr><td>4</td><td class="n">EX-USE</td><td class="n">97.25%<span class="s">3750 / 3856</span></td><td><span class="dn">▼</span></td><td>3.6 d <span class="up">▲</span> · 7.5 d <span class="up">▲</span></td><td class="n">95.84% <span class="dn">▼</span><span class="s">12076 / 12600</span></td><td><span class="pills"><span>Meets SLA</span><span>Risk</span><span class="on miss">Miss</span></span></td></tr>
+          <tr class="sum"><td>Σ</td><td class="n">Network excl. EX-UK</td><td class="n">98.20% <span class="dn">▼</span><span class="s">15448 / 15731</span></td><td><span class="dn">▼</span></td><td>3.8 d · 7.9 d<span class="s">order-weighted, approx. (Ops pack)</span></td><td class="n">96.09% <span class="up">▲</span><span class="s">48431 / 50400</span></td><td></td></tr>
+          <tr class="dim"><td>–</td><td>EX-UK (excluded, unranked)</td><td>98.34%<span class="s">trend: no data</span></td><td>no data</td><td>4.6 d · 9.7 d<span class="s">trend: no data</span></td><td>93.59%<span class="s">trend: no data</span></td><td><span class="st unv"><i></i>UNVERIFIED</span></td></tr>
+        </tbody></table></div>
+      <p style="font-size:10px;margin-top:auto;padding-top:8px">▲ better ▼ worse ▬ same vs 2027-03-07 · leader highlighted (OTIF only; lead time and in-stock are below target at every site). EX-MX is pipeline (not live): no data. Real sites are Observe only until walked + 4 weeks of data, with no league-table rank (<span class="path">ops/network-map-template.md</span>); this ranking is EXAMPLE. Δ: arrows from the CSV; −0.06 pts from the 3PL Ops Lead pack §5. AT RISK: EX-SG OTIF AT RISK (Proactive panel).</p>
+    </div>
+    <div class="card" style="--c:4">
+      <div class="hd"><div class="ml">In-stock by site · target ≥99.0%</div><span class="ex">EXAMPLE</span></div>
+      <div class="bars grow1" style="margin-top:14px">
+        <div class="tick" style="bottom:83.3%"><span>99.0%</span></div>
+        <div class="bcol"><div class="bar" style="height:46%;background:var(--sage);--k:0"><span class="v">96.76%</span></div></div>
+        <div class="bcol"><div class="bar" style="height:26.7%;background:var(--sage);--k:1"><span class="v">95.6%</span></div></div>
+        <div class="bcol"><div class="bar" style="height:36.2%;background:var(--sage);--k:2"><span class="v">96.17%</span></div></div>
+        <div class="bcol"><div class="bar" style="height:30.7%;background:var(--sand);--k:3"><span class="v">95.84%</span></div></div>
+        <div class="bcol"><div class="bar ghost" style="height:0%;--k:4"></div></div>
+      </div>
+      <div class="blab"><div>USW</div><div>NL</div><div>SG</div><div>USE</div><div>UK*</div></div>
+      <p style="font-size:9px;margin-top:3px">Axis 94–100%. *EX-UK 93.59% is excluded (UNVERIFIED), below the axis.</p>
+    </div>
+    <div class="card" style="--c:4">
+      <div class="hd"><div class="ml">Lead time by site · median / P90</div><span class="ex">EXAMPLE</span></div>
+      <div class="bars grow1" style="margin-top:14px;gap:8px">
+        <div class="tick" style="bottom:50%;--tc:var(--lav)"></div>
+        <div class="tick" style="bottom:25%"></div>
+        <div class="bgrp"><div class="bar" style="height:32%;background:var(--aqua);--k:0"><span class="v">3.2</span></div><div class="bar" style="height:68%;background:var(--lav);--k:0"><span class="v">6.8</span></div></div>
+        <div class="bgrp"><div class="bar" style="height:42%;background:var(--aqua);--k:1"><span class="v">4.2</span></div><div class="bar" style="height:88%;background:var(--lav);--k:1"><span class="v">8.8</span></div></div>
+        <div class="bgrp"><div class="bar" style="height:40%;background:var(--aqua);--k:2"><span class="v">4</span></div><div class="bar" style="height:83%;background:var(--lav);--k:2"><span class="v">8.3</span></div></div>
+        <div class="bgrp"><div class="bar" style="height:36%;background:var(--aqua);--k:3"><span class="v">3.6</span></div><div class="bar" style="height:75%;background:var(--lav);--k:3"><span class="v">7.5</span></div></div>
+        <div class="bgrp"><div class="bar ghost" style="height:46%;--k:4"><span class="v">4.6</span></div><div class="bar ghost" style="height:97%;--k:4"><span class="v">9.7</span></div></div>
+      </div>
+      <div class="blab" style="gap:8px"><div>USW</div><div>NL</div><div>SG</div><div>USE</div><div>UK*</div></div>
+      <p style="font-size:9px;margin-top:3px">Days, axis 0–10 d. <span style="color:#5d9a95">■</span> median (dashed: target ≤2.5 d) <span style="color:#8484a0">■</span> P90 (dashed: target ≤5.0 d). *EX-UK excluded (UNVERIFIED).</p>
+    </div>
+  </div>
+  <div class="vfoot"><svg viewBox="0 0 1695 303" role="img" aria-label="Verkada"><use href="#vk-logo"/></svg><i></i><span>Internal · 3PL Performance Report · Week ending 2026-10-30 · EXAMPLE data</span><span class="pg"></span></div>
+</section>
+<!-- ============ 3 · OTIF drill-down ============ -->
+<section class="slide" data-title="3 · Drill-down: OTIF">
+  <div class="hdr"><div class="ml"><svg class="vm" viewBox="0 0 440 303" aria-hidden="true"><use href="#vk-mark"/></svg><span>3 · Drill-down: OTIF <span class="ex">EXAMPLE</span></span></div><div class="mode">MODE: SANITIZED (M-01 open) · EXAMPLE WEEK · not Verkada data</div></div>
+  <h2 class="t">OTIF: EX-USE Is Below SLA; EX-SG and EX-USW Slipped but Stay Above It</h2>
+  <p class="sub">Why this slide: network OTIF meets the SLA but is down 9 weeks in a row (98.20% from 98.25%). EX-NL meets the SLA and improved (98.47% ▲), so it is not drilled.</p>
+  <div class="bento" style="grid-template-rows:auto 1fr">
+    <div class="card" style="--c:12">
+      <div class="hd"><div><div class="ml">3PL-coded OTIF misses by cause (orders)</div></div><div class="r"><span class="lg"><span><i style="background:var(--teal)"></i>3PL</span><span><i style="background:var(--aqua)"></i>carrier</span><span><i style="background:var(--lav)"></i>supply</span><span><i style="background:var(--sand)"></i>unattributed</span></span><span class="ex">EXAMPLE</span></div></div>
+      <div class="stk3" style="display:grid;grid-template-columns:70px 1fr 260px;gap:8px 14px;align-items:center;font-size:11px">
+        <b>EX-USE</b><div style="width:100%"><div class="stack" style="width:100%;--k:0"><i style="width:50%;background:var(--teal)"></i><i style="width:25.5%;background:var(--aqua)"></i><i style="width:19.8%;background:var(--lav)"></i><i style="width:4.7%;background:var(--sand)"></i></div></div><span>3pl 53 · carrier 27 · supply 21 · unattributed 5</span>
+        <b>EX-SG</b><div style="width:59.4%"><div class="stack" style="--k:1"><i style="width:25.4%;background:var(--teal)"></i><i style="width:14.3%;background:var(--aqua)"></i><i style="width:55.6%;background:var(--lav)"></i><i style="width:4.7%;background:var(--sand)"></i></div></div><span>3pl 16 · carrier 9 · supply 35 · unattributed 3</span>
+        <b>EX-USW</b><div style="width:49.1%"><div class="stack" style="--k:2"><i style="width:50%;background:var(--teal)"></i><i style="width:25%;background:var(--aqua)"></i><i style="width:19.2%;background:var(--lav)"></i><i style="width:5.8%;background:var(--sand)"></i></div></div><span>3PL 0.66 (26 orders), carrier 0.33 (13), supply 0.25 (10), unattributed 0.08 (3) · % of orders due</span>
+      </div>
+    </div>
+    <div class="card" style="--c:4">
+      <div class="hd"><div><div class="ml">EX-USE · 3PL site lead, EX-USE</div><div class="mid" style="margin-top:4px">97.25% <small style="font-size:12px;color:var(--sc);font-weight:500">vs 98.00% contract SLA</small></div></div><span class="ex">EXAMPLE</span></div>
+      <div style="display:flex;gap:6px;flex-wrap:wrap"><div class="pills"><span>Meets SLA</span><span>At risk</span><span class="on miss">Miss</span></div><span class="st risk"><i></i>Worse 8 wk</span><span class="pd">unconfirmed U-00</span></div>
+      <p style="margin-top:8px"><b>Driver:</b> Backlog aging: 15% of 667 open orders are &gt; 5 days old (33 are 11+ d). OTIF risk rising: 2.15%, up 3 wk in a row (Proactive panel). Likely drivers (dashboard): Stockouts (not in full), late release/ship, or carrier transit misses.</p>
+      <p style="margin-top:6px"><b>Fix:</b> Split misses into not-on-time vs not-in-full and by stage; fix the largest bucket. CAPA-EX-003: awaiting plan, due 2027-03-22.</p>
+    </div>
+    <div class="card" style="--c:4">
+      <div class="hd"><div><div class="ml">EX-SG · 3PL site lead, EX-SG</div><div class="mid" style="margin-top:4px">98.37% <small style="font-size:12px;color:var(--sc);font-weight:500">vs 98.00% · ▼ from 98.43%</small></div></div><span class="ex">EXAMPLE</span></div>
+      <div style="display:flex;gap:6px;flex-wrap:wrap"><div class="pills"><span>Meets SLA</span><span class="on risk">At risk</span><span>Miss</span></div><span class="pd">unconfirmed U-00</span></div>
+      <p style="margin-top:8px"><b>Driver:</b> OTIF AT RISK: 4.38% of orders due in the next 7 days. PROJECTED STOCKOUT, class A: 11.5 d of supply vs 16.1 d (Proactive panel).</p>
+      <p style="margin-top:6px"><b>Fix:</b> Work the at-risk list daily: expedite, split-ship with consent, or reset dates with the customer.</p>
+      <p style="margin-top:6px;font-size:10.5px">Meets SLA, at risk.</p>
+    </div>
+    <div class="card" style="--c:4">
+      <div class="hd"><div><div class="ml">EX-USW · 3PL site lead, EX-USW; Freight &amp; Trade</div><div class="mid" style="margin-top:4px">98.69% <small style="font-size:12px;color:var(--sc);font-weight:500">(3905 / 3957)</small></div></div><span class="ex">EXAMPLE</span></div>
+      <div style="display:flex;gap:6px;flex-wrap:wrap"><div class="pills"><span class="on">Meets SLA</span><span>At risk</span><span>Miss</span></div><span class="pd">unconfirmed</span></div>
+      <p style="margin-top:8px">▼ −0.06 pts from 98.75% · still above the 98.0% SLA; ahead of glide (plan now 98.33%). No root_cause value applies (not a contract-SLA miss row).</p>
+      <p style="margin-top:6px"><b>Driver:</b> Likely, unconfirmed: Stockouts, late release/ship, or carrier transit. The 3PL share is largest; 3PL and carrier misses each rose by 1 order. <b>Fix:</b> Split misses into not-on-time vs not-in-full and by stage; fix the largest bucket (carrier evidence: Freight &amp; Trade).</p>
+    </div>
+  </div>
+  <div class="fn">Tags stay unconfirmed until Freight &amp; Trade evidence is in (<span class="path">ops/3pl-accountability/miss-attribution.md</span>); 3PL-coded splits from the CSV (<span class="path">otif_misses</span>). Drivers, fixes and owners: <span class="path">ops/kpi-dashboard.html</span> exceptions and Proactive panel, week 2027-03-14. Bar lengths to scale by order count.</div>
+  <div class="vfoot"><svg viewBox="0 0 1695 303" role="img" aria-label="Verkada"><use href="#vk-logo"/></svg><i></i><span>Internal · 3PL Performance Report · Week ending 2026-10-30 · EXAMPLE data</span><span class="pg"></span></div>
+</section>
+
+<!-- ============ 4 · Lead time drill-down ============ -->
+<section class="slide" data-title="4 · Drill-down: Lead time">
+  <div class="hdr"><div class="ml"><svg class="vm" viewBox="0 0 440 303" aria-hidden="true"><use href="#vk-mark"/></svg><span>4 · Drill-down: Lead time <span class="ex">EXAMPLE</span></span></div><div class="mode">MODE: SANITIZED (M-01 open) · EXAMPLE WEEK · not Verkada data</div></div>
+  <h2 class="t">Lead Time: Every Site Is Above the 2.5 d / 5.0 d 12-Month Targets</h2>
+  <p class="sub">Why this slide: all four sites are above the 12-month targets on median and P90 (never a breach). EX-SG and EX-USW are ahead of or on the glide path (Ops pack). ▲ better ▼ worse ▬ same vs 2027-03-07.</p>
+  <div class="bento" style="grid-template-rows:.92fr 1.08fr">
+    <div class="card" style="--c:6">
+      <div class="hd"><div><div class="ml">Network lead time · Day-0 → latest → 12-month target</div></div><div class="r"><span class="ex">EXAMPLE</span></div></div>
+      <svg class="grow1" viewBox="0 0 520 170" style="width:100%;min-height:120px" role="img" aria-label="Network lead time line chart">
+        <defs><linearGradient id="gL" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="#9898B0" stop-opacity=".26"/><stop offset="1" stop-color="#9898B0" stop-opacity="0"/></linearGradient><linearGradient id="gM" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="#1190D7" stop-opacity=".28"/><stop offset="1" stop-color="#1190D7" stop-opacity="0"/></linearGradient></defs>
+        <path class="gridl" d="M30 148H500M30 104H500M30 60H500M30 16H500"/>
+        <g font-size="9" fill="#8a8a8a"><text x="0" y="151">0 d</text><text x="0" y="107">4 d</text><text x="0" y="63">8 d</text><text x="0" y="19">12 d</text></g>
+        <path class="area" d="M60 23.7C160 23.7 160 61.1 270 61.1V148H60Z" fill="url(#gL)"/>
+        <path class="area" d="M60 89.7C160 89.7 160 106.2 270 106.2V148H60Z" fill="url(#gM)"/>
+        <path class="draw" pathLength="1" style="--k:0" d="M60 23.7C160 23.7 160 61.1 270 61.1" fill="none" stroke="#9898B0" stroke-width="2.5" stroke-linecap="round"/>
+        <path class="draw" pathLength="1" style="--k:1" d="M60 89.7C160 89.7 160 106.2 270 106.2" fill="none" stroke="#1190D7" stroke-width="2.5" stroke-linecap="round"/>
+        <path d="M270 61.1C370 61.1 380 93 480 93M270 106.2C370 106.2 380 120.5 480 120.5" fill="none" stroke="#8a8a8a" stroke-width="1.4" stroke-dasharray="3 5" class="area"/>
+        <path d="M60 16C160 16 160 57.8 270 57.8M60 86.4C160 86.4 160 105.1 270 105.1" fill="none" stroke="#CDC8BC" stroke-width="1.4" stroke-dasharray="5 4" class="area"/>
+        <g class="area" font-size="10" font-weight="600" fill="#2D2D2D">
+          <circle cx="60" cy="23.7" r="3.5" fill="#9898B0"/><text x="66" y="38">11.3 d</text>
+          <circle cx="60" cy="89.7" r="3.5" fill="#1190D7"/><text x="66" y="84">5.3 d</text>
+          <circle cx="270" cy="61.1" r="4" fill="#9898B0"/><text x="276" y="54">7.9 d</text>
+          <circle cx="270" cy="106.2" r="4" fill="#1190D7"/><text x="276" y="100">3.8 d</text>
+          <circle cx="480" cy="93" r="3.5" fill="#fff" stroke="#9898B0" stroke-width="1.5"/><text x="470" y="85" text-anchor="end">≤5.0 d</text>
+          <circle cx="480" cy="120.5" r="3.5" fill="#fff" stroke="#1190D7" stroke-width="1.5"/><text x="470" y="136" text-anchor="end">≤2.5 d</text>
+        </g>
+        <g font-size="9" fill="#6B6B6B" font-weight="600" letter-spacing="1"><text x="60" y="166" text-anchor="middle">DAY-0</text><text x="270" y="166" text-anchor="middle">WK 2027-03-14</text><text x="480" y="166" text-anchor="middle">12-MO TARGET</text></g>
+      </svg>
+      <div class="lg" style="margin-top:4px"><span><i style="background:var(--teal)"></i>median</span><span><i style="background:var(--lav)"></i>P90</span><span><i style="background:var(--sand)"></i>all sites incl. EX-UK (5.6 → 3.9 d · 12.0 → 8.2 d)</span><span>dotted = target, not actual</span></div>
+    </div>
+    <div class="card tint" style="--c:6">
+      <div class="hd"><div class="ml">Network excl. EX-UK</div><span class="ex">EXAMPLE</span></div>
+      <div style="display:flex;gap:28px;align-items:flex-end"><div><div class="ml">Median</div><div class="big">3.8 d</div></div><div><div class="ml">P90</div><div class="big">7.9 d</div></div><div style="padding-bottom:4px"><span class="st risk"><i></i>Above 12-month target</span></div></div>
+      <p style="margin-top:10px">Network excl. EX-UK: 3.8 d · 7.9 d (Ops pack, approx.). Day-0: 5.3 d · 11.3 d. 12-month targets ≤2.5 d · ≤5.0 d (never a breach).</p>
+      <p style="margin-top:6px">No source tags lead-time causes, so every row is unconfirmed. Stage medians do not add up to the end-to-end median.</p>
+    </div>
+    <div class="card" style="--c:3">
+      <div class="hd"><div class="ml">EX-NL</div><span class="ex">EXAMPLE</span></div>
+      <div class="mid">4.2 d <span class="dn" style="font-size:13px">▼</span> <span style="font-size:14px;color:var(--sc)">· P90 8.8 d <span class="up">▲</span></span></div>
+      <div style="margin:6px 0;display:flex;gap:5px;flex-wrap:wrap"><span class="st risk"><i></i>TREND worse 2 wk</span><span class="pd">unconfirmed U-00</span></div>
+      <p style="font-size:10.2px">Median TREND worse 2 wk; P90 behind glide-path 8.7 d. Stage medians: release→ship 0.9 d · ship→deliver 2.9 d (stage targets 0.5 d · 2.0 d, ASSUMPTIONS).</p>
+      <p style="font-size:10.2px;margin-top:4px"><b>Fix:</b> Check stage split: release-to-ship vs ship-to-deliver. List the slowest 10% of orders; tag the cause (hold, backorder, lane). <b>Owner:</b> 3PL site lead, EX-NL</p>
+    </div>
+    <div class="card" style="--c:3">
+      <div class="hd"><div class="ml">EX-SG</div><span class="ex">EXAMPLE</span></div>
+      <div class="mid">4.0 d <span class="eq" style="font-size:13px">▬</span> <span style="font-size:14px;color:var(--sc)">· P90 8.3 d <span class="dn">▼</span></span></div>
+      <div style="margin:6px 0;display:flex;gap:5px;flex-wrap:wrap"><span class="st"><i></i>Ahead / on glide</span><span class="pd">unconfirmed U-00</span></div>
+      <p style="font-size:10.2px">Above the 12-month targets; median ahead of the glide path (plan now 4.1 d), P90 on it (plan now 8.3 d). Stages: release-to-ship 0.9 / 2.5 d; ship-to-deliver 2.8 / 5.7 d. Ship-to-deliver is the larger stage, so carrier lanes are the likely main driver.</p>
+      <p style="font-size:10.2px;margin-top:4px"><b>Fix:</b> Check the stage split; carrier lane review on the slowest P90 lanes. <b>Owner:</b> 3PL site lead, EX-SG; Freight &amp; Trade (lanes)</p>
+    </div>
+    <div class="card" style="--c:3">
+      <div class="hd"><div class="ml">EX-USE</div><span class="ex">EXAMPLE</span></div>
+      <div class="mid">3.6 d <span class="up" style="font-size:13px">▲</span> <span style="font-size:14px;color:var(--sc)">· P90 7.5 d <span class="up">▲</span></span></div>
+      <div style="margin:6px 0;display:flex;gap:5px;flex-wrap:wrap"><span class="st risk"><i></i>Above target</span><span class="pd">unconfirmed U-00</span></div>
+      <p style="font-size:10.2px">Stage medians: release→ship 0.8 d · ship→deliver 2.5 d (stage targets 0.5 d · 2.0 d, ASSUMPTIONS). Backlog aging: 15% of 667 open orders &gt; 5 days ("Aged orders become OTIF misses and long-tail lead time (P90)").</p>
+      <p style="font-size:10.2px;margin-top:4px"><b>Fix:</b> Daily aged-order review: release holds, allocate stock, or set a new date with the customer. <b>Owner:</b> 3PL site lead, EX-USE</p>
+    </div>
+    <div class="card" style="--c:3">
+      <div class="hd"><div class="ml">EX-USW</div><span class="ex">EXAMPLE</span></div>
+      <div class="mid">3.2 d <span class="eq" style="font-size:13px">▬</span> <span style="font-size:14px;color:var(--sc)">· P90 6.8 d <span class="dn">▼</span></span></div>
+      <div style="margin:6px 0;display:flex;gap:5px;flex-wrap:wrap"><span class="st"><i></i>Ahead of glide</span><span class="pd">unconfirmed U-00</span></div>
+      <p style="font-size:10.2px">Above the 12-month targets; ahead of the glide path (plan now 3.3 / 6.9 d). Stages: release-to-ship 0.7 / 2.0 d; ship-to-deliver 2.2 / 4.6 d. Likely, unconfirmed: as EX-SG ("Same; ship-to-deliver is the larger stage").</p>
+      <p style="font-size:10.2px;margin-top:4px"><b>Fix:</b> As EX-SG. <b>Owner:</b> 3PL site lead, EX-USW; Freight &amp; Trade (lanes)</p>
+    </div>
+  </div>
+  <div class="fn">Stage medians: CSV <span class="path">lt_release_to_ship_median</span>, <span class="path">lt_ship_to_deliver_median</span>; stage targets and flags: <span class="path">ops/kpi-dashboard.html</span>. Chart: the three points per line are source values (Day-0, week 2027-03-14, 12-month target); curves between them are drawn smooth for shape only.</div>
+  <div class="vfoot"><svg viewBox="0 0 1695 303" role="img" aria-label="Verkada"><use href="#vk-logo"/></svg><i></i><span>Internal · 3PL Performance Report · Week ending 2026-10-30 · EXAMPLE data</span><span class="pg"></span></div>
+</section>
+
+<!-- ============ 5 · In-stock drill-down ============ -->
+<section class="slide" data-title="5 · Drill-down: In-stock">
+  <div class="hdr"><div class="ml"><svg class="vm" viewBox="0 0 440 303" aria-hidden="true"><use href="#vk-mark"/></svg><span>5 · Drill-down: In-stock <span class="ex">EXAMPLE</span></span></div><div class="mode">MODE: SANITIZED (M-01 open) · EXAMPLE WEEK · not Verkada data</div></div>
+  <h2 class="t">In-Stock: Every Site Is Below the 99.0% 12-Month Target; EX-USE Slipped</h2>
+  <p class="sub">Why this slide: network in-stock improved (96.09% from 95.96%) but every site is below the 99.0% 12-month target. The dashboard flags only EX-USE as behind this week's glide-path point.</p>
+  <div class="bento" style="grid-template-rows:.9fr 1.1fr">
+    <div class="card" style="--c:6">
+      <div class="hd"><div class="ml">In-stock by site · 03-07 vs 03-14</div><div class="r"><span class="lg"><span><i style="background:var(--sand)"></i>03-07</span><span><i style="background:var(--aqua)"></i>03-14</span></span><span class="ex">EXAMPLE</span></div></div>
+      <div class="bars grow1" style="margin-top:14px">
+        <div class="tick" style="bottom:83.3%"><span>12-month target 99.0%</span></div>
+        <div class="bgrp"><div class="bar" style="height:33.7%;background:var(--sand);--k:0"><span class="v">96.02</span></div><div class="bar" style="height:30.7%;background:var(--miss);--k:0"><span class="v">95.84</span></div></div>
+        <div class="bgrp"><div class="bar" style="height:31.5%;background:var(--sand);--k:1"><span class="v">95.89</span></div><div class="bar" style="height:36.2%;background:var(--aqua);--k:1"><span class="v">96.17</span></div></div>
+        <div class="bgrp"><div class="bar" style="height:25.2%;background:var(--sand);--k:2"><span class="v">95.51</span></div><div class="bar" style="height:26.7%;background:var(--aqua);--k:2"><span class="v">95.6</span></div></div>
+        <div class="bgrp"><div class="bar" style="height:40.3%;background:var(--sand);--k:3"><span class="v">96.42</span></div><div class="bar" style="height:46%;background:var(--teal);--k:3"><span class="v">96.76</span></div></div>
+      </div>
+      <div class="blab"><div>EX-USE</div><div>EX-SG</div><div>EX-NL</div><div>EX-USW</div></div>
+      <p style="font-size:9.5px;margin-top:3px">Percent, axis 94–100%.</p>
+    </div>
+    <div class="card" style="--c:6">
+      <div class="hd"><div class="ml">3PL-coded gap SKU-days by cause</div><div class="r"><span class="lg"><span><i style="background:var(--teal)"></i>3pl</span><span><i style="background:var(--lav)"></i>supply</span><span><i style="background:var(--sand)"></i>unattributed</span></span><span class="ex">EXAMPLE</span></div></div>
+      <div style="display:grid;grid-template-columns:56px 1fr;gap:6px 12px;align-items:center;font-size:11px;margin-top:6px">
+        <b>EX-USE</b><div><div style="width:94.6%"><div class="stack" style="--k:0"><i style="width:45%;background:var(--teal)"></i><i style="width:45%;background:var(--lav)"></i><i style="width:10%;background:var(--sand)"></i></div></div><span style="font-size:10px;color:var(--sc)">3pl 236 · supply 236 · unattributed 52</span></div>
+        <b>EX-SG</b><div><div style="width:87.2%"><div class="stack" style="--k:1"><i style="width:20.1%;background:var(--teal)"></i><i style="width:74.9%;background:var(--lav)"></i><i style="width:5%;background:var(--sand)"></i></div></div><span style="font-size:10px;color:var(--sc)">3pl 97 · supply 362 · unattributed 24</span></div>
+        <b>EX-NL</b><div><div style="width:100%"><div class="stack" style="--k:2"><i style="width:45%;background:var(--teal)"></i><i style="width:45%;background:var(--lav)"></i><i style="width:10%;background:var(--sand)"></i></div></div><span style="font-size:10px;color:var(--sc)">3pl 249 · supply 249 · unattributed 56</span></div>
+        <b>EX-USW</b><div><span style="font-size:10px;color:var(--sc)">Gaps by cause (pts): 3PL 1.46, supply 1.46, unattributed 0.32. Class A 98.10%, B 97.24%, C 96.00%</span></div>
+      </div>
+    </div>
+    <div class="card" style="--c:3">
+      <div class="hd"><div class="ml">EX-USE</div><span class="ex">EXAMPLE</span></div>
+      <div class="mid">95.84% <span class="dn" style="font-size:13px">▼ from 96.02%</span></div>
+      <div style="margin:6px 0;display:flex;gap:5px;flex-wrap:wrap"><span class="st miss"><i></i>Behind glide 95.94%</span><span class="pd">unconfirmed U-00</span></div>
+      <p style="font-size:10.2px">Worse 1 wk. Dashboard likely cause (unconfirmed): replenishment late vs demand, stock stuck in receiving/QC, or allocation to the wrong region.</p>
+      <p style="font-size:10.2px;margin-top:4px"><b>Fix:</b> Review projected stockouts (Proactive panel); expedite or rebalance A-class. <b>Owner:</b> 3PL site lead, EX-USE</p>
+    </div>
+    <div class="card" style="--c:3">
+      <div class="hd"><div class="ml">EX-SG</div><span class="ex">EXAMPLE</span></div>
+      <div class="mid">96.17% <span class="up" style="font-size:13px">▲ from 95.89%</span></div>
+      <div style="margin:6px 0;display:flex;gap:5px;flex-wrap:wrap"><span class="st miss"><i></i>Projected stockout</span><span class="pd">unconfirmed U-00</span></div>
+      <p style="font-size:10.2px">PROJECTED STOCKOUT, class A: 11.5 d of supply vs 16.1 d to replenish (Proactive panel).</p>
+      <p style="font-size:10.2px;margin-top:4px"><b>Fix:</b> Expedite open POs or rebalance stock from another 3PL; confirm allocation rules. <b>Owner:</b> Supply planning + 3PL Ops Lead</p>
+    </div>
+    <div class="card" style="--c:3">
+      <div class="hd"><div class="ml">EX-NL</div><span class="ex">EXAMPLE</span></div>
+      <div class="mid">95.6% <span class="up" style="font-size:13px">▲ from 95.51%</span></div>
+      <div style="margin:6px 0;display:flex;gap:5px;flex-wrap:wrap"><span class="st risk"><i></i>Stockout watch</span><span class="pd">unconfirmed U-00</span></div>
+      <p style="font-size:10.2px">STOCKOUT WATCH, class B: 25 d vs 21.5 d. ASN LATE: 13.33% of inbound ("Blind receiving, so slower dock-to-stock, then in-stock gaps").</p>
+      <p style="font-size:10.2px;margin-top:4px"><b>Fix:</b> Check open PO ETAs and the next 2 weeks of demand; supplier ASN compliance review. <b>Owner:</b> Supply planning + 3PL Ops Lead; Procurement + 3PL Ops Lead</p>
+    </div>
+    <div class="card" style="--c:3">
+      <div class="hd"><div class="ml">EX-USW</div><span class="ex">EXAMPLE</span></div>
+      <div class="mid">96.76% <span class="up" style="font-size:13px">▲ from 96.42%</span></div>
+      <div style="margin:6px 0;display:flex;gap:5px;flex-wrap:wrap"><span class="st"><i></i>Ahead of glide</span><span class="pd">unconfirmed U-00</span></div>
+      <p style="font-size:10.2px">(12192 / 12600) Below the 99.0% 12-month target; ahead of the glide path (plan now 96.48%). Likely, unconfirmed: late replenishment vs demand, stock stuck in receiving/QC, or allocation to the wrong region.</p>
+      <p style="font-size:10.2px;margin-top:4px"><b>Fix:</b> Review projected stockouts; expedite or rebalance A-class. <b>Owner:</b> 3PL site lead, EX-USW; supply planning (supply-coded gaps)</p>
+    </div>
+  </div>
+  <div class="fn">Tags stay unconfirmed until evidence is in (<span class="path">miss-attribution.md</span>); 3PL-coded splits from the CSV (<span class="path">in_stock_gaps</span>). Drivers, fixes and owners: <span class="path">ops/kpi-dashboard.html</span>, week 2027-03-14. Bar lengths to scale by SKU-days.</div>
+  <div class="vfoot"><svg viewBox="0 0 1695 303" role="img" aria-label="Verkada"><use href="#vk-logo"/></svg><i></i><span>Internal · 3PL Performance Report · Week ending 2026-10-30 · EXAMPLE data</span><span class="pg"></span></div>
+</section>
+
+<!-- ============ 6 · Inventory health (placeholders pending M-01, except IRA from source) ============ -->
+<section class="slide" data-title="6 · Inventory health">
+  <div class="hdr"><div class="ml"><svg class="vm" viewBox="0 0 440 303" aria-hidden="true"><use href="#vk-mark"/></svg><span>6 · Inventory health <span class="ex">EXAMPLE</span></span></div><div class="mode">MODE: SANITIZED (M-01 open) · EXAMPLE WEEK · not Verkada data</div></div>
+  <h2 class="t">Inventory Health</h2>
+  <div class="phrow"><span class="phchip"><i></i>EXAMPLE placeholder data, pending internal data approval (M-01). Values from Contracts &amp; Finance</span><span class="phnote">Sites EX-NL, EX-UK, EX-USW, EX-USE. Record accuracy is copied from the source deck; every other value is a round placeholder.</span></div>
+  <div class="bento" style="grid-template-rows:1fr 1fr">
+    <div class="card" style="--c:5">
+      <div class="hd"><div><div class="ml">Blocked / quarantined stock</div><h3>QA and damage hold, at week end</h3></div><span class="ex">PLACEHOLDER</span></div>
+      <table class="tight inv"><thead><tr><th>Site</th><th>Units</th><th>Value</th><th>Days held</th><th>Status</th></tr></thead><tbody>
+        <tr><td class="n">EX-NL</td><td>200</td><td>$20K</td><td>5 d</td><td><span class="st"><i></i>OK ≤7 d</span></td></tr>
+        <tr><td class="n">EX-UK</td><td>500</td><td>$50K</td><td>15 d</td><td><span class="st risk"><i></i>Watch</span> <span class="uv">UNVERIFIED</span></td></tr>
+        <tr><td class="n">EX-USW</td><td>100</td><td>$10K</td><td>3 d</td><td><span class="st"><i></i>OK ≤7 d</span></td></tr>
+        <tr><td class="n">EX-USE</td><td>1,000</td><td>$100K</td><td>30 d</td><td><span class="st miss"><i></i>Escalate &gt;28 d</span></td></tr>
+        <tr class="tot"><td class="n">Total</td><td>1,800</td><td>$180K</td><td>oldest 30 d</td><td></td></tr>
+      </tbody></table>
+      <p class="fx"><b>Formula:</b> units in blocked WMS locations (QA, damage, recall) × standard cost; days held = week end − hold start (oldest hold). Thresholds ≤7 / 8–28 / &gt;28 d: EXAMPLE.</p>
+    </div>
+    <div class="card" style="--c:7">
+      <div class="hd"><div><div class="ml">Aged stock · % of on-hand value</div><h3>Age buckets by site; at-risk share (&gt;180 d) highlighted</h3></div><div class="r"><span class="lg"><span><i style="background:#B7DCF0"></i>0–90 d</span><span><i style="background:var(--vk)"></i>91–180 d</span><span><i style="background:#E2B49F"></i>181–365 d</span><span><i style="background:#B4583F"></i>365+ d</span></span><span class="ex">PLACEHOLDER</span></div></div>
+      <div class="agegrid">
+        <b>EX-NL</b><div class="stack" style="--k:0"><i style="width:70%;background:#B7DCF0"></i><i style="width:20%;background:var(--vk)"></i><i class="ar" style="width:7%;background:#E2B49F"></i><i class="ar" style="width:3%;background:#B4583F"></i></div><span class="risk">10%<small>at risk</small></span>
+        <b>EX-UK</b><div class="stack" style="--k:1"><i style="width:60%;background:#B7DCF0"></i><i style="width:20%;background:var(--vk)"></i><i class="ar" style="width:12%;background:#E2B49F"></i><i class="ar" style="width:8%;background:#B4583F"></i></div><span class="risk">20%<small>at risk</small></span>
+        <b>EX-USW</b><div class="stack" style="--k:2"><i style="width:80%;background:#B7DCF0"></i><i style="width:12%;background:var(--vk)"></i><i class="ar" style="width:6%;background:#E2B49F"></i><i class="ar" style="width:2%;background:#B4583F"></i></div><span class="risk">8%<small>at risk</small></span>
+        <b>EX-USE</b><div class="stack" style="--k:3"><i style="width:55%;background:#B7DCF0"></i><i style="width:20%;background:var(--vk)"></i><i class="ar" style="width:15%;background:#E2B49F"></i><i class="ar" style="width:10%;background:#B4583F"></i></div><span class="risk hi">25%<small>at risk</small></span>
+      </div>
+      <p class="fx"><b>Formula:</b> age = days since receipt (FIFO receipt date); bucket share = bucket value ÷ on-hand value. At-risk share = (181–365 d + 365+ d) ÷ on-hand value.</p>
+    </div>
+    <div class="card" style="--c:6">
+      <div class="hd"><div><div class="ml">Inventory value on hand · days of supply</div><h3>Network $18.0M on hand</h3></div><span class="ex">PLACEHOLDER</span></div>
+      <div class="valgrid">
+        <b>EX-NL</b><div class="hbar"><i style="width:66.7%;background:var(--vk);--k:0"></i></div><span class="v">$4.0M</span><span class="pd">40 d DOS</span>
+        <b>EX-UK</b><div class="hbar"><i style="width:50%;background:var(--lav);--k:1"></i></div><span class="v">$3.0M</span><span class="pd">35 d DOS</span>
+        <b>EX-USW</b><div class="hbar"><i style="width:100%;background:var(--vk);--k:2"></i></div><span class="v">$6.0M</span><span class="pd">45 d DOS</span>
+        <b>EX-USE</b><div class="hbar"><i style="width:83.3%;background:var(--vk);--k:3"></i></div><span class="v">$5.0M</span><span class="pd">30 d DOS</span>
+      </div>
+      <p class="fx"><b>Formula:</b> value = Σ on-hand units × standard unit cost at week end. DOS = available units ÷ forecast average daily demand, next 4 weeks. The source has class-level DOS only (EX-NL class B 25 d; slide 5).</p>
+    </div>
+    <div class="card" style="--c:6">
+      <div class="hd"><div><div class="ml">Inventory record accuracy · shrink</div><h3>Cycle-count accuracy vs 99.5% SLA; write-offs, last 4 weeks</h3></div><div class="r"><span class="pd">IRA: SOURCE</span><span class="ex">SHRINK: PLACEHOLDER</span></div></div>
+      <div class="iragrid">
+        <span></span><span class="ax">98%<em>SLA 99.5%</em>100%</span><span class="ax r">IRA</span><span class="ax r">Shrink</span>
+        <b>EX-NL</b><div class="hbar"><i style="width:85.5%;background:var(--vk);--k:0"></i><b style="left:75%"></b></div><span class="v">99.71%</span><span class="v s">$2K · 0.05%</span>
+        <b>EX-UK</b><div class="hbar"><i style="width:79%;background:var(--lav);--k:1"></i><b style="left:75%"></b></div><span class="v">99.58% <span class="uv">UNV</span></span><span class="v s">$4K · 0.13%</span>
+        <b>EX-USW</b><div class="hbar"><i style="width:90.5%;background:var(--vk);--k:2"></i><b style="left:75%"></b></div><span class="v">99.81%</span><span class="v s">$1K · 0.02%</span>
+        <b>EX-USE</b><div class="hbar"><i style="width:62.5%;background:var(--miss);--k:3"></i><b style="left:75%"></b></div><span class="v">99.25% <span class="st miss" style="font-size:9px;padding:0 6px"><i></i>Miss</span></span><span class="v s">$6K · 0.12%</span>
+      </div>
+      <p class="fx"><b>Formula:</b> IRA = locations where system qty = counted qty ÷ locations counted (cycle counts). Shrink = net loss, damage and write-off adjustments × unit cost; shrink % = shrink $ ÷ value on hand.</p>
+    </div>
+  </div>
+  <div class="fn">IRA from the source deck, Appendix B, week 2027-03-14 (EXAMPLE): EX-NL 2724 / 2732, EX-USE 2511 / 2530, EX-USW 2626 / 2631; EX-UK 99.58% is UNVERIFIED (G1) and its counts are not in the source. All other values are round placeholders to be replaced with Contracts &amp; Finance figures after M-01. Computations: Appendix A3. Bars to scale (IRA axis 98–100%).</div>
+  <div class="vfoot"><svg viewBox="0 0 1695 303" role="img" aria-label="Verkada"><use href="#vk-logo"/></svg><i></i><span>Internal · 3PL Performance Report · Week ending 2026-10-30 · EXAMPLE data</span><span class="pg"></span></div>
+</section>
+<!-- ============ Appendix divider (Verkada section divider + Light Bento Pro) ============ -->
+<section class="slide" data-title="Appendix">
+  <div class="bento" style="grid-template-rows:1fr">
+    <div class="card hero vk-hero" style="--c:12">
+      <svg class="vk-logo" viewBox="0 0 1695 303" role="img" aria-label="Verkada"><use href="#vk-logo"/></svg>
+      <div class="htext">
+        <div class="ml" style="margin-bottom:14px">Section · Appendix <span class="ex">EXAMPLE</span></div>
+        <h1>Appendix: The Detail Behind the Numbers</h1>
+        <p class="vk-sub">Every %, inventory health, the misses we own, next week's risks, and the go-live gates.</p>
+        <div class="vk-date">A–A3 Network &amp; inventory · B Scorecard · C Wins · D Misses · E Risks · F Questions · G Plan · H Decision · I Go-live gates</div>
+      </div>
+      <div class="mode vk-base">Internal · MODE: SANITIZED (M-01 open) · EXAMPLE WEEK · made-up names &amp; numbers · not Verkada data</div>
+    </div>
+  </div>
+</section>
+
+<!-- ============ Appendix A ============ -->
+<section class="slide" data-title="A · Network: every %">
+  <div class="hdr"><div class="ml"><svg class="vm" viewBox="0 0 440 303" aria-hidden="true"><use href="#vk-mark"/></svg><span>Appendix A <span class="ex">EXAMPLE</span></span></div><div class="mode">MODE: SANITIZED (M-01 open) · EXAMPLE WEEK · not Verkada data</div></div>
+  <h2 class="t">Network Ex-UK: Every % and How It Is Computed</h2>
+  <p class="sub">Σ numerator ÷ Σ denominator over EX-NL + EX-SG + EX-USE + EX-USW, week 2027-03-14.</p>
+  <div class="bento" style="grid-template-rows:1fr auto">
+    <div class="card" style="--c:12;padding:12px 18px">
+      <div class="tw"><table class="tight" style="font-size:9.5px">
+        <thead><tr><th>KPI</th><th>Label</th><th>03-14</th><th>Formula (NL + SG + USE + USW)</th><th>03-07</th><th></th><th>Target</th><th>Status</th></tr></thead>
+        <tbody>
+          <tr><td class="n">OTIF (customer)</td><td>Contract SLA + glide</td><td class="n">98.20%</td><td>(3996 + 3797 + 3750 + 3905) ÷ (4058 + 3860 + 3856 + 3957) = 15448 / 15731</td><td>98.25%<span class="s">15310 / 15583</span></td><td class="dn">▼</td><td>≥98.0% SLA · ≥98.0% glide</td><td><span class="st"><i></i>Meets SLA</span><span class="s">EX-USE MISS inside</span></td></tr>
+          <tr><td class="n">In-stock</td><td>Glide only</td><td class="n">96.09%</td><td>(12046 + 12117 + 12076 + 12192) ÷ (12600 + 12600 + 12600 + 12600) = 48431 / 50400</td><td>95.96%<span class="s">48364 / 50400</span></td><td class="up">▲</td><td>≥99.0% glide</td><td><span class="st risk"><i></i>Below 12-month target</span></td></tr>
+          <tr><td class="n">Order accuracy</td><td>Contract SLA + glide</td><td class="n">99.85%</td><td>(4235 + 4038 + 4043 + 4139) ÷ (4245 + 4047 + 4043 + 4144) = 16455 / 16479</td><td>99.86%<span class="s">16308 / 16331</span></td><td class="dn">▼</td><td>≥99.5% SLA (EXAMPLE) · ≥99.7% glide</td><td><span class="pd">PENDING: evidence</span><span class="s">EX-USE G5 weeks in pool</span></td></tr>
+          <tr><td class="n">Inventory accuracy</td><td>Contract SLA + glide</td><td class="n">99.60%</td><td>(2724 + 2524 + 2511 + 2626) ÷ (2732 + 2534 + 2530 + 2631) = 10385 / 10427</td><td>99.57%<span class="s">11031 / 11079</span></td><td class="up">▲</td><td>≥99.5% SLA · ≥99.9% glide</td><td><span class="st"><i></i>Meets SLA</span><span class="s">below 12-month target; EX-USE MISS inside</span></td></tr>
+          <tr><td class="n">Dock-to-stock<span class="s">hours ÷ receipts</span></td><td>Contract SLA + glide</td><td class="n">18.7 h</td><td>(6080.5 + 4460.3 + 4393.6 + 3258.8) ÷ (369 + 171 + 167 + 268) = 18193.2 / 975</td><td>21.7 h<span class="s">35350.4 / 1627</span></td><td class="up">▲</td><td>≤24 h SLA · ≤3 h glide</td><td><span class="st"><i></i>Meets SLA</span><span class="s">below 12-month target; EX-SG, EX-USE MISS inside</span></td></tr>
+          <tr><td class="n">Same-day rel.-to-ship vs cutoff¹</td><td>Diagnostic (SLA PENDING SOWs)</td><td class="n">99.34% ³</td><td>(3629 + 3505 + 3586) ÷ (3656 + 3538 + 3597) = 10,720 / 10,791 (NL + USE + USW; excl. EX-SG (CUTOFF MISSING); excl. EX-UK (UNVERIFIED)). Ops network base (NL, UK, USE, USW): 99.07% (14,371 / 14,506)³, excl. EX-SG (CUTOFF MISSING)²</td><td>no data</td><td class="eq">no data</td><td>≥99.0% (EXAMPLE, not active)</td><td><span class="st off"><i></i>Diagnostic only</span><span class="s">EX-SG not measured (CUTOFF MISSING)</span></td></tr>
+          <tr><td class="n">ASN compliance</td><td>Leading, glide only</td><td class="n">98.63%</td><td>(176 + 232 + 176 + 208) ÷ (178 + 236 + 180 + 209) = 792 / 803</td><td>98.39%<span class="s">794 / 807</span></td><td class="up">▲</td><td>≥99% glide</td><td><span class="st risk"><i></i>Below 12-month target</span></td></tr>
+          <tr><td class="n">Tracking coverage</td><td>Leading, glide only</td><td class="n">99.30%</td><td>(3849 + 4041 + 3685 + 3817) ÷ (3872 + 4086 + 3718 + 3825) = 15392 / 15501</td><td>99.19%<span class="s">15379 / 15505</span></td><td class="up">▲</td><td>≥99.5% glide</td><td><span class="st risk"><i></i>Below 12-month target</span></td></tr>
+          <tr><td class="n">Lead time median · P90</td><td>Glide only</td><td class="n">3.8 d · 7.9 d</td><td>Order-weighted mean of site statistics, an approximation (Ops pack §5.1; site inputs: Appendix A2)</td><td>no data</td><td></td><td>≤2.5 d · ≤5.0 d 12-month</td><td><span class="st risk"><i></i>Above 12-month target</span></td></tr>
+          <tr><td class="n">MOB ★ score · data completeness</td><td>Leading, glide only</td><td class="n">71 / 72 = 98.6% · 559 / 560 = 99.8%</td><td>Ops pack §5.2 (Y of 18 × 4; 7 KPIs × 20 weeks × 4). All sites incl. EX-UK: 97.8% · 95.3% (Appendix A2)</td><td>no data</td><td></td><td>100% · 100%</td><td><span class="st risk"><i></i>Below 12-month target</span></td></tr>
+        </tbody></table></div>
+    </div>
+    <div class="card" style="--c:12;padding:7px 18px"><p style="font-size:8.4px;line-height:1.36">EX-UK excluded: <span class="uv">UNVERIFIED</span> (G1). % shown at the dashboard's 2 dp (dock-to-stock at its 1 dp, in hours). Release-to-ship: rule 13 APPROVED (hypothesis to test, 2026-10-26); values from CSV v2.9.2 (3PL Ops Lead); ³EXAMPLE; values relabelled to the cutoff basis, not recomputed; cutoffs are EXAMPLE UNVERIFIED; F&amp;T template has no real rows; no prior-week values on that basis, so trend: no data (full rule text: Appendix B). ¹Same-day release-to-ship % vs site carrier cutoff (diagnostic only), approved (decisions.md 2026-10-26). ²Ops assumption (3PL Ops Lead, relayed by CoS; Mike to confirm): EX-UK stays in because rule 12 covers only the KPIs tied to critical basics. Weekly OTIF series behind "down 9 weeks in a row": md source trace. Lead time, MOB ★ and completeness: 3PL Ops Lead pack §5, EXAMPLE.</p></div>
+  </div>
+  <div class="vfoot"><svg viewBox="0 0 1695 303" role="img" aria-label="Verkada"><use href="#vk-logo"/></svg><i></i><span>Internal · 3PL Performance Report · Week ending 2026-10-30 · EXAMPLE data</span><span class="pg"></span></div>
+</section>
+
+<!-- ============ Appendix A2 ============ -->
+<section class="slide" data-title="A2 · Ops pack figures">
+  <div class="hdr"><div class="ml"><svg class="vm" viewBox="0 0 440 303" aria-hidden="true"><use href="#vk-mark"/></svg><span>Appendix A2 · Figures from the 3PL Ops Lead pack (quoted exactly) <span class="ex">EXAMPLE</span></span></div><div class="mode">MODE: SANITIZED (M-01 open) · EXAMPLE WEEK · not Verkada data</div></div>
+  <h2 class="t">Lead Time, Day-0, Critical Basics and Completeness: Base Named on Every Row</h2>
+  <p class="sub">Source: <span class="path">ops/handoffs/exec-comms-1030-pack.md</span> (3PL Ops Lead, 2026-10-26), week 2027-03-14. All EXAMPLE. Slide-1 base = network excl. EX-UK <span class="uv">UNVERIFIED</span>; all-sites values are shown beside it for reference (rule 12, approved (decisions.md 2026-10-26)).</p>
+  <div class="bento" style="grid-template-rows:1fr auto">
+    <div class="card" style="--c:9">
+      <div class="tw"><table>
+        <thead><tr><th>Figure</th><th>Base</th><th>Latest (wk 2027-03-14)</th><th>Last 4 received weeks, mean*</th><th>Day-0 baseline</th><th>Note</th></tr></thead>
+        <tbody>
+          <tr><td class="n">Network lead time median · P90</td><td>Excl. EX-UK <span class="uv">UNVERIFIED</span></td><td class="n">3.8 d · 7.9 d</td><td>—</td><td>5.3 d · 11.3 d</td><td>Order-weighted means of site statistics (approximation)†</td></tr>
+          <tr><td class="n">Network lead time median · P90</td><td>All sites incl. EX-UK (reference)</td><td class="n">3.9 d · 8.2 d</td><td>—</td><td>5.6 d · 12.0 d</td><td>12-month target ≤ 2.5 d · ≤ 5.0 d</td></tr>
+          <tr><td class="n">EX-UK lead time median · P90</td><td>EX-UK only (single site)</td><td class="n">4.6 d · 9.7 d</td><td>5.1 d · 10.6 d*</td><td>7.0 d · 15.0 d</td><td>EX-UK KPIs stay out of the network (G1)</td></tr>
+          <tr><td class="n">Critical basics (MOB ★ score)</td><td>Excl. EX-UK <span class="uv">UNVERIFIED</span></td><td class="n">71 / 72 = 98.6%</td><td>—</td><td>—</td><td>NL 18, SG 18, USW 18, USE 17 (cycle counting at P)</td></tr>
+          <tr><td class="n">Critical basics (MOB ★ score)</td><td>All sites incl. EX-UK (reference)</td><td class="n">88 / 90 = 97.8%</td><td>—</td><td>—</td><td>UK 17 (data channel N)</td></tr>
+          <tr><td class="n">Data completeness (7 KPIs × 20 weeks)</td><td>Excl. EX-UK <span class="uv">UNVERIFIED</span></td><td class="n">559 / 560 = 99.8%</td><td>—</td><td>—</td><td>NL, SG and USW 140 each; USE 139</td></tr>
+          <tr><td class="n">Data completeness (7 KPIs × 20 weeks)</td><td>All sites incl. EX-UK (reference)</td><td class="n">667 / 700 = 95.3%</td><td>—</td><td>—</td><td>EX-UK 77.1% (<span class="st risk" style="font-size:9.5px"><i></i>Watch</span>, below 90%)</td></tr>
+        </tbody></table></div>
+    </div>
+    <div class="card" style="--c:3">
+      <div class="hd"><div class="ml">Data completeness</div><span class="ex">EXAMPLE</span></div>
+      <div class="bars grow1" style="margin-top:16px;gap:16px">
+        <div class="tick" style="bottom:90%;--tc:var(--lav)"><span style="color:#5f5f80">90% watch line</span></div>
+        <div class="bcol"><div class="bar" style="height:99.8%;background:var(--teal);--k:0"><span class="v" style="top:6px;bottom:auto;color:#fff">99.8%</span></div></div>
+        <div class="bcol"><div class="bar" style="height:95.3%;background:var(--aqua);--k:1"><span class="v" style="top:6px;bottom:auto;color:#fff">95.3%</span></div></div>
+        <div class="bcol"><div class="bar" style="height:77.1%;background:var(--sand);--k:2"><span class="v" style="top:6px;bottom:auto">77.1%</span></div></div>
+      </div>
+      <div class="blab" style="gap:16px"><div>Excl. UK</div><div>All sites</div><div>EX-UK</div></div>
+      <p style="font-size:9px;margin-top:3px">Axis 0–100%.</p>
+    </div>
+    <div class="card" style="--c:12;padding:10px 18px"><p style="font-size:9px;line-height:1.45">†Sites, median (orders): NL 4.2 (3820), SG 4.0 (3962), USE 3.6 (3678), USW 3.2 (3749). Sites, P90: NL 8.8, SG 8.3, USE 7.5, USW 6.8. "A true pooled median or P90 can't be derived from site medians. These are order-weighted means of the site statistics (weight = orders delivered in the week), which is the dashboard's own method." Day-0: "a simple mean of the sites' EXAMPLE Day-0 values (dashboard method), not order-weighted." *EX-UK's 4-week figures cover 6 calendar weeks and include a stale repeat: "The last 4 received weeks are 2027-02-07, 02-14 (stale repeat), 02-21 and 03-14." <span class="uv">UNVERIFIED</span> (pack, as written): "all figures are EXAMPLE, not real 3PL data; the Day-0 baseline is EXAMPLE (real window/freeze pending M-01/M-08); averaging weekly medians/P90s and order-weighting site medians/P90s (section 5) are approximations; section 5 drivers are likely, unconfirmed; the rule 12 exclusion is DRAFT, pending Mike confirmation; root causes on the 4 rows are unconfirmed pending Freight &amp; Trade evidence" [rule 12 since approved (decisions.md 2026-10-26)].</p></div>
+  </div>
+  <div class="vfoot"><svg viewBox="0 0 1695 303" role="img" aria-label="Verkada"><use href="#vk-logo"/></svg><i></i><span>Internal · 3PL Performance Report · Week ending 2026-10-30 · EXAMPLE data</span><span class="pg"></span></div>
+</section>
+<!-- ============ Appendix A3 · Inventory health computations ============ -->
+<section class="slide" data-title="A3 · Inventory health">
+  <div class="hdr"><div class="ml"><svg class="vm" viewBox="0 0 440 303" aria-hidden="true"><use href="#vk-mark"/></svg><span>Appendix A3 · Inventory health <span class="ex">EXAMPLE</span></span></div><div class="mode">MODE: SANITIZED (M-01 open) · EXAMPLE WEEK · not Verkada data</div></div>
+  <h2 class="t">Inventory Health: Every Value and How It Is Computed</h2>
+  <div class="phrow"><span class="phchip"><i></i>EXAMPLE placeholder data, pending internal data approval (M-01). Values from Contracts &amp; Finance</span><span class="phnote">Appendix A rows continued. Sites EX-NL + EX-UK + EX-USW + EX-USE.</span></div>
+  <div class="bento" style="grid-template-rows:1fr">
+    <div class="card" style="--c:12;padding:12px 18px">
+      <div class="tw"><table class="tight" style="font-size:10px">
+        <thead><tr><th>KPI</th><th>Basis</th><th>4 sites</th><th>Formula (NL + UK + USW + USE)</th><th>By site (NL · UK · USW · USE)</th><th>Target / threshold</th><th>Status</th></tr></thead>
+        <tbody>
+          <tr><td class="n">Blocked / quarantined stock</td><td><span class="ex">PLACEHOLDER</span></td><td class="n">1,800 units · $180K</td><td>(200 + 500 + 100 + 1,000) units; ($20K + $50K + $10K + $100K) at standard cost; days held = week end − hold start</td><td>5 d · 15 d · 3 d · 30 d (oldest open hold)</td><td>≤7 d OK · 8–28 d Watch · &gt;28 d Escalate (EXAMPLE assumption)</td><td><span class="st miss"><i></i>Escalate</span><span class="s">EX-USE</span></td></tr>
+          <tr><td class="n">Aged stock, at-risk share (&gt;180 d)</td><td><span class="ex">PLACEHOLDER</span></td><td class="n">15.2%</td><td>Σ (site at-risk % × site value) ÷ Σ value = (0.40 + 0.60 + 0.48 + 1.25) ÷ 18.0 $M = 2.73 / 18.0</td><td>10% · 20% · 8% · 25%<span class="s">buckets 0–90 · 91–180 · 181–365 · 365+ d by receipt date</span></td><td>No target set (PENDING)</td><td><span class="st off"><i></i>No target</span></td></tr>
+          <tr><td class="n">Inventory value on hand</td><td><span class="ex">PLACEHOLDER</span></td><td class="n">$18.0M</td><td>Σ on-hand units × standard unit cost = 4.0 + 3.0 + 6.0 + 5.0 $M</td><td>$4.0M · $3.0M · $6.0M · $5.0M</td><td>None (context metric)</td><td><span class="st off"><i></i>Context</span></td></tr>
+          <tr><td class="n">Days of supply</td><td><span class="ex">PLACEHOLDER</span></td><td class="n">not pooled</td><td>Available units ÷ forecast average daily demand, next 4 weeks (<span class="path">ops/3pl-metric-definitions.md</span>)</td><td>40 d · 35 d · 45 d · 30 d<span class="s">source has class level only: EX-NL class B 25 d vs 21.5 d (slide 5)</span></td><td>PROJECTED STOCKOUT if DOS &lt; replenishment lead time</td><td><span class="st off"><i></i>Context</span></td></tr>
+          <tr><td class="n">Inventory record accuracy (cycle count)</td><td><span class="pd">SOURCE · EXAMPLE</span></td><td class="n">99.60%<span class="s">ex-UK, incl. EX-SG (Appendix A)</span></td><td>Locations with system qty = counted qty ÷ locations counted. NL 2724 / 2732 · USW 2626 / 2631 · USE 2511 / 2530</td><td>99.71% · 99.58% <span class="uv">UNVERIFIED</span> · 99.81% · 99.25%</td><td>≥99.5% SLA · ≥99.9% glide</td><td><span class="st miss"><i></i>EX-USE miss</span><span class="s">others meet SLA</span></td></tr>
+          <tr><td class="n">Shrink / write-offs, last 4 weeks</td><td><span class="ex">PLACEHOLDER</span></td><td class="n">$13K · 0.07%</td><td>Net loss, damage and write-off adjustments × unit cost = 2 + 4 + 1 + 6 $K; % = $13K ÷ $18.0M</td><td>$2K · $4K · $1K · $6K<span class="s">0.05% · 0.13% · 0.02% · 0.12% of value on hand</span></td><td>SOW shrink allowance (PENDING, <span class="path">finance/sow-sla-checklist.md</span>)</td><td><span class="pd">PENDING: SOW</span></td></tr>
+        </tbody></table></div>
+    </div>
+  </div>
+  <div class="fn">IRA values copied exactly from the source deck (Appendix B, week 2027-03-14), themselves EXAMPLE data; EX-UK counts are not in the source. All other rows are obviously round placeholders, not Verkada data, to be replaced with Contracts &amp; Finance values after M-01. Network shares are value-weighted.</div>
+  <div class="vfoot"><svg viewBox="0 0 1695 303" role="img" aria-label="Verkada"><use href="#vk-logo"/></svg><i></i><span>Internal · 3PL Performance Report · Week ending 2026-10-30 · EXAMPLE data</span><span class="pg"></span></div>
+</section>
+
+
+<!-- ============ Appendix B · KPI scorecard + radar ============ -->
+<section class="slide" data-title="B · Other KPIs by 3PL">
+  <div class="hdr"><div class="ml"><svg class="vm" viewBox="0 0 440 303" aria-hidden="true"><use href="#vk-mark"/></svg><span>Appendix B · Other KPIs by 3PL <span class="ex">EXAMPLE</span></span></div><div class="mode">MODE: SANITIZED (M-01 open) · EXAMPLE WEEK · not Verkada data</div></div>
+  <h2 class="t">Other KPIs: EX-USE and EX-SG Miss Contract SLAs; EX-UK Is UNVERIFIED</h2>
+  <p class="sub">Week 2027-03-14 to 03-20 from <span class="path">ops/weekly-data-example.csv</span> (= dashboard latest EXAMPLE week); trend vs 2027-03-07. Tier and MOB ★ from <span class="path">ops/kpi-dashboard.html</span> (EXAMPLE simulation). Real sites are Observe only: no tier until walked + 4 weeks.</p>
+  <div class="bento" style="grid-template-rows:auto 1fr">
+    <div class="card" style="--c:12;padding:10px 16px">
+      <div class="tw"><table class="tight" style="font-size:10px">
+        <thead><tr><th>3PL</th><th>EXAMPLE tier · score</th><th>OTIF<br>SLA ≥98.0</th><th>Order acc.<br>SLA ≥99.5</th><th>Inv. acc.<br>SLA ≥99.5</th><th>Dock-to-stock<br>SLA ≤24 h</th><th>Same-day rel.-to-ship vs cutoff³<br>diag. ≥99.0 · CSV v2.9.2</th><th>ASN<br>glide ≥99</th><th>Tracking<br>glide ≥99.5</th><th>Gate</th></tr></thead>
+        <tbody>
+          <tr><td class="n">EX-USW</td><td><span class="st"><i></i>Green</span><span class="s">MOB ★ 18/18 · Observe only</span></td><td class="n">98.69% <span class="dn">▼</span></td><td class="n">99.88% <span class="up">▲</span></td><td class="n">99.81% <span class="up">▲</span></td><td class="n">12.2 h <span class="dn">▼</span></td><td>99.69% (Los Angeles 17:00)<span class="s">trend: no data</span></td><td>99.52% <span class="up">▲</span></td><td>99.79% <span class="up">▲</span></td><td><span class="st"><i></i>PASSED</span></td></tr>
+          <tr><td class="n">EX-USE</td><td><span class="st risk"><i></i>Watch</span><span class="s">MOB ★ 17/18 · Observe only</span></td><td class="n" style="color:#9b4d38">97.25% ▼</td><td class="n">100% <span class="eq">▬</span><span class="pd" style="display:block;margin-top:2px;width:max-content">PENDING: evidence</span></td><td class="n" style="color:#9b4d38">99.25% ▼</td><td class="n" style="color:#9b4d38">26.3 h ▲</td><td>99.07% (New York 17:00)<span class="s">trend: no data</span></td><td>97.78% <span class="up">▲</span></td><td>99.11% <span class="up">▲</span></td><td><span class="st"><i></i>PASSED</span></td></tr>
+          <tr><td class="n">EX-NL</td><td><span class="st"><i></i>Green</span><span class="s">MOB ★ 18/18 · Observe only</span></td><td class="n">98.47% <span class="up">▲</span></td><td class="n">99.76% <span class="dn">▼</span></td><td class="n">99.71% <span class="up">▲</span></td><td class="n">16.5 h <span class="up">▲</span></td><td>99.26% (Amsterdam 14:00)<span class="s">trend: no data</span></td><td>98.88% <span class="up">▲</span></td><td>99.41% <span class="up">▲</span></td><td><span class="st"><i></i>PASSED</span></td></tr>
+          <tr><td class="n">EX-SG</td><td><span class="st risk"><i></i>Watch</span><span class="s">MOB ★ 18/18 · Observe only</span></td><td class="n">98.37% <span class="dn">▼</span></td><td class="n">99.78% <span class="dn">▼</span></td><td class="n">99.61% <span class="up">▲</span></td><td class="n" style="color:#9b4d38">26.1 h ▼</td><td>not measured<span class="s">CUTOFF MISSING</span></td><td>98.31% <span class="dn">▼</span></td><td>98.9% <span class="dn">▼</span></td><td><span class="st"><i></i>PASSED</span></td></tr>
+          <tr><td class="n">EX-UK</td><td><span class="st risk"><i></i>Watch</span><span class="s">MOB ★ 17/18 · Observe only</span></td><td>98.34%<span class="s">trend: no data · UNVERIFIED</span></td><td>99.75%<span class="s">trend: no data · UNVERIFIED</span></td><td>99.58%<span class="s">trend: no data · UNVERIFIED</span></td><td>19.2 h<span class="s">trend: no data · UNVERIFIED</span></td><td>98.28% (London 16:45)<span class="s">trend: no data</span></td><td>96.62%<span class="s">trend: no data</span></td><td>97.21%<span class="s">trend: no data</span></td><td><span class="st miss"><i></i>FAILING</span></td></tr>
+          <tr class="dim"><td class="n">EX-MX</td><td><span class="st off"><i></i>Not live</span><span class="s">MOB ★ 16/18 · Observe only</span></td><td>no data</td><td>no data</td><td>no data</td><td>no data</td><td>no data · CUTOFF MISSING</td><td>no data</td><td>no data</td><td><span class="st off"><i></i>BLOCKED</span></td></tr>
+        </tbody></table></div>
+      <p style="font-size:9.5px;margin-top:4px">Coral text = MISS vs contract SLA · ▲ better ▼ worse ▬ same vs 2027-03-07 · UNVERIFIED G1 · PENDING: evidence G5. OTIF repeats slide 2b.</p>
+    </div>
+    <div class="card" style="--c:12;padding:14px 20px"><p style="font-size:10.5px;line-height:1.55"><b>Rule 13</b>, quoted exactly from <span class="path">ops/data-rules.md</span> (v2.9.1; 3PL Ops Lead): "Same-day release-to-ship % in the weekly CSV (v2.6.1, APPROVED (hypothesis to test, 2026-10-26); decisions.md): metric release_to_ship_sameday (definition: ops/3pl-metric-definitions.md "Release-to-ship SLA"; target row in ops/targets.md). Diagnostic only until the SOWs set it: no tier, no credit, no breach, not in the rule 1 completeness list. v2.9.1 (Mike approved, decisions.md 2026-10-26): cutoff timing. An order is in scope when it is released on a business day by the site's effective cutoff = carrier pickup time − the site's buffer, in the site's local time zone, from freight/carrier-cutoff-template.md (Freight &amp; Trade owns it). It counts as same-day when its carrier pickup scan falls on the same local date. Orders released after the effective cutoff are due the next business day and are not in that day's denominator. A site with no cutoff row is flagged "CUTOFF MISSING" and is not measured; there is no default cutoff. Still diagnostic only. The lead-time stage rows (lt_release_to_ship_median / _p90, days, glide) stay separate and unchanged." <span class="uv">UNVERIFIED</span> per-site cutoffs are EXAMPLE; F&amp;T's template has no real site rows. No cutoff row (dashboard SITE_CUTOFFS, EXAMPLE): EX-SG, EX-MX = CUTOFF MISSING. Values: CSV v2.9.2 (3PL Ops Lead); ³EXAMPLE; values relabelled to the cutoff basis, not recomputed; trend: no data.</p></div>
+  </div>
+  <div class="vfoot"><svg viewBox="0 0 1695 303" role="img" aria-label="Verkada"><use href="#vk-logo"/></svg><i></i><span>Internal · 3PL Performance Report · Week ending 2026-10-30 · EXAMPLE data</span><span class="pg"></span></div>
+</section>
+
+<!-- ============ Appendix B2 · Radar scorecard ============ -->
+<section class="slide" data-title="B2 · 3PL scorecard radar">
+  <div class="hdr"><div class="ml"><svg class="vm" viewBox="0 0 440 303" aria-hidden="true"><use href="#vk-mark"/></svg><span>Appendix B · 3PL scorecard: NL · UK · US <span class="ex">EXAMPLE</span></span></div><div class="mode">MODE: SANITIZED (M-01 open) · EXAMPLE WEEK · not Verkada data</div></div>
+  <h2 class="t">3PL Scorecard: EX-NL, EX-UK and the US Sites Side by Side</h2>
+  <p class="sub">The same week 2027-03-14 values as the Appendix B table, drawn on one web. Outer ring = better on every axis. EX-UK is UNVERIFIED (G1), so its shape is dashed.</p>
+  <div class="bento" style="grid-template-rows:1fr 1fr 1fr">
+    <div class="card" style="--c:6;--r:3">
+      <div class="hd"><div><div class="ml">Radar · six KPIs</div><h3>NL vs UK vs US</h3></div><div class="r"><span class="ex">EXAMPLE</span></div></div>
+      <div style="display:flex;justify-content:space-between;align-items:center;gap:6px;flex-wrap:wrap"><div class="pills" id="usToggle" role="group" aria-label="US site"><button class="on" data-us="USW">US · EX-USW</button><button data-us="USE">US · EX-USE</button></div><span class="uv">UK UNVERIFIED</span></div>
+      <svg id="radar" class="grow1" viewBox="-36 -6 292 220" style="width:100%;min-height:220px" role="img" aria-label="Radar chart comparing EX-NL, EX-UK and a US site on six KPIs"></svg>
+      <div class="lg"><span><i style="background:var(--aqua)"></i>EX-NL</span><span><i style="background:var(--lav)"></i>EX-UK (dashed: UNVERIFIED)</span><span><i style="background:var(--teal)"></i><span id="usName">EX-USW</span></span></div>
+      <p style="font-size:9.5px;margin-top:4px">Axis ranges (scale only, not targets): OTIF 96–100% · order and inv. acc. 99–100% · dock-to-stock 30→0 h (lower is better) · ASN 95–100% · tracking 96–100%.</p>
+    </div>
+    <div class="card" style="--c:6">
+      <div class="hd"><div style="display:flex;gap:10px;align-items:center"><div class="av" style="background:var(--aqua)">NL</div><div><h3 style="margin:0">EX-NL</h3><span class="st"><i></i>Green · MOB ★ 18/18</span></div></div><span class="ex">EXAMPLE</span></div>
+      <div class="kpi6" style="display:grid;grid-template-columns:repeat(6,1fr);gap:6px;margin-top:auto"><div><div class="ml" style="font-size:8.5px;letter-spacing:.1em">OTIF</div><div style="font-size:15px;font-weight:600;letter-spacing:-.02em">98.47%</div></div><div><div class="ml" style="font-size:8.5px;letter-spacing:.1em">Order acc.</div><div style="font-size:15px;font-weight:600;letter-spacing:-.02em">99.76%</div></div><div><div class="ml" style="font-size:8.5px;letter-spacing:.1em">Inv. acc.</div><div style="font-size:15px;font-weight:600;letter-spacing:-.02em">99.71%</div></div><div><div class="ml" style="font-size:8.5px;letter-spacing:.1em">Dock-to-stock</div><div style="font-size:15px;font-weight:600;letter-spacing:-.02em">16.5 h</div></div><div><div class="ml" style="font-size:8.5px;letter-spacing:.1em">ASN</div><div style="font-size:15px;font-weight:600;letter-spacing:-.02em">98.88%</div></div><div><div class="ml" style="font-size:8.5px;letter-spacing:.1em">Tracking</div><div style="font-size:15px;font-weight:600;letter-spacing:-.02em">99.41%</div></div></div>
+    </div>
+    <div class="card" style="--c:6">
+      <div class="hd"><div style="display:flex;gap:10px;align-items:center"><div class="av" style="background:var(--lav)">UK</div><div><h3 style="margin:0">EX-UK</h3><span class="st risk"><i></i>Watch · MOB ★ 17/18</span> <span class="uv">UNVERIFIED</span></div></div><span class="ex">EXAMPLE</span></div>
+      <div class="kpi6" style="display:grid;grid-template-columns:repeat(6,1fr);gap:6px;margin-top:auto"><div><div class="ml" style="font-size:8.5px;letter-spacing:.1em">OTIF</div><div style="font-size:15px;font-weight:600;letter-spacing:-.02em">98.34%</div></div><div><div class="ml" style="font-size:8.5px;letter-spacing:.1em">Order acc.</div><div style="font-size:15px;font-weight:600;letter-spacing:-.02em">99.75%</div></div><div><div class="ml" style="font-size:8.5px;letter-spacing:.1em">Inv. acc.</div><div style="font-size:15px;font-weight:600;letter-spacing:-.02em">99.58%</div></div><div><div class="ml" style="font-size:8.5px;letter-spacing:.1em">Dock-to-stock</div><div style="font-size:15px;font-weight:600;letter-spacing:-.02em">19.2 h</div></div><div><div class="ml" style="font-size:8.5px;letter-spacing:.1em">ASN</div><div style="font-size:15px;font-weight:600;letter-spacing:-.02em">96.62%</div></div><div><div class="ml" style="font-size:8.5px;letter-spacing:.1em">Tracking</div><div style="font-size:15px;font-weight:600;letter-spacing:-.02em">97.21%</div></div></div>
+    </div>
+    <div class="card" style="--c:6">
+      <div class="hd"><div style="display:flex;gap:10px;align-items:center"><div class="av" style="background:var(--teal)">US</div><div><h3 style="margin:0" id="usCardName">EX-USW</h3><span class="st" id="usTier"><i></i>Green · MOB ★ 18/18</span></div></div><span class="ex">EXAMPLE</span></div>
+      <div class="kpi6" style="display:grid;grid-template-columns:repeat(6,1fr);gap:6px;margin-top:auto"><div><div class="ml" style="font-size:8.5px;letter-spacing:.1em">OTIF</div><div style="font-size:15px;font-weight:600;letter-spacing:-.02em" id=usv-0>98.69%</div></div><div><div class="ml" style="font-size:8.5px;letter-spacing:.1em">Order acc.</div><div style="font-size:15px;font-weight:600;letter-spacing:-.02em" id=usv-1>99.88%</div></div><div><div class="ml" style="font-size:8.5px;letter-spacing:.1em">Inv. acc.</div><div style="font-size:15px;font-weight:600;letter-spacing:-.02em" id=usv-2>99.81%</div></div><div><div class="ml" style="font-size:8.5px;letter-spacing:.1em">Dock-to-stock</div><div style="font-size:15px;font-weight:600;letter-spacing:-.02em" id=usv-3>12.2 h</div></div><div><div class="ml" style="font-size:8.5px;letter-spacing:.1em">ASN</div><div style="font-size:15px;font-weight:600;letter-spacing:-.02em" id=usv-4>99.52%</div></div><div><div class="ml" style="font-size:8.5px;letter-spacing:.1em">Tracking</div><div style="font-size:15px;font-weight:600;letter-spacing:-.02em" id=usv-5>99.79%</div></div></div>
+    </div>
+  </div>
+  <div class="fn">Values copied from the Appendix B table (<span class="path">ops/weekly-data-example.csv</span>, week 2027-03-14). EX-SG and EX-MX are in the table; the radar compares the NL, UK and US sites only. Tier and MOB ★ are EXAMPLE simulation values; real sites are Observe only.</div>
+  <div class="vfoot"><svg viewBox="0 0 1695 303" role="img" aria-label="Verkada"><use href="#vk-logo"/></svg><i></i><span>Internal · 3PL Performance Report · Week ending 2026-10-30 · EXAMPLE data</span><span class="pg"></span></div>
+</section>
+
+<!-- ============ Appendix C · Wins ============ -->
+<section class="slide" data-title="C · Wins">
+  <div class="hdr"><div class="ml"><svg class="vm" viewBox="0 0 440 303" aria-hidden="true"><use href="#vk-mark"/></svg><span>Appendix C · Wins <span class="ex">EXAMPLE</span></span></div><div class="mode">MODE: SANITIZED (M-01 open) · EXAMPLE WEEK · not Verkada data</div></div>
+  <h2 class="t">Two Sites Clean, One Site Ahead on the Leading Signals, Four CAPAs Closed</h2>
+  <p class="sub">From the dashboard EXAMPLE week 2027-03-14 (accountability view, CAPA log as of 2027-03-20) and the CSV.</p>
+  <div class="bento" style="grid-template-rows:1fr 1fr">
+    <div class="card" style="--c:4;--r:2">
+      <div class="hd"><div class="ml">EX-NL and EX-USW</div><span class="ex">EXAMPLE</span></div>
+      <div style="display:flex;gap:10px;margin:8px 0 14px"><div class="av" style="background:var(--aqua)">NL</div><div class="av" style="background:var(--teal)">USW</div></div>
+      <div class="big" style="font-size:44px">Green</div>
+      <p style="margin-top:10px;font-size:13px">No rule fired this week (EXAMPLE tier; real sites stay Observe only).</p>
+      <div style="margin-top:22px;display:flex;flex-direction:column;gap:8px">
+        <div class="row" style="border-top:1px solid var(--ln)"><b>EX-NL</b><span class="pills"><span class="on">Green</span><span>Watch</span><span>Probation</span></span></div>
+        <div class="row"><b>EX-USW</b><span class="pills"><span class="on">Green</span><span>Watch</span><span>Probation</span></span></div>
+      </div>
+    </div>
+    <div class="card" style="--c:5;--r:2">
+      <div class="hd"><div><div class="ml">EX-USW ahead on leading KPIs</div><h3>ASN compliance and tracking coverage vs glide</h3></div><span class="ex">EXAMPLE</span></div>
+      <div class="bars grow1" style="margin-top:24px;gap:40px;padding:0 30px">
+        <div class="bcol"><div class="tick" style="bottom:50%;left:-24px;right:-24px"><span style="right:auto;left:0">glide ≥99%</span></div><div class="bar" style="height:76%;background:var(--aqua);max-width:70px;--k:0"><span class="v" style="font-size:13px">99.52%</span></div></div>
+        <div class="bcol"><div class="tick" style="bottom:75%;left:-24px;right:-24px"><span style="right:auto;left:0">glide ≥99.5%</span></div><div class="bar" style="height:89.5%;background:var(--teal);max-width:70px;--k:1"><span class="v" style="font-size:13px">99.79%</span></div></div>
+      </div>
+      <div class="blab" style="gap:40px;padding:0 30px"><div>ASN compliance</div><div>Tracking coverage</div></div>
+      <p style="margin-top:8px">ASN compliance 99.52% and tracking coverage 99.79%, both at or above glide. Axis 98–100%.</p>
+    </div>
+    <div class="card tint" style="--c:3;--r:2">
+      <div class="hd"><div class="ml">Basics</div><span class="ex">EXAMPLE</span></div>
+      <div class="big" style="font-size:88px;color:var(--teal);margin-top:10px">4</div>
+      <h3 style="margin-top:6px">CAPAs closed (verified)</h3>
+      <p>CAPA log: Closed 4; none overdue.</p>
+      <div style="margin-top:auto"><span class="st"><i></i>None overdue</span></div>
+    </div>
+  </div>
+  <div class="vfoot"><svg viewBox="0 0 1695 303" role="img" aria-label="Verkada"><use href="#vk-logo"/></svg><i></i><span>Internal · 3PL Performance Report · Week ending 2026-10-30 · EXAMPLE data</span><span class="pg"></span></div>
+</section>
+<!-- ============ Appendix D · Misses ============ -->
+<section class="slide roomy" data-title="D · Misses we own">
+  <div class="hdr"><div class="ml"><svg class="vm" viewBox="0 0 440 303" aria-hidden="true"><use href="#vk-mark"/></svg><span>Appendix D · Misses we own <span class="ex">EXAMPLE</span></span></div><div class="mode">MODE: SANITIZED (M-01 open) · EXAMPLE WEEK · not Verkada data</div></div>
+  <h2 class="t">Four Contract-SLA Misses and One Overdue Basic. Shown in Full.</h2>
+  <p class="sub">Every miss, in full, not netted out (EX-USE OTIF is also drilled on slide 3). Likely drivers: Ops pack, quoted exactly. Evidence requests to a 3PL need Mike's approval. Root-cause tag stays "unconfirmed" until Freight &amp; Trade evidence is in.</p>
+  <div class="bento" style="grid-template-rows:1fr 1fr">
+    <div class="card" style="--c:4">
+      <div class="hd"><div class="ml">EX-USE · OTIF</div><span class="ex">EXAMPLE</span></div>
+      <div class="mid">97.25% <small style="font-size:12px;color:var(--sc);font-weight:500">vs 98.00% contract SLA</small></div>
+      <div style="margin:6px 0;display:flex;gap:5px;flex-wrap:wrap"><div class="pills"><span>Meets</span><span class="on miss">Miss</span></div><span class="st risk"><i></i>Worse 8 wk in a row</span></div>
+      <p style="font-size:12.5px">U-00 · unconfirmed (pending F&amp;T evidence). Likely drivers (dashboard): Stockouts (not in full), late release/ship, or carrier transit misses.</p>
+      <p style="font-size:12.5px;margin-top:4px"><b>Fix:</b> Split misses into not-on-time vs not-in-full and by stage; fix the largest bucket. <b>Owner:</b> 3PL site lead, EX-USE; evidence: Freight &amp; Trade · CAPA-EX-003 plan due 2027-03-22</p>
+    </div>
+    <div class="card" style="--c:4">
+      <div class="hd"><div class="ml">EX-USE · Inventory accuracy</div><span class="ex">EXAMPLE</span></div>
+      <div class="mid">99.25% <small style="font-size:12px;color:var(--sc);font-weight:500">vs 99.50%</small></div>
+      <div style="margin:6px 0;display:flex;gap:5px;flex-wrap:wrap"><div class="pills"><span>Meets</span><span class="on miss">Miss</span></div><span class="st risk"><i></i>Worse 8 wk in a row</span></div>
+      <p style="font-size:12.5px">U-00 · unconfirmed (pending F&amp;T evidence). Likely drivers (dashboard): Putaway errors, skipped cycle counts, or unreconciled adjustments (MOB cycle counting is P).</p>
+      <p style="font-size:12.5px;margin-top:4px"><b>Fix:</b> Recount affected locations; review adjustment reason codes. <b>Owner:</b> 3PL site lead, EX-USE</p>
+    </div>
+    <div class="card" style="--c:4">
+      <div class="hd"><div class="ml">EX-USE · Dock-to-stock</div><span class="ex">EXAMPLE</span></div>
+      <div class="mid">26.3 h <small style="font-size:12px;color:var(--sc);font-weight:500">vs 24.0 h</small></div>
+      <div style="margin:6px 0;display:flex;gap:5px;flex-wrap:wrap"><div class="pills"><span>Meets</span><span class="on miss">Miss</span></div><span class="st off"><i></i>Breach, not worsening (26.4 → 26.3)</span></div>
+      <p style="font-size:12.5px">U-00 · unconfirmed (pending F&amp;T evidence). Likely drivers (dashboard): Missing/late ASNs, receiving backlog, or putaway labor short.</p>
+      <p style="font-size:12.5px;margin-top:4px"><b>Fix:</b> Check ASN compliance by supplier; 3PL to confirm receiving labor plan. <b>Owner:</b> 3PL site lead, EX-USE</p>
+    </div>
+    <div class="card" style="--c:4">
+      <div class="hd"><div class="ml">EX-SG · Dock-to-stock</div><span class="ex">EXAMPLE</span></div>
+      <div class="mid">26.1 h <small style="font-size:12px;color:var(--sc);font-weight:500">vs 24.0 h</small></div>
+      <div style="margin:6px 0;display:flex;gap:5px;flex-wrap:wrap"><div class="pills"><span>Meets</span><span class="on miss">Miss</span></div><span class="st risk"><i></i>Worse 2 wk in a row</span></div>
+      <p style="font-size:12.5px">U-00 · unconfirmed (pending F&amp;T evidence). Likely drivers (dashboard): Missing/late ASNs, receiving backlog, or putaway labor short.</p>
+      <p style="font-size:12.5px;margin-top:4px"><b>Fix:</b> Check ASN compliance by supplier; 3PL to confirm receiving labor plan. <b>Owner:</b> 3PL site lead, EX-SG</p>
+    </div>
+    <div class="card" style="--c:4">
+      <div class="hd"><div class="ml">EX-UK · ★ data channel at N</div><span class="uv">UNVERIFIED KPIs</span></div>
+      <div class="mid">OVERDUE 17 days</div>
+      <div style="margin:6px 0;display:flex;gap:5px;flex-wrap:wrap"><span class="st miss"><i></i>30-day fix window (due 2027-03-03)</span></div>
+      <p style="font-size:12.5px">D-01 · 3PL. CAPA-EX-007: plan submitted, fix in progress.</p>
+      <p style="font-size:12.5px;margin-top:4px"><b>Owner:</b> 3PL site lead, EX-UK</p>
+    </div>
+    <div class="card" style="--c:4;background:#fbfbfa">
+      <div class="hd"><div class="ml">Carried over · EXAMPLE test chain</div><span class="uv">⚠ UNVERIFIED</span></div>
+      <p style="font-size:12.5px">Not in the dashboard week: EX-001, 40 units short-shipped to EMEA DC (BOL 400 vs ASN 440). Root cause not confirmed. "carrier claims shortage occurred at origin dock"</p>
+      <p style="font-size:12.5px;margin-top:4px">U-00 · unconfirmed. <b>Fix:</b> Count check at the dock before close-out. <b>Owner:</b> Mike + 3PL site lead</p>
+    </div>
+  </div>
+  <div class="fn">G4: no live site has a compliance basic at N or P. D-01 owner-to-tag mapping confirmed by C&amp;F 2026-10-26.</div>
+  <div class="vfoot"><svg viewBox="0 0 1695 303" role="img" aria-label="Verkada"><use href="#vk-logo"/></svg><i></i><span>Internal · 3PL Performance Report · Week ending 2026-10-30 · EXAMPLE data</span><span class="pg"></span></div>
+</section>
+
+<!-- ============ Appendix E · Risks ============ -->
+<section class="slide roomy" data-title="E · Next week's risks">
+  <div class="hdr"><div class="ml"><svg class="vm" viewBox="0 0 440 303" aria-hidden="true"><use href="#vk-mark"/></svg><span>Appendix E · Next week's risks (spotted early)</span></div><div class="mode">MODE: SANITIZED (M-01 open) · EXAMPLE WEEK · not Verkada data</div></div>
+  <h2 class="t">Five Obstacles, Each With an Owner</h2>
+  <p class="sub">Proactive-panel rows: dashboard EXAMPLE week 2027-03-14. Watchtower and seasonal rows: real public events as of the report date, 2026-10-30.</p>
+  <div class="bento" style="grid-template-rows:1fr 1fr">
+    <div class="card" style="--c:5">
+      <div class="hd"><span class="st miss"><i></i>Projected stockout · Proactive panel</span><span class="ex">EXAMPLE</span></div>
+      <h3>EX-SG class A: 11.5 d of supply vs 16.1 d to replenish</h3>
+      <div style="margin:8px 0 4px"><div style="display:flex;justify-content:space-between;font-size:10px;color:var(--sc)"><span>Days of supply 11.5 d</span><span>Replenish 16.1 d</span></div>
+        <div class="hbar"><i style="width:71.4%;background:var(--miss);--k:0"></i><b style="left:100%;margin-left:-2px"></b></div></div>
+      <p><b>Mitigation:</b> Expedite open POs or rebalance stock from another 3PL. <b>Owner:</b> Supply planning + 3PL Ops Lead</p>
+    </div>
+    <div class="card" style="--c:4">
+      <div class="hd"><span class="st risk"><i></i>At risk · Proactive panel</span><span class="ex">EXAMPLE</span></div>
+      <h3>EX-SG OTIF AT RISK</h3>
+      <div class="big" style="margin:4px 0">4.38%</div>
+      <p>of orders due in the next 7 days. <b>Mitigation:</b> Work the at-risk list daily. <b>Owner:</b> 3PL site lead, EX-SG</p>
+    </div>
+    <div class="card" style="--c:3">
+      <div class="hd"><span class="st risk"><i></i>Seasonal calendar</span></div>
+      <h3>Lunar New Year 2027 factory and port shutdowns</h3>
+      <p>LNY date <span class="uv">UNVERIFIED</span>. <b>Mitigation:</b> Pull APAC POs forward; book ocean space early. <b>Owner:</b> Freight &amp; Trade lane + Mike</p>
+    </div>
+    <div class="card" style="--c:6">
+      <div class="hd"><span class="st miss"><i></i>Watchtower · strike</span></div>
+      <h3>International dock strike today, 2026-10-30: 100+ ports, 17 countries</h3>
+      <p>EX-NL, EX-UK, EX-USW · participation by port <span class="uv">UNVERIFIED</span>. <b>Mitigation:</b> Plan for a lost day and knock-on delays into the week of 2026-11-02. <b>Owner:</b> Freight &amp; Trade lane</p>
+    </div>
+    <div class="card" style="--c:6">
+      <div class="hd"><span class="st unv"><i></i>Watchtower pending · 2026-10-30 (update)</span></div>
+      <h3>"Dock strike update: European Dockworkers' Council joined; Italy also has a general strike that day (trucking and rail)"</h3>
+      <p>Strike · EX-NL, EX-UK; EX-USW (Oakland); EX-MX · CONFIRMED (EDC); Italy general strike per Forwarder News. Impact note: "Adds inland Italy disruption to the port day". <b>Owner:</b> Freight &amp; Trade lane</p>
+    </div>
+  </div>
+  <div class="fn">Proactive panel <span class="path">ops/kpi-dashboard.html</span> · Watchtower <span class="path">freight/watchtower-log.md</span> (trade/DG follow-ups: Freight &amp; Trade) · Seasonal calendar <span class="path">freight/seasonal-calendar.md</span>. Stockout bar to scale (days).</div>
+  <div class="vfoot"><svg viewBox="0 0 1695 303" role="img" aria-label="Verkada"><use href="#vk-logo"/></svg><i></i><span>Internal · 3PL Performance Report · Week ending 2026-10-30 · EXAMPLE data</span><span class="pg"></span></div>
+</section>
+
+<!-- ============ Appendix F · Questions ============ -->
+<section class="slide roomy" data-title="F · Questions">
+  <div class="hdr"><div class="ml"><svg class="vm" viewBox="0 0 440 303" aria-hidden="true"><use href="#vk-mark"/></svg><span>Appendix F · Questions you're about to ask <span class="ex">EXAMPLE</span></span></div><div class="mode">MODE: SANITIZED (M-01 open) · EXAMPLE WEEK · not Verkada data</div></div>
+  <h2 class="t">Answered Before You Ask</h2>
+  <p class="sub">Four questions by audience, each answered from this week's data.</p>
+  <div class="bento" style="grid-template-rows:1fr 1fr">
+    <div class="card" style="--c:6"><div style="display:flex;gap:14px"><div class="av" style="background:var(--teal)">SVP</div><div><div class="ml">SVP</div><h3 style="font-size:17px">Did customers feel the misses?</h3><p style="font-size:13px;margin-top:6px">At EX-USE, yes: OTIF 97.25% vs 98.00%, worse 8 weeks in a row. CAPA-EX-003 plan is due 2027-03-22.</p></div></div><div style="margin-top:auto;display:flex;gap:6px"><span class="st miss"><i></i>Miss</span><span class="ex">EXAMPLE</span></div></div>
+    <div class="card" style="--c:6"><div style="display:flex;gap:14px"><div class="av" style="background:var(--aqua)">SVP</div><div><div class="ml">SVP</div><h3 style="font-size:17px">Where is lead time?</h3><p style="font-size:13px;margin-top:6px">Network median and P90 are pending Ops. EX-NL is the flag: median 4.2 d vs 4.0 d glide, worse 2 weeks in a row.</p></div></div><div style="margin-top:auto;display:flex;gap:6px"><span class="st risk"><i></i>Flag</span><span class="ex">EXAMPLE</span></div></div>
+    <div class="card" style="--c:6"><div style="display:flex;gap:14px"><div class="av" style="background:var(--lav)">VP</div><div><div class="ml">VP</div><h3 style="font-size:17px">What did we catch before it hit us?</h3><p style="font-size:13px;margin-top:6px">EX-SG's class-A stockout (11.5 d of supply vs 16.1 d to replenish) and its 4.38% OTIF-at-risk orders.</p></div></div><div style="margin-top:auto;display:flex;gap:6px"><span class="st risk"><i></i>At risk</span><span class="ex">EXAMPLE</span></div></div>
+    <div class="card" style="--c:6"><div style="display:flex;gap:14px"><div class="av" style="background:var(--sand);color:#5a5446">DIR</div><div><div class="ml">Director</div><h3 style="font-size:17px">Are the basics in place?</h3><p style="font-size:13px;margin-top:6px">Not at EX-UK: ★ data channel is N and its fix is 17 days overdue, so its KPIs are UNVERIFIED. EX-USE cycle counting is P (fix list).</p></div></div><div style="margin-top:auto;display:flex;gap:6px"><span class="st unv"><i></i>UNVERIFIED</span><span class="ex">EXAMPLE</span></div></div>
+  </div>
+  <div class="vfoot"><svg viewBox="0 0 1695 303" role="img" aria-label="Verkada"><use href="#vk-logo"/></svg><i></i><span>Internal · 3PL Performance Report · Week ending 2026-10-30 · EXAMPLE data</span><span class="pg"></span></div>
+</section>
+
+<!-- ============ Appendix G · Plan ============ -->
+<section class="slide roomy" data-title="G · Plan for next week">
+  <div class="hdr"><div class="ml"><svg class="vm" viewBox="0 0 440 303" aria-hidden="true"><use href="#vk-mark"/></svg><span>Appendix G · Plan for next week</span></div><div class="mode">MODE: SANITIZED (M-01 open) · EXAMPLE WEEK · not Verkada data</div></div>
+  <h2 class="t">Three Commitments for Next Week</h2>
+  <p class="sub">We own the misses, work the risk, and fix the basics. Actions from the dashboard.</p>
+  <div class="bento" style="grid-template-rows:.8fr 1.2fr">
+    <div class="card" style="--c:4"><div class="hd"><div class="big" style="color:var(--teal)">1</div><span class="st miss"><i></i>Miss we own</span></div><p style="font-size:17px;line-height:1.45;color:var(--tx);margin-top:6px">EX-USE: split OTIF misses by type and stage; get the CAPA-EX-003 plan by 2027-03-22.</p></div>
+    <div class="card" style="--c:4"><div class="hd"><div class="big" style="color:var(--aqua)">2</div><span class="st risk"><i></i>Risk ahead</span></div><p style="font-size:17px;line-height:1.45;color:var(--tx);margin-top:6px">EX-SG: expedite open POs or rebalance class-A stock before it runs out.</p></div>
+    <div class="card" style="--c:4"><div class="hd"><div class="big" style="color:var(--lav)">3</div><span class="st unv"><i></i>Basics</span></div><p style="font-size:17px;line-height:1.45;color:var(--tx);margin-top:6px">EX-UK: land the data-channel fix (CAPA-EX-007) so its KPIs can be verified.</p></div>
+    <div class="card" style="--c:12">
+      <div class="hd"><div><div class="ml">Scoring summary</div><h3>The week's misses and dates on the clock</h3></div><span class="ex">EXAMPLE</span></div>
+      <div class="tw"><table>
+        <thead><tr><th>When</th><th>3PL</th><th>Play</th><th>Status</th></tr></thead>
+        <tbody>
+          <tr><td class="n">2027-03-03</td><td class="n">EX-UK</td><td>★ data channel at N: 30-day fix window due; OVERDUE 17 days (CAPA-EX-007 in progress)</td><td><span class="st miss"><i></i>Miss</span> <span class="uv">UNVERIFIED KPIs</span></td></tr>
+          <tr><td class="n">Week 2027-03-14</td><td class="n">EX-USE</td><td>OTIF 97.25% vs 98.00% · inventory accuracy 99.25% vs 99.50% · dock-to-stock 26.3 h vs 24.0 h</td><td><span class="st miss"><i></i>Miss</span></td></tr>
+          <tr><td class="n">Week 2027-03-14</td><td class="n">EX-SG</td><td>Dock-to-stock 26.1 h vs 24.0 h · OTIF AT RISK: 4.38% of orders due in the next 7 days</td><td><span class="st miss"><i></i>Miss</span> <span class="st risk"><i></i>At risk</span></td></tr>
+          <tr><td class="n">2027-03-22</td><td class="n">EX-USE</td><td>CAPA-EX-003 plan due</td><td><span class="pd">Pending</span></td></tr>
+          <tr><td class="n">2027-03-30</td><td class="n">EX-USE</td><td>G5 evidence due (order accuracy, exactly 100.0% for 3 consecutive weeks)</td><td><span class="pd">Pending</span></td></tr>
+        </tbody></table></div>
+    </div>
+  </div>
+  <div class="vfoot"><svg viewBox="0 0 1695 303" role="img" aria-label="Verkada"><use href="#vk-logo"/></svg><i></i><span>Internal · 3PL Performance Report · Week ending 2026-10-30 · EXAMPLE data</span><span class="pg"></span></div>
+</section>
+
+<!-- ============ Appendix H · Decision ============ -->
+<section class="slide roomy" data-title="H · Decision needed">
+  <div class="hdr"><div class="ml"><svg class="vm" viewBox="0 0 440 303" aria-hidden="true"><use href="#vk-mark"/></svg><span>Appendix H · Decisions or help needed</span></div><div class="mode">MODE: SANITIZED (M-01 open) · EXAMPLE WEEK · not Verkada data</div></div>
+  <h2 class="t">One Decision Needed</h2>
+  <p class="sub">The ask also leads the slide-1 BLUF.</p>
+  <div class="bento" style="grid-template-rows:1fr .62fr">
+    <div class="card tint" style="--c:8">
+      <div class="hd"><div class="ml">Needed</div><span class="ex">EXAMPLE</span></div>
+      <div style="font-size:30px;font-weight:700;letter-spacing:-.03em;line-height:1.15;margin-top:6px;max-width:640px">Approve the evidence request to EX-USE for order accuracy</div>
+      <p style="font-size:14px;margin-top:10px">G5: exactly 100.0% for 3 consecutive weeks.</p>
+      <div style="margin-top:auto;display:flex;gap:10px;align-items:center;flex-wrap:wrap"><div class="pills" aria-label="Decision status"><span>Approved</span><span class="on unv">Awaiting Mike</span><span>Declined</span></div><span class="pd">PENDING: evidence</span></div>
+    </div>
+    <div class="card" style="--c:4">
+      <div class="hd"><div class="ml">Evidence due</div><span class="ex">EXAMPLE</span></div>
+      <div class="big" style="font-size:34px">2027-03-30</div>
+      <p style="margin-top:10px">Until then the held weeks are not scored for tiers or credits.</p>
+    </div>
+    <div class="card" style="--c:6"><div class="ml">From</div><p style="margin-top:6px;font-size:13px">Mike (each evidence request to a 3PL needs his approval).</p></div>
+    <div class="card" style="--c:6"><div class="ml">Note</div><p style="margin-top:6px;font-size:12px">EXAMPLE week: all names and numbers are made up and are not Verkada data. Reference build of <span class="path">comms/friday-report-template.md</span> (v2.9 drill-down order).</p></div>
+  </div>
+  <div class="vfoot"><svg viewBox="0 0 1695 303" role="img" aria-label="Verkada"><use href="#vk-logo"/></svg><i></i><span>Internal · 3PL Performance Report · Week ending 2026-10-30 · EXAMPLE data</span><span class="pg"></span></div>
+</section>
+
+<!-- ============ Appendix I · Go-live gate ============ -->
+<section class="slide roomy" data-title="I · Go-live gate status">
+  <div class="hdr"><div class="ml"><svg class="vm" viewBox="0 0 440 303" aria-hidden="true"><use href="#vk-mark"/></svg><span>Appendix I · Go-live gate status per site <span class="ex">EXAMPLE</span></span></div><div class="mode">MODE: SANITIZED (M-01 open) · EXAMPLE WEEK · not Verkada data</div></div>
+  <h2 class="t">EX-UK's Gate Is Failing. EX-MX Is Blocked From Go-Live.</h2>
+  <p class="sub">Three gates in order. A site goes live only when all three pass.</p>
+  <div class="bento" style="grid-template-rows:.6fr 1.4fr">
+    <div class="card" style="--c:4"><div class="hd"><div class="ml">Gate 1</div><div class="av" style="width:26px;height:26px;background:var(--sage)">1</div></div><h3>MOB site walk</h3><p>No ★ line at N. P lines go on the fix list.</p></div>
+    <div class="card" style="--c:4"><div class="hd"><div class="ml">Gate 2</div><div class="av" style="width:26px;height:26px;background:var(--aqua)">2</div></div><h3>Compliance checklist</h3><p>Every F&amp;T MUST item at Y. Any N or P fails.</p></div>
+    <div class="card" style="--c:4"><div class="hd"><div class="ml">Gate 3</div><div class="av" style="width:26px;height:26px;background:var(--lav)">3</div></div><h3>Readiness</h3><p>L-01 to L-04 met. Mike approves go-live.</p></div>
+    <div class="card" style="--c:12">
+      <div class="tw"><table>
+        <thead><tr><th>Site</th><th>Status</th><th>1 · MOB walk</th><th>2 · F&amp;T MUST</th><th>3 · Readiness</th><th>Gate</th></tr></thead>
+        <tbody>
+          <tr><td class="n">EX-UK (live)</td><td>Watch · <span class="uv">UNVERIFIED KPIs</span><span class="s">★ data channel = N; D-01, owner 3PL</span></td><td>★ data channel N</td><td>all Y</td><td>all Y</td><td><span class="pills"><span>Passed</span><span class="on miss">Gate failing</span><span>Blocked</span></span></td></tr>
+          <tr><td class="n">EX-MX (pipeline)</td><td>Not live · planned 2027-05-03</td><td>★ cycle counting N; SOPs P</td><td>A4 P, B3 N</td><td>L-03 P</td><td><span class="pills"><span>Passed</span><span>Gate failing</span><span class="on unv">Blocked</span></span></td></tr>
+          <tr><td class="n">EX-USE, EX-SG</td><td>Watch (live)</td><td>pass (EX-USE cycle counting P, on the fix list)</td><td>all Y</td><td>all Y</td><td><span class="pills"><span class="on">Passed</span><span>Gate failing</span><span>Blocked</span></span></td></tr>
+          <tr><td class="n">EX-NL, EX-USW</td><td>Green (live)</td><td>pass</td><td>all Y</td><td>all Y</td><td><span class="pills"><span class="on">Passed</span><span>Gate failing</span><span>Blocked</span></span></td></tr>
+        </tbody></table></div>
+      <p style="font-size:10px;margin-top:auto;padding-top:8px">G4: if a compliance basic (DG, export screening, or any F&amp;T MUST item) is at N or P at a live site, that site goes on immediate Probation and its affected flows are held. No live site has one this week. G2: Onboarding lasts 8 weeks EXAMPLE from the recorded go-live date. After that, a KPI left blank for 4+ weeks is a material miss.</p>
+    </div>
+  </div>
+  <div class="fn">Site values come from the EXAMPLE data in <span class="path">ops/kpi-dashboard.html</span> (its latest example week, 2027-03-14, the data week for this whole deck) · gate rules are in <span class="path">ops/3pl-accountability/go-live-gate.md</span>. End of deck.</div>
+  <div class="vfoot"><svg viewBox="0 0 1695 303" role="img" aria-label="Verkada"><use href="#vk-logo"/></svg><i></i><span>Internal · 3PL Performance Report · Week ending 2026-10-30 · EXAMPLE data</span><span class="pg"></span></div>
+</section>
+</div></div>
+<nav class="nav" aria-label="Slide navigation">
+  <svg class="vm" viewBox="0 0 440 303" role="img" aria-label="Verkada"><use href="#vk-mark"/></svg>
+  <button id="prevBtn" aria-label="Previous slide">◀ Prev</button>
+  <span id="counter">1 / 21</span>
+  <button id="nextBtn" aria-label="Next slide">Next ▶</button>
+  <button id="auto" aria-pressed="false" title="Advance slides automatically">Autoplay</button>
+</nav>
+<script>
+/* MODE: SANITIZED (M-01 open). Light Bento Pro deck controller.
+   Desktop/landscape: fixed 1280x720 stage scaled to the visible viewport, nav in the letterbox.
+   Phone portrait (<=700px): reflowed vertical page; each slide animates when it scrolls into view.
+   Motion: cards stagger in top-left to bottom-right (fade + 12px rise, .45s, 70ms step); bars grow; lines draw. No slide wipes. */
+document.documentElement.classList.add('js');
+(function () {
+  var slides = [].slice.call(document.querySelectorAll('.slide'));
+  var total = slides.length, current = 0, timer = null;
+  var stage = document.getElementById('stage'), counter = document.getElementById('counter');
+  var prevBtn = document.getElementById('prevBtn'), nextBtn = document.getElementById('nextBtn'), autoBtn = document.getElementById('auto');
+  var dotsEl = document.getElementById('dots');
+  [].forEach.call(document.querySelectorAll('.tick'), function (k) { k.parentNode.appendChild(k); });
+  var RF = window.matchMedia('screen and (max-width: 700px) and (orientation: portrait)');
+  var RM = window.matchMedia('(prefers-reduced-motion: reduce)');
+  var DW = 1280, DH = 720, NAVH = 76;
+
+  slides.forEach(function (s, i) {
+    var d = document.createElement('div'); d.className = 'dot';
+    d.title = (i + 1) + ' · ' + (s.getAttribute('data-title') || 'Slide');
+    d.setAttribute('role', 'button'); d.setAttribute('aria-label', d.title);
+    d.addEventListener('click', function () { goTo(i, true); });
+    dotsEl.appendChild(d);
+  });
+  var dots = [].slice.call(dotsEl.children);
+  slides.forEach(function (s, i) { var p = s.querySelector('.vfoot .pg'); if (p) p.textContent = (i + 1) + ' / ' + total; });
+
+  /* stagger: order cards by their position, top-left to bottom-right */
+  function play(s) {
+    s.classList.remove('play');
+    [].forEach.call(s.querySelectorAll('.done'), function (x) { x.classList.remove('done'); });
+    var cards = [].slice.call(s.querySelectorAll('.card'));
+    var pos = cards.map(function (c) { var r = c.getBoundingClientRect(); return { c: c, t: Math.round(r.top / 24), l: r.left }; });
+    pos.sort(function (a, b) { return a.t - b.t || a.l - b.l; });
+    pos.forEach(function (p, i) { p.c.style.setProperty('--d', (i * 70) + 'ms'); });
+    void s.offsetWidth;
+    s.classList.add('play');
+  }
+
+  document.addEventListener('animationend', function (e) {
+    var t = e.target; if (t.classList && (t.classList.contains('bar') || t.classList.contains('stack') || (t.parentNode && t.parentNode.classList && t.parentNode.classList.contains('hbar')))) t.classList.add('done');
+  });
+  function render() {
+    slides.forEach(function (s, i) { s.classList.toggle('active', i === current); });
+    dots.forEach(function (d, i) { d.classList.toggle('active', i === current); });
+    counter.textContent = (current + 1) + ' / ' + total;
+    prevBtn.disabled = current === 0; nextBtn.disabled = current === total - 1;
+    if (!RF.matches) play(slides[current]);
+    if (location.hash !== '#' + (current + 1)) { try { history.replaceState(null, '', '#' + (current + 1)); } catch (e) {} }
+  }
+  function goTo(i, scroll) {
+    current = Math.max(0, Math.min(total - 1, i)); render();
+    if (scroll && RF.matches) slides[current].scrollIntoView({ block: 'start' });
+  }
+  function fit() {
+    if (RF.matches) { stage.style.transform = ''; return; }
+    var vv = window.visualViewport, W = vv ? vv.width : window.innerWidth, H = vv ? vv.height : window.innerHeight;
+    var s = Math.min(W / DW, (H - NAVH) / DH); if (s <= 0) s = Math.min(W / DW, H / DH);
+    var x = (W - DW * s) / 2, y = Math.max(0, (H - NAVH - DH * s) / 2);
+    stage.style.transform = 'translate(' + x + 'px,' + y + 'px) scale(' + s + ')';
+  }
+  /* phone: animate each slide as it enters, track the current slide */
+  var io = null;
+  function setupPhone() {
+    if (io) { io.disconnect(); io = null; }
+    if (!RF.matches) { slides.forEach(function (s) { s.classList.remove('play'); }); render(); return; }
+    slides.forEach(function (s) { s.classList.remove('play'); });
+    io = new IntersectionObserver(function (es) {
+      es.forEach(function (e) {
+        if (e.isIntersecting) {
+          if (!e.target.classList.contains('play')) play(e.target);
+          var i = slides.indexOf(e.target);
+          if (e.intersectionRatio > 0.15 || e.boundingClientRect.top < window.innerHeight * .5) { current = i; counter.textContent = (i + 1) + ' / ' + total; prevBtn.disabled = i === 0; nextBtn.disabled = i === total - 1; }
+        }
+      });
+    }, { threshold: [0, 0.15] });
+    slides.forEach(function (s) { io.observe(s); });
+  }
+
+  prevBtn.addEventListener('click', function () { stopAuto(); goTo(current - 1, true); });
+  nextBtn.addEventListener('click', function () { stopAuto(); goTo(current + 1, true); });
+  function stopAuto() { if (timer) { clearInterval(timer); timer = null; } autoBtn.classList.remove('on'); autoBtn.setAttribute('aria-pressed', 'false'); }
+  function startAuto() { autoBtn.classList.add('on'); autoBtn.setAttribute('aria-pressed', 'true');
+    timer = setInterval(function () { if (current >= total - 1) { stopAuto(); return; } goTo(current + 1, true); }, 9000); }
+  autoBtn.addEventListener('click', function () { if (timer) stopAuto(); else startAuto(); });
+  document.addEventListener('keydown', function (e) {
+    if (e.key === 'ArrowRight' || e.key === 'PageDown' || e.key === ' ') { e.preventDefault(); stopAuto(); goTo(current + 1, true); }
+    else if (e.key === 'ArrowLeft' || e.key === 'PageUp') { e.preventDefault(); stopAuto(); goTo(current - 1, true); }
+    else if (e.key === 'Home') goTo(0, true); else if (e.key === 'End') goTo(total - 1, true);
+  });
+  var sx = null, sy = null;
+  document.addEventListener('touchstart', function (e) { sx = e.touches[0].clientX; sy = e.touches[0].clientY; }, { passive: true });
+  document.addEventListener('touchend', function (e) {
+    if (sx === null || RF.matches) return;
+    var dx = e.changedTouches[0].clientX - sx, dy = e.changedTouches[0].clientY - sy;
+    if (Math.abs(dx) > 50 && Math.abs(dx) > Math.abs(dy)) { stopAuto(); goTo(current + (dx < 0 ? 1 : -1)); }
+    sx = null;
+  }, { passive: true });
+  window.addEventListener('resize', fit);
+  if (window.visualViewport) window.visualViewport.addEventListener('resize', fit);
+  window.addEventListener('hashchange', function () { var n = parseInt(location.hash.slice(1), 10); if (n >= 1 && n - 1 !== current) goTo(n - 1, true); });
+  (RF.addEventListener ? RF.addEventListener.bind(RF, 'change') : RF.addListener.bind(RF))(function () { fit(); setupPhone(); });
+
+  /* radar: 3PL scorecard, NL vs UK vs US (values copied from the Appendix B table) */
+  var AX = [
+    { k: 'OTIF', lo: 96, hi: 100 }, { k: 'Order acc.', lo: 99, hi: 100 }, { k: 'Inv. acc.', lo: 99, hi: 100 },
+    { k: 'Dock-to-stock', lo: 30, hi: 0 }, { k: 'ASN', lo: 95, hi: 100 }, { k: 'Tracking', lo: 96, hi: 100 }];
+  var V = { NL: [98.47, 99.76, 99.71, 16.5, 98.88, 99.41], UK: [98.34, 99.75, 99.58, 19.2, 96.62, 97.21],
+            USW: [98.69, 99.88, 99.81, 12.2, 99.52, 99.79], USE: [97.25, 100, 99.25, 26.3, 97.78, 99.11] };
+  var USTXT = { USW: ['98.69%', '99.88%', '99.81%', '12.2 h', '99.52%', '99.79%'], USE: ['97.25%', '100%', '99.25%', '26.3 h', '97.78%', '99.11%'] };
+  var CX = 110, CY = 106, R = 78, NS = 'http://www.w3.org/2000/svg';
+  function pt(i, f) { var a = -Math.PI / 2 + i * 2 * Math.PI / AX.length; return [CX + Math.cos(a) * R * f, CY + Math.sin(a) * R * f]; }
+  function norm(i, v) { var a = AX[i], f = (v - a.lo) / (a.hi - a.lo); return 0.1 + 0.9 * Math.max(0, Math.min(1, f)); }
+  function pts(vals) { return vals.map(function (v, i) { return pt(i, norm(i, v)).map(function (n) { return n.toFixed(1); }).join(','); }).join(' '); }
+  function el(n, at) { var e = document.createElementNS(NS, n); for (var k in at) e.setAttribute(k, at[k]); return e; }
+  var svg = document.getElementById('radar');
+  if (svg) {
+    [1, 2 / 3, 1 / 3].forEach(function (f) { svg.appendChild(el('polygon', { points: AX.map(function (_, i) { return pt(i, f).join(','); }).join(' '), fill: f === 1 ? '#fafbfa' : 'none', stroke: '#E6E8E6' })); });
+    AX.forEach(function (a, i) { var p = pt(i, 1); svg.appendChild(el('line', { x1: CX, y1: CY, x2: p[0], y2: p[1], stroke: '#E6E8E6' }));
+      var q = pt(i, 1.17), t = el('text', { x: q[0], y: q[1] + 3, 'text-anchor': Math.abs(q[0] - CX) < 5 ? 'middle' : (q[0] > CX ? 'start' : 'end'), 'font-size': '8.5', fill: '#6B6B6B', 'font-weight': '600' });
+      if (i === 0) t.setAttribute('y', q[1] + 1); t.textContent = a.k; svg.appendChild(t); });
+    var pNL = el('polygon', { 'class': 'rp', style: '--k:0', points: pts(V.NL), fill: '#8BBFBA', 'fill-opacity': '.28', stroke: '#8BBFBA', 'stroke-width': '1.6' });
+    var pUK = el('polygon', { 'class': 'rp', style: '--k:1', points: pts(V.UK), fill: '#9898B0', 'fill-opacity': '.18', stroke: '#9898B0', 'stroke-width': '1.4', 'stroke-dasharray': '4 3' });
+    var pUS = el('polygon', { 'class': 'rp', style: '--k:2', points: pts(V.USW), fill: '#1190D7', 'fill-opacity': '.22', stroke: '#1190D7', 'stroke-width': '1.8' });
+    svg.appendChild(pNL); svg.appendChild(pUK); svg.appendChild(pUS);
+    var cur = V.USW.slice();
+    [].forEach.call(document.querySelectorAll('#usToggle button'), function (b) {
+      b.addEventListener('click', function () {
+        [].forEach.call(document.querySelectorAll('#usToggle button'), function (x) { x.classList.toggle('on', x === b); });
+        var to = V[b.getAttribute('data-us')], from = cur.slice(), t0 = null;
+        var key = b.getAttribute('data-us');
+        document.getElementById('usName').textContent = 'EX-' + key;
+        document.getElementById('usCardName').textContent = 'EX-' + key;
+        var tier = document.getElementById('usTier');
+        tier.className = key === 'USW' ? 'st' : 'st risk';
+        tier.innerHTML = '<i></i>' + (key === 'USW' ? 'Green · MOB ★ 18/18' : 'Watch · MOB ★ 17/18 · order acc. PENDING: evidence');
+        (USTXT[key] || []).forEach(function (txt, i) { var c = document.getElementById('usv-' + i); if (c) c.textContent = txt; });
+        if (RM.matches) { cur = to.slice(); pUS.setAttribute('points', pts(cur)); return; }
+        function step(ts) { if (t0 === null) t0 = ts; var p = Math.min(1, (ts - t0) / 450), e = 1 - Math.pow(1 - p, 4);
+          cur = from.map(function (v, i) { return v + (to[i] - v) * e; }); pUS.setAttribute('points', pts(cur)); if (p < 1) requestAnimationFrame(step); }
+        requestAnimationFrame(step);
+      });
+    });
+  }
+
+  var n = parseInt(location.hash.slice(1), 10);
+  current = n >= 1 ? Math.min(total, n) - 1 : 0;
+  fit(); setupPhone();
+  render();
+  if (RF.matches && n >= 1) slides[current].scrollIntoView({ block: 'start' });
+  if (/[?&]autoplay\b/.test(location.search)) startAuto();
+})();
+</script>
+</body>
+</html>
