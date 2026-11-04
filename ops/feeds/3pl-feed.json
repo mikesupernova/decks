@@ -1,0 +1,1728 @@
+{
+ "meta": {
+  "mode": "MODE: SANITIZED (M-01 open)",
+  "example": true,
+  "label": "EXAMPLE \u00b7 made-up data",
+  "asOf": "2026-11-03",
+  "days": [
+   "2026-10-05",
+   "2026-10-06",
+   "2026-10-07",
+   "2026-10-08",
+   "2026-10-09",
+   "2026-10-10",
+   "2026-10-11",
+   "2026-10-12",
+   "2026-10-13",
+   "2026-10-14",
+   "2026-10-15",
+   "2026-10-16",
+   "2026-10-17",
+   "2026-10-18",
+   "2026-10-19",
+   "2026-10-20",
+   "2026-10-21",
+   "2026-10-22",
+   "2026-10-23",
+   "2026-10-24",
+   "2026-10-25",
+   "2026-10-26",
+   "2026-10-27",
+   "2026-10-28",
+   "2026-10-29",
+   "2026-10-30",
+   "2026-10-31",
+   "2026-11-01",
+   "2026-11-02",
+   "2026-11-03"
+  ],
+  "levelsFrom": "EXAMPLE KPI week 2027-03-14 (ops weekly-data-example) scaled onto the 2026-11-03 snapshot window",
+  "feed": "3pl",
+  "target": 98.0,
+  "floor": 97.5,
+  "targetNote": "EXAMPLE target 98% (contract SLA level); EXAMPLE critical floor 97.5%",
+  "rules": "Controllable = 3PL-caused misses only; carrier, supplier and unconfirmed misses count in total, tagged outside 3PL control (D-007)."
+ },
+ "sites": [
+  {
+   "id": "EX-3PL-USW",
+   "site": "EX-USW",
+   "color": "#4fc3ff",
+   "lat": 35.6,
+   "lon": -113.5,
+   "verified": true,
+   "label": {
+    "dx": 12,
+    "dy": -14,
+    "anchor": "start"
+   },
+   "note": "",
+   "daily": [
+    {
+     "orders": 572,
+     "late3pl": 3,
+     "short3pl": 1,
+     "carrier": 2,
+     "supplier": 2,
+     "unconfLate": 0,
+     "unconfShort": 0
+    },
+    {
+     "orders": 534,
+     "late3pl": 2,
+     "short3pl": 1,
+     "carrier": 2,
+     "supplier": 1,
+     "unconfLate": 0,
+     "unconfShort": 0
+    },
+    {
+     "orders": 520,
+     "late3pl": 3,
+     "short3pl": 1,
+     "carrier": 2,
+     "supplier": 1,
+     "unconfLate": 0,
+     "unconfShort": 0
+    },
+    {
+     "orders": 540,
+     "late3pl": 3,
+     "short3pl": 1,
+     "carrier": 2,
+     "supplier": 1,
+     "unconfLate": 0,
+     "unconfShort": 0
+    },
+    {
+     "orders": 579,
+     "late3pl": 3,
+     "short3pl": 1,
+     "carrier": 2,
+     "supplier": 2,
+     "unconfLate": 0,
+     "unconfShort": 0
+    },
+    {
+     "orders": 608,
+     "late3pl": 3,
+     "short3pl": 1,
+     "carrier": 2,
+     "supplier": 1,
+     "unconfLate": 0,
+     "unconfShort": 0
+    },
+    {
+     "orders": 604,
+     "late3pl": 4,
+     "short3pl": 1,
+     "carrier": 2,
+     "supplier": 2,
+     "unconfLate": 0,
+     "unconfShort": 0
+    },
+    {
+     "orders": 571,
+     "late3pl": 2,
+     "short3pl": 1,
+     "carrier": 2,
+     "supplier": 1,
+     "unconfLate": 0,
+     "unconfShort": 0
+    },
+    {
+     "orders": 534,
+     "late3pl": 3,
+     "short3pl": 1,
+     "carrier": 2,
+     "supplier": 2,
+     "unconfLate": 0,
+     "unconfShort": 0
+    },
+    {
+     "orders": 520,
+     "late3pl": 3,
+     "short3pl": 1,
+     "carrier": 2,
+     "supplier": 2,
+     "unconfLate": 0,
+     "unconfShort": 0
+    },
+    {
+     "orders": 541,
+     "late3pl": 2,
+     "short3pl": 1,
+     "carrier": 2,
+     "supplier": 2,
+     "unconfLate": 0,
+     "unconfShort": 0
+    },
+    {
+     "orders": 580,
+     "late3pl": 3,
+     "short3pl": 1,
+     "carrier": 2,
+     "supplier": 1,
+     "unconfLate": 0,
+     "unconfShort": 0
+    },
+    {
+     "orders": 608,
+     "late3pl": 2,
+     "short3pl": 1,
+     "carrier": 2,
+     "supplier": 2,
+     "unconfLate": 0,
+     "unconfShort": 0
+    },
+    {
+     "orders": 604,
+     "late3pl": 3,
+     "short3pl": 1,
+     "carrier": 2,
+     "supplier": 2,
+     "unconfLate": 0,
+     "unconfShort": 0
+    },
+    {
+     "orders": 570,
+     "late3pl": 2,
+     "short3pl": 1,
+     "carrier": 2,
+     "supplier": 2,
+     "unconfLate": 0,
+     "unconfShort": 0
+    },
+    {
+     "orders": 533,
+     "late3pl": 3,
+     "short3pl": 1,
+     "carrier": 2,
+     "supplier": 2,
+     "unconfLate": 0,
+     "unconfShort": 0
+    },
+    {
+     "orders": 520,
+     "late3pl": 2,
+     "short3pl": 1,
+     "carrier": 2,
+     "supplier": 2,
+     "unconfLate": 0,
+     "unconfShort": 0
+    },
+    {
+     "orders": 542,
+     "late3pl": 2,
+     "short3pl": 1,
+     "carrier": 2,
+     "supplier": 1,
+     "unconfLate": 0,
+     "unconfShort": 0
+    },
+    {
+     "orders": 581,
+     "late3pl": 3,
+     "short3pl": 1,
+     "carrier": 2,
+     "supplier": 1,
+     "unconfLate": 0,
+     "unconfShort": 0
+    },
+    {
+     "orders": 608,
+     "late3pl": 3,
+     "short3pl": 1,
+     "carrier": 2,
+     "supplier": 1,
+     "unconfLate": 0,
+     "unconfShort": 0
+    },
+    {
+     "orders": 603,
+     "late3pl": 3,
+     "short3pl": 1,
+     "carrier": 2,
+     "supplier": 1,
+     "unconfLate": 0,
+     "unconfShort": 0
+    },
+    {
+     "orders": 569,
+     "late3pl": 3,
+     "short3pl": 1,
+     "carrier": 2,
+     "supplier": 1,
+     "unconfLate": 0,
+     "unconfShort": 0
+    },
+    {
+     "orders": 533,
+     "late3pl": 2,
+     "short3pl": 1,
+     "carrier": 2,
+     "supplier": 1,
+     "unconfLate": 0,
+     "unconfShort": 0
+    },
+    {
+     "orders": 521,
+     "late3pl": 3,
+     "short3pl": 1,
+     "carrier": 2,
+     "supplier": 2,
+     "unconfLate": 0,
+     "unconfShort": 1
+    },
+    {
+     "orders": 542,
+     "late3pl": 3,
+     "short3pl": 1,
+     "carrier": 1,
+     "supplier": 1,
+     "unconfLate": 0,
+     "unconfShort": 1
+    },
+    {
+     "orders": 582,
+     "late3pl": 2,
+     "short3pl": 1,
+     "carrier": 2,
+     "supplier": 1,
+     "unconfLate": 0,
+     "unconfShort": 1
+    },
+    {
+     "orders": 608,
+     "late3pl": 3,
+     "short3pl": 1,
+     "carrier": 2,
+     "supplier": 2,
+     "unconfLate": 0,
+     "unconfShort": 0
+    },
+    {
+     "orders": 603,
+     "late3pl": 3,
+     "short3pl": 1,
+     "carrier": 2,
+     "supplier": 2,
+     "unconfLate": 0,
+     "unconfShort": 0
+    },
+    {
+     "orders": 569,
+     "late3pl": 2,
+     "short3pl": 1,
+     "carrier": 2,
+     "supplier": 1,
+     "unconfLate": 0,
+     "unconfShort": 0
+    },
+    {
+     "orders": 532,
+     "late3pl": 3,
+     "short3pl": 1,
+     "carrier": 2,
+     "supplier": 1,
+     "unconfLate": 0,
+     "unconfShort": 0
+    }
+   ]
+  },
+  {
+   "id": "EX-3PL-USE",
+   "site": "EX-USE",
+   "color": "#a98bff",
+   "lat": 40.6,
+   "lon": -74.4,
+   "verified": true,
+   "label": {
+    "dx": 12,
+    "dy": -14,
+    "anchor": "start"
+   },
+   "note": "",
+   "daily": [
+    {
+     "orders": 557,
+     "late3pl": 2,
+     "short3pl": 1,
+     "carrier": 2,
+     "supplier": 2,
+     "unconfLate": 0,
+     "unconfShort": 0
+    },
+    {
+     "orders": 521,
+     "late3pl": 2,
+     "short3pl": 1,
+     "carrier": 2,
+     "supplier": 1,
+     "unconfLate": 0,
+     "unconfShort": 0
+    },
+    {
+     "orders": 507,
+     "late3pl": 3,
+     "short3pl": 1,
+     "carrier": 2,
+     "supplier": 1,
+     "unconfLate": 0,
+     "unconfShort": 0
+    },
+    {
+     "orders": 527,
+     "late3pl": 2,
+     "short3pl": 1,
+     "carrier": 2,
+     "supplier": 2,
+     "unconfLate": 0,
+     "unconfShort": 0
+    },
+    {
+     "orders": 565,
+     "late3pl": 2,
+     "short3pl": 1,
+     "carrier": 2,
+     "supplier": 1,
+     "unconfLate": 0,
+     "unconfShort": 0
+    },
+    {
+     "orders": 592,
+     "late3pl": 3,
+     "short3pl": 1,
+     "carrier": 2,
+     "supplier": 1,
+     "unconfLate": 0,
+     "unconfShort": 0
+    },
+    {
+     "orders": 589,
+     "late3pl": 3,
+     "short3pl": 1,
+     "carrier": 2,
+     "supplier": 2,
+     "unconfLate": 0,
+     "unconfShort": 0
+    },
+    {
+     "orders": 556,
+     "late3pl": 3,
+     "short3pl": 1,
+     "carrier": 2,
+     "supplier": 1,
+     "unconfLate": 0,
+     "unconfShort": 0
+    },
+    {
+     "orders": 520,
+     "late3pl": 3,
+     "short3pl": 1,
+     "carrier": 2,
+     "supplier": 2,
+     "unconfLate": 0,
+     "unconfShort": 0
+    },
+    {
+     "orders": 507,
+     "late3pl": 3,
+     "short3pl": 1,
+     "carrier": 2,
+     "supplier": 2,
+     "unconfLate": 0,
+     "unconfShort": 0
+    },
+    {
+     "orders": 527,
+     "late3pl": 4,
+     "short3pl": 1,
+     "carrier": 2,
+     "supplier": 2,
+     "unconfLate": 0,
+     "unconfShort": 0
+    },
+    {
+     "orders": 565,
+     "late3pl": 4,
+     "short3pl": 1,
+     "carrier": 3,
+     "supplier": 2,
+     "unconfLate": 0,
+     "unconfShort": 0
+    },
+    {
+     "orders": 592,
+     "late3pl": 4,
+     "short3pl": 2,
+     "carrier": 2,
+     "supplier": 2,
+     "unconfLate": 0,
+     "unconfShort": 1
+    },
+    {
+     "orders": 588,
+     "late3pl": 4,
+     "short3pl": 1,
+     "carrier": 3,
+     "supplier": 2,
+     "unconfLate": 0,
+     "unconfShort": 1
+    },
+    {
+     "orders": 556,
+     "late3pl": 4,
+     "short3pl": 1,
+     "carrier": 3,
+     "supplier": 2,
+     "unconfLate": 0,
+     "unconfShort": 1
+    },
+    {
+     "orders": 519,
+     "late3pl": 4,
+     "short3pl": 1,
+     "carrier": 3,
+     "supplier": 2,
+     "unconfLate": 0,
+     "unconfShort": 1
+    },
+    {
+     "orders": 507,
+     "late3pl": 4,
+     "short3pl": 1,
+     "carrier": 2,
+     "supplier": 2,
+     "unconfLate": 0,
+     "unconfShort": 1
+    },
+    {
+     "orders": 528,
+     "late3pl": 4,
+     "short3pl": 2,
+     "carrier": 3,
+     "supplier": 2,
+     "unconfLate": 0,
+     "unconfShort": 1
+    },
+    {
+     "orders": 566,
+     "late3pl": 4,
+     "short3pl": 2,
+     "carrier": 3,
+     "supplier": 3,
+     "unconfLate": 0,
+     "unconfShort": 1
+    },
+    {
+     "orders": 593,
+     "late3pl": 4,
+     "short3pl": 2,
+     "carrier": 4,
+     "supplier": 3,
+     "unconfLate": 0,
+     "unconfShort": 1
+    },
+    {
+     "orders": 588,
+     "late3pl": 4,
+     "short3pl": 2,
+     "carrier": 3,
+     "supplier": 3,
+     "unconfLate": 0,
+     "unconfShort": 1
+    },
+    {
+     "orders": 555,
+     "late3pl": 5,
+     "short3pl": 2,
+     "carrier": 4,
+     "supplier": 3,
+     "unconfLate": 0,
+     "unconfShort": 1
+    },
+    {
+     "orders": 519,
+     "late3pl": 6,
+     "short3pl": 2,
+     "carrier": 4,
+     "supplier": 3,
+     "unconfLate": 0,
+     "unconfShort": 1
+    },
+    {
+     "orders": 507,
+     "late3pl": 5,
+     "short3pl": 2,
+     "carrier": 3,
+     "supplier": 3,
+     "unconfLate": 0,
+     "unconfShort": 0
+    },
+    {
+     "orders": 529,
+     "late3pl": 5,
+     "short3pl": 2,
+     "carrier": 4,
+     "supplier": 3,
+     "unconfLate": 0,
+     "unconfShort": 0
+    },
+    {
+     "orders": 567,
+     "late3pl": 5,
+     "short3pl": 2,
+     "carrier": 4,
+     "supplier": 3,
+     "unconfLate": 0,
+     "unconfShort": 1
+    },
+    {
+     "orders": 593,
+     "late3pl": 6,
+     "short3pl": 2,
+     "carrier": 4,
+     "supplier": 3,
+     "unconfLate": 0,
+     "unconfShort": 1
+    },
+    {
+     "orders": 587,
+     "late3pl": 6,
+     "short3pl": 2,
+     "carrier": 4,
+     "supplier": 3,
+     "unconfLate": 0,
+     "unconfShort": 1
+    },
+    {
+     "orders": 554,
+     "late3pl": 6,
+     "short3pl": 2,
+     "carrier": 4,
+     "supplier": 3,
+     "unconfLate": 0,
+     "unconfShort": 1
+    },
+    {
+     "orders": 519,
+     "late3pl": 6,
+     "short3pl": 2,
+     "carrier": 4,
+     "supplier": 3,
+     "unconfLate": 0,
+     "unconfShort": 1
+    }
+   ]
+  },
+  {
+   "id": "EX-3PL-NL",
+   "site": "EX-NL",
+   "color": "#ff7ac8",
+   "lat": 51.0,
+   "lon": 8.0,
+   "verified": true,
+   "label": {
+    "dx": 12,
+    "dy": 24,
+    "anchor": "start"
+   },
+   "note": "",
+   "daily": [
+    {
+     "orders": 622,
+     "late3pl": 3,
+     "short3pl": 1,
+     "carrier": 2,
+     "supplier": 2,
+     "unconfLate": 0,
+     "unconfShort": 1
+    },
+    {
+     "orders": 591,
+     "late3pl": 3,
+     "short3pl": 1,
+     "carrier": 3,
+     "supplier": 1,
+     "unconfLate": 0,
+     "unconfShort": 0
+    },
+    {
+     "orders": 551,
+     "late3pl": 4,
+     "short3pl": 1,
+     "carrier": 2,
+     "supplier": 2,
+     "unconfLate": 0,
+     "unconfShort": 0
+    },
+    {
+     "orders": 533,
+     "late3pl": 4,
+     "short3pl": 1,
+     "carrier": 2,
+     "supplier": 2,
+     "unconfLate": 0,
+     "unconfShort": 0
+    },
+    {
+     "orders": 550,
+     "late3pl": 4,
+     "short3pl": 1,
+     "carrier": 3,
+     "supplier": 2,
+     "unconfLate": 0,
+     "unconfShort": 0
+    },
+    {
+     "orders": 590,
+     "late3pl": 3,
+     "short3pl": 1,
+     "carrier": 2,
+     "supplier": 2,
+     "unconfLate": 0,
+     "unconfShort": 0
+    },
+    {
+     "orders": 621,
+     "late3pl": 3,
+     "short3pl": 1,
+     "carrier": 3,
+     "supplier": 2,
+     "unconfLate": 0,
+     "unconfShort": 0
+    },
+    {
+     "orders": 622,
+     "late3pl": 3,
+     "short3pl": 1,
+     "carrier": 2,
+     "supplier": 1,
+     "unconfLate": 0,
+     "unconfShort": 0
+    },
+    {
+     "orders": 590,
+     "late3pl": 3,
+     "short3pl": 1,
+     "carrier": 2,
+     "supplier": 2,
+     "unconfLate": 0,
+     "unconfShort": 0
+    },
+    {
+     "orders": 551,
+     "late3pl": 4,
+     "short3pl": 1,
+     "carrier": 3,
+     "supplier": 2,
+     "unconfLate": 0,
+     "unconfShort": 0
+    },
+    {
+     "orders": 533,
+     "late3pl": 3,
+     "short3pl": 1,
+     "carrier": 2,
+     "supplier": 2,
+     "unconfLate": 0,
+     "unconfShort": 0
+    },
+    {
+     "orders": 551,
+     "late3pl": 3,
+     "short3pl": 1,
+     "carrier": 3,
+     "supplier": 2,
+     "unconfLate": 0,
+     "unconfShort": 1
+    },
+    {
+     "orders": 590,
+     "late3pl": 4,
+     "short3pl": 1,
+     "carrier": 2,
+     "supplier": 2,
+     "unconfLate": 0,
+     "unconfShort": 0
+    },
+    {
+     "orders": 622,
+     "late3pl": 3,
+     "short3pl": 1,
+     "carrier": 2,
+     "supplier": 1,
+     "unconfLate": 0,
+     "unconfShort": 0
+    },
+    {
+     "orders": 621,
+     "late3pl": 4,
+     "short3pl": 1,
+     "carrier": 2,
+     "supplier": 1,
+     "unconfLate": 0,
+     "unconfShort": 0
+    },
+    {
+     "orders": 589,
+     "late3pl": 3,
+     "short3pl": 1,
+     "carrier": 2,
+     "supplier": 2,
+     "unconfLate": 0,
+     "unconfShort": 0
+    },
+    {
+     "orders": 550,
+     "late3pl": 3,
+     "short3pl": 1,
+     "carrier": 3,
+     "supplier": 2,
+     "unconfLate": 0,
+     "unconfShort": 0
+    },
+    {
+     "orders": 533,
+     "late3pl": 3,
+     "short3pl": 1,
+     "carrier": 2,
+     "supplier": 2,
+     "unconfLate": 0,
+     "unconfShort": 0
+    },
+    {
+     "orders": 552,
+     "late3pl": 3,
+     "short3pl": 1,
+     "carrier": 2,
+     "supplier": 2,
+     "unconfLate": 0,
+     "unconfShort": 0
+    },
+    {
+     "orders": 591,
+     "late3pl": 3,
+     "short3pl": 1,
+     "carrier": 2,
+     "supplier": 2,
+     "unconfLate": 0,
+     "unconfShort": 0
+    },
+    {
+     "orders": 622,
+     "late3pl": 4,
+     "short3pl": 1,
+     "carrier": 2,
+     "supplier": 2,
+     "unconfLate": 0,
+     "unconfShort": 0
+    },
+    {
+     "orders": 621,
+     "late3pl": 3,
+     "short3pl": 1,
+     "carrier": 2,
+     "supplier": 2,
+     "unconfLate": 0,
+     "unconfShort": 0
+    },
+    {
+     "orders": 589,
+     "late3pl": 3,
+     "short3pl": 1,
+     "carrier": 2,
+     "supplier": 2,
+     "unconfLate": 0,
+     "unconfShort": 0
+    },
+    {
+     "orders": 550,
+     "late3pl": 4,
+     "short3pl": 1,
+     "carrier": 3,
+     "supplier": 2,
+     "unconfLate": 0,
+     "unconfShort": 0
+    },
+    {
+     "orders": 533,
+     "late3pl": 3,
+     "short3pl": 1,
+     "carrier": 2,
+     "supplier": 2,
+     "unconfLate": 0,
+     "unconfShort": 0
+    },
+    {
+     "orders": 552,
+     "late3pl": 3,
+     "short3pl": 1,
+     "carrier": 2,
+     "supplier": 2,
+     "unconfLate": 0,
+     "unconfShort": 1
+    },
+    {
+     "orders": 592,
+     "late3pl": 3,
+     "short3pl": 1,
+     "carrier": 2,
+     "supplier": 1,
+     "unconfLate": 0,
+     "unconfShort": 1
+    },
+    {
+     "orders": 622,
+     "late3pl": 4,
+     "short3pl": 1,
+     "carrier": 2,
+     "supplier": 2,
+     "unconfLate": 0,
+     "unconfShort": 0
+    },
+    {
+     "orders": 621,
+     "late3pl": 3,
+     "short3pl": 1,
+     "carrier": 2,
+     "supplier": 2,
+     "unconfLate": 0,
+     "unconfShort": 1
+    },
+    {
+     "orders": 588,
+     "late3pl": 4,
+     "short3pl": 1,
+     "carrier": 3,
+     "supplier": 1,
+     "unconfLate": 0,
+     "unconfShort": 0
+    }
+   ]
+  },
+  {
+   "id": "EX-3PL-UK",
+   "site": "EX-UK",
+   "color": "#e6e6e6",
+   "lat": 55.0,
+   "lon": -4.5,
+   "verified": false,
+   "label": {
+    "dx": -12,
+    "dy": -12,
+    "anchor": "end"
+   },
+   "note": "UNVERIFIED, not in network totals",
+   "daily": [
+    {
+     "orders": 637,
+     "late3pl": 4,
+     "short3pl": 1,
+     "carrier": 2,
+     "supplier": 2,
+     "unconfLate": 0,
+     "unconfShort": 1
+    },
+    {
+     "orders": 606,
+     "late3pl": 4,
+     "short3pl": 1,
+     "carrier": 3,
+     "supplier": 2,
+     "unconfLate": 0,
+     "unconfShort": 0
+    },
+    {
+     "orders": 565,
+     "late3pl": 4,
+     "short3pl": 1,
+     "carrier": 2,
+     "supplier": 2,
+     "unconfLate": 0,
+     "unconfShort": 0
+    },
+    {
+     "orders": 547,
+     "late3pl": 4,
+     "short3pl": 2,
+     "carrier": 3,
+     "supplier": 2,
+     "unconfLate": 0,
+     "unconfShort": 0
+    },
+    {
+     "orders": 564,
+     "late3pl": 3,
+     "short3pl": 1,
+     "carrier": 2,
+     "supplier": 2,
+     "unconfLate": 0,
+     "unconfShort": 0
+    },
+    {
+     "orders": 604,
+     "late3pl": 4,
+     "short3pl": 1,
+     "carrier": 3,
+     "supplier": 2,
+     "unconfLate": 0,
+     "unconfShort": 0
+    },
+    {
+     "orders": 637,
+     "late3pl": 4,
+     "short3pl": 1,
+     "carrier": 2,
+     "supplier": 2,
+     "unconfLate": 0,
+     "unconfShort": 0
+    },
+    {
+     "orders": 637,
+     "late3pl": 4,
+     "short3pl": 1,
+     "carrier": 3,
+     "supplier": 2,
+     "unconfLate": 0,
+     "unconfShort": 0
+    },
+    {
+     "orders": 605,
+     "late3pl": 4,
+     "short3pl": 1,
+     "carrier": 3,
+     "supplier": 2,
+     "unconfLate": 0,
+     "unconfShort": 0
+    },
+    {
+     "orders": 564,
+     "late3pl": 4,
+     "short3pl": 2,
+     "carrier": 3,
+     "supplier": 2,
+     "unconfLate": 0,
+     "unconfShort": 0
+    },
+    {
+     "orders": 547,
+     "late3pl": 4,
+     "short3pl": 1,
+     "carrier": 3,
+     "supplier": 2,
+     "unconfLate": 0,
+     "unconfShort": 0
+    },
+    {
+     "orders": 565,
+     "late3pl": 3,
+     "short3pl": 1,
+     "carrier": 3,
+     "supplier": 2,
+     "unconfLate": 0,
+     "unconfShort": 0
+    },
+    {
+     "orders": 605,
+     "late3pl": 3,
+     "short3pl": 1,
+     "carrier": 3,
+     "supplier": 2,
+     "unconfLate": 0,
+     "unconfShort": 0
+    },
+    {
+     "orders": 637,
+     "late3pl": 4,
+     "short3pl": 1,
+     "carrier": 2,
+     "supplier": 2,
+     "unconfLate": 0,
+     "unconfShort": 0
+    },
+    {
+     "orders": 637,
+     "late3pl": 4,
+     "short3pl": 2,
+     "carrier": 2,
+     "supplier": 2,
+     "unconfLate": 0,
+     "unconfShort": 0
+    },
+    {
+     "orders": 604,
+     "late3pl": 4,
+     "short3pl": 1,
+     "carrier": 2,
+     "supplier": 2,
+     "unconfLate": 0,
+     "unconfShort": 0
+    },
+    {
+     "orders": 564,
+     "late3pl": 4,
+     "short3pl": 1,
+     "carrier": 2,
+     "supplier": 2,
+     "unconfLate": 0,
+     "unconfShort": 0
+    },
+    {
+     "orders": 547,
+     "late3pl": 3,
+     "short3pl": 1,
+     "carrier": 2,
+     "supplier": 2,
+     "unconfLate": 0,
+     "unconfShort": 0
+    },
+    {
+     "orders": 565,
+     "late3pl": 4,
+     "short3pl": 1,
+     "carrier": 3,
+     "supplier": 2,
+     "unconfLate": 0,
+     "unconfShort": 0
+    },
+    {
+     "orders": 606,
+     "late3pl": 4,
+     "short3pl": 1,
+     "carrier": 3,
+     "supplier": 2,
+     "unconfLate": 0,
+     "unconfShort": 0
+    },
+    {
+     "orders": 638,
+     "late3pl": 4,
+     "short3pl": 1,
+     "carrier": 2,
+     "supplier": 2,
+     "unconfLate": 0,
+     "unconfShort": 0
+    },
+    {
+     "orders": 636,
+     "late3pl": 4,
+     "short3pl": 1,
+     "carrier": 2,
+     "supplier": 2,
+     "unconfLate": 0,
+     "unconfShort": 0
+    },
+    {
+     "orders": 603,
+     "late3pl": 4,
+     "short3pl": 1,
+     "carrier": 3,
+     "supplier": 2,
+     "unconfLate": 0,
+     "unconfShort": 0
+    },
+    {
+     "orders": 563,
+     "late3pl": 4,
+     "short3pl": 1,
+     "carrier": 3,
+     "supplier": 2,
+     "unconfLate": 0,
+     "unconfShort": 0
+    },
+    {
+     "orders": 547,
+     "late3pl": 4,
+     "short3pl": 1,
+     "carrier": 3,
+     "supplier": 2,
+     "unconfLate": 0,
+     "unconfShort": 1
+    },
+    {
+     "orders": 566,
+     "late3pl": 4,
+     "short3pl": 1,
+     "carrier": 2,
+     "supplier": 2,
+     "unconfLate": 0,
+     "unconfShort": 1
+    },
+    {
+     "orders": 607,
+     "late3pl": 4,
+     "short3pl": 1,
+     "carrier": 2,
+     "supplier": 2,
+     "unconfLate": 0,
+     "unconfShort": 0
+    },
+    {
+     "orders": 638,
+     "late3pl": 4,
+     "short3pl": 1,
+     "carrier": 3,
+     "supplier": 2,
+     "unconfLate": 0,
+     "unconfShort": 0
+    },
+    {
+     "orders": 636,
+     "late3pl": 4,
+     "short3pl": 1,
+     "carrier": 2,
+     "supplier": 2,
+     "unconfLate": 0,
+     "unconfShort": 0
+    },
+    {
+     "orders": 602,
+     "late3pl": 4,
+     "short3pl": 1,
+     "carrier": 2,
+     "supplier": 2,
+     "unconfLate": 0,
+     "unconfShort": 1
+    }
+   ]
+  },
+  {
+   "id": "EX-3PL-SG",
+   "site": "EX-SG",
+   "color": "#5ff0e0",
+   "lat": 1.35,
+   "lon": 103.9,
+   "verified": true,
+   "label": {
+    "dx": -14,
+    "dy": -14,
+    "anchor": "end"
+   },
+   "note": "",
+   "daily": [
+    {
+     "orders": 592,
+     "late3pl": 1,
+     "short3pl": 1,
+     "carrier": 1,
+     "supplier": 5,
+     "unconfLate": 0,
+     "unconfShort": 0
+    },
+    {
+     "orders": 562,
+     "late3pl": 1,
+     "short3pl": 1,
+     "carrier": 1,
+     "supplier": 5,
+     "unconfLate": 0,
+     "unconfShort": 1
+    },
+    {
+     "orders": 524,
+     "late3pl": 1,
+     "short3pl": 1,
+     "carrier": 2,
+     "supplier": 5,
+     "unconfLate": 0,
+     "unconfShort": 1
+    },
+    {
+     "orders": 507,
+     "late3pl": 2,
+     "short3pl": 1,
+     "carrier": 2,
+     "supplier": 7,
+     "unconfLate": 0,
+     "unconfShort": 1
+    },
+    {
+     "orders": 524,
+     "late3pl": 2,
+     "short3pl": 1,
+     "carrier": 2,
+     "supplier": 6,
+     "unconfLate": 0,
+     "unconfShort": 0
+    },
+    {
+     "orders": 561,
+     "late3pl": 2,
+     "short3pl": 1,
+     "carrier": 1,
+     "supplier": 5,
+     "unconfLate": 0,
+     "unconfShort": 1
+    },
+    {
+     "orders": 591,
+     "late3pl": 2,
+     "short3pl": 1,
+     "carrier": 2,
+     "supplier": 6,
+     "unconfLate": 0,
+     "unconfShort": 1
+    },
+    {
+     "orders": 591,
+     "late3pl": 1,
+     "short3pl": 1,
+     "carrier": 2,
+     "supplier": 6,
+     "unconfLate": 0,
+     "unconfShort": 0
+    },
+    {
+     "orders": 561,
+     "late3pl": 1,
+     "short3pl": 1,
+     "carrier": 1,
+     "supplier": 6,
+     "unconfLate": 0,
+     "unconfShort": 1
+    },
+    {
+     "orders": 524,
+     "late3pl": 1,
+     "short3pl": 1,
+     "carrier": 1,
+     "supplier": 4,
+     "unconfLate": 0,
+     "unconfShort": 0
+    },
+    {
+     "orders": 507,
+     "late3pl": 1,
+     "short3pl": 1,
+     "carrier": 1,
+     "supplier": 4,
+     "unconfLate": 0,
+     "unconfShort": 0
+    },
+    {
+     "orders": 524,
+     "late3pl": 1,
+     "short3pl": 1,
+     "carrier": 1,
+     "supplier": 4,
+     "unconfLate": 0,
+     "unconfShort": 0
+    },
+    {
+     "orders": 562,
+     "late3pl": 1,
+     "short3pl": 1,
+     "carrier": 1,
+     "supplier": 4,
+     "unconfLate": 0,
+     "unconfShort": 0
+    },
+    {
+     "orders": 591,
+     "late3pl": 1,
+     "short3pl": 1,
+     "carrier": 1,
+     "supplier": 4,
+     "unconfLate": 0,
+     "unconfShort": 0
+    },
+    {
+     "orders": 591,
+     "late3pl": 1,
+     "short3pl": 0,
+     "carrier": 1,
+     "supplier": 4,
+     "unconfLate": 0,
+     "unconfShort": 0
+    },
+    {
+     "orders": 561,
+     "late3pl": 1,
+     "short3pl": 1,
+     "carrier": 1,
+     "supplier": 4,
+     "unconfLate": 0,
+     "unconfShort": 0
+    },
+    {
+     "orders": 523,
+     "late3pl": 1,
+     "short3pl": 1,
+     "carrier": 1,
+     "supplier": 4,
+     "unconfLate": 0,
+     "unconfShort": 0
+    },
+    {
+     "orders": 507,
+     "late3pl": 1,
+     "short3pl": 1,
+     "carrier": 1,
+     "supplier": 5,
+     "unconfLate": 0,
+     "unconfShort": 0
+    },
+    {
+     "orders": 525,
+     "late3pl": 1,
+     "short3pl": 1,
+     "carrier": 1,
+     "supplier": 5,
+     "unconfLate": 0,
+     "unconfShort": 0
+    },
+    {
+     "orders": 562,
+     "late3pl": 2,
+     "short3pl": 1,
+     "carrier": 1,
+     "supplier": 5,
+     "unconfLate": 0,
+     "unconfShort": 0
+    },
+    {
+     "orders": 592,
+     "late3pl": 2,
+     "short3pl": 1,
+     "carrier": 1,
+     "supplier": 5,
+     "unconfLate": 0,
+     "unconfShort": 1
+    },
+    {
+     "orders": 591,
+     "late3pl": 1,
+     "short3pl": 1,
+     "carrier": 2,
+     "supplier": 6,
+     "unconfLate": 0,
+     "unconfShort": 1
+    },
+    {
+     "orders": 560,
+     "late3pl": 2,
+     "short3pl": 1,
+     "carrier": 2,
+     "supplier": 6,
+     "unconfLate": 0,
+     "unconfShort": 1
+    },
+    {
+     "orders": 523,
+     "late3pl": 2,
+     "short3pl": 1,
+     "carrier": 2,
+     "supplier": 5,
+     "unconfLate": 0,
+     "unconfShort": 1
+    },
+    {
+     "orders": 508,
+     "late3pl": 2,
+     "short3pl": 1,
+     "carrier": 2,
+     "supplier": 6,
+     "unconfLate": 0,
+     "unconfShort": 1
+    },
+    {
+     "orders": 525,
+     "late3pl": 1,
+     "short3pl": 1,
+     "carrier": 1,
+     "supplier": 5,
+     "unconfLate": 0,
+     "unconfShort": 1
+    },
+    {
+     "orders": 563,
+     "late3pl": 1,
+     "short3pl": 1,
+     "carrier": 1,
+     "supplier": 5,
+     "unconfLate": 0,
+     "unconfShort": 0
+    },
+    {
+     "orders": 592,
+     "late3pl": 1,
+     "short3pl": 1,
+     "carrier": 1,
+     "supplier": 5,
+     "unconfLate": 0,
+     "unconfShort": 0
+    },
+    {
+     "orders": 590,
+     "late3pl": 1,
+     "short3pl": 1,
+     "carrier": 1,
+     "supplier": 5,
+     "unconfLate": 0,
+     "unconfShort": 0
+    },
+    {
+     "orders": 559,
+     "late3pl": 1,
+     "short3pl": 1,
+     "carrier": 1,
+     "supplier": 4,
+     "unconfLate": 0,
+     "unconfShort": 0
+    }
+   ]
+  }
+ ],
+ "destinations": [
+  {
+   "id": "EX-DST-01",
+   "city": "Seattle",
+   "lat": 47.6,
+   "lon": -122.3,
+   "from": "EX-3PL-USW",
+   "share": 0.2
+  },
+  {
+   "id": "EX-DST-02",
+   "city": "Vancouver",
+   "lat": 49.3,
+   "lon": -123.1,
+   "from": "EX-3PL-USW",
+   "share": 0.08
+  },
+  {
+   "id": "EX-DST-03",
+   "city": "Phoenix",
+   "lat": 33.4,
+   "lon": -112.1,
+   "from": "EX-3PL-USW",
+   "share": 0.14
+  },
+  {
+   "id": "EX-DST-04",
+   "city": "Denver",
+   "lat": 39.7,
+   "lon": -105.0,
+   "from": "EX-3PL-USW",
+   "share": 0.16
+  },
+  {
+   "id": "EX-DST-05",
+   "city": "Dallas",
+   "lat": 32.8,
+   "lon": -96.8,
+   "from": "EX-3PL-USW",
+   "share": 0.22
+  },
+  {
+   "id": "EX-DST-06",
+   "city": "Mexico City",
+   "lat": 19.4,
+   "lon": -99.1,
+   "from": "EX-3PL-USW",
+   "share": 0.2
+  },
+  {
+   "id": "EX-DST-07",
+   "city": "Boston",
+   "lat": 42.4,
+   "lon": -71.1,
+   "from": "EX-3PL-USE",
+   "share": 0.14
+  },
+  {
+   "id": "EX-DST-08",
+   "city": "Chicago",
+   "lat": 41.9,
+   "lon": -87.6,
+   "from": "EX-3PL-USE",
+   "share": 0.24
+  },
+  {
+   "id": "EX-DST-09",
+   "city": "Atlanta",
+   "lat": 33.7,
+   "lon": -84.4,
+   "from": "EX-3PL-USE",
+   "share": 0.18
+  },
+  {
+   "id": "EX-DST-10",
+   "city": "Miami",
+   "lat": 25.8,
+   "lon": -80.2,
+   "from": "EX-3PL-USE",
+   "share": 0.14
+  },
+  {
+   "id": "EX-DST-11",
+   "city": "Toronto",
+   "lat": 43.7,
+   "lon": -79.4,
+   "from": "EX-3PL-USE",
+   "share": 0.12
+  },
+  {
+   "id": "EX-DST-12",
+   "city": "Bogota",
+   "lat": 4.7,
+   "lon": -74.1,
+   "from": "EX-3PL-USE",
+   "share": 0.08
+  },
+  {
+   "id": "EX-DST-13",
+   "city": "Sao Paulo",
+   "lat": -23.5,
+   "lon": -46.6,
+   "from": "EX-3PL-USE",
+   "share": 0.1
+  },
+  {
+   "id": "EX-DST-14",
+   "city": "Paris",
+   "lat": 48.9,
+   "lon": 2.4,
+   "from": "EX-3PL-NL",
+   "share": 0.2
+  },
+  {
+   "id": "EX-DST-15",
+   "city": "Berlin",
+   "lat": 52.5,
+   "lon": 13.4,
+   "from": "EX-3PL-NL",
+   "share": 0.18
+  },
+  {
+   "id": "EX-DST-16",
+   "city": "Madrid",
+   "lat": 40.4,
+   "lon": -3.7,
+   "from": "EX-3PL-NL",
+   "share": 0.14
+  },
+  {
+   "id": "EX-DST-17",
+   "city": "Milan",
+   "lat": 45.5,
+   "lon": 9.2,
+   "from": "EX-3PL-NL",
+   "share": 0.14
+  },
+  {
+   "id": "EX-DST-18",
+   "city": "Warsaw",
+   "lat": 52.2,
+   "lon": 21.0,
+   "from": "EX-3PL-NL",
+   "share": 0.12
+  },
+  {
+   "id": "EX-DST-19",
+   "city": "Stockholm",
+   "lat": 59.3,
+   "lon": 18.1,
+   "from": "EX-3PL-NL",
+   "share": 0.1
+  },
+  {
+   "id": "EX-DST-20",
+   "city": "Dubai",
+   "lat": 25.2,
+   "lon": 55.3,
+   "from": "EX-3PL-NL",
+   "share": 0.12
+  },
+  {
+   "id": "EX-DST-21",
+   "city": "Dublin",
+   "lat": 53.3,
+   "lon": -6.3,
+   "from": "EX-3PL-UK",
+   "share": 0.3
+  },
+  {
+   "id": "EX-DST-22",
+   "city": "Edinburgh",
+   "lat": 55.9,
+   "lon": -3.2,
+   "from": "EX-3PL-UK",
+   "share": 0.25
+  },
+  {
+   "id": "EX-DST-23",
+   "city": "Oslo",
+   "lat": 59.9,
+   "lon": 10.8,
+   "from": "EX-3PL-UK",
+   "share": 0.2
+  },
+  {
+   "id": "EX-DST-24",
+   "city": "Copenhagen",
+   "lat": 55.7,
+   "lon": 12.6,
+   "from": "EX-3PL-UK",
+   "share": 0.25
+  },
+  {
+   "id": "EX-DST-25",
+   "city": "Sydney",
+   "lat": -33.9,
+   "lon": 151.2,
+   "from": "EX-3PL-SG",
+   "share": 0.18
+  },
+  {
+   "id": "EX-DST-26",
+   "city": "Tokyo",
+   "lat": 35.7,
+   "lon": 139.7,
+   "from": "EX-3PL-SG",
+   "share": 0.2
+  },
+  {
+   "id": "EX-DST-27",
+   "city": "Seoul",
+   "lat": 37.6,
+   "lon": 127.0,
+   "from": "EX-3PL-SG",
+   "share": 0.14
+  },
+  {
+   "id": "EX-DST-28",
+   "city": "Mumbai",
+   "lat": 19.1,
+   "lon": 72.9,
+   "from": "EX-3PL-SG",
+   "share": 0.16
+  },
+  {
+   "id": "EX-DST-29",
+   "city": "Jakarta",
+   "lat": -6.2,
+   "lon": 106.8,
+   "from": "EX-3PL-SG",
+   "share": 0.12
+  },
+  {
+   "id": "EX-DST-30",
+   "city": "Manila",
+   "lat": 14.6,
+   "lon": 121.0,
+   "from": "EX-3PL-SG",
+   "share": 0.1
+  },
+  {
+   "id": "EX-DST-31",
+   "city": "Bangkok",
+   "lat": 13.8,
+   "lon": 100.5,
+   "from": "EX-3PL-SG",
+   "share": 0.1
+  }
+ ]
+}

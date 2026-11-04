@@ -1,0 +1,481 @@
+<!DOCTYPE html>
+<html lang="en">
+<!-- MODE: SANITIZED (M-01 open) -->
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<link rel="icon" href="data:,">
+<title>EXAMPLE · Gallery · Data is beautiful</title>
+<style>
+  :root { --bg:#000; --tx:#f2f2f2; --dim:#8a96a6; --cy:#6fd3ff; --amb:#ffb000; --red:#ff4d4d; --line:#1a2028; }
+  * { box-sizing:border-box; }
+  html,body { margin:0; background:var(--bg); color:var(--tx); font-family:"Inter","Helvetica Neue",Arial,sans-serif; }
+  a { color:var(--cy); text-decoration:none; }
+  .top { position:sticky; top:0; z-index:5; background:rgba(0,0,0,.92); border-bottom:1px solid var(--line); padding:14px 3vw; display:flex; gap:24px; align-items:center; flex-wrap:wrap; }
+  .top b { letter-spacing:.14em; font-size:15px; }
+  .ex { color:#000; background:var(--amb); font-weight:800; font-size:12px; letter-spacing:.12em; padding:3px 8px; }
+  .top nav { display:flex; gap:6px; flex-wrap:wrap; }
+  .top nav a { font-size:12px; letter-spacing:.1em; font-weight:700; color:var(--dim); border:1px solid #2a323c; padding:5px 9px; }
+  .top nav a:hover { color:var(--tx); border-color:var(--cy); }
+  .intro { padding:28px 3vw 0; color:var(--dim); font-size:14px; line-height:1.6; max-width:1100px; }
+  section.ch { min-height:92vh; padding:36px 3vw 24px; display:grid; grid-template-rows:auto minmax(0,1fr); border-bottom:1px solid var(--line); }
+  section.ch header { display:flex; flex-wrap:wrap; align-items:baseline; gap:10px 22px; margin-bottom:12px; }
+  .num { color:var(--cy); font-weight:800; letter-spacing:.1em; font-size:14px; }
+  h2 { margin:0; font-size:22px; letter-spacing:.12em; font-weight:800; }
+  .cap { margin:0; color:var(--dim); font-size:13px; letter-spacing:.03em; flex:1 1 380px; }
+  .ctl { display:flex; gap:6px; flex-wrap:wrap; align-items:center; }
+  .ctl button, .ctl a.b { background:#0d1116; color:#cfd8e3; border:1px solid #2a323c; font:700 12px/1 inherit; font-family:inherit; letter-spacing:.08em; padding:7px 10px; cursor:pointer; }
+  .ctl button.on { background:var(--tx); color:#000; }
+  .ctl input[type=range] { width:220px; accent-color:var(--cy); }
+  .ctl .lbl { font-size:12px; color:var(--dim); letter-spacing:.08em; font-weight:700; }
+  .fig { position:relative; min-height:0; height:calc(92vh - 140px); }
+  .fig > svg, .fig > canvas { position:absolute; inset:0; width:100%; height:100%; display:block; }
+  svg text { font-family:inherit; paint-order:stroke; stroke:#000; stroke-width:3px; stroke-linejoin:round; }
+  [data-k] { cursor:pointer; transition:opacity .25s; }
+  .dim { opacity:.08 !important; }
+  .band { mix-blend-mode:screen; }
+  .band:hover { opacity:.85; }
+  #tip { position:fixed; z-index:20; pointer-events:none; background:rgba(5,8,12,.94); border:1px solid var(--cy); box-shadow:0 0 18px rgba(111,211,255,.35); padding:8px 11px; font-size:12px; letter-spacing:.04em; line-height:1.55; display:none; max-width:340px; }
+  #tip b { color:var(--cy); }
+  .hud { position:absolute; left:14px; top:10px; pointer-events:none; font-size:12px; letter-spacing:.1em; font-weight:700; color:var(--dim); line-height:1.7; }
+  .hud .v { color:var(--tx); font-size:16px; }
+  footer { padding:24px 3vw 40px; color:var(--dim); font-size:12px; letter-spacing:.06em; }
+  /* solo: one chart fills the viewport (wall screens, kiosk, center screen globe) */
+  body.solo { overflow:hidden; height:100vh; }
+  body.solo .top, body.solo .intro, body.solo footer { display:none; }
+  body.solo section.ch { display:none; }
+  body.solo section.ch.on { display:grid; height:100vh; min-height:0; padding:14px 2vw 12px; border:0; }
+  body.solo .fig { height:auto; }
+  body.solo .soloexit { display:inline-block; }
+  .soloexit { display:none; }
+  @media (max-width:700px) { h2 { font-size:17px; } .cap { font-size:12px; flex-basis:100%; } .ctl input[type=range] { width:140px; } }
+  @media (prefers-reduced-motion: reduce) { [data-k] { transition:none; } }
+</style>
+</head>
+<body>
+<svg width="0" height="0" style="position:absolute" aria-hidden="true"><defs>
+  <filter id="gl" x="-50%" y="-50%" width="200%" height="200%"><feGaussianBlur stdDeviation="3.2" result="b"/><feMerge><feMergeNode in="b"/><feMergeNode in="SourceGraphic"/></feMerge></filter>
+  <filter id="gl2" x="-50%" y="-50%" width="200%" height="200%"><feGaussianBlur stdDeviation="7" result="b"/><feMerge><feMergeNode in="b"/><feMergeNode in="b"/><feMergeNode in="SourceGraphic"/></feMerge></filter>
+</defs></svg>
+<div class="top"><b>GALLERY · DATA IS BEAUTIFUL</b><span class="ex">EXAMPLE DATA</span>
+  <nav><a href="#c1">01 FLOW</a><a href="#c2">02 BUBBLES</a><a href="#c3">03 CALENDAR</a><a href="#c4">04 CLOCK</a><a href="#c5">05 CHORD</a><a href="#c6">06 RIDGES</a><a href="#c7">07 TREEMAP</a><a href="#c8">08 GLOBE</a></nav>
+  <nav><a href="control-tower-wall.html#map/3pl">MAP SELECTOR</a><a href="control-tower-wall.html">WALL</a><a href="index.html">INDEX</a></nav></div>
+<p class="intro">EXAMPLE data only, derived from the same EXAMPLE feeds as the map selector (ops/feeds). Invented figures, not real results. Money appears only as an index. Hover any mark for detail; click to isolate; Esc clears. Keys 1–8 open a chart full-screen (wall mode), G opens the globe, Esc exits.</p>
+<section class="ch" id="c1"><header><span class="num">01</span><h2>ORDER → RETURN FLOW</h2><span class="ex">EXAMPLE</span><p class="cap">Sankey of 7 days of EXAMPLE orders: 3PL site → outcome (controllable vs outside-3PL misses) → kept / returned → return reason. Hover a band; click a node to isolate.</p><div class="ctl"><button id="skf">FOCUS: RETURNS</button><a class="b" href="#solo/1">⛶ 1</a><a class="b soloexit" href="#c1">EXIT · ESC</a></div></header><div class="fig"><svg id="v1" viewBox="0 0 1600 760" preserveAspectRatio="xMidYMid meet" role="img" aria-label="Sankey"></svg></div></section>
+<section class="ch" id="c2"><header><span class="num">02</span><h2>3PL BUBBLES · WEEK BY WEEK</h2><span class="ex">EXAMPLE</span><p class="cap">Rosling-style: x = cost-per-order index, y = OTIF (filled = total, ring = controllable), size = orders. Slide or play through 4 EXAMPLE weeks; click a 3PL to isolate.</p><div class="ctl"><button id="bplay">▶ PLAY</button><input id="wk" type="range" min="0" max="3" step="0.01" value="3" aria-label="Week"><span class="lbl" id="wkl"></span><a class="b" href="#solo/2">⛶ 2</a><a class="b soloexit" href="#c2">EXIT · ESC</a></div></header><div class="fig"><svg id="v2" viewBox="0 0 1600 760" preserveAspectRatio="xMidYMid meet" role="img" aria-label="Bubble chart"></svg></div></section>
+<section class="ch" id="c3"><header><span class="num">03</span><h2>DAILY ON-TIME · CALENDAR</h2><span class="ex">EXAMPLE</span><p class="cap">Calendar heatmap of daily on-time % for 30 EXAMPLE days. Toggle total vs controllable; click a strip on the right to put that 3PL on the calendar; click a day to isolate.</p><div class="ctl"><button data-calmode="total" class="on">TOTAL</button><button data-calmode="ctrl">CONTROLLABLE</button><a class="b" href="#solo/3">⛶ 3</a><a class="b soloexit" href="#c3">EXIT · ESC</a></div></header><div class="fig"><svg id="v3" viewBox="0 0 1600 760" preserveAspectRatio="xMidYMid meet" role="img" aria-label="Calendar heatmap"></svg></div></section>
+<section class="ch" id="c4"><header><span class="num">04</span><h2>24-HOUR ORDER CLOCK</h2><span class="ex">EXAMPLE</span><p class="cap">Radial order clock: EXAMPLE orders by local hour, one ring per 3PL, against each site’s carrier pickup (white tick). Orders after pickup ship next day. Click a ring or row to isolate.</p><div class="ctl"><a class="b" href="#solo/4">⛶ 4</a><a class="b soloexit" href="#c4">EXIT · ESC</a></div></header><div class="fig"><svg id="v4" viewBox="0 0 1600 760" preserveAspectRatio="xMidYMid meet" role="img" aria-label="Radial clock"></svg></div></section>
+<section class="ch" id="c5"><header><span class="num">05</span><h2>3PL → REGION · CHORD</h2><span class="ex">EXAMPLE</span><p class="cap">Chord diagram of 7 days of EXAMPLE orders from each 3PL to destination regions. Hover a ribbon; click an arc to isolate.</p><div class="ctl"><a class="b" href="#solo/5">⛶ 5</a><a class="b soloexit" href="#c5">EXIT · ESC</a></div></header><div class="fig"><svg id="v5" viewBox="0 0 1600 760" preserveAspectRatio="xMidYMid meet" role="img" aria-label="Chord diagram"></svg></div></section>
+<section class="ch" id="c6"><header><span class="num">06</span><h2>LEAD-TIME RIDGELINES</h2><span class="ex">EXAMPLE</span><p class="cap">Ridgeline plot of order-to-delivery lead time per lane (30-day EXAMPLE sample) with P50 and P90. Pick a 3PL; click a ridge to isolate.</p><div class="ctl"><button data-rg="TOP" class="on">TOP 12</button><button data-rg="EX-3PL-USW">USW</button><button data-rg="EX-3PL-USE">USE</button><button data-rg="EX-3PL-NL">NL</button><button data-rg="EX-3PL-UK">UK</button><button data-rg="EX-3PL-SG">SG</button><a class="b" href="#solo/6">⛶ 6</a><a class="b soloexit" href="#c6">EXIT · ESC</a></div></header><div class="fig"><svg id="v6" viewBox="0 0 1600 760" preserveAspectRatio="xMidYMid meet" role="img" aria-label="Ridgeline plot"></svg></div></section>
+<section class="ch" id="c7"><header><span class="num">07</span><h2>REVENUE & RETURNS · TREEMAP</h2><span class="ex">EXAMPLE</span><p class="cap">Zoomable treemap, family → SKU. Size = revenue index (network = 1,000, no dollars) or returns index; colour = return rate. Click a family to zoom; click a SKU to isolate.</p><div class="ctl"><button data-tms="rev" class="on">SIZE: REVENUE INDEX</button><button data-tms="ret">SIZE: RETURNS INDEX</button><a class="b" href="#solo/7">⛶ 7</a><a class="b soloexit" href="#c7">EXIT · ESC</a></div></header><div class="fig"><svg id="v7" viewBox="0 0 1600 760" preserveAspectRatio="xMidYMid meet" role="img" aria-label="Treemap"></svg></div></section>
+<section class="ch" id="c8"><header><span class="num">08</span><h2>NIGHT-LIGHTS GLOBE</h2><span class="ex">EXAMPLE</span><p class="cap">3D globe mode for the map: 3PL sites and destinations as night lights with streaming lanes. Drag to spin; click a site to isolate. Open full-screen (G or #globe) for the centre wall screen.</p><div class="ctl"><a class="b" href="#globe">⛶ CENTRE-SCREEN MODE</a><a class="b" href="#solo/8">⛶ 8</a><a class="b soloexit" href="#c8">EXIT · ESC</a></div></header><div class="fig"><canvas id="v8" aria-label="Night-lights globe"></canvas><div class="hud" id="ghud"></div></div></section>
+
+<footer>MODE: SANITIZED (M-01 open) · EXAMPLE DATA EVERYWHERE · EX- CODES · MONEY AS AN INDEX ONLY · DATA AS OF <span id="asof"></span> · NO LIBRARIES LOADED FROM THE NETWORK (ALL CODE INLINE)</footer>
+<div id="tip"></div>
+<script type="application/json" id="gdata">{"meta":{"mode":"MODE: SANITIZED (M-01 open)","example":true,"asOf":"2026-11-03","days":["2026-10-05","2026-10-06","2026-10-07","2026-10-08","2026-10-09","2026-10-10","2026-10-11","2026-10-12","2026-10-13","2026-10-14","2026-10-15","2026-10-16","2026-10-17","2026-10-18","2026-10-19","2026-10-20","2026-10-21","2026-10-22","2026-10-23","2026-10-24","2026-10-25","2026-10-26","2026-10-27","2026-10-28","2026-10-29","2026-10-30","2026-10-31","2026-11-01","2026-11-02","2026-11-03"],"note":"EXAMPLE data derived from the EXAMPLE feeds (ops/feeds). Invented, not real figures. Money as an index only."},"sites":[{"id":"EX-3PL-USW","color":"#4fc3ff","lat":35.6,"lon":-113.5,"verified":true},{"id":"EX-3PL-USE","color":"#a98bff","lat":40.6,"lon":-74.4,"verified":true},{"id":"EX-3PL-NL","color":"#ff7ac8","lat":51.0,"lon":8.0,"verified":true},{"id":"EX-3PL-UK","color":"#e6e6e6","lat":55.0,"lon":-4.5,"verified":false},{"id":"EX-3PL-SG","color":"#5ff0e0","lat":1.35,"lon":103.9,"verified":true}],"sankey":{"nodes":[{"id":"EX-3PL-USW","col":0,"color":"#4fc3ff"},{"id":"EX-3PL-USE","col":0,"color":"#a98bff"},{"id":"EX-3PL-NL","col":0,"color":"#ff7ac8"},{"id":"EX-3PL-UK","col":0,"color":"#e6e6e6"},{"id":"EX-3PL-SG","col":0,"color":"#5ff0e0"},{"id":"OTIF","col":1,"color":"#3ddc84"},{"id":"MISS \u00b7 3PL (CONTROLLABLE)","col":1,"color":"#ff4d4d"},{"id":"MISS \u00b7 CARRIER (OUTSIDE 3PL)","col":1,"color":"#ffb000"},{"id":"MISS \u00b7 SUPPLIER (OUTSIDE 3PL)","col":1,"color":"#ffb000"},{"id":"MISS \u00b7 UNCONFIRMED","col":1,"color":"#8a96a6"},{"id":"KEPT","col":2,"color":"#2f6f8a"},{"id":"RETURNED","col":2,"color":"#ff7ac8"},{"id":"DEFECT","col":3,"color":"#6fd3ff"},{"id":"ORDERED WRONG","col":3,"color":"#6fd3ff"},{"id":"WRONG ITEM (3PL)","col":3,"color":"#ff4d4d"},{"id":"TRANSIT DAMAGE","col":3,"color":"#6fd3ff"},{"id":"UNKNOWN","col":3,"color":"#8a96a6"},{"id":"PACKING (3PL)","col":3,"color":"#ff4d4d"}],"links":[["EX-3PL-USW","OTIF",3905],["EX-3PL-USW","MISS \u00b7 3PL (CONTROLLABLE)",26],["EX-3PL-USW","MISS \u00b7 CARRIER (OUTSIDE 3PL)",13],["EX-3PL-USW","MISS \u00b7 SUPPLIER (OUTSIDE 3PL)",10],["EX-3PL-USW","MISS \u00b7 UNCONFIRMED",3],["EX-3PL-USE","OTIF",3750],["EX-3PL-USE","MISS \u00b7 3PL (CONTROLLABLE)",53],["EX-3PL-USE","MISS \u00b7 CARRIER (OUTSIDE 3PL)",27],["EX-3PL-USE","MISS \u00b7 SUPPLIER (OUTSIDE 3PL)",21],["EX-3PL-USE","MISS \u00b7 UNCONFIRMED",5],["EX-3PL-NL","OTIF",3996],["EX-3PL-NL","MISS \u00b7 3PL (CONTROLLABLE)",31],["EX-3PL-NL","MISS \u00b7 CARRIER (OUTSIDE 3PL)",16],["EX-3PL-NL","MISS \u00b7 SUPPLIER (OUTSIDE 3PL)",12],["EX-3PL-NL","MISS \u00b7 UNCONFIRMED",3],["EX-3PL-UK","OTIF",4090],["EX-3PL-UK","MISS \u00b7 3PL (CONTROLLABLE)",35],["EX-3PL-UK","MISS \u00b7 CARRIER (OUTSIDE 3PL)",17],["EX-3PL-UK","MISS \u00b7 SUPPLIER (OUTSIDE 3PL)",14],["EX-3PL-UK","MISS \u00b7 UNCONFIRMED",3],["EX-3PL-SG","OTIF",3797],["EX-3PL-SG","MISS \u00b7 3PL (CONTROLLABLE)",16],["EX-3PL-SG","MISS \u00b7 CARRIER (OUTSIDE 3PL)",9],["EX-3PL-SG","MISS \u00b7 SUPPLIER (OUTSIDE 3PL)",35],["EX-3PL-SG","MISS \u00b7 UNCONFIRMED",3],["OTIF","KEPT",19170],["OTIF","RETURNED",368],["MISS \u00b7 3PL (CONTROLLABLE)","KEPT",142],["MISS \u00b7 3PL (CONTROLLABLE)","RETURNED",19],["MISS \u00b7 CARRIER (OUTSIDE 3PL)","KEPT",77],["MISS \u00b7 CARRIER (OUTSIDE 3PL)","RETURNED",5],["MISS \u00b7 SUPPLIER (OUTSIDE 3PL)","KEPT",87],["MISS \u00b7 SUPPLIER (OUTSIDE 3PL)","RETURNED",5],["MISS \u00b7 UNCONFIRMED","KEPT",16],["MISS \u00b7 UNCONFIRMED","RETURNED",1],["RETURNED","DEFECT",135],["RETURNED","ORDERED WRONG",107],["RETURNED","WRONG ITEM (3PL)",64],["RETURNED","TRANSIT DAMAGE",52],["RETURNED","UNKNOWN",24],["RETURNED","PACKING (3PL)",16]],"total":19890,"returned":398,"ctrlReturned":80,"window":"2026-10-28 \u2013 2026-11-03"},"bubbles":{"weeks":["2026-10-07 \u2013 2026-10-13","2026-10-14 \u2013 2026-10-20","2026-10-21 \u2013 2026-10-27","2026-10-28 \u2013 2026-11-03"],"series":[{"id":"EX-3PL-USW","pts":[{"orders":3956,"otif":98.69,"otifC":99.29,"costIdx":108.6},{"orders":3956,"otif":98.69,"otifC":99.37,"costIdx":108.7},{"orders":3956,"otif":98.81,"otifC":99.37,"costIdx":109.1},{"orders":3957,"otif":98.69,"otifC":99.34,"costIdx":109.0}]},{"id":"EX-3PL-USE","pts":[{"orders":3856,"otif":98.7,"otifC":99.33,"costIdx":102.4},{"orders":3854,"otif":98.16,"otifC":99.09,"costIdx":102.4},{"orders":3856,"otif":97.59,"otifC":98.86,"costIdx":102.5},{"orders":3856,"otif":97.25,"otifC":98.63,"costIdx":102.2}]},{"id":"EX-3PL-NL","pts":[{"orders":4057,"otif":98.52,"otifC":99.24,"costIdx":93.0},{"orders":4057,"otif":98.52,"otifC":99.24,"costIdx":93.0},{"orders":4058,"otif":98.57,"otifC":99.29,"costIdx":93.1},{"orders":4058,"otif":98.47,"otifC":99.24,"costIdx":92.8}]},{"id":"EX-3PL-UK","pts":[{"orders":4159,"otif":98.39,"otifC":99.16,"costIdx":99.6},{"orders":4159,"otif":98.39,"otifC":99.16,"costIdx":99.6},{"orders":4159,"otif":98.44,"otifC":99.18,"costIdx":99.7},{"orders":4159,"otif":98.34,"otifC":99.16,"costIdx":99.6}]},{"id":"EX-3PL-SG","pts":[{"orders":3859,"otif":98.03,"otifC":99.53,"costIdx":122.6},{"orders":3860,"otif":98.76,"otifC":99.66,"costIdx":122.6},{"orders":3860,"otif":98.32,"otifC":99.56,"costIdx":122.6},{"orders":3860,"otif":98.37,"otifC":99.59,"costIdx":122.6}]}],"target":98.0,"floor":97.5},"calendar":{"series":{"EX-3PL-USW":{"total":[99.13,99.25,99.04,99.07,99.14,99.18,99.01,99.3,99.06,99.04,99.26,99.14,99.34,99.17,99.3,99.06,99.23,99.26,99.14,99.18,99.17,99.12,99.25,99.04,99.26,99.31,99.18,99.17,99.3,99.06],"ctrl":[99.48,99.63,99.42,99.44,99.48,99.51,99.34,99.65,99.44,99.42,99.63,99.48,99.67,99.5,99.65,99.44,99.62,99.63,99.48,99.51,99.5,99.47,99.62,99.42,99.45,99.66,99.51,99.5,99.65,99.44]},"EX-3PL-USE":{"total":[99.28,99.23,99.01,99.24,99.29,99.16,99.15,99.1,99.04,99.01,98.86,98.76,98.99,98.81,98.74,98.65,98.82,98.67,98.76,98.65,98.81,98.38,98.07,98.42,98.3,98.41,98.31,98.3,98.19,98.07],"ctrl":[99.64,99.62,99.41,99.62,99.65,99.49,99.49,99.46,99.42,99.41,99.24,99.29,99.32,99.32,99.28,99.23,99.21,99.24,99.29,99.33,99.32,99.1,98.84,99.01,99.05,99.12,98.99,98.98,98.92,98.84]},"EX-3PL-NL":{"total":[99.2,98.98,98.91,98.87,98.73,99.15,99.03,99.2,99.15,98.73,99.06,98.91,98.98,99.2,99.03,99.15,98.91,99.06,99.09,99.15,99.04,99.19,99.15,98.73,99.06,99.09,99.16,99.04,99.19,98.81],"ctrl":[99.52,99.49,99.27,99.25,99.27,99.49,99.52,99.52,99.49,99.27,99.44,99.46,99.32,99.52,99.36,99.49,99.45,99.44,99.46,99.49,99.36,99.52,99.49,99.27,99.44,99.46,99.49,99.36,99.52,99.32]},"EX-3PL-UK":{"total":[99.06,98.84,98.94,98.72,99.11,98.84,99.06,98.9,98.84,98.76,98.72,98.94,99.01,99.06,99.06,99.01,98.94,99.09,98.76,98.84,99.06,99.06,98.84,98.76,98.72,98.94,99.01,98.9,99.06,99.0],"ctrl":[99.37,99.34,99.29,99.27,99.47,99.34,99.37,99.37,99.34,99.29,99.27,99.47,99.5,99.37,99.37,99.34,99.29,99.45,99.29,99.34,99.37,99.37,99.34,99.29,99.27,99.29,99.34,99.37,99.37,99.34]},"EX-3PL-SG":{"total":[99.66,99.64,99.43,99.21,99.24,99.47,99.32,99.49,99.64,99.62,99.61,99.62,99.64,99.66,99.66,99.64,99.62,99.61,99.62,99.47,99.49,99.49,99.29,99.24,99.21,99.62,99.64,99.66,99.66,99.64],"ctrl":[99.83,99.82,99.81,99.61,99.62,99.64,99.66,99.83,99.82,99.81,99.8,99.81,99.82,99.83,99.83,99.82,99.81,99.8,99.81,99.64,99.66,99.83,99.64,99.62,99.61,99.81,99.82,99.83,99.83,99.82]},"NETWORK":{"total":[99.32,99.28,99.1,99.1,99.1,99.23,99.13,99.27,99.23,99.1,99.19,99.1,99.23,99.21,99.19,99.14,99.14,99.15,99.15,99.11,99.13,99.06,98.96,98.86,98.96,99.1,99.07,99.04,99.1,98.91],"ctrl":[99.62,99.64,99.48,99.48,99.5,99.53,99.5,99.62,99.55,99.48,99.53,99.5,99.53,99.54,99.53,99.5,99.52,99.53,99.51,99.49,99.46,99.49,99.41,99.33,99.38,99.51,99.45,99.42,99.49,99.36]}},"target":98.0,"floor":97.5,"note":"NETWORK excludes unverified EX-3PL-UK"},"clock":[{"id":"EX-3PL-USW","pickup":"17:00","tz":"America/Los_Angeles","hours":[7,7,7,7,6,8,9,18,37,48,49,36,34,44,52,39,22,16,16,19,18,15,10,8],"orders":532,"afterCutoff":102},{"id":"EX-3PL-USE","pickup":"18:00","tz":"America/New_York","hours":[7,7,6,7,7,7,11,18,37,51,55,36,34,38,43,40,21,14,14,17,16,14,10,9],"orders":519,"afterCutoff":80},{"id":"EX-3PL-NL","pickup":"17:30","tz":"Europe/Amsterdam","hours":[7,7,7,7,7,8,12,22,40,58,52,46,37,45,59,40,26,16,18,20,19,15,11,9],"orders":588,"afterCutoff":108},{"id":"EX-3PL-UK","pickup":"17:00","tz":"Europe/London","hours":[8,7,7,7,8,9,11,23,38,53,60,42,40,49,54,46,25,18,18,21,20,15,13,10],"orders":602,"afterCutoff":115},{"id":"EX-3PL-SG","pickup":"18:00","tz":"Asia/Singapore","hours":[7,7,7,7,7,7,10,19,39,50,45,40,33,50,51,44,26,16,17,20,20,16,12,9],"orders":559,"afterCutoff":94}],"chord":{"regions":[{"id":"NA WEST","color":"#4fc3ff"},{"id":"NA EAST","color":"#a98bff"},{"id":"LATAM","color":"#d9e86f"},{"id":"EUROPE","color":"#ff7ac8"},{"id":"UK & IRELAND","color":"#e6e6e6"},{"id":"MIDDLE EAST","color":"#ff8a3d"},{"id":"APAC","color":"#5ff0e0"}],"flows":[["EX-3PL-USW","NA WEST",3166],["EX-3PL-USW","LATAM",791],["EX-3PL-USE","NA EAST",3162],["EX-3PL-USE","LATAM",694],["EX-3PL-NL","EUROPE",3571],["EX-3PL-NL","MIDDLE EAST",487],["EX-3PL-UK","UK & IRELAND",2288],["EX-3PL-UK","EUROPE",1872],["EX-3PL-SG","APAC",3860]]},"ridge":{"x":[0.0,0.2,0.4,0.6000000000000001,0.8,1.0,1.2000000000000002,1.4000000000000001,1.6,1.8,2.0,2.2,2.4000000000000004,2.6,2.8000000000000003,3.0,3.2,3.4000000000000004,3.6,3.8000000000000003,4.0,4.2,4.4,4.6000000000000005,4.800000000000001,5.0,5.2,5.4,5.6000000000000005,5.800000000000001,6.0,6.2,6.4,6.6000000000000005,6.800000000000001,7.0,7.2,7.4,7.6000000000000005,7.800000000000001,8.0,8.200000000000001,8.4,8.6,8.8,9.0,9.200000000000001,9.4,9.600000000000001,9.8,10.0],"lanes":[{"id":"EX-LN-01","from":"EX-3PL-USW","to":"Seattle","mode":"LTL","units":236,"p50":4.0,"p90":6.3,"n":171,"dens":[0.0,0.0,0.0,0.0002,0.001,0.0034,0.0087,0.0188,0.0353,0.0596,0.0907,0.1244,0.157,0.1894,0.2252,0.2626,0.291,0.2989,0.2873,0.2694,0.2528,0.2332,0.2113,0.2001,0.207,0.2194,0.2167,0.1908,0.1514,0.1135,0.0863,0.0711,0.0634,0.0567,0.0485,0.0408,0.0359,0.0328,0.03,0.0284,0.0284,0.0277,0.0249,0.0206,0.0164,0.013,0.0104,0.0077,0.0047,0.0023,0.0008]},{"id":"EX-LN-02","from":"EX-3PL-USW","to":"Vancouver","mode":"parcel","units":103,"p50":2.6,"p90":3.4,"n":78,"dens":[0.0,0.0,0.0001,0.0004,0.0024,0.0101,0.0325,0.0808,0.1595,0.2619,0.3759,0.4887,0.5794,0.6199,0.5954,0.5154,0.4055,0.2935,0.2007,0.1363,0.0958,0.0674,0.043,0.0226,0.0092,0.0028,0.0006,0.0001,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0]},{"id":"EX-LN-03","from":"EX-3PL-USW","to":"Phoenix","mode":"LTL","units":182,"p50":3.4,"p90":4.7,"n":135,"dens":[0.0,0.0,0.0,0.0002,0.0009,0.0029,0.0077,0.0181,0.0391,0.0781,0.1394,0.2165,0.2926,0.3499,0.3797,0.3845,0.3756,0.367,0.3636,0.3558,0.3309,0.2868,0.2307,0.1726,0.1235,0.0919,0.0777,0.0706,0.0608,0.0472,0.0344,0.0249,0.0178,0.0115,0.0062,0.0026,0.001,0.0008,0.0019,0.0042,0.007,0.0084,0.0073,0.0046,0.0021,0.0007,0.0002,0.0,0.0,0.0,0.0]},{"id":"EX-LN-04","from":"EX-3PL-USW","to":"Denver","mode":"parcel","units":96,"p50":2.4,"p90":3.3,"n":71,"dens":[0.0,0.0003,0.0019,0.0081,0.0269,0.069,0.1396,0.2288,0.3171,0.3919,0.45,0.4859,0.4948,0.4841,0.4602,0.414,0.337,0.2431,0.1582,0.0978,0.0609,0.0394,0.0277,0.0222,0.0181,0.0126,0.0068,0.0027,0.0008,0.0002,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0]},{"id":"EX-LN-05","from":"EX-3PL-USW","to":"Dallas","mode":"LTL","units":260,"p50":4.2,"p90":5.7,"n":192,"dens":[0.0,0.0,0.0,0.0,0.0001,0.0005,0.0015,0.0038,0.008,0.0161,0.0329,0.0633,0.1064,0.1533,0.1965,0.2382,0.2822,0.3196,0.3344,0.3269,0.3149,0.3096,0.303,0.2875,0.2692,0.2528,0.2299,0.1926,0.147,0.1063,0.0786,0.0638,0.0573,0.0528,0.0466,0.0392,0.0335,0.0293,0.0235,0.0153,0.0076,0.0029,0.0011,0.0012,0.0026,0.0046,0.0061,0.0061,0.0056,0.0056,0.0062]},{"id":"EX-LN-06","from":"EX-3PL-USW","to":"Mexico City","mode":"air-parcel","units":197,"p50":4.9,"p90":6.5,"n":145,"dens":[0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0002,0.001,0.004,0.0124,0.0289,0.0526,0.0786,0.1046,0.1341,0.1724,0.2221,0.2787,0.3278,0.3524,0.3492,0.3317,0.3138,0.2988,0.2844,0.2683,0.2466,0.2164,0.1802,0.145,0.1165,0.0964,0.0818,0.0683,0.0543,0.0419,0.0324,0.0249,0.0188,0.0139,0.0108,0.0095,0.0091,0.0079,0.0053,0.0027,0.001,0.0003]},{"id":"EX-LN-07","from":"EX-3PL-USE","to":"Boston","mode":"FTL","units":157,"p50":2.7,"p90":4.0,"n":118,"dens":[0.0,0.0,0.0001,0.0008,0.0035,0.0123,0.0346,0.0801,0.1565,0.2612,0.3757,0.4715,0.5237,0.5214,0.4718,0.3999,0.3349,0.2859,0.24,0.1872,0.137,0.1035,0.0871,0.0769,0.063,0.0444,0.026,0.0135,0.0086,0.0092,0.0113,0.0126,0.0128,0.0121,0.0099,0.0065,0.0031,0.0011,0.0003,0.0001,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0]},{"id":"EX-LN-08","from":"EX-3PL-USE","to":"Chicago","mode":"parcel","units":122,"p50":2.5,"p90":3.7,"n":93,"dens":[0.0,0.0001,0.0005,0.0027,0.0107,0.0326,0.0776,0.148,0.2368,0.3335,0.4266,0.4961,0.5186,0.4909,0.4376,0.3839,0.3328,0.278,0.224,0.1791,0.1408,0.1035,0.0688,0.0411,0.0217,0.0096,0.0034,0.0009,0.0002,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0]},{"id":"EX-LN-09","from":"EX-3PL-USE","to":"Atlanta","mode":"LTL","units":231,"p50":3.9,"p90":6.1,"n":176,"dens":[0.0,0.0,0.0,0.0001,0.0005,0.0022,0.007,0.0173,0.0345,0.057,0.0819,0.111,0.1506,0.202,0.2546,0.2938,0.3137,0.3162,0.3028,0.2791,0.2586,0.2499,0.2474,0.2388,0.2185,0.1912,0.1659,0.1472,0.1333,0.1206,0.108,0.0946,0.0783,0.0609,0.0479,0.0428,0.0427,0.0413,0.035,0.025,0.0151,0.0078,0.0033,0.0011,0.0003,0.0001,0.0,0.0,0.0,0.0,0.0]},{"id":"EX-LN-10","from":"EX-3PL-USE","to":"Miami","mode":"parcel","units":123,"p50":2.6,"p90":3.8,"n":92,"dens":[0.0,0.0,0.0002,0.0014,0.0063,0.0214,0.0571,0.1227,0.2192,0.3331,0.4369,0.5035,0.5255,0.5124,0.4715,0.4039,0.3168,0.2303,0.1633,0.1182,0.0852,0.0596,0.0466,0.0497,0.0617,0.0696,0.0662,0.0528,0.0351,0.0188,0.0078,0.0025,0.0006,0.0001,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0]},{"id":"EX-LN-11","from":"EX-3PL-USE","to":"Toronto","mode":"LTL","units":133,"p50":3.4,"p90":6.2,"n":97,"dens":[0.0,0.0,0.0,0.0001,0.0004,0.002,0.0079,0.0246,0.0608,0.1205,0.1947,0.264,0.3148,0.3476,0.362,0.3504,0.3132,0.2678,0.2334,0.216,0.2068,0.194,0.1739,0.1525,0.1368,0.1254,0.1098,0.0872,0.0667,0.059,0.0649,0.0741,0.0746,0.0624,0.0445,0.0322,0.0316,0.0389,0.0437,0.0392,0.0275,0.0159,0.0096,0.0093,0.0113,0.0117,0.0089,0.0049,0.002,0.0006,0.0001]},{"id":"EX-LN-12","from":"EX-3PL-USE","to":"Bogota","mode":"air-parcel","units":80,"p50":5.6,"p90":8.7,"n":59,"dens":[0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0002,0.0009,0.004,0.0131,0.0314,0.0561,0.0756,0.0814,0.0842,0.1079,0.1654,0.2442,0.3163,0.3563,0.3534,0.3158,0.2639,0.2176,0.1849,0.1594,0.1333,0.1101,0.1019,0.114,0.1376,0.156,0.1566,0.1386,0.1127,0.0919,0.0816,0.0758,0.0661,0.052,0.04,0.0344,0.0354,0.0418,0.0505]},{"id":"EX-LN-13","from":"EX-3PL-USE","to":"Sao Paulo","mode":"air-parcel","units":129,"p50":8.0,"p90":11.4,"n":96,"dens":[0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0001,0.0005,0.002,0.0061,0.0132,0.0207,0.0238,0.0204,0.0149,0.0134,0.0185,0.0295,0.0465,0.0707,0.1,0.1257,0.1395,0.142,0.1405,0.1391,0.1359,0.1288,0.1188,0.1096,0.1094,0.1272,0.1628,0.2013,0.2249,0.2272,0.2152,0.1974,0.1788,0.1627,0.1508,0.1399,0.1245,0.1037,0.0828,0.0674]},{"id":"EX-LN-14","from":"EX-3PL-NL","to":"Paris","mode":"LTL","units":187,"p50":3.5,"p90":5.3,"n":140,"dens":[0.0,0.0,0.0,0.0,0.0001,0.0007,0.0031,0.0105,0.0275,0.057,0.098,0.1476,0.2048,0.2688,0.335,0.3929,0.4274,0.426,0.3893,0.332,0.2726,0.2241,0.191,0.1698,0.1539,0.1387,0.1217,0.1003,0.0761,0.0552,0.0428,0.0382,0.0369,0.0352,0.0311,0.0239,0.0155,0.0096,0.009,0.0128,0.0169,0.0179,0.016,0.0133,0.0111,0.0095,0.009,0.0091,0.0082,0.0057,0.0029]},{"id":"EX-LN-15","from":"EX-3PL-NL","to":"Berlin","mode":"FTL","units":204,"p50":2.8,"p90":3.9,"n":149,"dens":[0.0,0.0001,0.0008,0.0035,0.0124,0.0336,0.073,0.1323,0.2088,0.2939,0.3694,0.4131,0.4167,0.3956,0.3755,0.3694,0.3682,0.3536,0.3153,0.2552,0.1829,0.1143,0.0653,0.0411,0.0331,0.0288,0.0225,0.0161,0.0135,0.015,0.0176,0.0183,0.0161,0.0121,0.0075,0.0037,0.0014,0.0004,0.0001,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0]},{"id":"EX-LN-16","from":"EX-3PL-NL","to":"Madrid","mode":"LTL","units":134,"p50":4.1,"p90":5.8,"n":99,"dens":[0.0,0.0,0.0001,0.0003,0.0013,0.0037,0.0083,0.0148,0.0235,0.0373,0.0606,0.0946,0.1334,0.1678,0.1952,0.2218,0.2506,0.2777,0.3022,0.3259,0.3428,0.3446,0.3297,0.3003,0.2603,0.2166,0.1762,0.1437,0.1213,0.1072,0.096,0.0826,0.0655,0.046,0.0279,0.0163,0.015,0.0237,0.0362,0.0431,0.0388,0.0264,0.0135,0.0052,0.0015,0.0003,0.0001,0.0,0.0,0.0,0.0]},{"id":"EX-LN-17","from":"EX-3PL-NL","to":"Milan","mode":"LTL","units":174,"p50":3.5,"p90":5.3,"n":133,"dens":[0.0,0.0,0.0002,0.0011,0.0039,0.0109,0.0242,0.045,0.075,0.116,0.1673,0.2207,0.2632,0.2883,0.3014,0.3093,0.3119,0.3065,0.2958,0.2846,0.2721,0.253,0.2264,0.1987,0.1727,0.1443,0.1133,0.0863,0.0663,0.0495,0.0336,0.021,0.014,0.0106,0.0084,0.0073,0.0079,0.0089,0.008,0.0055,0.003,0.0023,0.0051,0.013,0.0258,0.0392,0.0456,0.0411,0.0289,0.0159,0.0067]},{"id":"EX-LN-18","from":"EX-3PL-NL","to":"Warsaw","mode":"parcel","units":149,"p50":2.4,"p90":3.4,"n":110,"dens":[0.0,0.0,0.0002,0.0011,0.0054,0.0199,0.0579,0.1348,0.2557,0.4004,0.5256,0.594,0.5997,0.5582,0.4825,0.384,0.2832,0.2,0.1409,0.1013,0.0742,0.0546,0.0393,0.0273,0.0192,0.0148,0.0116,0.0078,0.0041,0.0016,0.0004,0.0001,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0]},{"id":"EX-LN-19","from":"EX-3PL-NL","to":"Stockholm","mode":"LTL","units":131,"p50":4.1,"p90":6.0,"n":98,"dens":[0.0,0.0,0.0,0.0,0.0002,0.0013,0.0052,0.0159,0.037,0.0676,0.1014,0.1314,0.1563,0.1808,0.2099,0.2384,0.2538,0.2524,0.2465,0.2478,0.2541,0.2562,0.2526,0.2512,0.2575,0.2622,0.2472,0.2082,0.1619,0.1262,0.1034,0.0887,0.0792,0.0724,0.0635,0.0499,0.0345,0.0218,0.0147,0.0127,0.0127,0.011,0.0073,0.0035,0.0012,0.0003,0.0001,0.0,0.0,0.0,0.0]},{"id":"EX-LN-20","from":"EX-3PL-NL","to":"Dubai","mode":"air-parcel","units":152,"p50":7.0,"p90":9.6,"n":116,"dens":[0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0002,0.0007,0.0023,0.0056,0.011,0.0192,0.033,0.0559,0.0874,0.1222,0.1542,0.1803,0.2005,0.2124,0.2125,0.2041,0.1983,0.2031,0.2152,0.2236,0.2196,0.2033,0.1828,0.1688,0.1674,0.1744,0.1769,0.1652,0.1428,0.1233,0.1145,0.1101,0.0993,0.079,0.0544,0.0337]},{"id":"EX-LN-21","from":"EX-3PL-UK","to":"Dublin","mode":"LTL","units":341,"p50":3.4,"p90":4.8,"n":257,"dens":[0.0,0.0,0.0002,0.001,0.0032,0.0084,0.0195,0.0407,0.0752,0.1221,0.1752,0.2265,0.2707,0.3063,0.3362,0.3644,0.3873,0.3931,0.3726,0.3301,0.28,0.2348,0.1991,0.1707,0.1447,0.1178,0.0904,0.0669,0.0517,0.0446,0.0412,0.0366,0.0293,0.0203,0.0118,0.0055,0.002,0.0006,0.0002,0.0004,0.0013,0.0026,0.004,0.0044,0.0035,0.002,0.0008,0.0002,0.0001,0.0,0.0]},{"id":"EX-LN-22","from":"EX-3PL-UK","to":"Edinburgh","mode":"FTL","units":344,"p50":2.7,"p90":3.8,"n":253,"dens":[0.0,0.0001,0.0003,0.0016,0.0062,0.0193,0.049,0.1043,0.1877,0.2896,0.3903,0.4689,0.511,0.5131,0.4812,0.4264,0.3613,0.297,0.2374,0.1821,0.1339,0.0979,0.0742,0.0574,0.0428,0.0296,0.0188,0.0107,0.0052,0.0021,0.0006,0.0002,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0]},{"id":"EX-LN-23","from":"EX-3PL-UK","to":"Oslo","mode":"parcel","units":224,"p50":2.7,"p90":3.9,"n":167,"dens":[0.0,0.0,0.0001,0.0004,0.0022,0.009,0.0285,0.0712,0.1456,0.2516,0.377,0.4974,0.5825,0.6063,0.5597,0.4612,0.3493,0.2558,0.193,0.1578,0.1367,0.1133,0.0822,0.0505,0.0272,0.0148,0.0099,0.0075,0.0051,0.0027,0.001,0.0003,0.0001,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0]},{"id":"EX-LN-24","from":"EX-3PL-UK","to":"Copenhagen","mode":"LTL","units":343,"p50":4.3,"p90":6.2,"n":261,"dens":[0.0,0.0,0.0,0.0,0.0,0.0,0.0001,0.0005,0.0021,0.0069,0.018,0.0382,0.0693,0.1111,0.16,0.2092,0.2539,0.2922,0.3196,0.3308,0.328,0.3201,0.3126,0.3018,0.2807,0.2479,0.2096,0.1748,0.1491,0.1327,0.1213,0.1102,0.0982,0.0864,0.0734,0.0573,0.0402,0.0264,0.0175,0.0117,0.008,0.0067,0.0084,0.0114,0.0127,0.0107,0.007,0.0042,0.0035,0.0041,0.0044]},{"id":"EX-LN-25","from":"EX-3PL-SG","to":"Sydney","mode":"air-parcel","units":205,"p50":7.1,"p90":9.7,"n":152,"dens":[0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0002,0.0007,0.0023,0.0057,0.0107,0.016,0.021,0.0271,0.0366,0.0502,0.0675,0.0876,0.1077,0.1247,0.1377,0.1486,0.1609,0.1773,0.1982,0.2203,0.2362,0.2387,0.2295,0.2162,0.2028,0.1885,0.1759,0.1701,0.1698,0.1667,0.1552,0.1385,0.1241,0.1148,0.1086,0.1028,0.0964,0.0907,0.086]},{"id":"EX-LN-26","from":"EX-3PL-SG","to":"Tokyo","mode":"air-parcel","units":187,"p50":6.8,"p90":10.8,"n":136,"dens":[0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0001,0.0004,0.0013,0.0033,0.0063,0.0088,0.0103,0.0124,0.0185,0.0302,0.0462,0.0644,0.084,0.1043,0.1218,0.1326,0.1404,0.1549,0.1776,0.196,0.1978,0.1843,0.1677,0.1591,0.1609,0.1669,0.1702,0.1706,0.1724,0.1759,0.1769,0.1726,0.1618,0.1422,0.1149,0.0879,0.0698,0.0634,0.0649,0.0669,0.0636,0.0548,0.0452]},{"id":"EX-LN-27","from":"EX-3PL-SG","to":"Seoul","mode":"air-parcel","units":149,"p50":6.5,"p90":9.5,"n":112,"dens":[0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0001,0.0006,0.0026,0.0085,0.0212,0.0404,0.061,0.0765,0.0847,0.0893,0.0964,0.1099,0.1292,0.1497,0.1673,0.1833,0.1999,0.2144,0.2222,0.2228,0.2213,0.2192,0.2091,0.1835,0.1488,0.1217,0.11,0.1092,0.1141,0.1231,0.1332,0.1377,0.1303,0.1124,0.0937,0.0832,0.0797,0.076,0.0683,0.0574]},{"id":"EX-LN-28","from":"EX-3PL-SG","to":"Mumbai","mode":"air-parcel","units":167,"p50":6.0,"p90":8.1,"n":121,"dens":[0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0001,0.0003,0.0013,0.004,0.0101,0.0214,0.04,0.0664,0.0991,0.1368,0.1793,0.2234,0.263,0.2941,0.3166,0.331,0.3346,0.3236,0.3006,0.2761,0.258,0.2407,0.2124,0.1714,0.1292,0.0987,0.0849,0.0856,0.093,0.0952,0.0827,0.0585,0.0356,0.0244,0.024,0.0262,0.0243,0.0177]},{"id":"EX-LN-29","from":"EX-3PL-SG","to":"Jakarta","mode":"air-parcel","units":143,"p50":4.0,"p90":5.3,"n":109,"dens":[0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0003,0.0012,0.0041,0.0117,0.0277,0.058,0.1095,0.1844,0.2737,0.3572,0.412,0.4255,0.4085,0.3873,0.3754,0.3605,0.3268,0.2774,0.2293,0.1922,0.1612,0.1282,0.0928,0.0623,0.0408,0.0273,0.0193,0.0151,0.0125,0.0092,0.0053,0.0023,0.0007,0.0002,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0]},{"id":"EX-LN-30","from":"EX-3PL-SG","to":"Manila","mode":"air-parcel","units":102,"p50":4.6,"p90":6.9,"n":76,"dens":[0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0001,0.0005,0.0022,0.0075,0.0192,0.0383,0.0609,0.0817,0.1015,0.1297,0.1761,0.2379,0.2992,0.3464,0.3769,0.3884,0.3728,0.3276,0.2654,0.2062,0.1641,0.1424,0.1338,0.1274,0.119,0.1096,0.0983,0.0837,0.0688,0.0574,0.0496,0.0424,0.0347,0.0283,0.0242,0.0221,0.0205,0.018,0.0148,0.0142,0.0182,0.0244,0.0273,0.0239]},{"id":"EX-LN-31","from":"EX-3PL-SG","to":"Bangkok","mode":"air-parcel","units":118,"p50":4.7,"p90":6.9,"n":88,"dens":[0.0,0.0,0.0,0.0,0.0,0.0,0.0002,0.0008,0.003,0.0085,0.0191,0.0363,0.0611,0.0935,0.132,0.173,0.2116,0.2413,0.2571,0.261,0.2599,0.2584,0.2556,0.2499,0.2411,0.2303,0.2189,0.207,0.1914,0.1698,0.1474,0.1339,0.133,0.1391,0.1412,0.1306,0.1076,0.0793,0.0526,0.0325,0.0214,0.0166,0.013,0.0084,0.0041,0.0016,0.001,0.0021,0.0053,0.0096,0.0127]}]},"treemap":{"children":[{"id":"FAMILY CAM","children":[{"id":"EX-SKU-CAM-07","rev":65.7,"ret":6.8},{"id":"EX-SKU-CAM-12","rev":135.4,"ret":1.3},{"id":"EX-SKU-CAM-01","rev":78.4,"ret":1.15},{"id":"EX-SKU-CAM-03","rev":93.1,"ret":0.9},{"id":"EX-SKU-CAM-05","rev":87.4,"ret":1.21}]},{"id":"FAMILY SNS","children":[{"id":"EX-SKU-SNS-03","rev":81.4,"ret":3.4},{"id":"EX-SKU-SNS-08","rev":75.9,"ret":1.19},{"id":"EX-SKU-SNS-01","rev":52.8,"ret":1.28}]},{"id":"FAMILY ACC","children":[{"id":"EX-SKU-ACC-04","rev":53.3,"ret":1.21},{"id":"EX-SKU-ACC-12","rev":66.4,"ret":5.1},{"id":"EX-SKU-ACC-01","rev":100.3,"ret":0.88}]},{"id":"FAMILY ACS","children":[{"id":"EX-SKU-ACS-02","rev":38.7,"ret":2.2},{"id":"EX-SKU-ACS-05","rev":45.2,"ret":1.12},{"id":"EX-SKU-ACS-09","rev":26.1,"ret":1.37}]}],"networkReturn":2.0,"action":5.0},"globe":{"destinations":[{"id":"EX-DST-01","city":"Seattle","lat":47.6,"lon":-122.3,"from":"EX-3PL-USW","share":0.2},{"id":"EX-DST-02","city":"Vancouver","lat":49.3,"lon":-123.1,"from":"EX-3PL-USW","share":0.08},{"id":"EX-DST-03","city":"Phoenix","lat":33.4,"lon":-112.1,"from":"EX-3PL-USW","share":0.14},{"id":"EX-DST-04","city":"Denver","lat":39.7,"lon":-105.0,"from":"EX-3PL-USW","share":0.16},{"id":"EX-DST-05","city":"Dallas","lat":32.8,"lon":-96.8,"from":"EX-3PL-USW","share":0.22},{"id":"EX-DST-06","city":"Mexico City","lat":19.4,"lon":-99.1,"from":"EX-3PL-USW","share":0.2},{"id":"EX-DST-07","city":"Boston","lat":42.4,"lon":-71.1,"from":"EX-3PL-USE","share":0.14},{"id":"EX-DST-08","city":"Chicago","lat":41.9,"lon":-87.6,"from":"EX-3PL-USE","share":0.24},{"id":"EX-DST-09","city":"Atlanta","lat":33.7,"lon":-84.4,"from":"EX-3PL-USE","share":0.18},{"id":"EX-DST-10","city":"Miami","lat":25.8,"lon":-80.2,"from":"EX-3PL-USE","share":0.14},{"id":"EX-DST-11","city":"Toronto","lat":43.7,"lon":-79.4,"from":"EX-3PL-USE","share":0.12},{"id":"EX-DST-12","city":"Bogota","lat":4.7,"lon":-74.1,"from":"EX-3PL-USE","share":0.08},{"id":"EX-DST-13","city":"Sao Paulo","lat":-23.5,"lon":-46.6,"from":"EX-3PL-USE","share":0.1},{"id":"EX-DST-14","city":"Paris","lat":48.9,"lon":2.4,"from":"EX-3PL-NL","share":0.2},{"id":"EX-DST-15","city":"Berlin","lat":52.5,"lon":13.4,"from":"EX-3PL-NL","share":0.18},{"id":"EX-DST-16","city":"Madrid","lat":40.4,"lon":-3.7,"from":"EX-3PL-NL","share":0.14},{"id":"EX-DST-17","city":"Milan","lat":45.5,"lon":9.2,"from":"EX-3PL-NL","share":0.14},{"id":"EX-DST-18","city":"Warsaw","lat":52.2,"lon":21.0,"from":"EX-3PL-NL","share":0.12},{"id":"EX-DST-19","city":"Stockholm","lat":59.3,"lon":18.1,"from":"EX-3PL-NL","share":0.1},{"id":"EX-DST-20","city":"Dubai","lat":25.2,"lon":55.3,"from":"EX-3PL-NL","share":0.12},{"id":"EX-DST-21","city":"Dublin","lat":53.3,"lon":-6.3,"from":"EX-3PL-UK","share":0.3},{"id":"EX-DST-22","city":"Edinburgh","lat":55.9,"lon":-3.2,"from":"EX-3PL-UK","share":0.25},{"id":"EX-DST-23","city":"Oslo","lat":59.9,"lon":10.8,"from":"EX-3PL-UK","share":0.2},{"id":"EX-DST-24","city":"Copenhagen","lat":55.7,"lon":12.6,"from":"EX-3PL-UK","share":0.25},{"id":"EX-DST-25","city":"Sydney","lat":-33.9,"lon":151.2,"from":"EX-3PL-SG","share":0.18},{"id":"EX-DST-26","city":"Tokyo","lat":35.7,"lon":139.7,"from":"EX-3PL-SG","share":0.2},{"id":"EX-DST-27","city":"Seoul","lat":37.6,"lon":127.0,"from":"EX-3PL-SG","share":0.14},{"id":"EX-DST-28","city":"Mumbai","lat":19.1,"lon":72.9,"from":"EX-3PL-SG","share":0.16},{"id":"EX-DST-29","city":"Jakarta","lat":-6.2,"lon":106.8,"from":"EX-3PL-SG","share":0.12},{"id":"EX-DST-30","city":"Manila","lat":14.6,"lon":121.0,"from":"EX-3PL-SG","share":0.1},{"id":"EX-DST-31","city":"Bangkok","lat":13.8,"lon":100.5,"from":"EX-3PL-SG","share":0.1}],"sites":[{"id":"EX-3PL-USW","color":"#4fc3ff","lat":35.6,"lon":-113.5,"verified":true},{"id":"EX-3PL-USE","color":"#a98bff","lat":40.6,"lon":-74.4,"verified":true},{"id":"EX-3PL-NL","color":"#ff7ac8","lat":51.0,"lon":8.0,"verified":true},{"id":"EX-3PL-UK","color":"#e6e6e6","lat":55.0,"lon":-4.5,"verified":false},{"id":"EX-3PL-SG","color":"#5ff0e0","lat":1.35,"lon":103.9,"verified":true}]}}</script>
+<script>
+/* MODE: SANITIZED (M-01 open). Gallery charts, dependency-free (no network libraries). EXAMPLE data only. */
+(function () {
+  var D = JSON.parse(document.getElementById('gdata').textContent);
+  var C = { tx: '#f2f2f2', dim: '#8a96a6', cy: '#6fd3ff', amb: '#ffb000', red: '#ff4d4d', ok: '#3ddc84', line: '#1a2028' };
+  var reduce = matchMedia('(prefers-reduced-motion: reduce)').matches;
+  var SITE = {}; D.sites.forEach(function (s) { SITE[s.id] = s; });
+  document.getElementById('asof').textContent = D.meta.asOf;
+  function esc(s) { return String(s).replace(/&/g, '&amp;').replace(/</g, '&lt;').replace(/"/g, '&quot;'); }
+  function T(x, y, t, fs, col, a, w, extra) { return '<text x="' + (+x).toFixed(1) + '" y="' + (+y).toFixed(1) + '" font-size="' + fs + '" fill="' + (col || C.tx) + '" text-anchor="' + (a || 'start') + '" font-weight="' + (w || 700) + '" letter-spacing="0.04em"' + (extra || '') + '>' + esc(t) + '</text>'; }
+  function fmt(n) { return Math.round(n).toLocaleString('en-US'); }
+  function tipAttr(lines) { return ' data-tip="' + esc(lines.join('\n')) + '"'; }
+  /* ---- tooltip + isolation (shared) ---- */
+  var tip = document.getElementById('tip');
+  document.addEventListener('mousemove', function (e) {
+    var el = e.target.closest && e.target.closest('[data-tip]');
+    if (!el) { tip.style.display = 'none'; return; }
+    tip.innerHTML = ''; el.getAttribute('data-tip').split('\n').forEach(function (l, i) { var d = document.createElement(i ? 'div' : 'b'); d.textContent = l; tip.appendChild(d); if (!i) tip.appendChild(document.createElement('br')); });
+    tip.style.display = 'block';
+    var x = e.clientX + 16, y = e.clientY + 14, r = tip.getBoundingClientRect();
+    if (x + r.width > innerWidth - 8) x = e.clientX - r.width - 16; if (y + r.height > innerHeight - 8) y = e.clientY - r.height - 14;
+    tip.style.left = x + 'px'; tip.style.top = y + 'px';
+  });
+  var ISO = {};
+  function applyIso(id) { var svg = document.getElementById(id), k = ISO[id]; if (!svg) return;
+    [].forEach.call(svg.querySelectorAll('[data-k]'), function (el) { el.classList.toggle('dim', !!k && el.getAttribute('data-k').split(' ').indexOf(k) < 0); }); }
+  function bindIso(id, onChange) {
+    var svg = document.getElementById(id);
+    svg.addEventListener('click', function (e) {
+      var el = e.target.closest('[data-k]');
+      var k = el ? el.getAttribute('data-k').split(' ')[0] : null;
+      if (el && el.hasAttribute('data-act')) return;
+      ISO[id] = (k && ISO[id] !== k) ? k : null; applyIso(id); if (onChange) onChange(ISO[id]);
+    });
+  }
+  /* ================= 1 · SANKEY ================= */
+  var sk = { focus: false };
+  function sankey() {
+    var S = D.sankey, W = 1600, H = 760, top = 46, bot = 744, nw = 16, pad = 18;
+    var nodes = S.nodes.map(function (n) { return { id: n.id, col: n.col, color: n.color, inV: 0, outV: 0 }; });
+    var links = S.links.map(function (l) { return { s: l[0], t: l[1], v: l[2] }; });
+    if (sk.focus) {
+      var outc = nodes.filter(function (n) { return n.col === 1; }).map(function (n) { return n.id; });
+      links = links.filter(function (l) { return (outc.indexOf(l.s) >= 0 && l.t === 'RETURNED') || l.s === 'RETURNED'; });
+      var used = {}; links.forEach(function (l) { used[l.s] = used[l.t] = 1; });
+      nodes = nodes.filter(function (n) { return used[n.id]; });
+    }
+    var by = {}; nodes.forEach(function (n) { by[n.id] = n; });
+    links.forEach(function (l) { by[l.s].outV += l.v; by[l.t].inV += l.v; });
+    var cols = []; nodes.forEach(function (n) { n.v = Math.max(n.inV, n.outV); (cols[n.col] = cols[n.col] || []).push(n); });
+    cols = cols.filter(Boolean);
+    var k = Infinity; cols.forEach(function (c) { var s = c.reduce(function (a, n) { return a + n.v; }, 0); k = Math.min(k, (bot - top - pad * (c.length - 1) - c.length * 2) / s); });
+    var xs = cols.length === 4 ? [40, 480, 920, 1300] : [60, 700, 1210];
+    var TITLES = cols.length === 4 ? ['3PL SITE · 7 DAYS', 'OUTCOME · TOTAL & CONTROLLABLE', 'AFTER DELIVERY', 'RETURN REASON'] : ['OUTCOME (RETURNED ONLY)', 'RETURNED', 'RETURN REASON'];
+    var o = '';
+    cols.forEach(function (c, ci) {
+      var y = top; c.forEach(function (n) { n.x = xs[ci]; n.y = y; n.h = Math.max(2, n.v * k); n.so = 0; n.to = 0; y += n.h + pad; });
+      var used = y - pad - top, off = (bot - top - used) / 2; c.forEach(function (n) { n.y += Math.max(0, off); });
+      o += T(xs[ci], 24, TITLES[ci], 13, C.dim, 'start', 800);
+    });
+    links.sort(function (a, b) { return by[a.t].y - by[b.t].y; });
+    var bands = '';
+    links.forEach(function (l) {
+      var a = by[l.s], b = by[l.t], th = Math.max(1, l.v * k);
+      var sy = a.y + a.so, ty = b.y + b.to; a.so += th; b.to += th;
+      var x0 = a.x + nw, x1 = b.x, mx = (x0 + x1) / 2;
+      var d = 'M' + x0 + ' ' + sy.toFixed(1) + ' C' + mx + ' ' + sy.toFixed(1) + ' ' + mx + ' ' + ty.toFixed(1) + ' ' + x1 + ' ' + ty.toFixed(1) + ' L' + x1 + ' ' + (ty + th).toFixed(1) + ' C' + mx + ' ' + (ty + th).toFixed(1) + ' ' + mx + ' ' + (sy + th).toFixed(1) + ' ' + x0 + ' ' + (sy + th).toFixed(1) + ' Z';
+      bands += '<path class="band" data-k="' + esc(l.s + ' ' + l.t) + '" d="' + d + '" fill="' + a.color + '" opacity=".42"' + tipAttr([l.s + ' → ' + l.t, fmt(l.v) + ' orders · ' + (100 * l.v / S.total).toFixed(2) + '% of all orders', 'EXAMPLE · ' + S.window]) + '/>';
+    });
+    var nd = '';
+    nodes.forEach(function (n) {
+      var rel = links.filter(function (l) { return l.s === n.id || l.t === n.id; }).map(function (l) { return l.s === n.id ? l.t : l.s; });
+      var keys = [n.id].concat(rel).join(' ');
+      nd += '<rect data-k="' + esc(keys) + '" x="' + n.x + '" y="' + n.y.toFixed(1) + '" width="' + nw + '" height="' + n.h.toFixed(1) + '" fill="' + n.color + '" filter="url(#gl)"' + tipAttr([n.id, fmt(n.v) + ' orders · ' + (100 * n.v / S.total).toFixed(2) + '% of all orders', n.id.indexOf('OUTSIDE') >= 0 ? 'Counts in total score · tagged outside the 3PL’s control' : (n.id.indexOf('CONTROLLABLE') >= 0 || n.id.indexOf('(3PL)') >= 0 ? 'Controllable · caused by the 3PL' : 'EXAMPLE')]) + '/>';
+      var lx = n.x + nw + 8, cy = n.y + n.h / 2 + 5, lab = n.id + ' · ' + fmt(n.v);
+      nd += '<g data-k="' + esc(keys) + '">' + T(lx, cy, lab, 13.5, n.col === 0 ? n.color : C.tx, 'start', 800) + '</g>';
+    });
+    var sum = T(1590, 24, 'EXAMPLE · ' + S.window + ' · RETURNS ' + (100 * S.returned / S.total).toFixed(1) + '% TOTAL / ' + (100 * S.ctrlReturned / S.total).toFixed(2) + '% CONTROLLABLE', 13, C.amb, 'end', 800);
+    document.getElementById('v1').innerHTML = bands + nd + sum; applyIso('v1');
+  }
+  /* ================= 2 · ROSLING BUBBLES ================= */
+  var bb = { t: 3, playing: false, raf: 0 };
+  function bubbles() {
+    var B = D.bubbles, X0 = 110, X1 = 1180, Y0 = 40, Y1 = 680, all = [];
+    B.series.forEach(function (s) { s.pts.forEach(function (p) { all.push(p); }); });
+    var cx0 = Math.floor(Math.min.apply(null, all.map(function (p) { return p.costIdx; })) - 4), cx1 = Math.ceil(Math.max.apply(null, all.map(function (p) { return p.costIdx; })) + 4);
+    var oy0 = Math.min(97, Math.floor(Math.min.apply(null, all.map(function (p) { return p.otif; })) * 2) / 2 - 0.5), oy1 = 100;
+    var maxO = Math.max.apply(null, all.map(function (p) { return p.orders; }));
+    var sx = function (v) { return X0 + (v - cx0) / (cx1 - cx0) * (X1 - X0); }, sy = function (v) { return Y1 - (v - oy0) / (oy1 - oy0) * (Y1 - Y0); };
+    var o = '';
+    for (var v = Math.ceil(cx0 / 5) * 5; v <= cx1; v += 5) o += '<line x1="' + sx(v) + '" x2="' + sx(v) + '" y1="' + Y0 + '" y2="' + Y1 + '" stroke="' + C.line + '"/>' + T(sx(v), Y1 + 24, String(v), 12, C.dim, 'middle');
+    for (var u = oy0; u <= oy1 + 1e-6; u += 0.5) o += '<line x1="' + X0 + '" x2="' + X1 + '" y1="' + sy(u) + '" y2="' + sy(u) + '" stroke="' + C.line + '"/>' + T(X0 - 10, sy(u) + 4, u.toFixed(1) + '%', 12, C.dim, 'end');
+    o += T((X0 + X1) / 2, Y1 + 52, 'COST PER ORDER · INDEX (NETWORK LANE AVG = 100) · NO DOLLARS', 12.5, C.dim, 'middle', 800);
+    o += T(X0 - 70, Y0 - 16, 'OTIF % (BUBBLE = TOTAL · RING = CONTROLLABLE)', 12.5, C.dim, 'start', 800);
+    o += '<line x1="' + X0 + '" x2="' + X1 + '" y1="' + sy(B.target) + '" y2="' + sy(B.target) + '" stroke="' + C.amb + '" stroke-dasharray="6 5" stroke-width="1.5"/>' + T(X1 - 4, sy(B.target) - 6, 'TARGET 98% (EXAMPLE TARGET)', 12, C.amb, 'end', 800);
+    o += '<line x1="' + X0 + '" x2="' + X1 + '" y1="' + sy(B.floor) + '" y2="' + sy(B.floor) + '" stroke="' + C.red + '" stroke-dasharray="3 5" stroke-width="1.5"/>' + T(X1 - 4, sy(B.floor) + 16, 'FLOOR 97.5% (EXAMPLE)', 12, C.red, 'end', 800);
+    var t = bb.t, i0 = Math.floor(Math.min(t, 2.9999)), f = t - i0, i1 = Math.min(3, i0 + 1);
+    var wk = Math.round(t);
+    o += T(X1 - 10, Y1 - 14, 'WEEK ' + (wk + 1) + ' · ' + B.weeks[wk], 30, '#26313c', 'end', 800);
+    var dots = '', panel = T(1220, 56, '3PL · OTIF TOTAL / CTRL · COST IDX', 12.5, C.dim, 'start', 800);
+    var ser = B.series.slice().sort(function (a, b) { return b.pts[i0].orders - a.pts[i0].orders; });
+    ser.forEach(function (s) {
+      var a = s.pts[i0], b = s.pts[i1], L = function (k) { return a[k] + (b[k] - a[k]) * f; };
+      var x = sx(L('costIdx')), y = sy(L('otif')), yc = sy(L('otifC')), r = 10 + 44 * Math.sqrt(L('orders') / maxO), col = SITE[s.id].color;
+      var trail = s.pts.slice(0, i0 + 1).map(function (p) { return sx(p.costIdx).toFixed(1) + ',' + sy(p.otif).toFixed(1); }).concat([x.toFixed(1) + ',' + y.toFixed(1)]).join(' ');
+      var tp = tipAttr([s.id + (SITE[s.id].verified ? '' : ' · UNVERIFIED'), 'OTIF total ' + L('otif').toFixed(2) + '% · controllable ' + L('otifC').toFixed(2) + '%', 'Cost per order index ' + L('costIdx').toFixed(1) + ' · orders ' + fmt(L('orders')), 'EXAMPLE · week ' + (wk + 1)]);
+      dots += '<g data-k="' + s.id + '"' + tp + '><polyline points="' + trail + '" fill="none" stroke="' + col + '" stroke-opacity=".35" stroke-width="2"/>' +
+        '<line x1="' + x.toFixed(1) + '" x2="' + x.toFixed(1) + '" y1="' + y.toFixed(1) + '" y2="' + yc.toFixed(1) + '" stroke="' + col + '" stroke-opacity=".6" stroke-dasharray="3 3"/>' +
+        '<circle cx="' + x.toFixed(1) + '" cy="' + yc.toFixed(1) + '" r="7" fill="none" stroke="' + col + '" stroke-width="2"/>' +
+        '<circle cx="' + x.toFixed(1) + '" cy="' + y.toFixed(1) + '" r="' + r.toFixed(1) + '" fill="' + col + '" fill-opacity=".28" stroke="' + col + '" stroke-width="2.5" filter="url(#gl)"/></g>';
+    });
+    B.series.forEach(function (s, i) {
+      var p = s.pts[wk], y = 96 + i * 104, col = SITE[s.id].color, warn = p.otif < B.floor ? C.red : p.otif < B.target ? C.amb : C.tx;
+      panel += '<g data-k="' + s.id + '"><rect x="1212" y="' + (y - 26) + '" width="378" height="92" fill="#0d1116"/><rect x="1212" y="' + (y - 26) + '" width="5" height="92" fill="' + col + '"/>' +
+        T(1230, y, s.id + (SITE[s.id].verified ? '' : ' · UNVERIFIED'), 15, col, 'start', 800) + T(1230, y + 28, 'OTIF ' + p.otif.toFixed(2) + '%', 17, warn, 'start', 800) + T(1420, y + 28, 'CTRL ' + p.otifC.toFixed(2) + '%', 14, C.cy, 'start', 800) +
+        T(1230, y + 52, 'COST IDX ' + p.costIdx.toFixed(1) + ' · ORDERS ' + fmt(p.orders), 12, C.dim, 'start', 700) + '</g>';
+    });
+    document.getElementById('v2').innerHTML = o + dots + panel; applyIso('v2');
+    document.getElementById('wkl').textContent = 'WEEK ' + (wk + 1) + ' · ' + B.weeks[wk];
+    document.getElementById('wk').value = t;
+  }
+  function bplay(on) {
+    bb.playing = on; document.getElementById('bplay').textContent = on ? '❚❚ PAUSE' : '▶ PLAY'; cancelAnimationFrame(bb.raf);
+    if (!on) return; if (bb.t >= 3) bb.t = 0; var last = null;
+    function step(ts) { if (last == null) last = ts; bb.t = Math.min(3, bb.t + (ts - last) / 1600); last = ts; bubbles(); if (bb.t < 3 && bb.playing) bb.raf = requestAnimationFrame(step); else bplay(false); }
+    if (reduce) { bb.t = Math.min(3, Math.floor(bb.t) + 1); bubbles(); bplay(false); return; }
+    bb.raf = requestAnimationFrame(step);
+  }
+  /* ================= 3 · CALENDAR HEATMAP ================= */
+  var cal = { scope: 'NETWORK', mode: 'total' };
+  function calColor(v, Cc) { if (v < Cc.floor) return C.red; if (v < Cc.target) return C.amb; var a = Math.max(0, Math.min(1, (v - 98) / 2)); a = Math.pow(a, 1.8); return 'rgb(' + Math.round(8 + 103 * a) + ',' + Math.round(40 + 171 * a) + ',' + Math.round(60 + 195 * a) + ')'; }
+  function calendar() {
+    var Cc = D.calendar, days = D.meta.days, ser = Cc.series[cal.scope][cal.mode], o = '';
+    var d0 = new Date(days[0] + 'T12:00:00Z'), dow0 = (d0.getUTCDay() + 6) % 7, X = 150, Y = 92, cw = 112, ch = 80, g = 6;
+    var MON = ['JAN', 'FEB', 'MAR', 'APR', 'MAY', 'JUN', 'JUL', 'AUG', 'SEP', 'OCT', 'NOV', 'DEC'];
+    ['MON', 'TUE', 'WED', 'THU', 'FRI', 'SAT', 'SUN'].forEach(function (d, i) { o += T(X - 14, Y + i * (ch + g) + ch / 2 + 5, d, 12, C.dim, 'end', 800); });
+    o += T(X, 30, (cal.scope === 'NETWORK' ? 'NETWORK · EX-3PL-UK UNVERIFIED, EXCLUDED' : cal.scope), 15, cal.scope === 'NETWORK' ? C.tx : SITE[cal.scope].color, 'start', 800) + T(X, 52, 'DAILY ON-TIME % · ' + (cal.mode === 'total' ? 'TOTAL (ALL MISSES)' : 'CONTROLLABLE (3PL-CAUSED)'), 12, C.dim, 'start', 800);
+    for (var w = 0; w < 5; w++) o += T(X + w * (cw + g), Y - 14, 'WEEK OF ' + (function () { var d = new Date(d0.getTime() + (w * 7 - dow0) * 864e5); return MON[d.getUTCMonth()] + ' ' + String(d.getUTCDate()).padStart(2, '0'); })(), 11, C.dim, 'start', 800);
+    ser.forEach(function (v, i) {
+      var k = i + dow0, col = Math.floor(k / 7), row = k % 7, x = X + col * (cw + g), y = Y + row * (ch + g), dd = days[i];
+      var f = calColor(v, Cc), dark = v >= Cc.target && v > 99.2;
+      o += '<g data-k="d' + i + '"' + tipAttr([dd + ' · ' + (cal.scope), 'On time ' + v.toFixed(2) + '% (' + cal.mode + ')', 'Other score: ' + Cc.series[cal.scope][cal.mode === 'total' ? 'ctrl' : 'total'][i].toFixed(2) + '% (' + (cal.mode === 'total' ? 'controllable' : 'total') + ')', 'EXAMPLE · target 98% example']) + '><rect x="' + x + '" y="' + y + '" width="' + cw + '" height="' + ch + '" fill="' + f + '"' + (v < Cc.target ? ' filter="url(#gl)"' : '') + '/>' +
+        T(x + 10, y + 22, MON[+dd.slice(5, 7) - 1] + ' ' + dd.slice(8), 12, dark ? '#001018' : C.tx, 'start', 800, ' stroke="none"') + T(x + cw - 10, y + ch - 14, v.toFixed(1), 22, dark ? '#001018' : C.tx, 'end', 800, ' stroke="none"') + '</g>';
+    });
+    var SX = 860, cell = 23;
+    o += T(SX, 40, 'ALL SCOPES · 30 DAYS · CLICK TO SHOW ON THE CALENDAR', 13, C.dim, 'start', 800);
+    ['NETWORK'].concat(D.sites.map(function (s) { return s.id; })).forEach(function (id, j) {
+      var y = 84 + j * 100, s2 = Cc.series[id][cal.mode], on = id === cal.scope, col = id === 'NETWORK' ? C.tx : SITE[id].color;
+      o += '<g data-act="1" data-scope="' + id + '" style="cursor:pointer"><rect x="' + (SX - 10) + '" y="' + (y - 30) + '" width="' + (1600 - SX) + '" height="88" fill="' + (on ? '#101820' : '#06090c') + '" stroke="' + (on ? col : 'none') + '"/>' +
+        T(SX, y - 8, id + (id === 'EX-3PL-UK' ? ' · UNVERIFIED' : ''), 14, col, 'start', 800) + T(1584, y - 8, 'MIN ' + Math.min.apply(null, s2).toFixed(1) + '% · AVG ' + (s2.reduce(function (a, b) { return a + b; }, 0) / s2.length).toFixed(2) + '%', 12, C.dim, 'end', 800);
+      s2.forEach(function (v, i) { o += '<rect x="' + (SX + i * cell).toFixed(1) + '" y="' + (y + 6) + '" width="' + (cell - 3) + '" height="40" fill="' + calColor(v, Cc) + '"/>'; });
+      o += '</g>';
+    });
+    o += T(150, 752, 'CYAN BRIGHTER = HIGHER · AMBER = BELOW 98% EXAMPLE TARGET · RED = BELOW 97.5% EXAMPLE FLOOR', 12, C.dim, 'start', 700);
+    document.getElementById('v3').innerHTML = o; applyIso('v3');
+  }
+  /* ================= 4 · RADIAL ORDER CLOCK ================= */
+  function clock() {
+    var K = D.clock, cx = 560, cy = 384, r0 = 84, bw = 52, o = '';
+    for (var h = 0; h < 24; h += 3) { var a = h / 24 * 2 * Math.PI; o += T(cx + Math.sin(a) * (r0 + bw * 5 + 18), cy - Math.cos(a) * (r0 + bw * 5 + 18) + 5, String(h).padStart(2, '0') + ':00', 13, C.dim, 'middle', 800); }
+    for (var hh = 0; hh < 24; hh++) { var aa = hh / 24 * 2 * Math.PI; o += '<line x1="' + (cx + Math.sin(aa) * r0).toFixed(1) + '" y1="' + (cy - Math.cos(aa) * r0).toFixed(1) + '" x2="' + (cx + Math.sin(aa) * (r0 + bw * 5)).toFixed(1) + '" y2="' + (cy - Math.cos(aa) * (r0 + bw * 5)).toFixed(1) + '" stroke="#0e141a"/>'; }
+    o += T(cx, cy - 6, 'LOCAL', 13, C.dim, 'middle', 800) + T(cx, cy + 14, 'HOUR', 13, C.dim, 'middle', 800);
+    var panel = T(1000, 56, 'ORDERS BY LOCAL HOUR VS CARRIER PICKUP · DAY ' + D.meta.asOf, 13, C.dim, 'start', 800);
+    K.forEach(function (s, i) {
+      var col = SITE[s.id].color, ri = r0 + i * bw + 4, mx = Math.max.apply(null, s.hours), g = '';
+      g += '<circle cx="' + cx + '" cy="' + cy + '" r="' + (ri - 2) + '" fill="none" stroke="#141b22"/>';
+      s.hours.forEach(function (v, h) {
+        var a0 = h / 24 * 2 * Math.PI + 0.02, a1 = (h + 1) / 24 * 2 * Math.PI - 0.02, ro = ri + (bw - 10) * v / mx;
+        var pkh = +s.pickup.slice(0, 2) + +s.pickup.slice(3) / 60, after = h + 1 > pkh;
+        var p = function (a, r) { return (cx + Math.sin(a) * r).toFixed(1) + ' ' + (cy - Math.cos(a) * r).toFixed(1); };
+        g += '<path d="M' + p(a0, ri) + ' L' + p(a0, ro) + ' A' + ro.toFixed(1) + ' ' + ro.toFixed(1) + ' 0 0 1 ' + p(a1, ro) + ' L' + p(a1, ri) + ' A' + ri + ' ' + ri + ' 0 0 0 ' + p(a0, ri) + ' Z" fill="' + col + '" fill-opacity="' + (after ? .3 : .85) + '"' + tipAttr([s.id + ' · ' + String(h).padStart(2, '0') + ':00–' + String(h + 1).padStart(2, '0') + ':00 local', fmt(v) + ' orders' + (after ? ' · after pickup ' + s.pickup + ' → ships next day' : ' · before pickup ' + s.pickup), 'EXAMPLE']) + '/>';
+      });
+      var pk = (+s.pickup.slice(0, 2) + +s.pickup.slice(3) / 60) / 24 * 2 * Math.PI;
+      g += '<line x1="' + (cx + Math.sin(pk) * (ri - 3)).toFixed(1) + '" y1="' + (cy - Math.cos(pk) * (ri - 3)).toFixed(1) + '" x2="' + (cx + Math.sin(pk) * (ri + bw - 6)).toFixed(1) + '" y2="' + (cy - Math.cos(pk) * (ri + bw - 6)).toFixed(1) + '" stroke="#fff" stroke-width="3" filter="url(#gl)"/>';
+      o += '<g data-k="' + s.id + '">' + g + '</g>';
+      var y = 96 + i * 106, pctA = 100 * s.afterCutoff / s.orders, sp = '', smx = mx;
+      s.hours.forEach(function (v, h) { sp += '<rect x="' + (1330 + h * 10.5).toFixed(1) + '" y="' + (y + 50 - 40 * v / smx).toFixed(1) + '" width="8" height="' + (40 * v / smx).toFixed(1) + '" fill="' + col + '" fill-opacity="' + (h + 1 > +s.pickup.slice(0, 2) + +s.pickup.slice(3) / 60 ? .3 : .9) + '"/>'; });
+      panel += '<g data-k="' + s.id + '"><rect x="992" y="' + (y - 26) + '" width="598" height="94" fill="#0d1116"/><rect x="992" y="' + (y - 26) + '" width="5" height="94" fill="' + col + '"/>' +
+        T(1010, y, s.id, 15, col, 'start', 800) + T(1010, y + 26, 'PICKUP ' + s.pickup + ' LOCAL · ' + fmt(s.orders) + ' ORDERS', 13, C.tx, 'start', 800) +
+        T(1010, y + 50, fmt(s.afterCutoff) + ' AFTER PICKUP (' + pctA.toFixed(0) + '%) → NEXT DAY', 12.5, pctA > 25 ? C.amb : C.dim, 'start', 800) + sp + '</g>';
+    });
+    o += T(1000, 640, 'RINGS INSIDE → OUT: ' + K.map(function (s) { return s.id.slice(7); }).join(' · '), 12.5, C.dim, 'start', 700) + T(1000, 664, 'WHITE TICK = CARRIER PICKUP · FADED = AFTER PICKUP (SHIPS NEXT DAY)', 12.5, C.dim, 'start', 700);
+    document.getElementById('v4').innerHTML = o + panel; applyIso('v4');
+  }
+  /* ================= 5 · CHORD 3PL → REGION ================= */
+  function chord() {
+    var Ch = D.chord, cx = 560, cy = 386, R = 290, aw = 18, gap = 0.035, o = '';
+    var tot = Ch.flows.reduce(function (a, f) { return a + f[2]; }, 0);
+    var groups = [], st = {};
+    function lay(list, a0, a1, side) {
+      var span = a1 - a0 - gap * (list.length - 1), a = a0;
+      list.forEach(function (g) { var v = Ch.flows.filter(function (f) { return f[side] === g.id; }).reduce(function (s, f) { return s + f[2]; }, 0); g.v = v; g.a0 = a; g.a1 = a + span * v / tot; g.cur = g.a0; a = g.a1 + gap; groups.push(g); st[g.id] = g; });
+    }
+    lay(D.sites.map(function (s) { return { id: s.id, color: s.color, side: 0 }; }), Math.PI + 0.06, 2 * Math.PI - 0.06, 0);
+    lay(Ch.regions.map(function (r) { return { id: r.id, color: r.color, side: 1 }; }), 0.06, Math.PI - 0.06, 1);
+    var P = function (a, r) { return [cx + Math.sin(a) * r, cy - Math.cos(a) * r]; }, f2 = function (p) { return p[0].toFixed(1) + ' ' + p[1].toFixed(1); };
+    var rib = '';
+    var fl = Ch.flows.slice().sort(function (a, b) { return st[a[1]].a0 - st[b[1]].a0; });
+    D.sites.forEach(function (s) { fl.filter(function (f) { return f[0] === s.id; }).sort(function (a, b) { return st[b[1]].a0 - st[a[1]].a0; }).forEach(function (f) {
+      var A = st[f[0]], B = st[f[1]], da = (A.a1 - A.a0) * f[2] / A.v, db = (B.a1 - B.a0) * f[2] / B.v;
+      var a0 = A.cur, a1 = A.cur + da; A.cur = a1; var b0 = B.cur, b1 = B.cur + db; B.cur = b1;
+      var d = 'M' + f2(P(a0, R)) + ' A' + R + ' ' + R + ' 0 0 1 ' + f2(P(a1, R)) + ' Q' + cx + ' ' + cy + ' ' + f2(P(b0, R)) + ' A' + R + ' ' + R + ' 0 0 1 ' + f2(P(b1, R)) + ' Q' + cx + ' ' + cy + ' ' + f2(P(a0, R)) + ' Z';
+      rib += '<path class="band" data-k="' + esc(f[0] + ' ' + f[1]) + '" d="' + d + '" fill="' + A.color + '" fill-opacity=".45" stroke="' + A.color + '" stroke-opacity=".6"' + tipAttr([f[0] + ' → ' + f[1], fmt(f[2]) + ' orders · 7 days · ' + (100 * f[2] / tot).toFixed(1) + '% of network', 'EXAMPLE']) + '/>';
+    }); });
+    var arcs = '';
+    groups.forEach(function (g) {
+      var big = g.a1 - g.a0 > Math.PI ? 1 : 0, ro = R + aw;
+      var d = 'M' + f2(P(g.a0, R + 2)) + ' A' + (R + 2) + ' ' + (R + 2) + ' 0 ' + big + ' 1 ' + f2(P(g.a1, R + 2)) + ' L' + f2(P(g.a1, ro)) + ' A' + ro + ' ' + ro + ' 0 ' + big + ' 0 ' + f2(P(g.a0, ro)) + ' Z';
+      var am = (g.a0 + g.a1) / 2, lp = P(am, R + aw + 14), anchor = Math.sin(am) > 0.15 ? 'start' : Math.sin(am) < -0.15 ? 'end' : 'middle';
+      arcs += '<g data-k="' + esc(g.id) + '"' + tipAttr([g.id, fmt(g.v) + ' orders · 7 days', 'EXAMPLE']) + '><path d="' + d + '" fill="' + g.color + '" filter="url(#gl)"/>' + T(lp[0], lp[1] + 5, g.id + ' · ' + fmt(g.v), 13, g.color, anchor, 800) + '</g>';
+    });
+    var panel = T(1010, 56, 'LARGEST FLOWS · 3PL → REGION · 7 DAYS', 13, C.dim, 'start', 800), top = Ch.flows.slice().sort(function (a, b) { return b[2] - a[2]; }).slice(0, 11), mx = top[0][2];
+    top.forEach(function (f, i) { var y = 92 + i * 58; panel += '<g data-k="' + esc(f[0] + ' ' + f[1]) + '">' + T(1010, y, f[0] + ' → ' + f[1], 13.5, C.tx, 'start', 800) + '<rect x="1010" y="' + (y + 10) + '" width="' + (480 * f[2] / mx).toFixed(1) + '" height="12" fill="' + SITE[f[0]].color + '"/>' + T(1586, y, fmt(f[2]), 13, C.dim, 'end', 800) + '</g>'; });
+    document.getElementById('v5').innerHTML = rib + arcs + panel + T(20, 752, 'LEFT = 3PL SITES · RIGHT = DESTINATION REGIONS · RIBBON WIDTH = ORDERS · CLICK AN ARC TO ISOLATE', 12, C.dim, 'start', 700);
+    applyIso('v5');
+  }
+  /* ================= 6 · RIDGELINE ================= */
+  var rg = { scope: 'TOP' };
+  function ridge() {
+    var Rr = D.ridge, lanes = Rr.lanes.slice();
+    lanes = rg.scope === 'TOP' ? lanes.sort(function (a, b) { return b.units - a.units; }).slice(0, 12) : lanes.filter(function (l) { return l.from === rg.scope; });
+    var n = lanes.length, X0 = 330, X1 = 1460, Y0 = 70, Y1 = 690, step = (Y1 - Y0) / n, xmax = 10;
+    var mxd = Math.max.apply(null, lanes.map(function (l) { return Math.max.apply(null, l.dens); }));
+    var sx = function (v) { return X0 + v / xmax * (X1 - X0); }, o = '';
+    for (var d = 0; d <= xmax; d++) o += '<line x1="' + sx(d) + '" x2="' + sx(d) + '" y1="' + (Y0 - 20) + '" y2="' + Y1 + '" stroke="' + C.line + '"/>' + T(sx(d), Y1 + 24, d + ' D', 12, C.dim, 'middle', 800);
+    o += T((X0 + X1) / 2, Y1 + 52, 'ORDER-TO-DELIVERY LEAD TIME · DAYS · 30-DAY EXAMPLE SAMPLE', 12.5, C.dim, 'middle', 800);
+    o += T(20, 40, 'LANE · FROM → TO', 12.5, C.dim, 'start', 800) + T(1590, 40, 'P50 / P90', 12.5, C.dim, 'end', 800);
+    lanes.forEach(function (l, i) {
+      var base = Y0 + (i + 1) * step, hh = step * 1.9, col = SITE[l.from].color;
+      var pts = l.dens.map(function (v, j) { return sx(Rr.x[j]).toFixed(1) + ',' + (base - hh * v / mxd).toFixed(1); });
+      var tp = tipAttr([l.id + ' · ' + l.from + ' → ' + l.to, l.mode.toUpperCase() + ' · ' + l.units + ' units/day · n=' + l.n, 'P50 ' + l.p50 + ' d · P90 ' + l.p90 + ' d', 'EXAMPLE']);
+      o += '<g data-k="' + l.id + ' ' + l.from + '"' + tp + '><path d="M' + sx(0) + ' ' + base.toFixed(1) + ' L' + pts.join(' L') + ' L' + sx(xmax) + ' ' + base.toFixed(1) + ' Z" fill="#000" fill-opacity=".86"/>' +
+        '<path d="M' + pts.join(' L') + '" fill="none" stroke="' + col + '" stroke-width="2" filter="url(#gl)"/>' +
+        '<path d="M' + sx(0) + ' ' + base.toFixed(1) + ' L' + pts.join(' L') + ' L' + sx(xmax) + ' ' + base.toFixed(1) + ' Z" fill="' + col + '" fill-opacity=".14"/>' +
+        '<line x1="' + sx(l.p50).toFixed(1) + '" x2="' + sx(l.p50).toFixed(1) + '" y1="' + base.toFixed(1) + '" y2="' + (base - step * .6).toFixed(1) + '" stroke="#fff" stroke-width="1.5"/>' +
+        '<line x1="' + sx(l.p90).toFixed(1) + '" x2="' + sx(l.p90).toFixed(1) + '" y1="' + base.toFixed(1) + '" y2="' + (base - step * .6).toFixed(1) + '" stroke="' + C.amb + '" stroke-width="1.5" stroke-dasharray="3 2"/>' +
+        T(20, base - 4, l.id + ' · ' + l.from.slice(7) + ' → ' + l.to.toUpperCase(), Math.min(14, step * .42), col, 'start', 800) +
+        T(1590, base - 4, l.p50.toFixed(1) + ' / ' + l.p90.toFixed(1), Math.min(14, step * .42), C.tx, 'end', 800) + '</g>';
+    });
+    o += T(20, 752, 'WHITE TICK = P50 · AMBER DASH = P90 · COLOUR = ORIGIN 3PL · ' + (rg.scope === 'TOP' ? 'TOP 12 LANES BY VOLUME' : rg.scope + ' LANES'), 12, C.dim, 'start', 700);
+    document.getElementById('v6').innerHTML = o; applyIso('v6');
+  }
+  /* ================= 7 · ZOOMABLE TREEMAP ================= */
+  var tm = { zoom: null, size: 'rev', rects: {}, raf: 0 };
+  function squarify(items, x, y, w, h) {
+    var out = [], tot = items.reduce(function (a, b) { return a + b.v; }, 0), list = items.slice().sort(function (a, b) { return b.v - a.v; });
+    var scale = w * h / tot; list = list.map(function (it) { return { it: it, a: it.v * scale }; });
+    function worst(row, side) { var s = row.reduce(function (a, b) { return a + b.a; }, 0), mx = Math.max.apply(null, row.map(function (r) { return r.a; })), mn = Math.min.apply(null, row.map(function (r) { return r.a; })); return Math.max(side * side * mx / (s * s), s * s / (side * side * mn)); }
+    var row = [];
+    while (list.length) {
+      var side = Math.min(w, h), c = list[0];
+      if (!row.length || worst(row.concat([c]), side) <= worst(row, side)) { row.push(c); list.shift(); }
+      else { place(); row = []; }
+    }
+    if (row.length) place();
+    function place() {
+      var s = row.reduce(function (a, b) { return a + b.a; }, 0);
+      if (w >= h) { var cw = s / h, yy = y; row.forEach(function (r) { var rh = r.a / cw; out.push({ it: r.it, x: x, y: yy, w: cw, h: rh }); yy += rh; }); x += cw; w -= cw; }
+      else { var rh2 = s / w, xx = x; row.forEach(function (r) { var rw = r.a / rh2; out.push({ it: r.it, x: xx, y: y, w: rw, h: rh2 }); xx += rw; }); y += rh2; h -= rh2; }
+    }
+    return out;
+  }
+  function retCol(r, act) { return r >= act ? C.red : r > 2.0 ? C.amb : 'rgba(111,211,255,' + (0.35 + 0.4 * r / 2).toFixed(2) + ')'; }
+  function treeLayout() {
+    var Tm = D.treemap, X = 20, Y = 44, W = 1560, H = 690, L = {}, val = function (c) { return tm.size === 'rev' ? c.rev : c.rev * c.ret / 100; };
+    var fams = Tm.children.map(function (f) { return { id: f.id, f: f, v: f.children.reduce(function (a, c) { return a + val(c); }, 0) }; });
+    if (tm.zoom) {
+      var f = Tm.children.filter(function (x) { return x.id === tm.zoom; })[0];
+      L[f.id] = { x: X, y: Y, w: W, h: H, fam: true, f: f };
+      squarify(f.children.map(function (c) { return { id: c.id, c: c, v: val(c) }; }), X + 4, Y + 30, W - 8, H - 34).forEach(function (r) { L[r.it.id] = { x: r.x, y: r.y, w: r.w, h: r.h, c: r.it.c, fam: f.id }; });
+      Tm.children.forEach(function (o) { if (o.id !== tm.zoom) { L[o.id] = { x: X + W / 2, y: Y + H / 2, w: 0, h: 0, fam: true, f: o, hidden: true }; o.children.forEach(function (c) { L[c.id] = { x: X + W / 2, y: Y + H / 2, w: 0, h: 0, c: c, fam: o.id, hidden: true }; }); } });
+    } else {
+      squarify(fams, X, Y, W, H).forEach(function (r) {
+        L[r.it.id] = { x: r.x, y: r.y, w: r.w, h: r.h, fam: true, f: r.it.f };
+        squarify(r.it.f.children.map(function (c) { return { id: c.id, c: c, v: val(c) }; }), r.x + 3, r.y + 28, r.w - 6, r.h - 31).forEach(function (q) { L[q.it.id] = { x: q.x, y: q.y, w: q.w, h: q.h, c: q.it.c, fam: r.it.id }; });
+      });
+    }
+    return L;
+  }
+  function treemapDraw(L, labels) {
+    var Tm = D.treemap, o = '', fr = '';
+    var crumb = 'ALL FAMILIES' + (tm.zoom ? ' › ' + tm.zoom + ' (CLICK HERE OR ESC TO ZOOM OUT)' : ' · CLICK A FAMILY TO ZOOM');
+    o += '<g data-act="1" data-zoomout="1" style="cursor:pointer">' + T(20, 28, crumb, 14, C.cy, 'start', 800) + '</g>' + T(1580, 28, 'SIZE = ' + (tm.size === 'rev' ? 'REVENUE INDEX (NETWORK = 1,000)' : 'RETURNS INDEX') + ' · COLOUR = RETURN RATE · NETWORK ' + Tm.networkReturn.toFixed(1) + '%', 13, C.dim, 'end', 800);
+    Object.keys(L).forEach(function (id) {
+      var r = L[id]; if (r.hidden && r.w < 1) return;
+      if (r.fam === true) {
+        var tot = r.f.children.reduce(function (a, c) { return a + c.rev; }, 0), ret = r.f.children.reduce(function (a, c) { return a + c.rev * c.ret; }, 0) / tot;
+        fr += '<g data-act="1" data-zoom="' + id + '" style="cursor:zoom-in"><rect x="' + r.x.toFixed(1) + '" y="' + r.y.toFixed(1) + '" width="' + Math.max(0, r.w).toFixed(1) + '" height="' + Math.max(0, r.h).toFixed(1) + '" fill="none" stroke="' + C.cy + '" stroke-opacity=".7" stroke-width="2" filter="url(#gl)"/>' +
+          (labels && r.w > 220 ? T(r.x + 10, r.y + 20, id + ' · REV IDX ' + tot.toFixed(0) + ' · RETURNS ' + ret.toFixed(1) + '%', 13, C.tx, 'start', 800) : (labels && r.w > 90 ? T(r.x + 8, r.y + 20, id.replace('FAMILY ', ''), 13, C.tx, 'start', 800) : '')) + '</g>';
+      } else {
+        var c = r.c, col = retCol(c.ret, Tm.action), lab = '';
+        if (labels && r.w > 130 && r.h > 52) lab = T(r.x + 8, r.y + 22, c.id, 13, '#fff', 'start', 800) + T(r.x + 8, r.y + 42, 'IDX ' + c.rev.toFixed(0) + ' · RET ' + c.ret.toFixed(1) + '%', 12, '#fff', 'start', 700);
+        else if (labels && r.w > 76 && r.h > 30) lab = T(r.x + 6, r.y + 20, c.id.slice(7), 12, '#fff', 'start', 800);
+        o += '<g data-k="' + c.id + ' ' + r.fam + '"' + tipAttr([c.id + ' · ' + r.fam, 'Revenue index ' + c.rev.toFixed(1) + ' (network = 1,000) · no dollars', 'Return rate ' + c.ret.toFixed(2) + '%' + (c.ret >= Tm.action ? ' · ACTION (≥5%)' : c.ret > 2 ? ' · above network 2.0%' : ''), 'EXAMPLE']) + '><rect x="' + (r.x + 1).toFixed(1) + '" y="' + (r.y + 1).toFixed(1) + '" width="' + Math.max(0, r.w - 2).toFixed(1) + '" height="' + Math.max(0, r.h - 2).toFixed(1) + '" fill="' + col + '"' + (c.ret >= Tm.action ? ' filter="url(#gl)"' : '') + '/>' + lab + '</g>';
+      }
+    });
+    o += T(20, 754, 'CYAN ≤ 2.0% NETWORK · AMBER ABOVE NETWORK · RED ≥ 5% ACTION LINE · MATCHES WALL SCREEN 5 SKU RATES', 12, C.dim, 'start', 700);
+    document.getElementById('v7').innerHTML = o + fr; applyIso('v7');
+  }
+  function treemap(animate) {
+    var to = treeLayout(), from = tm.rects; tm.rects = to; cancelAnimationFrame(tm.raf);
+    if (!animate || reduce || !Object.keys(from).length) { treemapDraw(to, true); return; }
+    var t0 = null;
+    function step(ts) { if (!t0) t0 = ts; var p = Math.min(1, (ts - t0) / 550), e = 1 - Math.pow(1 - p, 3), M = {};
+      Object.keys(to).forEach(function (id) { var a = from[id] || to[id], b = to[id]; M[id] = { x: a.x + (b.x - a.x) * e, y: a.y + (b.y - a.y) * e, w: a.w + (b.w - a.w) * e, h: a.h + (b.h - a.h) * e, fam: b.fam, f: b.f, c: b.c, hidden: b.hidden && p === 1 }; });
+      treemapDraw(M, p === 1); if (p < 1) tm.raf = requestAnimationFrame(step); }
+    tm.raf = requestAnimationFrame(step);
+  }
+  /* ================= 8 · NIGHT-LIGHTS GLOBE (canvas) ================= */
+  var gb = { lon: -40, lat: 22, sel: null, drag: null, hover: null, idle: 0, raf: 0, pts: [] };
+  function globeInit() {
+    var cv = document.getElementById('v8'), ctx = cv.getContext('2d'), G = D.globe, hud = document.getElementById('ghud');
+    var vol = {}; D.sites.forEach(function (s) { vol[s.id] = 0; });
+    function size() { var r = cv.getBoundingClientRect(), dpr = Math.min(2, devicePixelRatio || 1); cv.width = Math.max(1, r.width * dpr); cv.height = Math.max(1, r.height * dpr); }
+    new ResizeObserver(size).observe(cv); size();
+    var rad = Math.PI / 180;
+    function v3(lat, lon) { lat *= rad; lon *= rad; return [Math.cos(lat) * Math.sin(lon), Math.sin(lat), Math.cos(lat) * Math.cos(lon)]; }
+    function rot(p) { var l = -gb.lon * rad, t = gb.lat * rad, x = p[0] * Math.cos(l) + p[2] * Math.sin(l), z = -p[0] * Math.sin(l) + p[2] * Math.cos(l), y = p[1];
+      return [x, y * Math.cos(t) - z * Math.sin(t), y * Math.sin(t) + z * Math.cos(t)]; }
+    function slerp(a, b, t) { var d = Math.acos(Math.max(-1, Math.min(1, a[0] * b[0] + a[1] * b[1] + a[2] * b[2]))), s = Math.sin(d) || 1;
+      var k0 = Math.sin((1 - t) * d) / s, k1 = Math.sin(t * d) / s; return [a[0] * k0 + b[0] * k1, a[1] * k0 + b[1] * k1, a[2] * k0 + b[2] * k1]; }
+    var routes = G.destinations.map(function (d) { var s = SITE[d.from]; return { d: d, s: s, a: v3(s.lat, s.lon), b: v3(d.lat, d.lon), w: d.share }; });
+    function frame(ts) {
+      var bw = cv.getBoundingClientRect().width; if (!bw || cv.width < 2) { gb.raf = 0; return; }
+      if (Math.abs(cv.width - bw * Math.min(2, devicePixelRatio || 1)) > 2) size();
+      var W = cv.width, H = cv.height, dpr = cv.width / bw, R = Math.min(W, H) * 0.42, cx = W / 2, cy = H / 2;
+      if (!gb.drag && !reduce && Date.now() - gb.idle > 2500) gb.lon += 0.06;
+      ctx.clearRect(0, 0, W, H);
+      var g = ctx.createRadialGradient(cx, cy, R * 0.2, cx, cy, R * 1.12); g.addColorStop(0, '#04121a'); g.addColorStop(0.89, '#020a10'); g.addColorStop(0.9, 'rgba(111,211,255,.35)'); g.addColorStop(1, 'rgba(111,211,255,0)');
+      ctx.fillStyle = g; ctx.beginPath(); ctx.arc(cx, cy, R * 1.12, 0, 7); ctx.fill();
+      var pr = function (p, alt) { var q = rot(p), k = (alt || 1); return [cx + q[0] * R * k, cy - q[1] * R * k, q[2]]; };
+      ctx.fillStyle = 'rgba(111,211,255,.22)';
+      for (var la = -75; la <= 75; la += 15) for (var lo = -180; lo < 180; lo += 3) { var q = pr(v3(la, lo)); if (q[2] > 0) ctx.fillRect(q[0], q[1], 1.2 * dpr, 1.2 * dpr); }
+      for (var lo2 = -180; lo2 < 180; lo2 += 30) for (var la2 = -84; la2 <= 84; la2 += 3) { var q2 = pr(v3(la2, lo2)); if (q2[2] > 0) ctx.fillRect(q2[0], q2[1], 1.2 * dpr, 1.2 * dpr); }
+      ctx.globalCompositeOperation = 'lighter';
+      var t = reduce ? 0.5 : (ts / 2600) % 1;
+      routes.forEach(function (r) {
+        var on = !gb.sel || gb.sel === r.s.id, alpha = on ? 0.85 : 0.06; ctx.strokeStyle = r.s.color; ctx.lineWidth = (1 + r.w * 6) * dpr; ctx.globalAlpha = alpha * 0.5;
+        ctx.beginPath(); var pen = false;
+        for (var i = 0; i <= 40; i++) { var u = i / 40, p = slerp(r.a, r.b, u), q = pr(p, 1 + 0.18 * Math.sin(Math.PI * u) * Math.min(1, Math.acos(r.a[0] * r.b[0] + r.a[1] * r.b[1] + r.a[2] * r.b[2]))); if (q[2] > -0.05) { if (pen) ctx.lineTo(q[0], q[1]); else ctx.moveTo(q[0], q[1]); pen = true; } else pen = false; }
+        ctx.stroke();
+        if (on) { for (var j = 0; j < 3; j++) { var u2 = (t + j / 3) % 1, q3 = pr(slerp(r.a, r.b, u2), 1 + 0.18 * Math.sin(Math.PI * u2) * Math.min(1, Math.acos(r.a[0] * r.b[0] + r.a[1] * r.b[1] + r.a[2] * r.b[2]))); if (q3[2] > 0) { ctx.globalAlpha = 0.95; ctx.fillStyle = '#fff'; ctx.beginPath(); ctx.arc(q3[0], q3[1], 1.8 * dpr, 0, 7); ctx.fill(); } } }
+      });
+      gb.pts = [];
+      routes.forEach(function (r) { var q = pr(r.b); if (q[2] <= 0) return; var on = !gb.sel || gb.sel === r.s.id, rr = (5 + r.w * 40) * dpr;
+        var gg = ctx.createRadialGradient(q[0], q[1], 0, q[0], q[1], rr); gg.addColorStop(0, 'rgba(255,236,190,' + (on ? .95 : .12) + ')'); gg.addColorStop(1, 'rgba(255,190,90,0)'); ctx.globalAlpha = 1; ctx.fillStyle = gg; ctx.beginPath(); ctx.arc(q[0], q[1], rr, 0, 7); ctx.fill();
+        gb.pts.push({ x: q[0] / dpr, y: q[1] / dpr, tip: [r.d.city.toUpperCase() + ' · ' + r.d.id, 'Served by ' + r.s.id + ' · ' + Math.round(r.w * 100) + '% of its orders', 'EXAMPLE'] }); });
+      D.sites.forEach(function (s) { var q = pr(v3(s.lat, s.lon)); if (q[2] <= 0) return; var on = !gb.sel || gb.sel === s.id, rr = 22 * dpr;
+        var gg = ctx.createRadialGradient(q[0], q[1], 0, q[0], q[1], rr); gg.addColorStop(0, s.color); gg.addColorStop(1, 'rgba(0,0,0,0)'); ctx.globalAlpha = on ? 1 : 0.2; ctx.fillStyle = gg; ctx.beginPath(); ctx.arc(q[0], q[1], rr, 0, 7); ctx.fill();
+        ctx.fillStyle = '#fff'; ctx.beginPath(); ctx.arc(q[0], q[1], 3.2 * dpr, 0, 7); ctx.fill();
+        ctx.globalAlpha = on ? 1 : .3; ctx.font = '800 ' + (12 * dpr) + 'px Inter, Arial'; ctx.fillStyle = s.color; ctx.fillText(s.id, q[0] + 10 * dpr, q[1] - 10 * dpr);
+        gb.pts.push({ x: q[0] / dpr, y: q[1] / dpr, site: s.id, tip: [s.id + (s.verified ? '' : ' · UNVERIFIED'), 'Click to isolate its lanes · Esc clears', 'EXAMPLE'] }); });
+      ctx.globalAlpha = 1; ctx.globalCompositeOperation = 'source-over';
+      hud.innerHTML = 'EXAMPLE · NIGHT-LIGHTS GLOBE · SCHEMATIC<br><span class="v">' + (gb.sel ? gb.sel : '5 3PL SITES · 31 DESTINATIONS') + '</span><br>DRAG TO SPIN · CLICK A SITE TO ISOLATE · ESC CLEARS';
+      if (!reduce || gb.drag) gb.raf = requestAnimationFrame(frame);
+    }
+    gb.redraw = function () { cancelAnimationFrame(gb.raf); gb.raf = requestAnimationFrame(frame); };
+    function near(e) { var r = cv.getBoundingClientRect(), x = e.clientX - r.left, y = e.clientY - r.top, best = null, bd = 14; gb.pts.forEach(function (p) { var d = Math.hypot(p.x - x, p.y - y); if (d < bd) { bd = d; best = p; } }); return best; }
+    cv.addEventListener('pointerdown', function (e) { gb.drag = { x: e.clientX, y: e.clientY, lon: gb.lon, lat: gb.lat, moved: false }; cv.setPointerCapture(e.pointerId); });
+    cv.addEventListener('pointermove', function (e) {
+      if (gb.drag) { var dx = e.clientX - gb.drag.x, dy = e.clientY - gb.drag.y; if (Math.abs(dx) + Math.abs(dy) > 3) gb.drag.moved = true; gb.lon = gb.drag.lon - dx * 0.3; gb.lat = Math.max(-70, Math.min(70, gb.drag.lat + dy * 0.3)); gb.idle = Date.now(); if (reduce) gb.redraw(); return; }
+      var p = near(e); if (p) { tip.innerHTML = ''; p.tip.forEach(function (l, i) { var d = document.createElement(i ? 'div' : 'b'); d.textContent = l; tip.appendChild(d); }); tip.style.display = 'block'; tip.style.left = (e.clientX + 16) + 'px'; tip.style.top = (e.clientY + 14) + 'px'; cv.style.cursor = p.site ? 'pointer' : 'default'; }
+      else { tip.style.display = 'none'; cv.style.cursor = 'grab'; }
+    });
+    cv.addEventListener('pointerup', function (e) { var d = gb.drag; gb.drag = null; gb.idle = Date.now(); if (d && !d.moved) { var p = near(e); gb.sel = p && p.site ? (gb.sel === p.site ? null : p.site) : null; gb.redraw(); } });
+    gb.raf = requestAnimationFrame(frame);
+  }
+  /* ================= wiring ================= */
+  function wire() {
+    bindIso('v1'); bindIso('v2'); bindIso('v4'); bindIso('v5'); bindIso('v6'); bindIso('v7'); bindIso('v3');
+    document.getElementById('skf').onclick = function () { sk.focus = !sk.focus; this.classList.toggle('on', sk.focus); this.textContent = sk.focus ? 'SHOW ALL ORDERS' : 'FOCUS: RETURNS'; ISO.v1 = null; sankey(); };
+    document.getElementById('bplay').onclick = function () { bplay(!bb.playing); };
+    document.getElementById('wk').oninput = function () { bplay(false); bb.t = +this.value; bubbles(); };
+    [].forEach.call(document.querySelectorAll('[data-calmode]'), function (b) { b.onclick = function () { cal.mode = b.getAttribute('data-calmode'); [].forEach.call(document.querySelectorAll('[data-calmode]'), function (x) { x.classList.toggle('on', x === b); }); calendar(); }; });
+    document.getElementById('v3').addEventListener('click', function (e) { var g = e.target.closest('[data-scope]'); if (g) { cal.scope = g.getAttribute('data-scope'); calendar(); } });
+    [].forEach.call(document.querySelectorAll('[data-rg]'), function (b) { b.onclick = function () { rg.scope = b.getAttribute('data-rg'); ISO.v6 = null; [].forEach.call(document.querySelectorAll('[data-rg]'), function (x) { x.classList.toggle('on', x === b); }); ridge(); }; });
+    [].forEach.call(document.querySelectorAll('[data-tms]'), function (b) { b.onclick = function () { tm.size = b.getAttribute('data-tms'); [].forEach.call(document.querySelectorAll('[data-tms]'), function (x) { x.classList.toggle('on', x === b); }); treemap(true); }; });
+    document.getElementById('v7').addEventListener('click', function (e) { var z = e.target.closest('[data-zoom]'), out = e.target.closest('[data-zoomout]');
+      if (out) { tm.zoom = null; ISO.v7 = null; treemap(true); } else if (z && !tm.zoom) { tm.zoom = z.getAttribute('data-zoom'); ISO.v7 = null; treemap(true); } });
+    /* solo mode / keys */
+    function route() {
+      var h = location.hash, m = h.match(/^#solo\/(\d)$/), n = h === '#globe' ? 8 : (m ? +m[1] : 0);
+      document.body.classList.toggle('solo', n > 0);
+      [].forEach.call(document.querySelectorAll('section.ch'), function (s, i) { s.classList.toggle('on', i + 1 === n); });
+      if (gb.redraw) gb.redraw();
+    }
+    window.addEventListener('hashchange', route); route();
+    window.addEventListener('keydown', function (e) {
+      if (e.ctrlKey || e.metaKey || e.altKey || /input|select|textarea/i.test(e.target.tagName)) return;
+      var k = e.key.toLowerCase();
+      if (k >= '1' && k <= '8') location.hash = '#solo/' + k;
+      else if (k === 'g') location.hash = '#globe';
+      else if (k === 'escape') {
+        var any = Object.keys(ISO).some(function (id) { return ISO[id]; }) || gb.sel || tm.zoom;
+        if (any) { Object.keys(ISO).forEach(function (id) { ISO[id] = null; applyIso(id); }); gb.sel = null; if (gb.redraw) gb.redraw(); if (tm.zoom) { tm.zoom = null; treemap(true); } }
+        else if (document.body.classList.contains('solo')) location.hash = '#c1';
+      }
+      else if (k === ' ' && document.body.classList.contains('solo') && location.hash === '#solo/2') { e.preventDefault(); bplay(!bb.playing); }
+    });
+  }
+  sankey(); bubbles(); calendar(); clock(); chord(); ridge(); treemap(false); globeInit(); wire();
+})();
+
+</script>
+</body>
+</html>
