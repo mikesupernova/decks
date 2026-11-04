@@ -76,6 +76,33 @@
     .flip { animation: flip .6s steps(4) both; }
     @keyframes flip { 0% { opacity:.2; transform:scaleY(.2); } 100% { opacity:1; transform:none; } }
   }
+
+  /* ===== Alert tiers (2026-11-03): only CRITICAL blinks (1 Hz, under the 3 Hz flash limit); warnings glow steady amber ===== */
+  .st.amb { box-shadow:0 0 calc(.9*var(--u)) rgba(255,176,0,.55); }
+  td.amb { text-shadow:0 0 calc(.6*var(--u)) rgba(255,176,0,.6); }
+  tr.crit td { background:#3a0e0e; box-shadow:inset 0 calc(.18*var(--u)) 0 var(--red), inset 0 calc(-.18*var(--u)) 0 var(--red); }
+  tr.crit td:first-child { box-shadow:inset calc(.35*var(--u)) 0 0 var(--red), inset 0 calc(.18*var(--u)) 0 var(--red), inset 0 calc(-.18*var(--u)) 0 var(--red); }
+  .scr.has-crit { box-shadow:inset 0 0 0 calc(.3*var(--u)) var(--red); }
+  .ft > span { white-space:nowrap; }
+  @media (max-width: 760px) { .ft { flex-wrap:wrap; gap:6px; } .ft > span, .lgd { white-space:normal; flex-wrap:wrap; } }
+  .lgd { display:inline-flex; align-items:center; gap:calc(.5*var(--u)); color:var(--dim); }
+  .sw { display:inline-block; width:calc(1.1*var(--u)); height:calc(1.1*var(--u)); border-radius:50%; flex:none; }
+  .crit-sw { background:var(--red); } .warn-sw { background:var(--amb); box-shadow:0 0 calc(.7*var(--u)) var(--amb); }
+  @media (prefers-reduced-motion: no-preference) {
+    tr.crit td { animation:critrow 1s ease-in-out infinite; }
+    .mk.crit { animation:critmk 1s ease-in-out infinite; }
+    .crit-sw { animation:critmk 1s ease-in-out infinite; }
+    .scr.has-crit { animation:edge 4s ease-in-out infinite; }
+    @keyframes critrow { 0%,100% { background:#5a1414; } 50% { background:#1a0b0b; } }
+    @keyframes critmk { 0%,100% { opacity:1; } 50% { opacity:.25; } }
+    @keyframes edge { 0%,100% { box-shadow:inset 0 0 0 calc(.25*var(--u)) rgba(255,77,77,.9), inset 0 0 calc(2.5*var(--u)) rgba(255,77,77,.45); } 50% { box-shadow:inset 0 0 0 calc(.25*var(--u)) rgba(255,77,77,.35), inset 0 0 calc(.8*var(--u)) rgba(255,77,77,.1); } }
+  }
+  @media (prefers-reduced-motion: reduce) {
+    tr.crit td { box-shadow:inset 0 calc(.3*var(--u)) 0 var(--red), inset 0 calc(-.3*var(--u)) 0 var(--red); font-weight:900; }
+    tr.crit td:first-child { box-shadow:inset calc(.5*var(--u)) 0 0 var(--red), inset 0 calc(.3*var(--u)) 0 var(--red), inset 0 calc(-.3*var(--u)) 0 var(--red); }
+    .mk.crit circle:first-child { stroke-width:7; }
+    .scr.has-crit { box-shadow:inset 0 0 0 calc(.5*var(--u)) var(--red); }
+  }
 </style>
 </head>
 <body>
@@ -92,8 +119,8 @@
       <tbody>
         <tr><td>11-02 11:40</td><td class="w">EX-SO-10388 · EX-C22 · release hold at EX-USE, +2 d</td><td>3PL Ops</td><td class="amb">31 h</td><td><span class="st red">3PL</span></td></tr>
         <tr><td>11-02 15:50</td><td class="w">EX-C41 · 2 orders +5 d · supplier PO late (EX-CNTR-040)</td><td>Supply plan</td><td class="amb">27 h</td><td><span class="st out">Supplier</span></td></tr>
-        <tr><td>11-02 20:45</td><td class="w">EX-CNTR-014 at Long Beach · 2 EX-C07 orders · strike deadline</td><td>Freight</td><td class="amb">22 h</td><td><span class="st red">Port risk</span></td></tr>
-        <tr><td>11-02 20:45</td><td class="w">5 more boxes at / to LA-LB (015, 016, 019, 020, 021)</td><td>Freight</td><td class="amb">22 h</td><td><span class="st red">Port risk</span></td></tr>
+        <tr data-due="2026-11-05T01:00:00Z"><td>11-02 20:45</td><td class="w">EX-CNTR-014 at Long Beach · 2 EX-C07 orders · strike deadline</td><td>Freight</td><td class="amb">22 h</td><td><span class="st red">Port risk</span></td></tr>
+        <tr data-due="2026-11-05T01:00:00Z"><td>11-02 20:45</td><td class="w">5 more boxes at / to LA-LB (015, 016, 019, 020, 021)</td><td>Freight</td><td class="amb">22 h</td><td><span class="st red">Port risk</span></td></tr>
         <tr><td>11-02 22:45</td><td class="w">EX-SO-10395 · EX-C22 · short pick at EX-USE, +1 d</td><td>3PL Ops</td><td>20 h</td><td><span class="st red">3PL</span></td></tr>
         <tr><td>11-03 09:45</td><td class="w">EX-SO-10399 · EX-C22 · carrier missed pickup, +1 d</td><td>Freight</td><td>9 h</td><td><span class="st out">Carrier</span></td></tr>
       </tbody>
@@ -102,14 +129,14 @@
     <div class="tw"><table class="db" style="font-size:calc(1.3*var(--u))">
       <thead><tr><th>Move</th><th>Expires</th><th>D-010</th><th>Owner</th><th>Status</th></tr></thead>
       <tbody>
-        <tr><td>PULL CNTR-014 · 015 FROM LGB</td><td class="amb">11-04 17:00 PT</td><td class="ok">WITHIN*</td><td>Freight</td><td><span class="st ok">1 APPR · 1 PROP</span></td></tr>
-        <tr><td>TERMINAL SWITCH CNTR-019</td><td class="amb">11-04 17:00 PT</td><td class="ok">WITHIN*</td><td>Freight</td><td><span class="st out">PROPOSED</span></td></tr>
-        <tr><td>DIVERT CNTR-021 → OAKLAND</td><td>11-06</td><td class="amb">NEEDS MIKE</td><td>Freight · C&amp;F</td><td><span class="st out">PROPOSED</span></td></tr>
-        <tr><td>AIR TOP-UP EX-C41 · EX-L06</td><td>11-07</td><td class="amb">NEEDS MIKE</td><td>Supply plan</td><td><span class="st out">PROPOSED</span></td></tr>
+        <tr data-due="2026-11-05T01:00:00Z"><td>PULL CNTR-014 · 015 FROM LGB</td><td class="amb">11-04 17:00 PT</td><td class="ok">WITHIN*</td><td>Freight</td><td><span class="st ok">1 APPR · 1 PROP</span></td></tr>
+        <tr data-due="2026-11-05T01:00:00Z"><td>TERMINAL SWITCH CNTR-019</td><td class="amb">11-04 17:00 PT</td><td class="ok">WITHIN*</td><td>Freight</td><td><span class="st out">PROPOSED</span></td></tr>
+        <tr data-due="2026-11-07T01:00:00Z"><td>DIVERT CNTR-021 → OAKLAND</td><td>11-06</td><td class="amb">NEEDS MIKE</td><td>Freight · C&amp;F</td><td><span class="st out">PROPOSED</span></td></tr>
+        <tr data-due="2026-11-08T01:00:00Z"><td>AIR TOP-UP EX-C41 · EX-L06</td><td>11-07</td><td class="amb">NEEDS MIKE</td><td>Supply plan</td><td><span class="st out">PROPOSED</span></td></tr>
       </tbody>
     </table></div>
   </div>
-  <div class="ft"><span class="ex">EXAMPLE · made-up data · not Verkada</span><span>Rules: spec §1–§4, §10 · thresholds adopted (D-012)</span></div>
+  <div class="ft"><span class="ex">EXAMPLE · made-up data</span><span class="lgd"><i class="sw crit-sw"></i>BLINK = CRITICAL (&lt;24 H · PAST PROMISE · STRIKE HITS OUR BOXES) &nbsp;<i class="sw warn-sw"></i>AMBER GLOW = WARNING</span></div>
 </section>
 
 
@@ -120,15 +147,15 @@
     <div class="tw"><table class="db">
       <thead><tr><th>Order</th><th>Customer</th><th>Rep</th><th>Site</th><th>Promised</th><th>ETA</th><th>Status</th></tr></thead>
       <tbody>
-        <tr><td>EX-SO-10388</td><td>EX-C22</td><td>EX-R05</td><td>USE</td><td>11-09</td><td class="amb">11-11</td><td><span class="st amb">+2 D · 3PL</span></td></tr>
-        <tr><td>EX-SO-10395</td><td>EX-C22</td><td>EX-R05</td><td>USE</td><td>11-09</td><td class="amb">11-10</td><td><span class="st amb">+1 D · 3PL</span></td></tr>
-        <tr><td>EX-SO-10399</td><td>EX-C22</td><td>EX-R05</td><td>USE</td><td>11-10</td><td class="amb">11-11</td><td><span class="st amb">+1 D · CARR</span></td></tr>
-        <tr><td>EX-SO-10421</td><td>EX-C07</td><td>EX-R03</td><td>USW</td><td>11-10</td><td class="amb">11-13</td><td><span class="st amb">+3 D · PORT</span></td></tr>
-        <tr><td>EX-SO-10433</td><td>EX-C07</td><td>EX-R03</td><td>USW</td><td>11-12</td><td class="amb">11-14</td><td><span class="st amb">+2 D · PORT</span></td></tr>
-        <tr><td>EX-SO-10402</td><td>EX-C41</td><td>EX-R01</td><td>SG</td><td>11-11</td><td class="amb">11-16</td><td><span class="st amb">+5 D · SUPP</span></td></tr>
-        <tr><td>EX-SO-10410</td><td>EX-C41</td><td>EX-R01</td><td>SG</td><td>11-11</td><td class="amb">11-16</td><td><span class="st amb">+5 D · SUPP</span></td></tr>
-        <tr><td>EX-SO-10457</td><td>EX-C03</td><td>EX-R03</td><td>USW</td><td>11-18</td><td>11-18</td><td><span class="st ok">WATCH · BIG</span></td></tr>
-        <tr><td>EX-SO-10450</td><td>EX-C15</td><td>EX-R02</td><td>USW</td><td>11-20</td><td>11-18</td><td><span class="st ok">ON TRACK · BIG</span></td></tr>
+        <tr data-promised="2026-11-09"><td>EX-SO-10388</td><td>EX-C22</td><td>EX-R05</td><td>USE</td><td>11-09</td><td class="amb">11-11</td><td><span class="st amb">+2 D · 3PL</span></td></tr>
+        <tr data-promised="2026-11-09"><td>EX-SO-10395</td><td>EX-C22</td><td>EX-R05</td><td>USE</td><td>11-09</td><td class="amb">11-10</td><td><span class="st amb">+1 D · 3PL</span></td></tr>
+        <tr data-promised="2026-11-10"><td>EX-SO-10399</td><td>EX-C22</td><td>EX-R05</td><td>USE</td><td>11-10</td><td class="amb">11-11</td><td><span class="st amb">+1 D · CARR</span></td></tr>
+        <tr data-promised="2026-11-10"><td>EX-SO-10421</td><td>EX-C07</td><td>EX-R03</td><td>USW</td><td>11-10</td><td class="amb">11-13</td><td><span class="st amb">+3 D · PORT</span></td></tr>
+        <tr data-promised="2026-11-12"><td>EX-SO-10433</td><td>EX-C07</td><td>EX-R03</td><td>USW</td><td>11-12</td><td class="amb">11-14</td><td><span class="st amb">+2 D · PORT</span></td></tr>
+        <tr data-promised="2026-11-11"><td>EX-SO-10402</td><td>EX-C41</td><td>EX-R01</td><td>SG</td><td>11-11</td><td class="amb">11-16</td><td><span class="st amb">+5 D · SUPP</span></td></tr>
+        <tr data-promised="2026-11-11"><td>EX-SO-10410</td><td>EX-C41</td><td>EX-R01</td><td>SG</td><td>11-11</td><td class="amb">11-16</td><td><span class="st amb">+5 D · SUPP</span></td></tr>
+        <tr data-promised="2026-11-18"><td>EX-SO-10457</td><td>EX-C03</td><td>EX-R03</td><td>USW</td><td>11-18</td><td>11-18</td><td><span class="st ok">WATCH · BIG</span></td></tr>
+        <tr data-promised="2026-11-20"><td>EX-SO-10450</td><td>EX-C15</td><td>EX-R02</td><td>USW</td><td>11-20</td><td>11-18</td><td><span class="st ok">ON TRACK · BIG</span></td></tr>
       </tbody>
     </table></div>
     <div class="lbl" style="margin-top:calc(.5*var(--u))">Why 7 orders are at risk · <span style="color:#ff4d4d">3PL 2 (controllable)</span> · <span style="color:#8ab4ff">carrier 1</span> · <span style="color:#ffb000">port 2</span> · <span style="color:#c48cff">supplier 2</span></div><svg class="wchart" viewBox="0 0 1000 14" preserveAspectRatio="none" style="height:calc(.9*var(--u))" role="img" aria-label="3PL 2, carrier 1, port 2, supplier 2"><rect x="0" y="0" width="281.7" height="14" fill="#ff4d4d"/><rect x="285.7" y="0" width="138.9" height="14" fill="#8ab4ff"/><rect x="428.6" y="0" width="281.7" height="14" fill="#ffb000"/><rect x="714.3" y="0" width="285.7" height="14" fill="#c48cff"/></svg>
@@ -152,7 +179,7 @@
             <line x1="330" y1="175" x2="470" y2="140" stroke="#ffb000" stroke-width="2" stroke-dasharray="6 5"/>
             <line x1="330" y1="175" x2="480" y2="250" stroke="#3ddc84" stroke-width="2"/>
             <circle cx="330" cy="175" r="7" fill="#f2f2f2"/><text x="330" y="205" fill="#9a9a9a" font-size="15">EX-ASIA-FACTORY</text>
-            <circle cx="150" cy="120" r="26" fill="none" stroke="#ff4d4d" stroke-width="3"/><circle cx="150" cy="120" r="10" fill="#ff4d4d"/>
+            <g class="mk" data-due="2026-11-05T01:00:00Z"><circle cx="150" cy="120" r="26" fill="none" stroke="#ff4d4d" stroke-width="3"/><circle cx="150" cy="120" r="10" fill="#ff4d4d"/></g>
             <text x="150" y="76" fill="#f2f2f2" font-size="20">LA / LONG BEACH</text>
             <text x="150" y="172" fill="#ff4d4d" font-size="18">11 BOXES · 6 FLAGGED</text>
             <text x="150" y="195" fill="#ff4d4d" font-size="16">STRIKE DEADLINE</text>
@@ -169,10 +196,10 @@
         <div class="tw"><table class="db">
           <thead><tr><th>Box</th><th>Port</th><th>ETA</th><th>Status</th></tr></thead>
           <tbody>
-            <tr><td>CNTR-014</td><td>LGB</td><td>AVAIL</td><td><span class="st red">PULL NOW</span></td></tr>
-            <tr><td>CNTR-015</td><td>LGB</td><td>AVAIL</td><td><span class="st red">PULL NOW</span></td></tr>
+            <tr data-due="2026-11-05T01:00:00Z"><td>CNTR-014</td><td>LGB</td><td>AVAIL</td><td><span class="st red">PULL NOW</span></td></tr>
+            <tr data-due="2026-11-05T01:00:00Z"><td>CNTR-015</td><td>LGB</td><td>AVAIL</td><td><span class="st red">PULL NOW</span></td></tr>
             <tr><td>CNTR-016</td><td>LAX</td><td>DISCH</td><td><span class="st red">PORT RISK</span></td></tr>
-            <tr><td>CNTR-019</td><td>LGB</td><td>11-05</td><td><span class="st red">PORT RISK</span></td></tr>
+            <tr data-due="2026-11-05T01:00:00Z"><td>CNTR-019</td><td>LGB</td><td>11-05</td><td><span class="st red">PORT RISK</span></td></tr>
             <tr><td>CNTR-020</td><td>LAX</td><td>11-07</td><td><span class="st red">PORT RISK</span></td></tr>
             <tr><td>CNTR-021</td><td>LGB</td><td>11-09</td><td><span class="st red">PORT RISK</span></td></tr>
             <tr><td>CNTR-031</td><td>VLC</td><td>11-10</td><td><span class="st amb">WATCH</span></td></tr>
@@ -280,6 +307,23 @@
     [].forEach.call(document.querySelectorAll('.scr'), function (s, i) { s.classList.toggle('on', on && i === n - 1); });
   }
   window.addEventListener('hashchange', show); show();
+})();
+
+/* Alert tiers. Critical = window closes in under 24 h (data-due), or an open order is past its promised date (data-promised, end of day PT),
+   or a port strike/closure is active at a port holding our boxes (data-strike="active", set from the watchtower row). Re-checked every minute. */
+(function () {
+  function tier() {
+    var now = Date.now(), H = 3600e3;
+    [].forEach.call(document.querySelectorAll('[data-due],[data-promised],[data-strike]'), function (el) {
+      var crit = false, d;
+      if (el.dataset.due) { d = Date.parse(el.dataset.due) - now; crit = d > 0 && d <= 24 * H; }
+      if (el.dataset.promised) { crit = crit || now > Date.parse(el.dataset.promised + 'T23:59:00-08:00'); }
+      if (el.dataset.strike === 'active') crit = true;
+      el.classList.toggle('crit', crit);
+    });
+    [].forEach.call(document.querySelectorAll('.scr'), function (s) { s.classList.toggle('has-crit', !!s.querySelector('.crit')); });
+  }
+  tier(); setInterval(tier, 60e3);
 })();
 </script>
 </body>
