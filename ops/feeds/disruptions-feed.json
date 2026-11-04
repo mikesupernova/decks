@@ -145,13 +145,14 @@
    "status": "normal (EXAMPLE status)",
    "containers": 0,
    "orders": 0,
-   "source": "EXAMPLE",
+   "source": "Autoridad del Canal de Panama water indicators, 2026-11-03 (Gatun 87.0 ft, Neopanamax draft 49.0 ft, 33 slots/day): https://evtms-rpts.pancanal.com/",
    "tier": "info",
    "label": {
     "dx": 12,
     "dy": 18,
     "anchor": "start"
-   }
+   },
+   "status_note": "normal per ACP; El Nino 2027 dry-season watch (UNVERIFIED)"
   }
  ]
 }

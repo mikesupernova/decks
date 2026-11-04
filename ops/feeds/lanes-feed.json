@@ -38,8 +38,21 @@
   ],
   "levelsFrom": "EXAMPLE KPI week 2027-03-14 (ops weekly-data-example) scaled onto the 2026-11-03 snapshot window",
   "feed": "lanes",
-  "costNote": "Cost per unit as an index, network average = 100. No dollars.",
-  "candidateRule": "Parcel lane with >= 80 units/day and cost index >= 115 = parcel-to-LTL candidate; proposed for the moves list (K6), status proposed."
+  "costNote": "Cost per unit as an index (EXAMPLE, no dollars). costIndex: network unit-weighted average = 100. costIndexInMode: unit-weighted average = 100 within each mode (compare lanes only within a mode). costIndexRaw: pre-rebase value.",
+  "candidateRule": "Parcel lane (air-parcel excluded) with >= 80 units/day and costIndexInMode >= 115 (within-mode index, C&F decision 2026-11-04) = parcel-to-LTL candidate; status PROPOSED, no saving claimed.",
+  "indexBase": {
+   "period": "2026-10-05 to 2026-11-03 (30-day feed window)",
+   "weights": "unitsPerDay per lane (30-day mean)",
+   "rawNetworkWeightedAvg": 104.99,
+   "rawModeWeightedAvg": {
+    "LTL": 97.96,
+    "parcel": 100.24,
+    "air-parcel": 121.53,
+    "FTL": 95.77
+   },
+   "airRescale": "air-parcel lanes rescaled so the air mode average = 3.0x the parcel mode average (RATES.mode_multiplier, EXAMPLE); then network rebased to 100. costIndexInMode unchanged.",
+   "networkWeightedAvgAfterRescale": "100 (pre-rebase 158.05)"
+  }
  },
  "lanes": [
   {
@@ -49,7 +62,7 @@
    "mode": "LTL",
    "carrier": "EX-CAR-B",
    "unitsPerDay": 236,
-   "costIndex": 98,
+   "costIndex": 62.0,
    "dailyUnits": [
     206,
     259,
@@ -83,7 +96,9 @@
     205
    ],
    "candidate": null,
-   "move": null
+   "move": null,
+   "costIndexRaw": 98,
+   "costIndexInMode": 100.0
   },
   {
    "id": "EX-LN-02",
@@ -92,7 +107,7 @@
    "mode": "parcel",
    "carrier": "EX-CAR-A",
    "unitsPerDay": 103,
-   "costIndex": 105,
+   "costIndex": 66.4,
    "dailyUnits": [
     107,
     117,
@@ -126,7 +141,9 @@
     99
    ],
    "candidate": null,
-   "move": null
+   "move": null,
+   "costIndexRaw": 105,
+   "costIndexInMode": 104.7
   },
   {
    "id": "EX-LN-03",
@@ -135,7 +152,7 @@
    "mode": "LTL",
    "carrier": "EX-CAR-C",
    "unitsPerDay": 182,
-   "costIndex": 111,
+   "costIndex": 70.2,
    "dailyUnits": [
     205,
     172,
@@ -169,7 +186,9 @@
     185
    ],
    "candidate": null,
-   "move": null
+   "move": null,
+   "costIndexRaw": 111,
+   "costIndexInMode": 113.3
   },
   {
    "id": "EX-LN-04",
@@ -178,7 +197,7 @@
    "mode": "parcel",
    "carrier": "EX-CAR-D",
    "unitsPerDay": 96,
-   "costIndex": 121,
+   "costIndex": 76.6,
    "dailyUnits": [
     96,
     91,
@@ -212,7 +231,9 @@
     109
    ],
    "candidate": "parcel\u2192LTL",
-   "move": "PROPOSED M-14"
+   "move": "PROPOSED M-14",
+   "costIndexRaw": 121,
+   "costIndexInMode": 120.7
   },
   {
    "id": "EX-LN-05",
@@ -221,7 +242,7 @@
    "mode": "LTL",
    "carrier": "EX-CAR-C",
    "unitsPerDay": 260,
-   "costIndex": 104,
+   "costIndex": 65.8,
    "dailyUnits": [
     241,
     269,
@@ -255,7 +276,9 @@
     298
    ],
    "candidate": null,
-   "move": null
+   "move": null,
+   "costIndexRaw": 104,
+   "costIndexInMode": 106.2
   },
   {
    "id": "EX-LN-06",
@@ -264,7 +287,7 @@
    "mode": "air-parcel",
    "carrier": "EX-CAR-F",
    "unitsPerDay": 197,
-   "costIndex": 122,
+   "costIndex": 191.0,
    "dailyUnits": [
     206,
     179,
@@ -298,7 +321,9 @@
     187
    ],
    "candidate": null,
-   "move": null
+   "move": null,
+   "costIndexRaw": 122,
+   "costIndexInMode": 100.4
   },
   {
    "id": "EX-LN-07",
@@ -307,7 +332,7 @@
    "mode": "FTL",
    "carrier": "EX-CAR-E",
    "unitsPerDay": 157,
-   "costIndex": 97,
+   "costIndex": 61.4,
    "dailyUnits": [
     169,
     154,
@@ -341,7 +366,9 @@
     150
    ],
    "candidate": null,
-   "move": null
+   "move": null,
+   "costIndexRaw": 97,
+   "costIndexInMode": 101.3
   },
   {
    "id": "EX-LN-08",
@@ -350,7 +377,7 @@
    "mode": "parcel",
    "carrier": "EX-CAR-D",
    "unitsPerDay": 122,
-   "costIndex": 128,
+   "costIndex": 81.0,
    "dailyUnits": [
     134,
     133,
@@ -384,7 +411,9 @@
     138
    ],
    "candidate": "parcel\u2192LTL",
-   "move": "PROPOSED M-13"
+   "move": "PROPOSED M-13",
+   "costIndexRaw": 128,
+   "costIndexInMode": 127.7
   },
   {
    "id": "EX-LN-09",
@@ -393,7 +422,7 @@
    "mode": "LTL",
    "carrier": "EX-CAR-B",
    "unitsPerDay": 231,
-   "costIndex": 97,
+   "costIndex": 61.4,
    "dailyUnits": [
     256,
     201,
@@ -427,7 +456,9 @@
     197
    ],
    "candidate": null,
-   "move": null
+   "move": null,
+   "costIndexRaw": 97,
+   "costIndexInMode": 99.0
   },
   {
    "id": "EX-LN-10",
@@ -436,7 +467,7 @@
    "mode": "parcel",
    "carrier": "EX-CAR-A",
    "unitsPerDay": 123,
-   "costIndex": 86,
+   "costIndex": 54.4,
    "dailyUnits": [
     128,
     109,
@@ -470,7 +501,9 @@
     104
    ],
    "candidate": null,
-   "move": null
+   "move": null,
+   "costIndexRaw": 86,
+   "costIndexInMode": 85.8
   },
   {
    "id": "EX-LN-11",
@@ -479,7 +512,7 @@
    "mode": "LTL",
    "carrier": "EX-CAR-C",
    "unitsPerDay": 133,
-   "costIndex": 93,
+   "costIndex": 58.8,
    "dailyUnits": [
     134,
     135,
@@ -513,7 +546,9 @@
     149
    ],
    "candidate": null,
-   "move": null
+   "move": null,
+   "costIndexRaw": 93,
+   "costIndexInMode": 95.0
   },
   {
    "id": "EX-LN-12",
@@ -522,7 +557,7 @@
    "mode": "air-parcel",
    "carrier": "EX-CAR-F",
    "unitsPerDay": 80,
-   "costIndex": 108,
+   "costIndex": 169.2,
    "dailyUnits": [
     89,
     85,
@@ -556,7 +591,9 @@
     86
    ],
    "candidate": null,
-   "move": null
+   "move": null,
+   "costIndexRaw": 108,
+   "costIndexInMode": 88.9
   },
   {
    "id": "EX-LN-13",
@@ -565,7 +602,7 @@
    "mode": "air-parcel",
    "carrier": "EX-CAR-F",
    "unitsPerDay": 129,
-   "costIndex": 116,
+   "costIndex": 181.7,
    "dailyUnits": [
     147,
     111,
@@ -599,7 +636,9 @@
     118
    ],
    "candidate": null,
-   "move": null
+   "move": null,
+   "costIndexRaw": 116,
+   "costIndexInMode": 95.5
   },
   {
    "id": "EX-LN-14",
@@ -608,7 +647,7 @@
    "mode": "LTL",
    "carrier": "EX-CAR-B",
    "unitsPerDay": 187,
-   "costIndex": 96,
+   "costIndex": 60.7,
    "dailyUnits": [
     180,
     185,
@@ -642,7 +681,9 @@
     179
    ],
    "candidate": null,
-   "move": null
+   "move": null,
+   "costIndexRaw": 96,
+   "costIndexInMode": 98.0
   },
   {
    "id": "EX-LN-15",
@@ -651,7 +692,7 @@
    "mode": "FTL",
    "carrier": "EX-CAR-E",
    "unitsPerDay": 204,
-   "costIndex": 86,
+   "costIndex": 54.4,
    "dailyUnits": [
     205,
     233,
@@ -685,7 +726,9 @@
     230
    ],
    "candidate": null,
-   "move": null
+   "move": null,
+   "costIndexRaw": 86,
+   "costIndexInMode": 89.8
   },
   {
    "id": "EX-LN-16",
@@ -694,7 +737,7 @@
    "mode": "LTL",
    "carrier": "EX-CAR-B",
    "unitsPerDay": 134,
-   "costIndex": 87,
+   "costIndex": 55.0,
    "dailyUnits": [
     137,
     118,
@@ -728,7 +771,9 @@
     137
    ],
    "candidate": null,
-   "move": null
+   "move": null,
+   "costIndexRaw": 87,
+   "costIndexInMode": 88.9
   },
   {
    "id": "EX-LN-17",
@@ -737,7 +782,7 @@
    "mode": "LTL",
    "carrier": "EX-CAR-C",
    "unitsPerDay": 174,
-   "costIndex": 86,
+   "costIndex": 54.4,
    "dailyUnits": [
     186,
     177,
@@ -771,7 +816,9 @@
     179
    ],
    "candidate": null,
-   "move": null
+   "move": null,
+   "costIndexRaw": 86,
+   "costIndexInMode": 87.8
   },
   {
    "id": "EX-LN-18",
@@ -780,7 +827,7 @@
    "mode": "parcel",
    "carrier": "EX-CAR-A",
    "unitsPerDay": 149,
-   "costIndex": 85,
+   "costIndex": 53.8,
    "dailyUnits": [
     152,
     131,
@@ -814,7 +861,9 @@
     163
    ],
    "candidate": null,
-   "move": null
+   "move": null,
+   "costIndexRaw": 85,
+   "costIndexInMode": 84.8
   },
   {
    "id": "EX-LN-19",
@@ -823,7 +872,7 @@
    "mode": "LTL",
    "carrier": "EX-CAR-B",
    "unitsPerDay": 131,
-   "costIndex": 86,
+   "costIndex": 54.4,
    "dailyUnits": [
     142,
     130,
@@ -857,7 +906,9 @@
     140
    ],
    "candidate": null,
-   "move": null
+   "move": null,
+   "costIndexRaw": 86,
+   "costIndexInMode": 87.8
   },
   {
    "id": "EX-LN-20",
@@ -866,7 +917,7 @@
    "mode": "air-parcel",
    "carrier": "EX-CAR-F",
    "unitsPerDay": 152,
-   "costIndex": 125,
+   "costIndex": 195.8,
    "dailyUnits": [
     157,
     167,
@@ -900,7 +951,9 @@
     138
    ],
    "candidate": null,
-   "move": null
+   "move": null,
+   "costIndexRaw": 125,
+   "costIndexInMode": 102.9
   },
   {
    "id": "EX-LN-21",
@@ -909,7 +962,7 @@
    "mode": "LTL",
    "carrier": "EX-CAR-C",
    "unitsPerDay": 341,
-   "costIndex": 109,
+   "costIndex": 69.0,
    "dailyUnits": [
     379,
     381,
@@ -943,7 +996,9 @@
     305
    ],
    "candidate": null,
-   "move": null
+   "move": null,
+   "costIndexRaw": 109,
+   "costIndexInMode": 111.3
   },
   {
    "id": "EX-LN-22",
@@ -952,7 +1007,7 @@
    "mode": "FTL",
    "carrier": "EX-CAR-E",
    "unitsPerDay": 344,
-   "costIndex": 101,
+   "costIndex": 63.9,
    "dailyUnits": [
     376,
     394,
@@ -986,7 +1041,9 @@
     333
    ],
    "candidate": null,
-   "move": null
+   "move": null,
+   "costIndexRaw": 101,
+   "costIndexInMode": 105.5
   },
   {
    "id": "EX-LN-23",
@@ -995,7 +1052,7 @@
    "mode": "parcel",
    "carrier": "EX-CAR-D",
    "unitsPerDay": 224,
-   "costIndex": 92,
+   "costIndex": 58.2,
    "dailyUnits": [
     247,
     194,
@@ -1029,7 +1086,9 @@
     254
    ],
    "candidate": null,
-   "move": null
+   "move": null,
+   "costIndexRaw": 92,
+   "costIndexInMode": 91.8
   },
   {
    "id": "EX-LN-24",
@@ -1038,7 +1097,7 @@
    "mode": "LTL",
    "carrier": "EX-CAR-C",
    "unitsPerDay": 343,
-   "costIndex": 94,
+   "costIndex": 59.5,
    "dailyUnits": [
     295,
     371,
@@ -1072,7 +1131,9 @@
     325
    ],
    "candidate": null,
-   "move": null
+   "move": null,
+   "costIndexRaw": 94,
+   "costIndexInMode": 95.9
   },
   {
    "id": "EX-LN-25",
@@ -1081,7 +1142,7 @@
    "mode": "air-parcel",
    "carrier": "EX-CAR-F",
    "unitsPerDay": 205,
-   "costIndex": 128,
+   "costIndex": 200.4,
    "dailyUnits": [
     185,
     231,
@@ -1115,7 +1176,9 @@
     190
    ],
    "candidate": null,
-   "move": null
+   "move": null,
+   "costIndexRaw": 128,
+   "costIndexInMode": 105.3
   },
   {
    "id": "EX-LN-26",
@@ -1124,7 +1187,7 @@
    "mode": "air-parcel",
    "carrier": "EX-CAR-F",
    "unitsPerDay": 187,
-   "costIndex": 123,
+   "costIndex": 192.6,
    "dailyUnits": [
     174,
     165,
@@ -1158,7 +1221,9 @@
     179
    ],
    "candidate": null,
-   "move": null
+   "move": null,
+   "costIndexRaw": 123,
+   "costIndexInMode": 101.2
   },
   {
    "id": "EX-LN-27",
@@ -1167,7 +1232,7 @@
    "mode": "air-parcel",
    "carrier": "EX-CAR-F",
    "unitsPerDay": 149,
-   "costIndex": 115,
+   "costIndex": 180.0,
    "dailyUnits": [
     139,
     137,
@@ -1201,7 +1266,9 @@
     151
    ],
    "candidate": null,
-   "move": null
+   "move": null,
+   "costIndexRaw": 115,
+   "costIndexInMode": 94.6
   },
   {
    "id": "EX-LN-28",
@@ -1210,7 +1277,7 @@
    "mode": "air-parcel",
    "carrier": "EX-CAR-F",
    "unitsPerDay": 167,
-   "costIndex": 125,
+   "costIndex": 195.8,
    "dailyUnits": [
     166,
     144,
@@ -1244,7 +1311,9 @@
     161
    ],
    "candidate": null,
-   "move": null
+   "move": null,
+   "costIndexRaw": 125,
+   "costIndexInMode": 102.9
   },
   {
    "id": "EX-LN-29",
@@ -1253,7 +1322,7 @@
    "mode": "air-parcel",
    "carrier": "EX-CAR-F",
    "unitsPerDay": 143,
-   "costIndex": 118,
+   "costIndex": 184.8,
    "dailyUnits": [
     139,
     155,
@@ -1287,7 +1356,9 @@
     162
    ],
    "candidate": null,
-   "move": null
+   "move": null,
+   "costIndexRaw": 118,
+   "costIndexInMode": 97.1
   },
   {
    "id": "EX-LN-30",
@@ -1296,7 +1367,7 @@
    "mode": "air-parcel",
    "carrier": "EX-CAR-F",
    "unitsPerDay": 102,
-   "costIndex": 121,
+   "costIndex": 189.3,
    "dailyUnits": [
     96,
     102,
@@ -1330,7 +1401,9 @@
     92
    ],
    "candidate": null,
-   "move": null
+   "move": null,
+   "costIndexRaw": 121,
+   "costIndexInMode": 99.5
   },
   {
    "id": "EX-LN-31",
@@ -1339,7 +1412,7 @@
    "mode": "air-parcel",
    "carrier": "EX-CAR-F",
    "unitsPerDay": 118,
-   "costIndex": 126,
+   "costIndex": 197.3,
    "dailyUnits": [
     108,
     125,
@@ -1373,7 +1446,9 @@
     103
    ],
    "candidate": null,
-   "move": null
+   "move": null,
+   "costIndexRaw": 126,
+   "costIndexInMode": 103.7
   }
  ]
 }
