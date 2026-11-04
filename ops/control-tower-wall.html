@@ -1,0 +1,286 @@
+<!-- MODE: SANITIZED (M-01 open) -->
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<title>EXAMPLE · Control-tower wall mockup (6 screens)</title>
+
+<style>
+  :root { --bg:#000; --panel:#0b0b0b; --cell:#161616; --line:#262626; --txt:#f2f2f2; --dim:#9a9a9a;
+          --ok:#3ddc84; --amb:#ffb000; --red:#ff4d4d; --info:#8ab4ff; }
+  * { box-sizing:border-box; }
+  html, body { margin:0; background:var(--bg); color:var(--txt); font-family:-apple-system, BlinkMacSystemFont, "Segoe UI", system-ui, sans-serif; }
+  .wall { display:grid; grid-template-columns:repeat(3, 1fr); gap:10px; padding:10px; }
+  .scr { container-type:inline-size; aspect-ratio:16/9; background:var(--panel); border:1px solid var(--line); overflow:hidden; display:flex; flex-direction:column; position:relative; }
+  body.one .wall { display:block; padding:0; }
+  body.one .scr { display:none; width:100vw; height:100vh; aspect-ratio:auto; border:none; }
+  body.one .scr.on { display:flex; }
+  /* header bar */
+  .hd { display:flex; align-items:center; gap:calc(2*var(--u)); padding:calc(1*var(--u)) calc(2.2*var(--u)); border-bottom:calc(.25*var(--u)) solid var(--line); }
+  .hd .n { font-size:calc(2.4*var(--u)); font-weight:800; color:#000; background:var(--txt); padding:calc(.2*var(--u)) calc(1*var(--u)); }
+  .hd .t { font-size:calc(2.6*var(--u)); font-weight:800; letter-spacing:.14em; text-transform:uppercase; }
+  .hd .r { margin-left:auto; text-align:right; font-size:calc(1.35*var(--u)); color:var(--dim); letter-spacing:.08em; text-transform:uppercase; line-height:1.35; }
+  .hd .r b { color:var(--txt); }
+  .bd { flex:1; padding:calc(1*var(--u)) calc(2.2*var(--u)); display:flex; flex-direction:column; min-height:0; }
+  .ft { padding:calc(.8*var(--u)) calc(2.2*var(--u)); font-size:calc(1.2*var(--u)); color:var(--dim); letter-spacing:.06em; border-top:calc(.15*var(--u)) solid var(--line); display:flex; justify-content:space-between; }
+  .ft .ex { color:var(--amb); font-weight:800; }
+  /* headline */
+  .hl { display:flex; align-items:baseline; gap:calc(2*var(--u)); margin-bottom:calc(.7*var(--u)); }
+  .hl .big { font-size:calc(5*var(--u)); font-weight:800; line-height:1; color:var(--ok); font-variant-numeric:tabular-nums; }
+  .hl .big small { font-size:calc(2.6*var(--u)); color:var(--dim); font-weight:700; }
+  .hl .side { font-size:calc(1.8*var(--u)); color:var(--txt); font-weight:700; line-height:1.3; }
+  .hl .side .a { color:var(--amb); }
+  /* departures board table */
+  table.db { width:100%; border-collapse:separate; border-spacing:0 calc(.3*var(--u)); font-size:calc(1.45*var(--u)); }
+  table.db th { text-align:left; font-size:calc(1.2*var(--u)); color:var(--dim); letter-spacing:.14em; text-transform:uppercase; font-weight:700; padding:0 calc(.8*var(--u)); }
+  table.db td { background:var(--cell); padding:calc(.38*var(--u)) calc(.7*var(--u)); font-weight:700; letter-spacing:.04em; text-transform:uppercase; white-space:nowrap; font-variant-numeric:tabular-nums; position:relative; }
+  table.db td::after { content:""; position:absolute; left:0; right:0; top:50%; height:1px; background:rgba(0,0,0,.55); }
+  table.db td.w { white-space:normal; text-transform:none; letter-spacing:.01em; }
+  .st { display:inline-block; min-width:calc(9.5*var(--u)); text-align:center; padding:calc(.1*var(--u)) calc(.6*var(--u)); font-weight:800; letter-spacing:.1em; }
+  .st.ok { color:var(--ok); } .st.amb { color:#000; background:var(--amb); } .st.red { color:#fff; background:var(--red); } .st.out { color:var(--dim); border:calc(.15*var(--u)) solid #444; }
+  td.ok { color:var(--ok); } td.amb { color:var(--amb); } td.red { color:var(--red); } td.dim { color:var(--dim); }
+  .row2 { display:grid; grid-template-columns:1fr 1fr; gap:calc(2*var(--u)); flex:1; min-height:0; }
+  .lbl { font-size:calc(1.3*var(--u)); color:var(--dim); letter-spacing:.14em; text-transform:uppercase; font-weight:800; margin:0 0 calc(.4*var(--u)); }
+  .note { font-size:calc(1.35*var(--u)); color:var(--dim); margin-top:auto; line-height:1.4; }
+  .note b { color:var(--txt); }
+  /* map */
+  svg.map { width:100%; height:100%; display:block; }
+  .k6 { display:grid; grid-template-columns:repeat(4,1fr); gap:0; border-top:calc(.2*var(--u)) solid var(--line); border-bottom:calc(.2*var(--u)) solid var(--line); }
+  .k6 .t { padding:calc(1.4*var(--u)) calc(1.2*var(--u)); border-left:calc(.15*var(--u)) solid var(--line); } .k6 .t:first-child { border-left:none; padding-left:0; }
+  .k6 .k { font-size:calc(1.3*var(--u)); color:var(--dim); letter-spacing:.14em; text-transform:uppercase; font-weight:800; }
+  .k6 .v { font-size:calc(4.6*var(--u)); font-weight:300; font-variant-numeric:tabular-nums; margin-top:calc(.6*var(--u)); }
+  .k6 .s { font-size:calc(1.25*var(--u)); color:var(--dim); }
+  .rec { display:grid; grid-template-columns:1fr 1fr; gap:0 calc(3*var(--u)); margin-top:calc(1.4*var(--u)); }
+  .rec div { display:flex; justify-content:space-between; align-items:baseline; padding:calc(1*var(--u)) 0; border-bottom:calc(.15*var(--u)) solid var(--line); font-size:calc(1.5*var(--u)); letter-spacing:.12em; text-transform:uppercase; font-weight:800; color:var(--dim); }
+  .rec b { font-size:calc(2.8*var(--u)); color:var(--txt); letter-spacing:0; font-variant-numeric:tabular-nums; }
+  .rec b small { font-size:calc(1.2*var(--u)); color:var(--dim); font-weight:700; letter-spacing:.08em; }
+  .tick { color:var(--dim); }
+  @media (max-width: 1600px) { .wall { grid-template-columns:1fr; max-width:1400px; margin:0 auto; } }
+  .scr { --u:1cqw; }
+  .wring { width:calc(5.6*var(--u)); height:calc(5.6*var(--u)); flex:none; align-self:center; }
+  .wchart { display:block; width:100%; height:auto; }
+  .tw { overflow-x:auto; overflow-y:hidden; -webkit-overflow-scrolling:touch; flex:none; }
+  @media (max-width: 760px) {
+    .wall { grid-template-columns:1fr; gap:14px; padding:8px; }
+    .scr { --u:7.5px; aspect-ratio:auto; }
+    body.one .scr { height:auto; min-height:100vh; }
+    .row2, .rec, .k6 { grid-template-columns:1fr !important; }
+    .k6 .t { border-left:none !important; padding-left:0 !important; border-bottom:1px solid var(--line); }
+    .hd { flex-wrap:wrap; } .hd .r { margin-left:0; text-align:left; width:100%; }
+    .hl { flex-wrap:wrap; }
+    .note { margin-top:12px; }
+  }
+
+  @media (prefers-reduced-motion: no-preference) {
+    .flip { animation: flip .6s steps(4) both; }
+    @keyframes flip { 0% { opacity:.2; transform:scaleY(.2); } 100% { opacity:1; transform:none; } }
+  }
+</style>
+</head>
+<body>
+<!-- MODE: SANITIZED (M-01 open) -->
+<div class="wall">
+
+
+<section class="scr" id="s1">
+  <div class="hd"><span class="n">1</span><span class="t">Exceptions &amp; alerts</span><span class="r">Data <b>2026-11-03 18:45 ET</b> · refresh 5 min<br>EXAMPLE · sorted by hours open</span></div>
+  <div class="bd">
+    <div class="hl" style="margin-bottom:calc(.4*var(--u))"><span class="big" style="color:var(--amb);font-size:calc(4*var(--u))">8</span><span class="side" style="font-size:calc(1.6*var(--u))">alerts open · <span class="a">6 LA/LB boxes need action before 11-04 17:00 PT</span><br><span style="color:var(--dim)">3 controllable (3PL) · 5 outside 3PL control · 2 returns alerts on screen 5</span></span></div>
+    <div class="tw"><table class="db" style="font-size:calc(1.3*var(--u))">
+      <thead><tr><th>Opened</th><th>What broke</th><th>Owner</th><th>Open</th><th>Status</th></tr></thead>
+      <tbody>
+        <tr><td>11-02 11:40</td><td class="w">EX-SO-10388 · EX-C22 · release hold at EX-USE, +2 d</td><td>3PL Ops</td><td class="amb">31 h</td><td><span class="st red">3PL</span></td></tr>
+        <tr><td>11-02 15:50</td><td class="w">EX-C41 · 2 orders +5 d · supplier PO late (EX-CNTR-040)</td><td>Supply plan</td><td class="amb">27 h</td><td><span class="st out">Supplier</span></td></tr>
+        <tr><td>11-02 20:45</td><td class="w">EX-CNTR-014 at Long Beach · 2 EX-C07 orders · strike deadline</td><td>Freight</td><td class="amb">22 h</td><td><span class="st red">Port risk</span></td></tr>
+        <tr><td>11-02 20:45</td><td class="w">5 more boxes at / to LA-LB (015, 016, 019, 020, 021)</td><td>Freight</td><td class="amb">22 h</td><td><span class="st red">Port risk</span></td></tr>
+        <tr><td>11-02 22:45</td><td class="w">EX-SO-10395 · EX-C22 · short pick at EX-USE, +1 d</td><td>3PL Ops</td><td>20 h</td><td><span class="st red">3PL</span></td></tr>
+        <tr><td>11-03 09:45</td><td class="w">EX-SO-10399 · EX-C22 · carrier missed pickup, +1 d</td><td>Freight</td><td>9 h</td><td><span class="st out">Carrier</span></td></tr>
+      </tbody>
+    </table></div>
+    <div class="lbl" style="margin-top:calc(.6*var(--u))">Moves &amp; opportunities · 12 on list · 2 need Mike · caps TBD Day 1 (all spend to Mike until then)</div>
+    <div class="tw"><table class="db" style="font-size:calc(1.3*var(--u))">
+      <thead><tr><th>Move</th><th>Expires</th><th>D-010</th><th>Owner</th><th>Status</th></tr></thead>
+      <tbody>
+        <tr><td>PULL CNTR-014 · 015 FROM LGB</td><td class="amb">11-04 17:00 PT</td><td class="ok">WITHIN*</td><td>Freight</td><td><span class="st ok">1 APPR · 1 PROP</span></td></tr>
+        <tr><td>TERMINAL SWITCH CNTR-019</td><td class="amb">11-04 17:00 PT</td><td class="ok">WITHIN*</td><td>Freight</td><td><span class="st out">PROPOSED</span></td></tr>
+        <tr><td>DIVERT CNTR-021 → OAKLAND</td><td>11-06</td><td class="amb">NEEDS MIKE</td><td>Freight · C&amp;F</td><td><span class="st out">PROPOSED</span></td></tr>
+        <tr><td>AIR TOP-UP EX-C41 · EX-L06</td><td>11-07</td><td class="amb">NEEDS MIKE</td><td>Supply plan</td><td><span class="st out">PROPOSED</span></td></tr>
+      </tbody>
+    </table></div>
+  </div>
+  <div class="ft"><span class="ex">EXAMPLE · made-up data · not Verkada</span><span>Rules: spec §1–§4, §10 · thresholds adopted (D-012)</span></div>
+</section>
+
+
+<section class="scr" id="s2">
+  <div class="hd"><span class="n">2</span><span class="t">Orders · promise dates</span><span class="r">Data <b>2026-11-03 18:45 ET</b> · refresh 15 min<br>EXAMPLE · 412 open orders</span></div>
+  <div class="bd">
+    <div class="hl"><svg class="wring" viewBox="0 0 100 100" role="img" aria-label="75 of 78 customers on track"><circle cx="50" cy="50" r="40" fill="none" stroke="#262626" stroke-width="14"/><circle cx="50" cy="50" r="40" fill="none" stroke="#3ddc84" stroke-width="14" stroke-dasharray="251.3" stroke-dashoffset="9.7" transform="rotate(-90 50 50)"/></svg><span class="big">75 <small>of 78 customers on track</small></span><span class="side"><span class="a">3 at risk · 7 orders</span><br><span style="color:var(--dim)">controllable: 77 of 78 · 9 orders on watch</span></span></div>
+    <div class="tw"><table class="db">
+      <thead><tr><th>Order</th><th>Customer</th><th>Rep</th><th>Site</th><th>Promised</th><th>ETA</th><th>Status</th></tr></thead>
+      <tbody>
+        <tr><td>EX-SO-10388</td><td>EX-C22</td><td>EX-R05</td><td>USE</td><td>11-09</td><td class="amb">11-11</td><td><span class="st amb">+2 D · 3PL</span></td></tr>
+        <tr><td>EX-SO-10395</td><td>EX-C22</td><td>EX-R05</td><td>USE</td><td>11-09</td><td class="amb">11-10</td><td><span class="st amb">+1 D · 3PL</span></td></tr>
+        <tr><td>EX-SO-10399</td><td>EX-C22</td><td>EX-R05</td><td>USE</td><td>11-10</td><td class="amb">11-11</td><td><span class="st amb">+1 D · CARR</span></td></tr>
+        <tr><td>EX-SO-10421</td><td>EX-C07</td><td>EX-R03</td><td>USW</td><td>11-10</td><td class="amb">11-13</td><td><span class="st amb">+3 D · PORT</span></td></tr>
+        <tr><td>EX-SO-10433</td><td>EX-C07</td><td>EX-R03</td><td>USW</td><td>11-12</td><td class="amb">11-14</td><td><span class="st amb">+2 D · PORT</span></td></tr>
+        <tr><td>EX-SO-10402</td><td>EX-C41</td><td>EX-R01</td><td>SG</td><td>11-11</td><td class="amb">11-16</td><td><span class="st amb">+5 D · SUPP</span></td></tr>
+        <tr><td>EX-SO-10410</td><td>EX-C41</td><td>EX-R01</td><td>SG</td><td>11-11</td><td class="amb">11-16</td><td><span class="st amb">+5 D · SUPP</span></td></tr>
+        <tr><td>EX-SO-10457</td><td>EX-C03</td><td>EX-R03</td><td>USW</td><td>11-18</td><td>11-18</td><td><span class="st ok">WATCH · BIG</span></td></tr>
+        <tr><td>EX-SO-10450</td><td>EX-C15</td><td>EX-R02</td><td>USW</td><td>11-20</td><td>11-18</td><td><span class="st ok">ON TRACK · BIG</span></td></tr>
+      </tbody>
+    </table></div>
+    <div class="lbl" style="margin-top:calc(.5*var(--u))">Why 7 orders are at risk · <span style="color:#ff4d4d">3PL 2 (controllable)</span> · <span style="color:#8ab4ff">carrier 1</span> · <span style="color:#ffb000">port 2</span> · <span style="color:#c48cff">supplier 2</span></div><svg class="wchart" viewBox="0 0 1000 14" preserveAspectRatio="none" style="height:calc(.9*var(--u))" role="img" aria-label="3PL 2, carrier 1, port 2, supplier 2"><rect x="0" y="0" width="281.7" height="14" fill="#ff4d4d"/><rect x="285.7" y="0" width="138.9" height="14" fill="#8ab4ff"/><rect x="428.6" y="0" width="281.7" height="14" fill="#ffb000"/><rect x="714.3" y="0" width="285.7" height="14" fill="#c48cff"/></svg>
+    <div class="note">+ <b>396 more orders on track</b> (not listed: the board shows exceptions, watch and big orders only). At risk = projected ETA past the promised date.</div>
+  </div>
+  <div class="ft"><span class="ex">EXAMPLE · made-up data · not Verkada</span><span>Spec §1 · at risk = promised date (D-008)</span></div>
+</section>
+
+
+<section class="scr" id="s3">
+  <div class="hd"><span class="n">3</span><span class="t">Containers · ports</span><span class="r">Data <b>2026-11-03 18:30 ET</b> · refresh 30 min<br>Port risk: watchtower, daily 08:00 ET</span></div>
+  <div class="bd">
+    <div class="hl"><span class="big">17 <small>of 26 boxes clear</small></span><span class="side"><span class="a">9 flagged · 6 at LA/LB</span><br><span style="color:var(--dim)">on plan 24 of 26 total · 25 of 26 controllable</span></span></div>
+    <div class="row2" style="grid-template-columns:1.15fr 1fr">
+      <div>
+        <svg class="map" viewBox="0 0 640 330" role="img" aria-label="Schematic port map, EXAMPLE containers">
+          
+          <g font-family="system-ui, sans-serif" font-weight="700" text-anchor="middle">
+            <line x1="330" y1="175" x2="150" y2="120" stroke="#ff4d4d" stroke-width="3"/>
+            <line x1="330" y1="175" x2="520" y2="70" stroke="#3ddc84" stroke-width="2"/>
+            <line x1="330" y1="175" x2="470" y2="140" stroke="#ffb000" stroke-width="2" stroke-dasharray="6 5"/>
+            <line x1="330" y1="175" x2="480" y2="250" stroke="#3ddc84" stroke-width="2"/>
+            <circle cx="330" cy="175" r="7" fill="#f2f2f2"/><text x="330" y="205" fill="#9a9a9a" font-size="15">EX-ASIA-FACTORY</text>
+            <circle cx="150" cy="120" r="26" fill="none" stroke="#ff4d4d" stroke-width="3"/><circle cx="150" cy="120" r="10" fill="#ff4d4d"/>
+            <text x="150" y="76" fill="#f2f2f2" font-size="20">LA / LONG BEACH</text>
+            <text x="150" y="172" fill="#ff4d4d" font-size="18">11 BOXES · 6 FLAGGED</text>
+            <text x="150" y="195" fill="#ff4d4d" font-size="16">STRIKE DEADLINE</text>
+            <text x="150" y="216" fill="#ff4d4d" font-size="16">11-04 17:00 PT</text>
+            <circle cx="520" cy="70" r="10" fill="#3ddc84"/><text x="520" y="40" fill="#f2f2f2" font-size="20">ROTTERDAM</text>
+            <text x="540" y="98" fill="#3ddc84" font-size="15">8 BOXES · 1 DOCK DELAY</text>
+            <circle cx="470" cy="140" r="7" fill="#ffb000"/><text x="482" y="166" fill="#ffb000" font-size="15" text-anchor="start">VALENCIA · STRIKE 11-11</text>
+            <circle cx="480" cy="250" r="10" fill="#3ddc84"/><text x="480" y="284" fill="#f2f2f2" font-size="20">SINGAPORE</text>
+            <text x="480" y="308" fill="#ffb000" font-size="16">7 BOXES · 1 LATE</text>
+          </g>
+        </svg>
+      </div>
+      <div>
+        <div class="tw"><table class="db">
+          <thead><tr><th>Box</th><th>Port</th><th>ETA</th><th>Status</th></tr></thead>
+          <tbody>
+            <tr><td>CNTR-014</td><td>LGB</td><td>AVAIL</td><td><span class="st red">PULL NOW</span></td></tr>
+            <tr><td>CNTR-015</td><td>LGB</td><td>AVAIL</td><td><span class="st red">PULL NOW</span></td></tr>
+            <tr><td>CNTR-016</td><td>LAX</td><td>DISCH</td><td><span class="st red">PORT RISK</span></td></tr>
+            <tr><td>CNTR-019</td><td>LGB</td><td>11-05</td><td><span class="st red">PORT RISK</span></td></tr>
+            <tr><td>CNTR-020</td><td>LAX</td><td>11-07</td><td><span class="st red">PORT RISK</span></td></tr>
+            <tr><td>CNTR-021</td><td>LGB</td><td>11-09</td><td><span class="st red">PORT RISK</span></td></tr>
+            <tr><td>CNTR-031</td><td>VLC</td><td>11-10</td><td><span class="st amb">WATCH</span></td></tr>
+            <tr><td>CNTR-040</td><td>SIN</td><td>11-18</td><td><span class="st amb">+7 D SUPP</span></td></tr>
+            <tr><td>CNTR-033</td><td>RTM</td><td>11-05</td><td><span class="st amb">+2 D 3PL</span></td></tr>
+          </tbody>
+        </table></div>
+      </div>
+    </div>
+  </div>
+  <div class="ft"><span class="ex">EXAMPLE boxes · real public port risk (freight/watchtower-log.md)</span><span>Map is schematic, not to scale · spec §3</span></div>
+</section>
+
+
+<section class="scr" id="s4">
+  <div class="hd"><span class="n">4</span><span class="t">3PL scorecards</span><span class="r">Data week <b>2027-03-14</b> (EXAMPLE) · refresh daily<br>Controllable = 3PL-caused misses only · same denominator</span></div>
+  <div class="bd">
+    <div class="tw"><table class="db" style="font-size:calc(1.7*var(--u))">
+      <thead><tr><th>3PL</th><th>OTIF total</th><th>OTIF ctrl</th><th>In-stock total</th><th>In-stock ctrl</th><th>Status</th></tr></thead>
+      <tbody>
+        <tr><td>EX-USW</td><td class="ok">98.69%</td><td class="ok">99.34%</td><td class="amb">96.76%</td><td>98.54%</td><td><span class="st ok">MEETS SLA</span></td></tr>
+        <tr><td>EX-NL</td><td class="ok">98.47%</td><td class="ok">99.24%</td><td class="amb">95.60%</td><td>98.02%</td><td><span class="st ok">MEETS SLA</span></td></tr>
+        <tr><td>EX-SG</td><td class="ok">98.37%</td><td class="ok">99.59%</td><td class="amb">96.17%</td><td>99.23%</td><td><span class="st amb">AT RISK</span></td></tr>
+        <tr><td>EX-USE</td><td class="red">97.25%</td><td>98.63%</td><td class="amb">95.84%</td><td>98.13%</td><td><span class="st red">MISS</span></td></tr>
+        <tr><td>NETWORK</td><td class="ok">98.20%</td><td class="ok">99.20%</td><td class="amb">96.09%</td><td>98.48%</td><td><span class="st ok">MEETS SLA</span></td></tr>
+        <tr><td class="dim">EX-UK</td><td class="dim">98.34%</td><td class="dim">99.16%</td><td class="dim">93.59%</td><td class="dim">97.11%</td><td><span class="st out">UNVERIFIED</span></td></tr>
+      </tbody>
+    </table></div>
+    <div class="row2" style="flex:none;margin-top:calc(1*var(--u))">
+      <div><div class="lbl">OTIF by site · bar = total · thin = controllable · dashed = 98% SLA</div><svg class="wchart" style="height:calc(11.5*var(--u))" viewBox="0 0 600 190" role="img" aria-label="OTIF total and controllable by site against the 98 percent SLA"><line x1="80.0" x2="80.0" y1="4" y2="164" stroke="#262626" stroke-width="1" /><text x="80.0" y="182" fill="#9a9a9a" font-size="15" text-anchor="middle" font-family="-apple-system,BlinkMacSystemFont,Segoe UI,system-ui,sans-serif">96%</text><line x1="205.0" x2="205.0" y1="4" y2="164" stroke="#262626" stroke-width="1" /><text x="205.0" y="182" fill="#9a9a9a" font-size="15" text-anchor="middle" font-family="-apple-system,BlinkMacSystemFont,Segoe UI,system-ui,sans-serif">97%</text><line x1="330.0" x2="330.0" y1="4" y2="164" stroke="#ffb000" stroke-width="2" stroke-dasharray="5 4"/><text x="330.0" y="182" fill="#9a9a9a" font-size="15" text-anchor="middle" font-family="-apple-system,BlinkMacSystemFont,Segoe UI,system-ui,sans-serif">98%</text><line x1="455.0" x2="455.0" y1="4" y2="164" stroke="#262626" stroke-width="1" /><text x="455.0" y="182" fill="#9a9a9a" font-size="15" text-anchor="middle" font-family="-apple-system,BlinkMacSystemFont,Segoe UI,system-ui,sans-serif">99%</text><line x1="580.0" x2="580.0" y1="4" y2="164" stroke="#262626" stroke-width="1" /><text x="580.0" y="182" fill="#9a9a9a" font-size="15" text-anchor="middle" font-family="-apple-system,BlinkMacSystemFont,Segoe UI,system-ui,sans-serif">100%</text><text x="70" y="27" fill="#f2f2f2" font-size="16" font-weight="800" text-anchor="end" font-family="-apple-system,BlinkMacSystemFont,Segoe UI,system-ui,sans-serif">USW</text><rect x="80" y="10" width="336.2" height="11" fill="#3ddc84"/><rect x="80" y="23" width="417.5" height="8" fill="#8ab4ff" fill-opacity=".75"/><text x="70" y="58" fill="#f2f2f2" font-size="16" font-weight="800" text-anchor="end" font-family="-apple-system,BlinkMacSystemFont,Segoe UI,system-ui,sans-serif">NL</text><rect x="80" y="41" width="308.7" height="11" fill="#3ddc84"/><rect x="80" y="54" width="405.0" height="8" fill="#8ab4ff" fill-opacity=".75"/><text x="70" y="89" fill="#f2f2f2" font-size="16" font-weight="800" text-anchor="end" font-family="-apple-system,BlinkMacSystemFont,Segoe UI,system-ui,sans-serif">SG</text><rect x="80" y="72" width="296.3" height="11" fill="#3ddc84"/><rect x="80" y="85" width="448.8" height="8" fill="#8ab4ff" fill-opacity=".75"/><text x="70" y="120" fill="#f2f2f2" font-size="16" font-weight="800" text-anchor="end" font-family="-apple-system,BlinkMacSystemFont,Segoe UI,system-ui,sans-serif">USE</text><rect x="80" y="103" width="156.2" height="11" fill="#ff4d4d"/><rect x="80" y="116" width="328.7" height="8" fill="#8ab4ff" fill-opacity=".75"/><text x="70" y="151" fill="#f2f2f2" font-size="16" font-weight="800" text-anchor="end" font-family="-apple-system,BlinkMacSystemFont,Segoe UI,system-ui,sans-serif">NET</text><rect x="80" y="134" width="275.0" height="11" fill="#3ddc84"/><rect x="80" y="147" width="400.0" height="8" fill="#8ab4ff" fill-opacity=".75"/></svg></div>
+      <div><div class="lbl">Network trend</div><svg class="wchart" style="height:calc(11.5*var(--u))" viewBox="0 0 600 190" role="img" aria-label="Network OTIF and in-stock, last 12 weeks"><text x="0" y="43.5" fill="#9a9a9a" font-size="15" font-weight="800" font-family="-apple-system,BlinkMacSystemFont,Segoe UI,system-ui,sans-serif">OTIF ▼ 9 WK</text><polyline points="150.0,39.0 183.6,13.1 217.3,10.0 250.9,11.5 284.5,19.2 318.2,25.3 351.8,28.3 385.5,40.6 419.1,46.7 452.7,52.8 486.4,57.4 520.0,65.0" fill="none" stroke="#ffb000" stroke-width="3"/><circle cx="520.0" cy="65.0" r="5" fill="#ffb000"/><text x="532.0" y="71.0" fill="#ffb000" font-size="18" font-weight="800" font-family="-apple-system,BlinkMacSystemFont,Segoe UI,system-ui,sans-serif">98.20%</text><text x="0" y="143.5" fill="#9a9a9a" font-size="15" font-weight="800" font-family="-apple-system,BlinkMacSystemFont,Segoe UI,system-ui,sans-serif">IN-STOCK ▲</text><polyline points="150.0,165.0 183.6,159.7 217.3,153.7 250.9,145.1 284.5,137.8 318.2,135.5 351.8,131.2 385.5,124.9 419.1,121.3 452.7,118.6 486.4,114.3 520.0,110.0" fill="none" stroke="#3ddc84" stroke-width="3"/><circle cx="520.0" cy="110.0" r="5" fill="#3ddc84"/><text x="532.0" y="116.0" fill="#3ddc84" font-size="18" font-weight="800" font-family="-apple-system,BlinkMacSystemFont,Segoe UI,system-ui,sans-serif">96.09%</text><text x="150" y="182" fill="#9a9a9a" font-size="14" font-family="-apple-system,BlinkMacSystemFont,Segoe UI,system-ui,sans-serif">network · last 12 EXAMPLE weeks</text></svg></div>
+    </div>
+    <div class="note" style="font-size:calc(1.2*var(--u))"><b>Targets:</b> OTIF contract SLA ≥98.0% (scored on total) · in-stock 12-month glide target ≥99.0% · amber = below glide target, never a breach. Network excludes EX-UK (UNVERIFIED, rule 12). Source: ops/weekly-data-example.csv (otif_misses, in_stock_gaps segment 3pl). Carrier and supplier misses count in total, tagged outside 3PL control.</div>
+  </div>
+  <div class="ft"><span class="ex">EXAMPLE · made-up data · not Verkada</span><span>D-007 dual scoring</span></div>
+</section>
+
+
+<section class="scr" id="s5">
+  <div class="hd"><span class="n">5</span><span class="t">Returns · top customers</span><span class="r">Data <b>2026-11-03 06:00 ET</b> · refresh daily<br>EXAMPLE · returns trailing 4 wk</span></div>
+  <div class="bd">
+    <div class="row2">
+      <div>
+        <div class="hl" style="margin-bottom:calc(.6*var(--u))"><span class="big" style="font-size:calc(4.6*var(--u))">2.0%</span><span class="side" style="font-size:calc(1.6*var(--u))">returned · total<br><span style="color:var(--dim)">0.40% controllable</span></span></div>
+        <div class="tw"><table class="db" style="font-size:calc(1.5*var(--u))">
+          <thead><tr><th>SKU</th><th>Rate</th><th>Reason</th><th>Flag</th></tr></thead>
+          <tbody>
+            <tr><td>CAM-07</td><td class="red">6.8%</td><td>DEFECT</td><td><span class="st amb" style="min-width:calc(7*var(--u))">ACTION</span></td></tr>
+            <tr><td>ACC-12</td><td class="red">5.1%</td><td>WRONG ITEM</td><td><span class="st red" style="min-width:calc(7*var(--u))">3PL</span></td></tr>
+            <tr><td>SNS-03</td><td class="amb">3.4%</td><td>ORDERED WRONG</td><td><span class="st ok" style="min-width:calc(7*var(--u))">WATCH</span></td></tr>
+            <tr><td>ACS-02</td><td>2.2%</td><td>TRANSIT DAMAGE</td><td><span class="st ok" style="min-width:calc(7*var(--u))">OK</span></td></tr>
+            <tr><td>CUST C12</td><td class="amb">14.0%</td><td>OVER-ORDERED</td><td><span class="st ok" style="min-width:calc(7*var(--u))">REVIEW</span></td></tr>
+          </tbody>
+        </table></div>
+        <div class="lbl" style="margin-top:calc(.9*var(--u))">Why things come back · Pareto</div><svg class="wchart" viewBox="0 0 600 170" role="img" aria-label="Returns reasons Pareto"><rect x="15.0" y="35.6" width="70.0" height="94.4" fill="#8ab4ff"/><text x="50.0" y="29.6" fill="#f2f2f2" font-size="17" font-weight="800" text-anchor="middle" font-family="-apple-system,BlinkMacSystemFont,Segoe UI,system-ui,sans-serif">34%</text><text x="50.0" y="152" fill="#9a9a9a" font-size="14" font-weight="800" text-anchor="middle" font-family="-apple-system,BlinkMacSystemFont,Segoe UI,system-ui,sans-serif">DEFECT</text><rect x="115.0" y="55.0" width="70.0" height="75.0" fill="#8ab4ff"/><text x="150.0" y="49.0" fill="#f2f2f2" font-size="17" font-weight="800" text-anchor="middle" font-family="-apple-system,BlinkMacSystemFont,Segoe UI,system-ui,sans-serif">27%</text><text x="150.0" y="152" fill="#9a9a9a" font-size="14" font-weight="800" text-anchor="middle" font-family="-apple-system,BlinkMacSystemFont,Segoe UI,system-ui,sans-serif">ORD WRONG</text><rect x="215.0" y="85.6" width="70.0" height="44.4" fill="#ff4d4d"/><text x="250.0" y="79.6" fill="#f2f2f2" font-size="17" font-weight="800" text-anchor="middle" font-family="-apple-system,BlinkMacSystemFont,Segoe UI,system-ui,sans-serif">16%</text><text x="250.0" y="152" fill="#9a9a9a" font-size="14" font-weight="800" text-anchor="middle" font-family="-apple-system,BlinkMacSystemFont,Segoe UI,system-ui,sans-serif">WRONG ITEM</text><rect x="315.0" y="93.9" width="70.0" height="36.1" fill="#8ab4ff"/><text x="350.0" y="87.9" fill="#f2f2f2" font-size="17" font-weight="800" text-anchor="middle" font-family="-apple-system,BlinkMacSystemFont,Segoe UI,system-ui,sans-serif">13%</text><text x="350.0" y="152" fill="#9a9a9a" font-size="14" font-weight="800" text-anchor="middle" font-family="-apple-system,BlinkMacSystemFont,Segoe UI,system-ui,sans-serif">TRANSIT</text><rect x="415.0" y="113.3" width="70.0" height="16.7" fill="#9a9a9a"/><text x="450.0" y="107.3" fill="#f2f2f2" font-size="17" font-weight="800" text-anchor="middle" font-family="-apple-system,BlinkMacSystemFont,Segoe UI,system-ui,sans-serif">6%</text><text x="450.0" y="152" fill="#9a9a9a" font-size="14" font-weight="800" text-anchor="middle" font-family="-apple-system,BlinkMacSystemFont,Segoe UI,system-ui,sans-serif">UNKNOWN</text><rect x="515.0" y="118.9" width="70.0" height="11.1" fill="#ff4d4d"/><text x="550.0" y="112.9" fill="#f2f2f2" font-size="17" font-weight="800" text-anchor="middle" font-family="-apple-system,BlinkMacSystemFont,Segoe UI,system-ui,sans-serif">4%</text><text x="550.0" y="152" fill="#9a9a9a" font-size="14" font-weight="800" text-anchor="middle" font-family="-apple-system,BlinkMacSystemFont,Segoe UI,system-ui,sans-serif">PACKING</text><polyline points="50.0,89.9 150.0,58.0 250.0,39.1 350.0,23.8 450.0,16.7 550.0,12.0" fill="none" stroke="#3ddc84" stroke-width="2.5"/><text x="600" y="168" fill="#9a9a9a" font-size="13" text-anchor="end" font-family="-apple-system,BlinkMacSystemFont,Segoe UI,system-ui,sans-serif">line = cumulative % · red = 3PL-controllable</text></svg>
+      </div>
+      <div>
+        <div class="lbl">Top 5 customers · spend index · at risk</div>
+        <div class="tw"><table class="db" style="font-size:calc(1.5*var(--u))">
+          <thead><tr><th>#</th><th>Cust</th><th>Index</th><th>Status</th></tr></thead>
+          <tbody>
+            <tr><td>1</td><td>EX-C07</td><td>100</td><td><span class="st amb" style="min-width:calc(7*var(--u))">2 AT RISK</span></td></tr>
+            <tr><td>2</td><td>EX-C22</td><td>86</td><td><span class="st amb" style="min-width:calc(7*var(--u))">3 AT RISK</span></td></tr>
+            <tr><td>3</td><td>EX-C03</td><td>71</td><td><span class="st ok" style="min-width:calc(7*var(--u))">BIG · WATCH</span></td></tr>
+            <tr><td>4</td><td>EX-C41</td><td>64</td><td><span class="st amb" style="min-width:calc(7*var(--u))">2 AT RISK</span></td></tr>
+            <tr><td>5</td><td>EX-C15</td><td>52</td><td><span class="st ok" style="min-width:calc(7*var(--u))">BIG · ON TRACK</span></td></tr>
+          </tbody>
+        </table></div>
+        <div class="lbl" style="margin-top:calc(.9*var(--u))">Top 10 = 46% of spend · amber = has orders at risk</div><svg class="wchart" viewBox="0 0 600 170" role="img" aria-label="Top 10 customers by spend index"><text x="0" y="12.0" fill="#f2f2f2" font-size="13" font-weight="800" font-family="-apple-system,BlinkMacSystemFont,Segoe UI,system-ui,sans-serif">EX-C07</text><rect x="70" y="2.0" width="440.0" height="11" fill="#ffb000"/><text x="518.0" y="12.0" fill="#9a9a9a" font-size="13" font-family="-apple-system,BlinkMacSystemFont,Segoe UI,system-ui,sans-serif">100</text><text x="0" y="27.5" fill="#f2f2f2" font-size="13" font-weight="800" font-family="-apple-system,BlinkMacSystemFont,Segoe UI,system-ui,sans-serif">EX-C22</text><rect x="70" y="17.5" width="378.4" height="11" fill="#ffb000"/><text x="456.4" y="27.5" fill="#9a9a9a" font-size="13" font-family="-apple-system,BlinkMacSystemFont,Segoe UI,system-ui,sans-serif">86</text><text x="0" y="43.0" fill="#f2f2f2" font-size="13" font-weight="800" font-family="-apple-system,BlinkMacSystemFont,Segoe UI,system-ui,sans-serif">EX-C03</text><rect x="70" y="33.0" width="312.4" height="11" fill="#3ddc84"/><text x="390.4" y="43.0" fill="#9a9a9a" font-size="13" font-family="-apple-system,BlinkMacSystemFont,Segoe UI,system-ui,sans-serif">71</text><text x="0" y="58.5" fill="#f2f2f2" font-size="13" font-weight="800" font-family="-apple-system,BlinkMacSystemFont,Segoe UI,system-ui,sans-serif">EX-C41</text><rect x="70" y="48.5" width="281.6" height="11" fill="#ffb000"/><text x="359.6" y="58.5" fill="#9a9a9a" font-size="13" font-family="-apple-system,BlinkMacSystemFont,Segoe UI,system-ui,sans-serif">64</text><text x="0" y="74.0" fill="#f2f2f2" font-size="13" font-weight="800" font-family="-apple-system,BlinkMacSystemFont,Segoe UI,system-ui,sans-serif">EX-C15</text><rect x="70" y="64.0" width="228.8" height="11" fill="#3ddc84"/><text x="306.8" y="74.0" fill="#9a9a9a" font-size="13" font-family="-apple-system,BlinkMacSystemFont,Segoe UI,system-ui,sans-serif">52</text><text x="0" y="89.5" fill="#9a9a9a" font-size="13" font-weight="800" font-family="-apple-system,BlinkMacSystemFont,Segoe UI,system-ui,sans-serif">EX-C09</text><rect x="70" y="79.5" width="206.8" height="11" fill="#3a3a3a"/><text x="284.8" y="89.5" fill="#9a9a9a" font-size="13" font-family="-apple-system,BlinkMacSystemFont,Segoe UI,system-ui,sans-serif">47</text><text x="0" y="105.0" fill="#9a9a9a" font-size="13" font-weight="800" font-family="-apple-system,BlinkMacSystemFont,Segoe UI,system-ui,sans-serif">EX-C55</text><rect x="70" y="95.0" width="180.4" height="11" fill="#3a3a3a"/><text x="258.4" y="105.0" fill="#9a9a9a" font-size="13" font-family="-apple-system,BlinkMacSystemFont,Segoe UI,system-ui,sans-serif">41</text><text x="0" y="120.5" fill="#9a9a9a" font-size="13" font-weight="800" font-family="-apple-system,BlinkMacSystemFont,Segoe UI,system-ui,sans-serif">EX-C18</text><rect x="70" y="110.5" width="167.2" height="11" fill="#3a3a3a"/><text x="245.2" y="120.5" fill="#9a9a9a" font-size="13" font-family="-apple-system,BlinkMacSystemFont,Segoe UI,system-ui,sans-serif">38</text><text x="0" y="136.0" fill="#9a9a9a" font-size="13" font-weight="800" font-family="-apple-system,BlinkMacSystemFont,Segoe UI,system-ui,sans-serif">EX-C30</text><rect x="70" y="126.0" width="145.2" height="11" fill="#3a3a3a"/><text x="223.2" y="136.0" fill="#9a9a9a" font-size="13" font-family="-apple-system,BlinkMacSystemFont,Segoe UI,system-ui,sans-serif">33</text><text x="0" y="151.5" fill="#9a9a9a" font-size="13" font-weight="800" font-family="-apple-system,BlinkMacSystemFont,Segoe UI,system-ui,sans-serif">EX-C12</text><rect x="70" y="141.5" width="127.6" height="11" fill="#3a3a3a"/><text x="205.6" y="151.5" fill="#9a9a9a" font-size="13" font-family="-apple-system,BlinkMacSystemFont,Segoe UI,system-ui,sans-serif">29</text></svg>
+        <div class="note" style="margin-top:calc(.6*var(--u))">Spend as index (top = 100), owned by C&amp;F. No dollars.</div>
+      </div>
+    </div>
+  </div>
+  <div class="ft"><span class="ex">EXAMPLE · made-up data · not Verkada</span><span>Spec §2, §4 · CS contacts = background only</span></div>
+</section>
+
+
+<section class="scr" id="s6">
+  <div class="hd"><span class="n">6</span><span class="t">Running totals · did you know</span><span class="r">Data <b>2026-11-02 close</b> · refresh daily<br>EXAMPLE · fiscal year to date</span></div>
+  <div class="bd">
+    <div class="k6">
+      <div class="t"><div class="k">Revenue to date</div><div class="v flip">104</div><div class="s">index · plan = 100 · C&amp;F</div></div>
+      <div class="t"><div class="k">Orders placed</div><div class="v flip">61,480</div><div class="s">FYTD</div></div>
+      <div class="t"><div class="k">Orders fulfilled</div><div class="v flip">60,912</div><div class="s">FYTD</div></div>
+      <div class="t"><div class="k">Units shipped</div><div class="v flip">1,284,600</div><div class="s">FYTD</div></div>
+    </div>
+    <div class="rec">
+      <div>Countries shipped to <b>74</b></div>
+      <div>Most orders in a day <b>1,146</b></div>
+      <div>On-time streak · EX-USW <b>23 d <small>CTRL</small> · 9 d <small>TOTAL</small></b></div>
+      <div>Largest order vs avg <b>4.2×</b></div>
+    </div>
+    <div class="lbl" style="margin-top:calc(1.6*var(--u))">Orders placed by fiscal month · EXAMPLE · sums to 61,480</div><svg class="wchart" viewBox="0 0 1000 200" role="img" aria-label="Orders placed per fiscal month"><rect x="20.0" y="59.7" width="71.1" height="105.3" fill="#1f5f3d"/><text x="55.6" y="53.7" fill="#f2f2f2" font-size="19" font-weight="800" text-anchor="middle" font-family="-apple-system,BlinkMacSystemFont,Segoe UI,system-ui,sans-serif">6,020</text><text x="55.6" y="190" fill="#9a9a9a" font-size="16" font-weight="800" text-anchor="middle" font-family="-apple-system,BlinkMacSystemFont,Segoe UI,system-ui,sans-serif">M1</text><rect x="131.1" y="54.6" width="71.1" height="110.4" fill="#1f5f3d"/><text x="166.7" y="48.6" fill="#f2f2f2" font-size="19" font-weight="800" text-anchor="middle" font-family="-apple-system,BlinkMacSystemFont,Segoe UI,system-ui,sans-serif">6,310</text><text x="166.7" y="190" fill="#9a9a9a" font-size="16" font-weight="800" text-anchor="middle" font-family="-apple-system,BlinkMacSystemFont,Segoe UI,system-ui,sans-serif">M2</text><rect x="242.2" y="50.4" width="71.1" height="114.6" fill="#1f5f3d"/><text x="277.8" y="44.4" fill="#f2f2f2" font-size="19" font-weight="800" text-anchor="middle" font-family="-apple-system,BlinkMacSystemFont,Segoe UI,system-ui,sans-serif">6,550</text><text x="277.8" y="190" fill="#9a9a9a" font-size="16" font-weight="800" text-anchor="middle" font-family="-apple-system,BlinkMacSystemFont,Segoe UI,system-ui,sans-serif">M3</text><rect x="353.3" y="51.6" width="71.1" height="113.4" fill="#1f5f3d"/><text x="388.9" y="45.6" fill="#f2f2f2" font-size="19" font-weight="800" text-anchor="middle" font-family="-apple-system,BlinkMacSystemFont,Segoe UI,system-ui,sans-serif">6,480</text><text x="388.9" y="190" fill="#9a9a9a" font-size="16" font-weight="800" text-anchor="middle" font-family="-apple-system,BlinkMacSystemFont,Segoe UI,system-ui,sans-serif">M4</text><rect x="464.4" y="44.4" width="71.1" height="120.6" fill="#1f5f3d"/><text x="500.0" y="38.4" fill="#f2f2f2" font-size="19" font-weight="800" text-anchor="middle" font-family="-apple-system,BlinkMacSystemFont,Segoe UI,system-ui,sans-serif">6,890</text><text x="500.0" y="190" fill="#9a9a9a" font-size="16" font-weight="800" text-anchor="middle" font-family="-apple-system,BlinkMacSystemFont,Segoe UI,system-ui,sans-serif">M5</text><rect x="575.6" y="38.8" width="71.1" height="126.2" fill="#1f5f3d"/><text x="611.1" y="32.8" fill="#f2f2f2" font-size="19" font-weight="800" text-anchor="middle" font-family="-apple-system,BlinkMacSystemFont,Segoe UI,system-ui,sans-serif">7,210</text><text x="611.1" y="190" fill="#9a9a9a" font-size="16" font-weight="800" text-anchor="middle" font-family="-apple-system,BlinkMacSystemFont,Segoe UI,system-ui,sans-serif">M6</text><rect x="686.7" y="43.5" width="71.1" height="121.5" fill="#1f5f3d"/><text x="722.2" y="37.5" fill="#f2f2f2" font-size="19" font-weight="800" text-anchor="middle" font-family="-apple-system,BlinkMacSystemFont,Segoe UI,system-ui,sans-serif">6,940</text><text x="722.2" y="190" fill="#9a9a9a" font-size="16" font-weight="800" text-anchor="middle" font-family="-apple-system,BlinkMacSystemFont,Segoe UI,system-ui,sans-serif">M7</text><rect x="797.8" y="36.7" width="71.1" height="128.3" fill="#1f5f3d"/><text x="833.3" y="30.7" fill="#f2f2f2" font-size="19" font-weight="800" text-anchor="middle" font-family="-apple-system,BlinkMacSystemFont,Segoe UI,system-ui,sans-serif">7,330</text><text x="833.3" y="190" fill="#9a9a9a" font-size="16" font-weight="800" text-anchor="middle" font-family="-apple-system,BlinkMacSystemFont,Segoe UI,system-ui,sans-serif">M8</text><rect x="908.9" y="29.4" width="71.1" height="135.6" fill="#3ddc84"/><text x="944.4" y="23.4" fill="#f2f2f2" font-size="19" font-weight="800" text-anchor="middle" font-family="-apple-system,BlinkMacSystemFont,Segoe UI,system-ui,sans-serif">7,750</text><text x="944.4" y="190" fill="#9a9a9a" font-size="16" font-weight="800" text-anchor="middle" font-family="-apple-system,BlinkMacSystemFont,Segoe UI,system-ui,sans-serif">M9</text></svg>
+  </div>
+  <div class="ft"><span class="ex">EXAMPLE · made-up data · not Verkada</span><span>Records from closed days only · spec §5</span></div>
+</section>
+
+</div>
+<script>
+/* MODE: SANITIZED (M-01 open). #1..#6 = show one screen full-window (one browser per monitor). No hash = all six. */
+(function () {
+  function show() {
+    var n = parseInt(location.hash.slice(1), 10), on = n >= 1 && n <= 6;
+    document.body.classList.toggle('one', on);
+    [].forEach.call(document.querySelectorAll('.scr'), function (s, i) { s.classList.toggle('on', on && i === n - 1); });
+  }
+  window.addEventListener('hashchange', show); show();
+})();
+</script>
+</body>
+</html>

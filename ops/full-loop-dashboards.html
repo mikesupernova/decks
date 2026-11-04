@@ -1,0 +1,612 @@
+<!-- MODE: SANITIZED (M-01 open) -->
+<!DOCTYPE html><html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1">
+<title>EXAMPLE · Full-loop dashboards spec</title>
+<style>
+:root{--ink:#0d1526;--dim:#5a6782;--line:#e3e8f0;--accent:#0a7f6f;--navy:#0b1220}
+*{box-sizing:border-box} html{-webkit-text-size-adjust:100%}
+body{margin:0;background:#fff;color:var(--ink);font:16px/1.6 -apple-system,BlinkMacSystemFont,"Segoe UI",system-ui,sans-serif}
+.ex-bar{position:sticky;top:0;z-index:5;background:#fff8e6;border-bottom:1px solid #f1d58a;color:#7a5600;font-size:13px;font-weight:700;letter-spacing:.04em;padding:8px 20px;text-align:center}
+main{max-width:900px;margin:0 auto;padding:48px 24px 96px}
+nav.top{font-size:13px;letter-spacing:.12em;text-transform:uppercase;margin-bottom:28px} nav.top a{color:var(--accent);text-decoration:none;margin-right:18px;font-weight:700}
+h1{font-size:34px;line-height:1.2;letter-spacing:-.01em;margin:0 0 12px}
+h2{font-size:22px;margin:56px 0 12px;padding-top:20px;border-top:1px solid var(--line)}
+p,li{color:#26314a} em{color:var(--dim)} a{color:var(--accent)}
+code{font:13px ui-monospace,SFMono-Regular,Menlo,monospace;background:#f2f5f9;padding:1px 5px;border-radius:3px}
+.tw{overflow-x:auto;margin:14px 0} table{border-collapse:collapse;width:100%;font-size:14px}
+th{text-align:left;font-size:11.5px;letter-spacing:.12em;text-transform:uppercase;color:var(--dim);border-bottom:2px solid var(--ink);padding:8px 10px}
+td{border-bottom:1px solid var(--line);padding:8px 10px;vertical-align:top}
+.fig{margin:22px 0;background:var(--navy);padding:18px 20px 14px;border-radius:6px}
+.figt{color:#e8ecf4;font-size:12px;letter-spacing:.14em;text-transform:uppercase;font-weight:700;margin-bottom:10px}
+.figt .ex{color:#ffc454;margin-left:8px} .fig svg.chart{width:100%;height:auto;display:block} .fig svg text{font-family:-apple-system,BlinkMacSystemFont,"Segoe UI",system-ui,sans-serif}
+figcaption{color:#9fb0cc;font-size:12.5px;margin-top:8px}
+footer{margin-top:64px;color:var(--dim);font-size:13px;border-top:1px solid var(--line);padding-top:16px}
+@media (max-width:600px){ main{padding:28px 16px 64px} h1{font-size:26px} h2{font-size:19px} body{font-size:15px} table{font-size:13px} .fig{padding:12px} }
+</style></head><body>
+<div class="ex-bar">EXAMPLE · made-up names and numbers · not company data · money shown only as an index</div>
+<main>
+<nav class="top"><a href="index.html">← Ops index</a><a href="friday-report-2026-11-06.html">Friday report</a><a href="control-tower-wall.html">Control-tower wall</a></nav>
+<h1 id="full-loop-dashboards-spec-v2-decisions-d-008-to-d-012-applied">Full-loop dashboards: spec (v2, decisions D-008 to D-012 applied)</h1>
+<p><em>Draft by 3PL Ops Lead lane (built via Chief of Staff), 2026-11-03 19:00 ET. Ask: Mike wants the team to see the full supply chain, from what is ordered and produced to what is shipped and returned, so he can control or influence all of it. Nothing is sent, posted or connected. Every number here and in the deck mockups is <strong>EXAMPLE</strong> (made up, not Verkada data). Customers, reps, SKUs and containers use codes only (EX-C.., EX-R.., EX-SKU-.., EX-CNTR-..). Money is shown as an <strong>index or a %</strong>, never in dollars (governance-sanitized-mode.md).</em></p>
+<p><strong>Status of thresholds and refresh rates: ADOPTED per D-012 (Decided by Mike (delegated), logged by CoS; decisions.md 2026-11-03, 7:23 PM ET), review after month 1.</strong> D-008, D-009, D-011 cited the same way below. D-010: method approved by Mike ("Do it"); dollar caps TBD on Day 1, owned by Contracts &amp; Finance; no spend authority until set.</p>
+<p>Where it shows up:</p>
+<ul>
+<li>Friday report: <a href="friday-report-2026-11-06.html">Friday report deck</a>. New page 0 (At a glance) and page 0b (Top 3 risks) lead the deck, slide 6 (Did you know) closes the main flow, and the dashboards sit in <strong>Appendix K1–K6</strong>, linked from page 0 (K6 = Potential moves &amp; opportunities, §10).</li>
+<li>Control-tower wall mockup (6 screens): <a href="control-tower-wall.html">control-tower wall</a> (§8).</li>
+</ul>
+<h2 id="0-rules-that-apply-to-every-dashboard">0. Rules that apply to every dashboard</h2>
+<ol>
+<li><strong>Dual scoring (D-007).</strong> Every KPI shows two scores on the same denominator: <strong>controllable</strong> (misses the 3PL caused: P-01..P-06, plus D-01 with owner 3PL) and <strong>total</strong> (all misses). Carrier, supplier, port and customer-driven misses count in the total and carry an <strong>outside 3PL control</strong> tag. U-00 (<code>unconfirmed</code>) stays out of the controllable count and is shown as its own flag. Controllable is never shown without total. No add-backs.</li>
+<li><strong>Exceptions first.</strong> The order and container views open on the exception list (what broke or will break, owner, how long open). Rows that are on track appear only as counts. Each screen is calm and green by default, so red stands out.</li>
+<li><strong>Early warning, not a lagging score.</strong> An order goes <strong>at risk</strong> when its projected ETA passes the promised date, not when it is already late. A container is flagged when it sits at or is heading to a port with an active risk row in <code>freight/watchtower-log.md</code>.</li>
+<li><strong>Customer-service signals are background only.</strong> Ticket volume and contact reasons can raise an early-warning note (for example "won't power on" contacts rising for one SKU). They never feed a KPI, score, tier or credit.</li>
+<li><strong>Money belongs to Contracts &amp; Finance.</strong> Spend, revenue, return value and reroute cost come from C&amp;F. Other bots quote C&amp;F and never compute money.</li>
+<li><strong>Data source = confirm on Day 1</strong> (board M-02: Workday, Tableau, Snowflake access). Candidate systems are named below; none is confirmed. The real schema stays unknown until M-01 closes.</li>
+</ol>
+<h2 id="1-order-status-appendix-k1-wall-screen-2">1. Order status (Appendix K1; wall screen 2)</h2>
+<p><strong>Purpose:</strong> every open customer order, with its rep, customer, ETA and promised date, and a projection of on track or at risk. Built around exceptions.</p><figure class="fig"><div class="figt">Headline ring <span class="ex">EXAMPLE</span></div><svg viewBox="0 0 280 130" class="chart" role="img" aria-label="75 of 78 customers on track"><circle cx="65" cy="65" r="54" fill="none" stroke="rgba(255,255,255,.12)" stroke-width="12"/><circle cx="65" cy="65" r="54" fill="none" stroke="#5ee1c7" stroke-width="12" stroke-dasharray="339.3" stroke-dashoffset="13.0" transform="rotate(-90 65 65)"/><text x="65" y="72" fill="#fff" font-size="26" font-weight="700" text-anchor="middle">75/78</text><text x="140" y="52" fill="#e8ecf4" font-size="15" font-weight="700">customers on track</text><text x="140" y="74" fill="#ffc454" font-size="13">3 at risk · 7 orders</text><text x="140" y="94" fill="#9fb0cc" font-size="12">controllable 77 of 78</text></svg><figcaption>At risk = projected ETA past the promised date (D-008).</figcaption></figure>
+<p><strong>Headline (EXAMPLE):</strong> <code>75 of 78 customers on track · 3 at risk</code> (total). Controllable: <code>77 of 78 · 1 at risk from 3PL-caused issues</code>. Orders: 405 of 412 open orders on track · 7 at risk · 9 on watch.</p>
+<div class="tw"><table>
+<thead>
+<tr>
+<th>Metric</th>
+<th>Definition</th>
+<th>Score</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Customers on track</td>
+<td>Customers with an open order where <strong>no</strong> order is at risk ÷ customers with an open order</td>
+<td>total + controllable</td>
+</tr>
+<tr>
+<td>Orders at risk</td>
+<td>Open orders where projected ETA &gt; promised date</td>
+<td>total + controllable (cause = 3PL)</td>
+</tr>
+<tr>
+<td>Orders on watch</td>
+<td>Open orders where projected ETA is within the buffer of the promised date (ETA ≤ promised but buffer &lt; 1 business day)</td>
+<td>count only</td>
+</tr>
+<tr>
+<td>Requested-date slip</td>
+<td>Projected ETA − customer requested date; separate metric, does not set at risk (D-008)</td>
+<td>per order</td>
+</tr>
+<tr>
+<td>Slip (days)</td>
+<td>Projected ETA − promised date, in business days</td>
+<td>per order</td>
+</tr>
+<tr>
+<td>Age of exception</td>
+<td>Hours since the order first went at risk</td>
+<td>per order</td>
+</tr>
+<tr>
+<td>Projected ETA</td>
+<td>Max of (planned release + site release-to-ship median, stock-available date for short lines, inbound container ETA + dock-to-stock for lines waiting on inbound) + lane transit median (<code>freight/carrier-lane-scorecard.md</code>)</td>
+<td>per order</td>
+</tr>
+<tr>
+<td>Cause tag</td>
+<td>3PL (P-01..P-06) · carrier (C-01/C-02) · supplier (S-..) · port/event · customer · unconfirmed (U-00)</td>
+<td>per order</td>
+</tr>
+</tbody>
+</table></div>
+<p>Columns on the list: order, customer, rep, ship site, promised, projected ETA, slip, cause tag (inside/outside 3PL control), owner, next action, hours open.</p>
+<p><strong>Alert thresholds (ADOPTED, D-012; review after month 1 of real data):</strong></p>
+<ul>
+<li>At risk (D-008: the promised date; requested date tracked separately): projected ETA &gt; promised date → alert same day to the owner of the cause.</li>
+<li>Watch: ETA ≤ promised date with &lt; 1 business day of buffer.</li>
+<li>Escalate to Mike: any at-risk order for a <strong>top-10 customer</strong> or a <strong>big order</strong> (§2), or any order at risk &gt; 48 h with no new action.</li>
+<li>Headline goes amber when customers on track &lt; 97%; red when &lt; 95% (total score).</li>
+</ul>
+<p><strong>Owner bot:</strong> 3PL Ops Lead (list, projection, 3PL causes). Freight &amp; Trade adds carrier and port causes. <strong>Data to confirm Day 1:</strong> order system / ERP (sales orders, promised dates, rep); 3PL WMS or Snowflake 3PL tables (release and ship scans); carrier tracking (ETAs). Candidate: Snowflake replica + Tableau view.</p>
+<h2 id="2-top-customers-and-big-orders-appendix-k4-wall-screen-5">2. Top customers and big orders (Appendix K4; wall screen 5)</h2>
+<p><strong>Purpose:</strong> rank customers by spend and flag unusually large orders so they get priority handling.</p>
+<div class="tw"><table>
+<thead>
+<tr>
+<th>Metric</th>
+<th>Definition</th>
+<th>Score</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Spend rank</td>
+<td>Trailing-12-month invoiced spend per customer, shown as an <strong>index (top customer = 100)</strong></td>
+<td>C&amp;F number</td>
+</tr>
+<tr>
+<td>Share of spend, top 10</td>
+<td>Top-10 spend ÷ total spend</td>
+<td>C&amp;F number</td>
+</tr>
+<tr>
+<td>Top-customer OTIF (4 wk)</td>
+<td>OTIF on orders for the top-10 customers</td>
+<td>total + controllable</td>
+</tr>
+<tr>
+<td>Open / at-risk orders per top customer</td>
+<td>From §1</td>
+<td>count</td>
+</tr>
+<tr>
+<td>Big order</td>
+<td>Order value ≥ <strong>3× the customer's 12-month average order</strong> or in the <strong>top 1% of order values network-wide</strong>, whichever triggers first (D-009)</td>
+<td>flag</td>
+</tr>
+</tbody>
+</table></div>
+<p><strong>Alert thresholds (ADOPTED, D-012; review after month 1 of real data):</strong></p>
+<ul>
+<li>Big-order alert on order entry → priority flag in WMS (pre-allocate stock, confirm carrier capacity, named owner).</li>
+<li>Any at-risk order for a top-10 customer → same-day escalation to Mike and the rep.</li>
+<li>Top-customer OTIF (total) &lt; 98.0% for 2 weeks → review with the rep (EXAMPLE; same level as the OTIF contract SLA in <code>ops/targets.md</code>).</li>
+</ul>
+<p><strong>Owner bot:</strong> Contracts &amp; Finance (spend, ranks, order value). 3PL Ops Lead (priority handling, OTIF). Freight &amp; Trade (capacity for big orders). <strong>Data to confirm Day 1:</strong> ERP / billing (spend, order value; possibly Workday Financials or another ERP, so confirm), CRM for rep mapping, Snowflake for joins.</p>
+<h2 id="3-container-visibility-appendix-k2-wall-screen-3">3. Container visibility (Appendix K2; wall screen 3)</h2>
+<p><strong>Purpose:</strong> every inbound container with its port, ETA and status, a port-risk flag, and a suggested reprioritize or reroute move. Built around exceptions.</p><figure class="fig"><div class="figt">Port and container map (schematic) <span class="ex">EXAMPLE</span></div><svg class="chart" viewBox="0 0 1104 300" role="img" aria-label="Schematic map of ports: LA/Long Beach 11 boxes 6 at risk; Rotterdam 8 boxes; Singapore 7 boxes; options Oakland, Valencia transship, stock transfer from EX-USE"><line x1="136.1" x2="136.1" y1="10" y2="280" stroke="rgba(122,184,255,.10)"/><line x1="252.1" x2="252.1" y1="10" y2="280" stroke="rgba(122,184,255,.10)"/><line x1="368.2" x2="368.2" y1="10" y2="280" stroke="rgba(122,184,255,.10)"/><line x1="484.3" x2="484.3" y1="10" y2="280" stroke="rgba(122,184,255,.10)"/><line x1="600.4" x2="600.4" y1="10" y2="280" stroke="rgba(122,184,255,.10)"/><line x1="716.4" x2="716.4" y1="10" y2="280" stroke="rgba(122,184,255,.10)"/><line x1="832.5" x2="832.5" y1="10" y2="280" stroke="rgba(122,184,255,.10)"/><line x1="948.6" x2="948.6" y1="10" y2="280" stroke="rgba(122,184,255,.10)"/><line x1="1064.7" x2="1064.7" y1="10" y2="280" stroke="rgba(122,184,255,.10)"/><line x1="10" x2="1094" y1="260.2" y2="260.2" stroke="rgba(122,184,255,.10)"/><text x="12" y="257.2" fill="#5f7090" font-size="9">0°N</text><line x1="10" x2="1094" y1="142.1" y2="142.1" stroke="rgba(122,184,255,.10)"/><text x="12" y="139.1" fill="#5f7090" font-size="9">30°N</text><line x1="10" x2="1094" y1="23.9" y2="23.9" stroke="rgba(122,184,255,.10)"/><text x="12" y="20.9" fill="#5f7090" font-size="9">60°N</text><line x1="143.0" y1="127.3" x2="170.9" y2="116.5" stroke="rgba(232,236,244,.5)" stroke-width="1.3"/><line x1="617.8" y1="55.8" x2="633.3" y2="53.0" stroke="rgba(232,236,244,.5)" stroke-width="1.3"/><line x1="1002.0" y1="255.1" x2="1018.2" y2="242.5" stroke="rgba(232,236,244,.5)" stroke-width="1.3"/><line x1="143.0" y1="127.3" x2="127.2" y2="111.3" stroke="#ffc454" stroke-width="1.3" stroke-dasharray="4 3"/><line x1="312.9" y1="100.7" x2="170.9" y2="116.5" stroke="#5ee1c7" stroke-width="1.3" stroke-dasharray="4 3"/><line x1="599.1" y1="104.8" x2="617.8" y2="55.8" stroke="#ffc454" stroke-width="1.3" stroke-dasharray="4 3"/><circle cx="143.0" cy="127.3" r="19" fill="#ff9f7a" fill-opacity=".18" stroke="#ff9f7a" stroke-width="1.5"/><circle cx="143.0" cy="127.3" r="2.5" fill="#ff9f7a"/><circle cx="127.2" cy="111.3" r="7" fill="#ffc454" fill-opacity=".18" stroke="#ffc454" stroke-width="1.5" stroke-dasharray="3 3"/><circle cx="127.2" cy="111.3" r="2.5" fill="#ffc454"/><circle cx="617.8" cy="55.8" r="16" fill="#ffc454" fill-opacity=".18" stroke="#ffc454" stroke-width="1.5"/><circle cx="617.8" cy="55.8" r="2.5" fill="#ffc454"/><circle cx="599.1" cy="104.8" r="6" fill="#ffc454" fill-opacity=".18" stroke="#ffc454" stroke-width="1.5" stroke-dasharray="3 3"/><circle cx="599.1" cy="104.8" r="2.5" fill="#ffc454"/><circle cx="1002.0" cy="255.1" r="15" fill="#ffc454" fill-opacity=".18" stroke="#ffc454" stroke-width="1.5"/><circle cx="1002.0" cy="255.1" r="2.5" fill="#ffc454"/><rect x="166.9" y="112.5" width="8" height="8" fill="none" stroke="#e8ecf4" stroke-width="1.3"/><text x="170.9" y="106.5" fill="#e8ecf4" font-size="10.5" text-anchor="middle">EX-USW</text><rect x="308.9" y="96.7" width="8" height="8" fill="none" stroke="#e8ecf4" stroke-width="1.3"/><text x="322.9" y="104.7" fill="#e8ecf4" font-size="10.5" text-anchor="start">EX-USE</text><rect x="629.3" y="49.0" width="8" height="8" fill="none" stroke="#e8ecf4" stroke-width="1.3"/><text x="641.3" y="57.0" fill="#e8ecf4" font-size="10.5" text-anchor="start">EX-NL</text><rect x="1014.2" y="238.5" width="8" height="8" fill="none" stroke="#e8ecf4" stroke-width="1.3"/><text x="1026.2" y="246.5" fill="#e8ecf4" font-size="10.5" text-anchor="start">EX-SG</text><text x="167.0" y="161.3" fill="#ff9f7a" font-size="12" font-weight="700" text-anchor="start">LA / Long Beach · 11 boxes</text><text x="167.0" y="175.3" fill="#ff9f7a" font-size="10.5" font-weight="600" text-anchor="start">6 port-risk · deadline 11-04 17:00 PT</text><text x="167.0" y="189.3" fill="#9fb0cc" font-size="10.5" font-weight="500" text-anchor="start">moves 1–3: pull or switch terminal</text><text x="117.2" y="77.3" fill="#ffc454" font-size="12" font-weight="700" text-anchor="start">Oakland (option)</text><text x="117.2" y="91.3" fill="#9fb0cc" font-size="10.5" font-weight="500" text-anchor="start">move 4: divert 021 if strike</text><text x="272.9" y="130.7" fill="#5ee1c7" font-size="12" font-weight="700" text-anchor="start">Stock transfer option</text><text x="272.9" y="144.7" fill="#9fb0cc" font-size="10.5" font-weight="500" text-anchor="start">move 6: EX-C03 from EX-USE</text><text x="639.8" y="25.8" fill="#ffc454" font-size="12" font-weight="700" text-anchor="start">Rotterdam · 8 boxes</text><text x="639.8" y="39.8" fill="#9fb0cc" font-size="10.5" font-weight="500" text-anchor="start">1 dock delay (3PL) · 033</text><text x="587.1" y="130.8" fill="#ffc454" font-size="12" font-weight="700" text-anchor="end">Valencia transship · 031</text><text x="587.1" y="144.8" fill="#9fb0cc" font-size="10.5" font-weight="500" text-anchor="end">Spain strike 11-11</text><text x="978.0" y="219.1" fill="#ffc454" font-size="12" font-weight="700" text-anchor="end">Singapore · 7 boxes</text><text x="978.0" y="233.1" fill="#9fb0cc" font-size="10.5" font-weight="500" text-anchor="end">040 supplier late +7 d</text><text x="978.0" y="247.1" fill="#9fb0cc" font-size="10.5" font-weight="500" text-anchor="end">move 5: air top-up</text></svg><figcaption>Port events are real public events; boxes, sites and moves are EXAMPLE.</figcaption></figure>
+<p><strong>Headline (EXAMPLE):</strong> <code>17 of 26 containers clear · 9 flagged · 6 at or heading to LA/LB</code>. On plan: 24 of 26 total · 25 of 26 controllable (only EX-CNTR-033 is 3PL-caused).</p>
+<div class="tw"><table>
+<thead>
+<tr>
+<th>Metric</th>
+<th>Definition</th>
+<th>Score</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Containers clear</td>
+<td>Active inbound containers with no flag (port risk, watch, late, dwell, LFD) ÷ all active inbound</td>
+<td>count</td>
+</tr>
+<tr>
+<td>Containers on plan</td>
+<td>Projected arrival at the 3PL ≤ planned date ÷ active inbound containers</td>
+<td>total + controllable</td>
+</tr>
+<tr>
+<td>Port-risk exposure</td>
+<td>Containers at or due within 7 days at a port with an active watchtower risk row (strike, weather, congestion, closure)</td>
+<td>count + list</td>
+</tr>
+<tr>
+<td>Dwell at port</td>
+<td>Days since discharge / availability without pickup</td>
+<td>per container</td>
+</tr>
+<tr>
+<td>Last free day (LFD) gap</td>
+<td>LFD − today (demurrage risk)</td>
+<td>per container</td>
+</tr>
+<tr>
+<td>Linked orders</td>
+<td>Customer orders whose stock is on the container (from §1)</td>
+<td>count</td>
+</tr>
+<tr>
+<td>Status</td>
+<td>Booked · Rolled · On water · Discharged · Available · Picked up · At 3PL · Received</td>
+<td>per container</td>
+</tr>
+</tbody>
+</table></div>
+<p>Controllable for containers = misses the 3PL caused after the container reaches its door (dock appointment refused or pushed, dock-to-stock over SLA). Port, carrier, customs and supplier delays count in the total, tagged outside 3PL control.</p>
+<p><strong>Suggested moves (rules; each move is ranked and tracked on K6, §10):</strong> pull available boxes before a risk deadline; ask the carrier to discharge at an unaffected terminal; divert on-water boxes to another port (for example Oakland or Seattle/Tacoma for EX-USW) when the cost is approved; air a class-A top-up on the air lane (EX-L02); fill linked customer orders from another site. Reroute costs come from C&amp;F before any move.</p>
+<p><strong>Alert thresholds (ADOPTED, D-012; review after month 1 of real data):</strong></p>
+<ul>
+<li>Port-risk flag: any active watchtower risk row for the port, with the event deadline shown (EXAMPLE now: <strong>LA/LB ILWU Local 26 watchmen, deadline 2026-11-04 17:00 PT</strong>, real public event, outcome pending).</li>
+<li>Dwell at port &gt; 3 days, or LFD within 2 days → alert Freight &amp; Trade.</li>
+<li>ETA slip &gt; 3 days vs plan, or status "Rolled" → alert Freight &amp; Trade and re-run §1 projections for linked orders.</li>
+<li>Any container with linked top-10 or big-order stock in a flagged port → escalate to Mike.</li>
+<li>Reroute spend (D-010, method approved): Freight &amp; Trade may approve one container's move if cost ≤ min(CAP, 50% × avoided exposure), cost &lt; avoided exposure, and month-to-date + cost ≤ monthly cap. Single container only, no splitting, logged within 24 h, never sign, pay or commit terms; limit = 0 without a tariff or quote for that box. Above the limit → Mike. <strong>CAP and monthly cap are set on Day 1</strong> against the company approval policy (Mike's own limit is the ceiling); until then every reroute cost goes to Mike. Method: <code>finance/d010-reroute-spend-limit-proposal.md</code>.</li>
+</ul>
+<p><strong>Owner bot:</strong> Freight &amp; Trade (status, port risk, moves). Contracts &amp; Finance (reroute, demurrage and detention cost). 3PL Ops Lead (dock appointment and dock-to-stock). <strong>Data to confirm Day 1:</strong> forwarder / carrier visibility portal or TMS (container status and ETA), ASN feed (<code>freight/asn-sscc-requirements.md</code>), Snowflake if loaded; port risk from <code>freight/watchtower-log.md</code> (public).</p>
+<h2 id="4-returns-appendix-k3-wall-screen-5">4. Returns (Appendix K3; wall screen 5)</h2>
+<p><strong>Purpose:</strong> see products returned at a high rate (rate and value), customers who return a lot, why things come back, and flag what needs action.</p><figure class="fig"><div class="figt">Why things come back · Pareto <span class="ex">EXAMPLE</span></div><svg class="chart" viewBox="0 0 520 210" role="img" aria-label="Returns Pareto: defect 34%, ordered wrong 27%, wrong item 16%, transit damage 13%, unknown 6%, packing damage 4%"><line x1="34" x2="514" y1="170.5" y2="170.5" stroke="rgba(255,255,255,.2)"/><text x="518" y="173.0" fill="#9fb0cc" font-size="9.5" text-anchor="end"></text><text x="518" y="95.0" fill="#9fb0cc" font-size="9.5" text-anchor="end">50%</text><text x="518" y="17.0" fill="#9fb0cc" font-size="9.5" text-anchor="end">100%</text><rect x="46.7" y="44.0" width="53.9" height="126.0" fill="#7ab8ff"/><text x="73.7" y="40.0" fill="#e8ecf4" font-size="11" text-anchor="middle" font-weight="700">34%</text><text x="73.7" y="184" fill="#cbd6ea" font-size="10.5" text-anchor="middle">Defect</text><rect x="126.0" y="70.0" width="53.9" height="100.0" fill="#7ab8ff"/><text x="153.0" y="66.0" fill="#e8ecf4" font-size="11" text-anchor="middle" font-weight="700">27%</text><text x="153.0" y="184" fill="#cbd6ea" font-size="10.5" text-anchor="middle">Ordered wrong</text><rect x="205.4" y="110.7" width="53.9" height="59.3" fill="#ff9f7a"/><text x="232.3" y="106.7" fill="#e8ecf4" font-size="11" text-anchor="middle" font-weight="700">16%</text><text x="232.3" y="184" fill="#cbd6ea" font-size="10.5" text-anchor="middle">Wrong item</text><rect x="284.7" y="121.8" width="53.9" height="48.2" fill="#7ab8ff"/><text x="311.7" y="117.8" fill="#e8ecf4" font-size="11" text-anchor="middle" font-weight="700">13%</text><text x="311.7" y="184" fill="#cbd6ea" font-size="10.5" text-anchor="middle">Transit dmg</text><rect x="364.0" y="147.8" width="53.9" height="22.2" fill="#9fb0cc"/><text x="391.0" y="143.8" fill="#e8ecf4" font-size="11" text-anchor="middle" font-weight="700">6%</text><text x="391.0" y="184" fill="#cbd6ea" font-size="10.5" text-anchor="middle">Unknown</text><rect x="443.4" y="155.2" width="53.9" height="14.8" fill="#ff9f7a"/><text x="470.3" y="151.2" fill="#e8ecf4" font-size="11" text-anchor="middle" font-weight="700">4%</text><text x="470.3" y="184" fill="#cbd6ea" font-size="10.5" text-anchor="middle">Packing dmg</text><polyline points="73.7,117.0 153.0,74.8 232.3,49.9 311.7,29.6 391.0,20.2 470.3,14.0" fill="none" stroke="#5ee1c7" stroke-width="1.5"/><circle cx="73.7" cy="117.0" r="2.5" fill="#5ee1c7"/><circle cx="153.0" cy="74.8" r="2.5" fill="#5ee1c7"/><circle cx="232.3" cy="49.9" r="2.5" fill="#5ee1c7"/><circle cx="311.7" cy="29.6" r="2.5" fill="#5ee1c7"/><circle cx="391.0" cy="20.2" r="2.5" fill="#5ee1c7"/><circle cx="470.3" cy="14.0" r="2.5" fill="#5ee1c7"/><text x="34" y="202" fill="#9fb0cc" font-size="10.5">Bars: share of 960 returned units · line: cumulative % · coral = 3PL-controllable</text></svg></figure>
+<p><strong>Headline (EXAMPLE, trailing 4 weeks):</strong> return rate <strong>2.0%</strong> of units shipped (total) · <strong>0.40%</strong> controllable (3PL-caused) · return value <strong>2.6%</strong> of shipped value (C&amp;F) · 2 SKUs need action · 1 customer to review.</p>
+<div class="tw"><table>
+<thead>
+<tr>
+<th>Metric</th>
+<th>Definition</th>
+<th>Score</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Return rate (units)</td>
+<td>Units returned (RMA received) ÷ units shipped, same SKU, trailing 4 weeks</td>
+<td>total + controllable</td>
+</tr>
+<tr>
+<td>Return value %</td>
+<td>Value of returned units ÷ value shipped (C&amp;F)</td>
+<td>% only, no dollars</td>
+</tr>
+<tr>
+<td>SKU return rate vs network</td>
+<td>SKU rate ÷ network rate</td>
+<td>ratio</td>
+</tr>
+<tr>
+<td>Customer return rate</td>
+<td>Units a customer returned ÷ units it bought, trailing 12 weeks</td>
+<td>per customer</td>
+</tr>
+<tr>
+<td>Return reason mix</td>
+<td>Share of returned units by reason code</td>
+<td>%</td>
+</tr>
+<tr>
+<td>Return cycle time</td>
+<td>RMA issued → credit or replacement shipped</td>
+<td>median, P90</td>
+</tr>
+</tbody>
+</table></div>
+<p>Reason codes → control tag: wrong item shipped, damaged at 3PL / packing = <strong>3PL (controllable)</strong>; damaged in transit = <strong>carrier (outside)</strong>; DOA / defect = <strong>supplier (outside)</strong>; ordered wrong / no longer needed = <strong>customer (outside)</strong>; unknown = <strong>unconfirmed</strong>.</p>
+<p><strong>Alert thresholds (ADOPTED, D-012; review after month 1 of real data):</strong></p>
+<ul>
+<li>SKU <strong>ACTION</strong>: rate ≥ 2× the network rate <strong>or</strong> ≥ 5%, with ≥ 30 units shipped in the window. <strong>WATCH</strong>: ≥ 1.5× network.</li>
+<li>Any 3PL-coded reason (wrong item, packing damage) ≥ 1% of a SKU's units → CAPA review with the site (the CAPA trigger is 3PL-tagged misses only, decisions.md 10-26).</li>
+<li>Customer <strong>REVIEW</strong>: ≥ 10% of units returned (≥ 50 units bought) or top 5 by return value → rep review.</li>
+<li>Return value % &gt; 3% of shipped value in a month → C&amp;F note to Mike.</li>
+<li>Customer-service contacts on a return theme: background early-warning note only.</li>
+</ul>
+<p><strong>Owner bot:</strong> 3PL Ops Lead (rates, reasons, reverse-logistics flow on lanes EX-L17, EX-L18). Contracts &amp; Finance (value, credits, recovery). Freight &amp; Trade (carrier damage claims). <strong>Data to confirm Day 1:</strong> RMA / returns system (may sit in the ERP or the CS platform), 3PL returns receipts (WMS), Snowflake for joins, Tableau view.</p>
+<h2 id="5-did-you-know-deck-slide-6-wall-screen-6">5. Did you know (deck slide 6; wall screen 6)</h2>
+<p><strong>Purpose:</strong> running totals and records, styled like sports-broadcast stats, so the team sees the scale of the work. Clean layout: big numbers, small uppercase labels, thin rules, no decorative shapes.</p><figure class="fig"><div class="figt">Orders placed by fiscal month <span class="ex">EXAMPLE</span></div><svg class="chart" viewBox="0 0 1104 96" role="img" aria-label="Orders placed per fiscal month, months 1 to 9, EXAMPLE"><rect x="22.1" y="28.5" width="78.5" height="41.5" fill="rgba(94,225,199,.45)"/><text x="61.3" y="24.5" fill="#e8ecf4" font-size="11" text-anchor="middle">6,020</text><text x="61.3" y="86" fill="#9fb0cc" font-size="10.5" text-anchor="middle">M1</text><rect x="144.7" y="26.5" width="78.5" height="43.5" fill="rgba(94,225,199,.45)"/><text x="184.0" y="22.5" fill="#e8ecf4" font-size="11" text-anchor="middle">6,310</text><text x="184.0" y="86" fill="#9fb0cc" font-size="10.5" text-anchor="middle">M2</text><rect x="267.4" y="24.8" width="78.5" height="45.2" fill="rgba(94,225,199,.45)"/><text x="306.7" y="20.8" fill="#e8ecf4" font-size="11" text-anchor="middle">6,550</text><text x="306.7" y="86" fill="#9fb0cc" font-size="10.5" text-anchor="middle">M3</text><rect x="390.1" y="25.4" width="78.5" height="44.6" fill="rgba(94,225,199,.45)"/><text x="429.3" y="21.4" fill="#e8ecf4" font-size="11" text-anchor="middle">6,480</text><text x="429.3" y="86" fill="#9fb0cc" font-size="10.5" text-anchor="middle">M4</text><rect x="512.7" y="22.5" width="78.5" height="47.5" fill="rgba(94,225,199,.45)"/><text x="552.0" y="18.5" fill="#e8ecf4" font-size="11" text-anchor="middle">6,890</text><text x="552.0" y="86" fill="#9fb0cc" font-size="10.5" text-anchor="middle">M5</text><rect x="635.4" y="20.3" width="78.5" height="49.7" fill="rgba(94,225,199,.45)"/><text x="674.7" y="16.3" fill="#e8ecf4" font-size="11" text-anchor="middle">7,210</text><text x="674.7" y="86" fill="#9fb0cc" font-size="10.5" text-anchor="middle">M6</text><rect x="758.1" y="22.2" width="78.5" height="47.8" fill="rgba(94,225,199,.45)"/><text x="797.3" y="18.2" fill="#e8ecf4" font-size="11" text-anchor="middle">6,940</text><text x="797.3" y="86" fill="#9fb0cc" font-size="10.5" text-anchor="middle">M7</text><rect x="880.7" y="19.5" width="78.5" height="50.5" fill="rgba(94,225,199,.45)"/><text x="920.0" y="15.5" fill="#e8ecf4" font-size="11" text-anchor="middle">7,330</text><text x="920.0" y="86" fill="#9fb0cc" font-size="10.5" text-anchor="middle">M8</text><rect x="1003.4" y="16.6" width="78.5" height="53.4" fill="#5ee1c7"/><text x="1042.7" y="12.6" fill="#e8ecf4" font-size="11" text-anchor="middle">7,750</text><text x="1042.7" y="86" fill="#9fb0cc" font-size="10.5" text-anchor="middle">M9</text><line x1="0" x2="1104" y1="70.5" y2="70.5" stroke="rgba(255,255,255,.18)"/></svg></figure>
+<div class="tw"><table>
+<thead>
+<tr>
+<th>Stat (EXAMPLE, fiscal year to date)</th>
+<th>Definition</th>
+<th>Owner bot</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Revenue to date</td>
+<td>FYTD revenue as an <strong>index (plan to date = 100)</strong></td>
+<td>Contracts &amp; Finance</td>
+</tr>
+<tr>
+<td>Orders placed</td>
+<td>Count of customer orders created FYTD</td>
+<td>3PL Ops Lead</td>
+</tr>
+<tr>
+<td>Orders fulfilled</td>
+<td>Orders fully shipped FYTD</td>
+<td>3PL Ops Lead</td>
+</tr>
+<tr>
+<td>Units shipped</td>
+<td>Units with a carrier pickup scan FYTD</td>
+<td>3PL Ops Lead</td>
+</tr>
+<tr>
+<td>Countries shipped to</td>
+<td>Distinct ship-to countries FYTD</td>
+<td>Freight &amp; Trade</td>
+</tr>
+<tr>
+<td>Most orders in a day (record)</td>
+<td>Max daily orders created; week shown, not the day</td>
+<td>3PL Ops Lead</td>
+</tr>
+<tr>
+<td>Longest on-time streak</td>
+<td>Consecutive ship days with zero OTIF misses at a site; <strong>controllable and total</strong> streaks both shown</td>
+<td>3PL Ops Lead</td>
+</tr>
+<tr>
+<td>Largest single order (record)</td>
+<td>Biggest order vs that customer's average (×)</td>
+<td>Contracts &amp; Finance</td>
+</tr>
+</tbody>
+</table></div>
+<p>Records update only from closed data (no intraday). Totals refresh daily. <strong>Data to confirm Day 1:</strong> same sources as §1 and §2.</p>
+<h2 id="6-at-a-glance-page-0-and-top-3-risks-page-0b">6. At a glance (page 0) and Top 3 risks (page 0b)</h2>
+<ul>
+<li><strong>At a glance:</strong> headline counts (OTIF, in-stock, customers on track, containers on plan, return rate, big orders); a "what's red or at risk" list with the owner of each fix; links to K1–K5.</li>
+<li><strong>Top 3 risks:</strong> ranked by customer impact × time to act. Each risk names the trigger, the linked orders and customers, the owner and the next move. Everything else stays in Appendix E.</li>
+</ul>
+<h2 id="7-coverage-gaps-notes-build-order-decided-d-011">7. Coverage gaps (NOTES; build order decided, D-011)</h2>
+<p>Build order per D-011: G-6 backorders/allocation → G-1 supplier POs → G-8 returns disposition. Draft spec for G-6: <code>ops/specs/backorder-allocation-spec.md</code>.
+<code>[Mike]</code> = an angle Mike named. <code>[Added]</code> = added by the bot team.</p>
+<div class="tw"><table>
+<thead>
+<tr>
+<th>#</th>
+<th>Angle</th>
+<th>Why it closes a gap</th>
+<th>Likely owner</th>
+<th>Status</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>G-1</td>
+<td><strong>[Mike]</strong> Production and supplier POs: PO confirmed vs requested ship date, factory output vs plan, PO aging</td>
+<td>Shows supply misses before they become stockouts</td>
+<td>Freight &amp; Trade (with supply planning)</td>
+<td>note</td>
+</tr>
+<tr>
+<td>G-2</td>
+<td><strong>[Mike]</strong> Inventory and stockouts: weeks of supply by site and class, projected stockouts</td>
+<td>Partly live: in-stock KPI and Proactive panel (<code>ops/kpi-dashboard.html</code>); needs SKU-level weeks of supply</td>
+<td>3PL Ops Lead</td>
+<td>note (partly covered)</td>
+</tr>
+<tr>
+<td>G-3</td>
+<td><strong>[Mike]</strong> Forecast vs actual: demand forecast accuracy and bias by family and region</td>
+<td>Explains stockouts and excess</td>
+<td>Supply planning; 3PL Ops Lead reports</td>
+<td>note</td>
+</tr>
+<tr>
+<td>G-4</td>
+<td><strong>[Mike]</strong> Cost-to-serve: freight + 3PL + returns cost per order, customer and region (index)</td>
+<td>Ties service level to cost</td>
+<td>Contracts &amp; Finance</td>
+<td>note</td>
+</tr>
+<tr>
+<td>G-5</td>
+<td><strong>[Mike]</strong> Carrier performance: on-time pickup and delivery, damage, claims by lane</td>
+<td>Partly built: <code>freight/carrier-lane-scorecard.md</code></td>
+<td>Freight &amp; Trade</td>
+<td>note (partly covered)</td>
+</tr>
+<tr>
+<td>G-6</td>
+<td><strong>[Added]</strong> Backorders and allocation: open backorders, age, who gets scarce stock first (top customers and big orders)</td>
+<td>Links §1 and §2 when stock is short</td>
+<td>3PL Ops Lead</td>
+<td>note</td>
+</tr>
+<tr>
+<td>G-7</td>
+<td><strong>[Added]</strong> Customs and trade holds: entries on hold, ISF and docs exceptions, tariff changes per shipment</td>
+<td>Inbound delays that §3 can't explain</td>
+<td>Freight &amp; Trade</td>
+<td>note</td>
+</tr>
+<tr>
+<td>G-8</td>
+<td><strong>[Added]</strong> Returns disposition and recovery: restock, refurb, scrap, RTV to supplier; value recovered (%)</td>
+<td>Closes the returns loop</td>
+<td>3PL Ops Lead + C&amp;F</td>
+<td>note</td>
+</tr>
+<tr>
+<td>G-9</td>
+<td><strong>[Added]</strong> Excess and obsolete stock / end-of-life SKUs: aged inventory, slow movers</td>
+<td>Cash and space tied up</td>
+<td>C&amp;F + 3PL Ops Lead</td>
+<td>note</td>
+</tr>
+<tr>
+<td>G-10</td>
+<td><strong>[Added]</strong> Inter-3PL transfers and rebalancing (lane EX-L07): in transit, ETA, reason</td>
+<td>Stock moves are a common fix for §1 risks</td>
+<td>3PL Ops Lead</td>
+<td>note</td>
+</tr>
+<tr>
+<td>G-11</td>
+<td><strong>[Added]</strong> Sales pipeline signal for large deals (CRM): big quotes likely to close in 30 days</td>
+<td>Earlier warning than the big-order alert</td>
+<td>C&amp;F (with Sales)</td>
+<td>note</td>
+</tr>
+<tr>
+<td>G-12</td>
+<td><strong>[Added]</strong> Orders on hold (credit, compliance, address): count and age</td>
+<td>Hidden cause of late release</td>
+<td>3PL Ops Lead</td>
+<td>note</td>
+</tr>
+<tr>
+<td>G-13</td>
+<td><strong>[Added]</strong> DG / lithium-battery shipment compliance exceptions (<code>freight/dg-batteries</code>)</td>
+<td>Rejected shipments stop orders cold</td>
+<td>Freight &amp; Trade</td>
+<td>note</td>
+</tr>
+<tr>
+<td>G-14</td>
+<td><strong>[Added]</strong> Claims recovery: carrier damage/loss claims filed, aging, recovered (%)</td>
+<td>Gets money back on outside-control misses</td>
+<td>Freight &amp; Trade + C&amp;F</td>
+<td>note</td>
+</tr>
+<tr>
+<td>G-15</td>
+<td><strong>[Added]</strong> Customer delivery experience (CS contacts, delivery complaints)</td>
+<td><strong>Background early warning only</strong>, never a KPI (rule 4)</td>
+<td>3PL Ops Lead</td>
+<td>note</td>
+</tr>
+</tbody>
+</table></div>
+<h2 id="8-control-tower-wall-6-screens-open-the-wall">8. Control-tower wall (6 screens) — <a href="control-tower-wall.html">open the wall</a></h2>
+<p><strong>What it is:</strong> a six-monitor wall in the style of an airport departures board: one row per item, fixed-width columns, flap-style status cells, high contrast, readable from across the room. <strong>Calm and green by default</strong>; only exceptions show amber or red. Mockup on EXAMPLE data; every screen carries the EXAMPLE label.</p>
+<div class="tw"><table>
+<thead>
+<tr>
+<th>Screen</th>
+<th>Content</th>
+<th>Source section</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>1</td>
+<td>Live exceptions and alerts: what broke, owner, hours open, next action; plus a <strong>Moves &amp; opportunities</strong> panel (top moves by window expiry, D-010 test, status)</td>
+<td>§1–§4 alert rules, §10</td>
+</tr>
+<tr>
+<td>2</td>
+<td>Orders and promise dates: <code>75 of 78 customers on track · 3 at risk</code>, at-risk and watch orders</td>
+<td>§1</td>
+</tr>
+<tr>
+<td>3</td>
+<td>Container and port map with risk flags; exception boxes listed</td>
+<td>§3</td>
+</tr>
+<tr>
+<td>4</td>
+<td>3PL scorecards, controllable and total side by side</td>
+<td><code>ops/3pl-metric-definitions.md</code>, D-007</td>
+</tr>
+<tr>
+<td>5</td>
+<td>Returns and top customers</td>
+<td>§4, §2</td>
+</tr>
+<tr>
+<td>6</td>
+<td>Running totals and Did you know</td>
+<td>§5</td>
+</tr>
+</tbody>
+</table></div>
+<p><strong>Refresh rates (ADOPTED, D-012; review after month 1 of real data; feasibility confirmed on Day 1):</strong>
+| Screen | Refresh | Why |
+|---|---|---|
+| 1 Exceptions | every 5 min | alerts must be fresh; "hours open" ticks |
+| 2 Orders | every 15 min | ETA projections move with scans |
+| 3 Containers | every 30 min (carrier feeds update a few times a day); watchtower rows daily 08:00 ET | |
+| 4 Scorecards | daily, after the overnight load | weekly KPIs; daily is enough |
+| 5 Returns / customers | daily | trailing-window metrics |
+| 6 Totals / Did you know | daily (records from closed days only) | |</p>
+<p>Screen 4 uses the KPI data week (EXAMPLE 2027-03-14) with controllable values computed from <code>ops/weekly-data-example.csv</code> 3PL-coded misses (network OTIF 99.20% controllable vs 98.20% total; in-stock 98.48% vs 96.09%). Open one screen per monitor with <code>#1</code> to <code>#6</code> in the URL. Each screen shows its data timestamp; a screen whose data is older than 2× its refresh rate turns its timestamp amber ("STALE"), so a frozen feed can't pass for a calm green board.</p>
+<p><strong>Day-1 checks (Mike / IT; board M-02):</strong></p>
+<ol>
+<li>Does Tableau connect <strong>live</strong> to Snowflake (live connection vs extract), and what is the minimum extract refresh on our Tableau Server/Cloud plan? Live is needed for screens 1–2 at 5–15 min.</li>
+<li>Can Tableau dashboards auto-cycle or run full-screen on a wall (kiosk mode, auth that doesn't time out, a service account)?</li>
+<li>Are 3PL WMS scans, carrier ETAs and the RMA data landed in Snowflake, and how often?</li>
+<li>Which system holds promised dates, reps and order value (ERP / CRM)? Is it in Snowflake?</li>
+<li>Can Tableau data-driven alerts (or a Snowflake task) push the §1–§4 alerts to Slack/email?</li>
+<li>Security: is a wall display in the ops area allowed to show customer codes and money indexes? Who may view?</li>
+<li>If Tableau can't refresh fast enough: fallback is screens 1–3 as a small web page over Snowflake, screens 4–6 in Tableau. That is a build decision for Mike after Day 1.</li>
+</ol>
+<h2 id="9-decisions-applied-2026-11-03-and-what-is-still-open">9. Decisions applied (2026-11-03) and what is still open</h2>
+<div class="tw"><table>
+<thead>
+<tr>
+<th>ID</th>
+<th>Decision (decisions.md; D-008/009/011/012: Decided by Mike (delegated), logged by CoS)</th>
+<th>Applied in</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>D-008</td>
+<td>At risk = projected ETA passes the date we promised the customer; requested date tracked as a separate metric</td>
+<td>§0 rule 3, §1</td>
+</tr>
+<tr>
+<td>D-009</td>
+<td>Big order = 3× the customer's average order OR top 1% of all orders, whichever triggers first</td>
+<td>§2</td>
+</tr>
+<tr>
+<td>D-010</td>
+<td>Reroute limit METHOD approved: min(CAP, 50% × avoided exposure), monthly cap, single container, log within 24 h, never sign/pay/commit, 0 without a tariff or quote. CAP and monthly cap set on Day 1; no spend authority until then</td>
+<td>§3, §10</td>
+</tr>
+<tr>
+<td>D-011</td>
+<td>Gap build order: backorders and allocation → supplier POs → returned-unit disposition</td>
+<td>§7</td>
+</tr>
+<tr>
+<td>D-012</td>
+<td>Thresholds and wall refresh rates adopted as-is; review after the first month of real data</td>
+<td>§1–§4, §8, §10</td>
+</tr>
+</tbody>
+</table></div>
+<p>Still open for Mike:</p>
+<ol>
+<li><strong>Day 1:</strong> set the D-010 CAP and monthly cap against the company approval policy (Mike's limit is the ceiling).</li>
+<li><strong>Day 1:</strong> the §8 Tableau/Snowflake checks.</li>
+<li>Wall display: approve the mockup direction and which screens go up first.</li>
+<li><strong>After month 1 of real data:</strong> review thresholds and refresh rates (D-012).</li>
+</ol>
+<h2 id="10-potential-moves-opportunities-appendix-k6-wall-screen-1-panel">10. Potential moves &amp; opportunities (Appendix K6; wall screen 1 panel)</h2>
+<p><strong>Purpose:</strong> one ranked list of suggested actions that cut risk or cost: reroutes, pull-forwards, terminal switches, rate relief, consolidation, stock moves, returns recovery and claims. Each row says why, what it saves, what it costs, whether it fits the D-010 limit, who owns it, its status and when the window closes.</p><figure class="fig"><div class="figt">Spend moves: avoided exposure vs est. cost (index) <span class="ex">EXAMPLE</span></div><svg class="chart" viewBox="0 0 540 244" role="img" aria-label="Spend moves: avoided exposure versus estimated cost with the 50 percent test"><line x1="150.0" x2="150.0" y1="6" y2="214" stroke="rgba(255,255,255,.08)"/><text x="150.0" y="228" fill="#9fb0cc" font-size="9.5" text-anchor="middle">0</text><line x1="260.0" x2="260.0" y1="6" y2="214" stroke="rgba(255,255,255,.08)"/><text x="260.0" y="228" fill="#9fb0cc" font-size="9.5" text-anchor="middle">25</text><line x1="370.0" x2="370.0" y1="6" y2="214" stroke="rgba(255,255,255,.08)"/><text x="370.0" y="228" fill="#9fb0cc" font-size="9.5" text-anchor="middle">50</text><line x1="480.0" x2="480.0" y1="6" y2="214" stroke="rgba(255,255,255,.08)"/><text x="480.0" y="228" fill="#9fb0cc" font-size="9.5" text-anchor="middle">75</text><text x="142" y="25" fill="#e8ecf4" font-size="11.5" text-anchor="end"><tspan fill="#9fb0cc">#1</tspan> Pull-forward 014</text><rect x="150" y="12" width="79.2" height="9" fill="none" stroke="#7ab8ff" stroke-width="1"/><rect x="150" y="23" width="17.6" height="9" fill="#5ee1c7"/><line x1="189.6" x2="189.6" y1="10" y2="34" stroke="#fff" stroke-width="1.5"/><text x="235.2" y="27" fill="#5ee1c7" font-size="10.5" font-weight="700">Within*</text><text x="142" y="59" fill="#e8ecf4" font-size="11.5" text-anchor="end"><tspan fill="#9fb0cc">#2</tspan> Pull-forward 015</text><rect x="150" y="46" width="66.0" height="9" fill="none" stroke="#7ab8ff" stroke-width="1"/><rect x="150" y="57" width="17.6" height="9" fill="#5ee1c7"/><line x1="183.0" x2="183.0" y1="44" y2="68" stroke="#fff" stroke-width="1.5"/><text x="222.0" y="61" fill="#5ee1c7" font-size="10.5" font-weight="700">Within*</text><text x="142" y="93" fill="#e8ecf4" font-size="11.5" text-anchor="end"><tspan fill="#9fb0cc">#3</tspan> Terminal switch 019</text><rect x="150" y="80" width="105.6" height="9" fill="none" stroke="#7ab8ff" stroke-width="1"/><rect x="150" y="91" width="26.4" height="9" fill="#5ee1c7"/><line x1="202.8" x2="202.8" y1="78" y2="102" stroke="#fff" stroke-width="1.5"/><text x="261.6" y="95" fill="#5ee1c7" font-size="10.5" font-weight="700">Within*</text><text x="142" y="127" fill="#e8ecf4" font-size="11.5" text-anchor="end"><tspan fill="#9fb0cc">#6</tspan> Stock transfer EX-C03</text><rect x="150" y="114" width="132.0" height="9" fill="none" stroke="#7ab8ff" stroke-width="1"/><rect x="150" y="125" width="52.8" height="9" fill="#5ee1c7"/><line x1="216.0" x2="216.0" y1="112" y2="136" stroke="#fff" stroke-width="1.5"/><text x="288.0" y="129" fill="#5ee1c7" font-size="10.5" font-weight="700">Within*</text><text x="142" y="161" fill="#e8ecf4" font-size="11.5" text-anchor="end"><tspan fill="#9fb0cc">#4</tspan> Divert 021 → Oakland</text><rect x="150" y="148" width="308.0" height="9" fill="none" stroke="#7ab8ff" stroke-width="1"/><rect x="150" y="159" width="167.2" height="9" fill="#ffc454"/><line x1="304.0" x2="304.0" y1="146" y2="170" stroke="#fff" stroke-width="1.5"/><text x="464.0" y="163" fill="#ffc454" font-size="10.5" font-weight="700">Needs Mike</text><text x="142" y="195" fill="#e8ecf4" font-size="11.5" text-anchor="end"><tspan fill="#9fb0cc">#5</tspan> Air top-up EX-C41</text><rect x="150" y="193" width="114.4" height="9" fill="#ffc454"/><text x="270.4" y="197" fill="#ffc454" font-size="10.5" font-weight="700">Needs Mike</text><text x="150" y="242" fill="#9fb0cc" font-size="10">index points · outline = avoided exposure · fill = est. cost · white tick = 50% test</text></svg></figure><figure class="fig"><div class="figt">Time left before each window closes <span class="ex">EXAMPLE</span></div><svg class="chart" viewBox="0 0 540 238" role="img" aria-label="Days left before each move window closes"><text x="62" y="20" fill="#e8ecf4" font-size="11.5" text-anchor="end" font-weight="700">11-04</text><rect x="70" y="11" width="6.4" height="11" fill="#ff9f7a"/><text x="84.4" y="20" fill="#cbd6ea" font-size="11">#1 #2 #3 pull / switch · 1 d</text><text x="62" y="46" fill="#e8ecf4" font-size="11.5" text-anchor="end" font-weight="700">11-06</text><rect x="70" y="37" width="19.3" height="11" fill="#ffc454"/><text x="97.3" y="46" fill="#cbd6ea" font-size="11">#4 divert notice · 3 d</text><text x="62" y="72" fill="#e8ecf4" font-size="11.5" text-anchor="end" font-weight="700">11-07</text><rect x="70" y="63" width="25.8" height="11" fill="#ffc454"/><text x="103.8" y="72" fill="#cbd6ea" font-size="11">#5 last flight · 4 d</text><text x="62" y="98" fill="#e8ecf4" font-size="11.5" text-anchor="end" font-weight="700">11-12</text><rect x="70" y="89" width="58.0" height="11" fill="#5ee1c7"/><text x="136.0" y="98" fill="#cbd6ea" font-size="11">#6 ship-by · 9 d</text><text x="62" y="124" fill="#e8ecf4" font-size="11.5" text-anchor="end" font-weight="700">11-13</text><rect x="70" y="115" width="64.4" height="11" fill="#5ee1c7"/><text x="142.4" y="124" fill="#cbd6ea" font-size="11">#7 Suez re-quote · 10 d</text><text x="62" y="150" fill="#e8ecf4" font-size="11.5" text-anchor="end" font-weight="700">11-30</text><rect x="70" y="141" width="174.0" height="11" fill="#5ee1c7"/><text x="252.0" y="150" fill="#cbd6ea" font-size="11">#11 rate review · 27 d</text><text x="62" y="176" fill="#e8ecf4" font-size="11.5" text-anchor="end" font-weight="700">12-03</text><rect x="70" y="167" width="193.3" height="11" fill="#5ee1c7"/><text x="271.3" y="176" fill="#cbd6ea" font-size="11">#8 return to supplier · 30 d</text><text x="62" y="202" fill="#e8ecf4" font-size="11.5" text-anchor="end" font-weight="700">mid-Dec*</text><rect x="70" y="193" width="270.7" height="11" fill="#5ee1c7"/><text x="348.7" y="202" fill="#cbd6ea" font-size="11">#9 PO pull-forward · 42 d</text><text x="70" y="234" fill="#9fb0cc" font-size="10">days left from 11-03 · *LNY date UNVERIFIED</text></svg></figure>
+<p><strong>Headline (EXAMPLE):</strong> <code>12 moves · 4 would be within the D-010 limit once caps are set · 2 need Mike · 3 windows close 11-04 17:00 PT</code>. Status: 9 proposed · 1 approved · 1 done · 1 deferred. Spend moves: avoided exposure 157 vs est. cost 90 (cost index points, EXAMPLE); the 4 moves that pass the 50% test cost 26. Full EXAMPLE list: <a href="friday-report-2026-11-06.html#27">deck Appendix K6</a>.</p>
+<p>EXAMPLE rows (move types covered): pull-forwards (EX-CNTR-014, -015), terminal switch (EX-CNTR-019), divert to Oakland (EX-CNTR-021, needs Mike: cost 38 &gt; 50% of exposure 70), air top-up for EX-C41 (needs Mike: no C&amp;F exposure figure → limit 0), stock transfer for the EX-C03 big order, Suez-return rate relief on EX-L03 (real public trigger, watchtower 2026-11-03), trans-Pacific rate check on EX-L01, returns recovery for EX-SKU-CAM-07, Lunar New Year PO pull-forward, carrier damage claim for EX-C33 (done), EX-L10 consolidation (deferred until EX-UK is verified).</p>
+<div class="tw"><table>
+<thead>
+<tr>
+<th>Field</th>
+<th>Definition</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Rank</td>
+<td>Window expiry first (soonest), then net benefit (avoided exposure − cost)</td>
+</tr>
+<tr>
+<td>Move type</td>
+<td>Reroute/divert · pull-forward · terminal switch · stock transfer · air top-up · rate relief · consolidation · returns recovery · claim · PO pull-forward</td>
+</tr>
+<tr>
+<td>Trigger</td>
+<td>The signal behind it: watchtower row, K1 at-risk order, K2 flag, K3 return flag, K4 big order, rate change</td>
+</tr>
+<tr>
+<td>Avoided exposure</td>
+<td>D&amp;D avoided + expedite avoided + stockout exposure avoided (D-010 §2). Stockout exposure = 0 when C&amp;F has no number; never estimated</td>
+</tr>
+<tr>
+<td>Est. cost</td>
+<td>From a tariff or written quote for that box; no quote → "needs quote" and the limit is 0</td>
+</tr>
+<tr>
+<td>Savings (opportunities)</td>
+<td>For rate, consolidation and recovery moves: % of lane cost or % of return value (C&amp;F)</td>
+</tr>
+<tr>
+<td>D-010 test</td>
+<td><strong>Within limit</strong> (cost ≤ min(CAP, 50% × exposure), cost &lt; exposure, month-to-date within the monthly cap) · <strong>Needs Mike</strong> (above the limit, or exposure/quote missing) · <strong>Not a spend</strong> (rate terms, claims, recovery: C&amp;F and Mike handle terms; never commit)</td>
+</tr>
+<tr>
+<td>Owner</td>
+<td>Freight &amp; Trade (moves, rates, claims), 3PL Ops Lead (stock moves, recovery), Supply planning (POs), C&amp;F (all money)</td>
+</tr>
+<tr>
+<td>Status</td>
+<td><strong>Proposed · Approved · Done · Deferred</strong> (never "rejected"; a declined move is Deferred with a reason and a revisit date)</td>
+</tr>
+<tr>
+<td>Window expires</td>
+<td>The time after which the move no longer works (port deadline, LFD, divert notice, booking cut-off, claim window)</td>
+</tr>
+</tbody>
+</table></div>
+<p>Money: <strong>cost index points (EXAMPLE)</strong>. D-010 caps (per container and monthly): <strong>TBD on Day 1, owned by Contracts &amp; Finance</strong>; no values shown here. <strong>Until the caps are set, every spend goes to Mike.</strong></p>
+<p><strong>Alert thresholds (ADOPTED with the dashboard set, D-012):</strong> a move whose window closes within 24 h → screen 1 and same-day note to the owner; any "needs Mike" move → Mike via CoS the same day; month-to-date spend ≥ 80% of the monthly cap → C&amp;F note to Mike; a Deferred move resurfaces on its revisit date.</p>
+<p><strong>Owner bot:</strong> Freight &amp; Trade (list owner). C&amp;F (cost, savings, limit test, monthly log). 3PL Ops Lead (stock moves, returns recovery). <strong>Data to confirm Day 1:</strong> carrier/terminal tariffs and forwarder quotes (email or TMS), C&amp;F reroute log, K1–K4 feeds, <code>freight/watchtower-log.md</code>.</p>
+<footer>Public copy · EXAMPLE data only · published 2026-11-03. MODE: SANITIZED (M-01 open). Every figure on this page is EXAMPLE. Port events marked real are public events.</footer>
+</main></body></html>

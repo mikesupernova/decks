@@ -1,0 +1,1343 @@
+<!-- MODE: SANITIZED (M-01 open) -->
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<title>EXAMPLE · Friday Weekly Report — Week ending 2026-11-06 (EXAMPLE WEEK)</title>
+
+<style>
+  :root { color-scheme: dark; }
+  * { box-sizing: border-box; }
+  body {
+    margin: 0;
+    font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", system-ui, sans-serif;
+    background: #0b1220; color: #e8ecf4; overflow: hidden; height: 100vh;
+  }
+  .deck { position: relative; height: 100vh; width: 100vw; overflow: hidden; }
+  .slide {
+    position: absolute; inset: 0; display: none; flex-direction: column; justify-content: center;
+    padding: clamp(48px, 5vw, 64px) clamp(24px, 7vw, 88px) 78px;
+    background: linear-gradient(135deg, #0b1220 0%, #10192e 60%, #0d1b2e 100%);
+    color: #e8ecf4; overflow: hidden;
+  }
+  .slide.active { display: flex; }
+
+  .kicker { text-transform: uppercase; letter-spacing: .14em; font-size: clamp(11px, 1.1vw, 13px);
+    color: #5ee1c7; font-weight: 700; margin-bottom: 10px; display: flex; gap: 10px; align-items: center; flex-wrap: wrap; }
+  h1.big { font-size: clamp(30px, 5.2vw, 58px); line-height: 1.08; margin: 0 0 14px; font-weight: 800;
+    background: linear-gradient(90deg, #ffffff 0%, #a9c7ff 100%); -webkit-background-clip: text; background-clip: text; color: transparent; }
+  h2.title { font-size: clamp(22px, 3.2vw, 36px); font-weight: 800; margin: 0 0 6px; color: #ffffff; }
+  .subtitle { font-size: clamp(14px, 1.6vw, 19px); color: #9fb0cc; margin: 0 0 22px; max-width: 860px; line-height: 1.4; }
+
+  .grid-2 { display: grid; grid-template-columns: repeat(auto-fit, minmax(280px, 1fr)); gap: 18px; }
+  .grid-3 { display: grid; grid-template-columns: repeat(auto-fit, minmax(220px, 1fr)); gap: 18px; }
+  .grid-4 { display: grid; grid-template-columns: repeat(auto-fit, minmax(180px, 1fr)); gap: 16px; }
+
+  .card { background: rgba(255,255,255,.05); border: 1px solid rgba(255,255,255,.09); border-radius: 14px; padding: 18px 20px; }
+  .card h3 { margin: 0 0 10px; font-size: 18px; color: #fff; }
+  .card p { margin: 0; font-size: 16px; color: #cbd6ea; line-height: 1.5; }
+
+  .stat-card { background: linear-gradient(160deg, rgba(94,225,199,.14), rgba(94,225,199,.02));
+    border: 1px solid rgba(94,225,199,.35); border-radius: 16px; padding: 18px 18px; }
+  .stat-num { font-size: clamp(28px, 3.6vw, 42px); font-weight: 800; color: #5ee1c7; line-height: 1; margin-bottom: 6px; }
+  .stat-card.coral { background: linear-gradient(160deg, rgba(255,159,122,.14), rgba(255,159,122,.02)); border-color: rgba(255,159,122,.4); }
+  .stat-card.coral .stat-num { color: #ff9f7a; }
+  .stat-card.amber { background: linear-gradient(160deg, rgba(255,196,84,.14), rgba(255,196,84,.02)); border-color: rgba(255,196,84,.4); }
+  .stat-card.amber .stat-num { color: #ffc454; }
+  .stat-label { font-size: 13.5px; color: #cbd6ea; line-height: 1.4; }
+
+  /* truth tags */
+  .tag { display: inline-block; font-size: 11px; padding: 2px 8px; border-radius: 20px; font-weight: 800;
+    letter-spacing: .05em; vertical-align: middle; white-space: nowrap; text-transform: uppercase; font-style: normal; }
+  .tag-example { background: rgba(255,196,84,.18); color: #ffc454; }
+  .tag-unverified { background: rgba(255,159,122,.18); color: #ff9f7a; border: 1px dashed #ff9f7a; }
+  .tag-verified { background: rgba(94,225,199,.18); color: #5ee1c7; }
+  .tag-basics { background: rgba(122,184,255,.18); color: #7ab8ff; }
+  .tag-pending { background: rgba(159,176,204,.16); color: #cbd6ea; border: 1px solid rgba(159,176,204,.35); }
+  .tag-pass { background: rgba(94,225,199,.18); color: #5ee1c7; }
+  .tag-miss { background: rgba(255,159,122,.18); color: #ff9f7a; }
+  .tag-blocked { background: #ff9f7a; color: #0b1220; }
+  /* v2.4 */
+  .legend { display: flex; gap: 8px 14px; flex-wrap: wrap; align-items: center; margin-top: 14px; font-size: 12.5px; color: #b7c3da; }
+  table.tbl.compact { font-size: 13.5px; } table.tbl.compact th, table.tbl.compact td { padding: 8px 10px; }
+  .gate-parts { display: grid; grid-template-columns: repeat(3, 1fr); gap: 12px; margin-bottom: 14px; }
+  .gate-parts .card { padding: 12px 14px; } .gate-parts .card h3 { font-size: 14.5px; margin: 0 0 4px; } .gate-parts .card p { font-size: 13px; color: #b7c3da; }
+  .note-line { margin-top: 12px; font-size: 13.5px; color: #cbd6ea; line-height: 1.45; }
+  .note-line b { color: #fff; }
+  .gate-line { margin: 14px 0 0; font-size: 15px; color: #cbd6ea; white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
+  .gate-line b { color: #fff; }
+  .appendix-kicker { color: #9fb0cc; }
+  .ask.compact { max-width: none; padding: 12px 16px; }
+  .ask.compact h3 { font-size: 15.5px; margin: 0; line-height: 1.4; }
+  .ask.compact .meta { font-size: 13.5px; color: #cbd6ea; margin-top: 4px; }
+  .declog { display: grid; grid-template-columns: 0.8fr 1fr 1.5fr; gap: 12px; margin-top: 12px; }
+  .declog .card { padding: 10px 12px; }
+  .declog .hd { font-size: 12px; font-weight: 800; color: #7ab8ff; margin-bottom: 6px; line-height: 1.35; }
+  .declog ul { margin: 0; padding-left: 15px; }
+  .declog li, .declog p { font-size: 12.5px; color: #cbd6ea; line-height: 1.38; margin: 0 0 3px; }
+  .declog-heads { display: grid; grid-template-columns: repeat(3, 1fr); gap: 14px; margin-top: 16px; }
+  .declog-heads .card { padding: 14px 16px; }
+  .declog-heads .hd { font-size: 15px; font-weight: 800; color: #7ab8ff; line-height: 1.4; margin-bottom: 6px; }
+  .declog-heads p { font-size: 13.5px; color: #b7c3da; margin: 0; }
+  .declog.appx li, .declog.appx p { font-size: 13.5px; line-height: 1.42; margin-bottom: 4px; }
+  .fn.r13 { font-size: 10px; line-height: 1.3; margin-top: 4px; }
+  .b-tight table.tbl.bo td { padding: 3px 6px; line-height: 1.2; } .b-tight table.tbl.bo th { padding: 4px 6px; } .b-tight .legend { margin-top: 4px; font-size: 11.5px; } .b-tight .data-note { font-size: 12px; margin-top: 4px; margin-bottom: 6px; } .b-tight .fn.r13 { margin-top: 2px; }
+  .declog.appx4 { grid-template-columns: 0.75fr 0.95fr 1.5fr 0.9fr; gap: 10px; }
+  .declog.appx4 li, .declog.appx4 p { font-size: 12.5px; line-height: 1.38; }
+  .declog.appx .hd { font-size: 13px; }
+  /* v2.7 slide 1 network scorecard + slide 2 per-3PL breakout */
+  .hdr-strip { display: flex; flex-wrap: wrap; align-items: center; gap: 6px 14px; padding: 9px 14px; margin-bottom: 12px;
+    border: 1px solid rgba(255,255,255,.12); border-left: 4px solid #5ee1c7; border-radius: 0 10px 10px 0; background: rgba(255,255,255,.04); }
+  .hdr-strip .t { font-size: 17px; font-weight: 800; color: #fff; }
+  .hdr-strip .m { font-size: 12.5px; color: #b7c3da; }
+  .data-note { font-size: 12.5px; color: #cbd6ea; margin: 0 0 10px; }
+  table.tbl.sc td, table.tbl.sc th { padding: 5px 8px; font-size: 12.5px; }
+  table.tbl.mi td, table.tbl.mi th { padding: 6px 8px; font-size: 12.5px; }
+  table.tbl.sc td.act { color: #fff; font-weight: 800; font-size: 15px; }
+  table.tbl.bo { font-size: 12px; } table.tbl.bo th { font-size: 10.5px; padding: 6px 6px; } table.tbl.bo td { padding: 6px 6px; line-height: 1.3; }
+  table.tbl.bo td.c { font-weight: 700; }
+  .slide.bo-slide { padding-left: 40px; padding-right: 40px; }
+  table.tbl.bo td .tag { display: inline-block; margin-top: 2px; }
+  td.c.ok { color: #5ee1c7; } td.c.miss { color: #ff9f7a; } td.c.behind { color: #ffc454; } td.c.unv, td.c.pend { color: #e8ecf4; }
+  td.nd, span.nd { color: #8a9cbb; font-style: italic; font-weight: 400; }
+  .tr { font-size: 11px; margin-left: 2px; } .tr.up { color: #5ee1c7; } .tr.down { color: #ff9f7a; } .tr.flat { color: #ffc454; } .tr.nd { font-size: 10.5px; }
+  table.tbl.bo .tag { font-size: 9.5px; padding: 1px 5px; letter-spacing: .02em; }
+  .tier { display: inline-block; font-size: 11px; font-weight: 800; padding: 1px 7px; border-radius: 20px; }
+  .tier-green { background: rgba(94,225,199,.18); color: #5ee1c7; } .tier-watch { background: rgba(255,196,84,.18); color: #ffc454; } .tier-na { background: rgba(159,176,204,.16); color: #cbd6ea; }
+  .bluf-head { margin: 0 0 10px; padding: 10px 14px; border-left: 4px solid #ffc454; background: rgba(255,196,84,.07); border-radius: 0 10px 10px 0;
+    font-size: 17px; font-weight: 700; color: #fff; line-height: 1.35; }
+  .bluf-head .lbl { font-size: 11px; letter-spacing: .12em; text-transform: uppercase; color: #ffc454; font-weight: 800; margin-right: 8px; }
+  .fn { font-size: 12px; color: #cbd6ea; margin-top: 8px; }
+  table.tbl.sc td.act { white-space: nowrap; }
+  .src-line { margin-top: 10px; font-size: 12.5px; color: #b7c3da; }
+  .stat-card .tag { margin-top: 8px; }
+
+  .ex-banner { position: absolute; top: 14px; left: 22px; z-index: 5; font-size: 11.5px; font-weight: 800;
+    letter-spacing: .06em; color: #ffc454; background: rgba(255,196,84,.12); border: 1px solid rgba(255,196,84,.45);
+    padding: 4px 10px; border-radius: 20px; white-space: nowrap; }
+  .example-ribbon { position: fixed; top: 16px; left: 22px; z-index: 20; font-size: 11.5px; font-weight: 800;
+    letter-spacing: .06em; color: #ffc454; background: rgba(255,196,84,.12); border: 1px solid rgba(255,196,84,.45);
+    padding: 4px 10px; border-radius: 20px; }
+
+  /* BLUF */
+  .bluf { display: grid; gap: 14px; }
+  .bluf-item { display: grid; grid-template-columns: 54px 1fr; gap: 16px; align-items: start;
+    background: rgba(255,255,255,.04); border: 1px solid rgba(255,255,255,.08); border-left: 4px solid #5ee1c7;
+    border-radius: 0 12px 12px 0; padding: 16px 20px; }
+  .bluf-item .n { font-size: 30px; font-weight: 800; color: #5ee1c7; line-height: 1; }
+  .bluf-item .lbl { font-size: 11px; letter-spacing: .1em; text-transform: uppercase; font-weight: 800; margin-bottom: 6px; }
+  .bluf-item p { margin: 0; font-size: clamp(16px, 1.7vw, 20px); line-height: 1.45; color: #e8ecf4; }
+  .bluf-item.coral { border-left-color: #ff9f7a; } .bluf-item.coral .n, .bluf-item.coral .lbl { color: #ff9f7a; }
+  .bluf-item.amber { border-left-color: #ffc454; } .bluf-item.amber .n, .bluf-item.amber .lbl { color: #ffc454; }
+  .lbl-teal { color: #5ee1c7; }
+
+  /* tables */
+  table.tbl { width: 100%; border-collapse: collapse; font-size: 15px; }
+  table.tbl th, table.tbl td { border: 1px solid rgba(255,255,255,.12); padding: 10px 12px; text-align: left; color: #cbd6ea; vertical-align: top; }
+  table.tbl th { background: rgba(255,255,255,.06); color: #fff; font-size: 12.5px; letter-spacing: .04em; text-transform: uppercase; }
+  table.tbl td.num, table.tbl th.num { text-align: center; }
+  table.tbl td.metric { color: #fff; font-weight: 700; }
+  table.tbl .now { background: rgba(94,225,199,.10); color: #5ee1c7; font-weight: 800; font-size: 17px; }
+  table.tbl th.now { font-size: 12.5px; }
+  table.tbl td.trend-up { color: #5ee1c7; font-weight: 800; } table.tbl td.trend-flat { color: #ffc454; font-weight: 800; }
+
+  /* misses (STAR-style) */
+  .star-cols { display: grid; grid-template-columns: repeat(5, 1fr); gap: 16px; }
+  .star-col { border-radius: 12px; padding: 16px 18px; background: rgba(255,255,255,.04); border: 1px solid rgba(255,255,255,.08); }
+  .star-col .lbl { font-size: 11px; letter-spacing: .1em; text-transform: uppercase; font-weight: 800; margin-bottom: 8px; }
+  .star-col p { margin: 0; font-size: 15px; color: #cbd6ea; line-height: 1.5; }
+  .star-col p + p { margin-top: 8px; }
+  .lbl-sit { color: #ff9f7a; } .lbl-act { color: #7ab8ff; } .lbl-res { color: #5ee1c7; } .lbl-amb { color: #ffc454; }
+  .quote-block { border-left: 4px solid #ff9f7a; padding: 12px 18px; background: rgba(255,255,255,.04);
+    border-radius: 0 12px 12px 0; font-size: clamp(15px, 1.6vw, 18px); color: #dfe6f2; margin: 18px 0 0; }
+  .quote-block em { color: #fff; }
+  .unverified-box { border: 1px dashed rgba(255,159,122,.7); background: rgba(255,159,122,.07); border-radius: 10px; padding: 10px 12px; }
+
+  /* risk source pills */
+  .src { display: inline-block; font-size: 12px; font-weight: 800; padding: 3px 10px; border-radius: 20px; white-space: nowrap; }
+  .src-season { background: rgba(255,196,84,.18); color: #ffc454; }
+  .src-watch { background: rgba(122,184,255,.18); color: #7ab8ff; }
+  .src-panel { background: rgba(94,225,199,.18); color: #5ee1c7; }
+  .sources { display: grid; grid-template-columns: repeat(3, 1fr); gap: 12px; margin-top: 16px; }
+  .sources .card { padding: 12px 14px; }
+  .sources .card p { font-size: 12.5px; color: #b7c3da; line-height: 1.45; margin-top: 6px; }
+  code { font-family: ui-monospace, SFMono-Regular, Menlo, Consolas, monospace; font-size: .92em; color: #dfe6f2; }
+
+  /* Q&A */
+  .qa { display: grid; grid-template-columns: 1fr 1fr; gap: 16px; }
+  .qa .card { padding: 16px 18px; }
+  .qa .q { font-size: 18px; font-weight: 800; color: #fff; margin: 6px 0 8px; line-height: 1.35; }
+  .qa .a { font-size: 16px; color: #cbd6ea; line-height: 1.5; margin: 0; }
+  .aud { font-size: 11px; font-weight: 800; letter-spacing: .08em; padding: 3px 9px; border-radius: 20px; }
+  .aud-svp { background: rgba(122,184,255,.18); color: #7ab8ff; }
+  .aud-vp { background: rgba(94,225,199,.18); color: #5ee1c7; }
+  .aud-dir { background: rgba(196,140,255,.18); color: #c48cff; }
+
+  /* plan */
+  .playbook { display: flex; gap: 16px; flex-wrap: wrap; align-items: stretch; }
+  .step { flex: 1; min-width: 200px; background: rgba(255,255,255,.04); border: 1px solid rgba(255,255,255,.08);
+    border-radius: 12px; padding: 22px 18px; text-align: center; }
+  .step .circle { width: 42px; height: 42px; border-radius: 50%; background: linear-gradient(135deg, #5ee1c7, #7ab8ff);
+    color: #0b1220; font-weight: 800; display: flex; align-items: center; justify-content: center; margin: 0 auto 12px; font-size: 18px; }
+  .step p { font-size: 19px; color: #e8ecf4; margin: 0; line-height: 1.4; }
+  .step .why { font-size: 13px; text-transform: uppercase; letter-spacing: .08em; font-weight: 700; color: #9fb0cc; margin-top: 10px; }
+
+  /* close */
+  .close-slide { text-align: center; align-items: center; }
+  .close-slide h1.big { background: linear-gradient(90deg, #5ee1c7, #7ab8ff); -webkit-background-clip: text; background-clip: text; color: transparent; }
+  .ask { max-width: 720px; text-align: left; border-color: rgba(255,196,84,.45); background: rgba(255,196,84,.06); }
+  .ask .row { display: grid; grid-template-columns: 110px 1fr; gap: 8px 14px; margin-top: 12px; font-size: 15px; }
+  .ask .row .k { color: #9fb0cc; font-weight: 700; font-size: 12px; letter-spacing: .08em; text-transform: uppercase; padding-top: 2px; }
+  .ask .row .v { color: #fff; }
+
+  .footer-note { margin-top: 20px; font-size: 12px; color: #8a9cbb; }
+  .lens { display: flex; gap: 10px; flex-wrap: wrap; margin-top: 18px; }
+  .lens span { font-size: 12.5px; color: #cbd6ea; background: rgba(255,255,255,.05); border: 1px solid rgba(255,255,255,.09); padding: 5px 12px; border-radius: 20px; }
+  .lens b { color: #fff; }
+
+  /* nav */
+  .nav { position: fixed; bottom: 18px; left: 0; right: 0; display: flex; justify-content: center; align-items: center; gap: 16px; z-index: 20; pointer-events: none; }
+  .nav > * { pointer-events: auto; }
+  .nav button { background: rgba(255,255,255,.08); border: 1px solid rgba(255,255,255,.18); color: #e8ecf4;
+    border-radius: 8px; padding: 8px 16px; font-size: 14px; font-weight: 700; cursor: pointer; font-family: inherit; }
+  .nav button:hover { background: rgba(255,255,255,.16); }
+  .nav button:disabled { opacity: .35; cursor: default; }
+  .nav .counter { font-size: 13px; color: #9fb0cc; font-weight: 700; min-width: 60px; text-align: center; }
+  .dots { position: fixed; top: 18px; right: 22px; display: flex; gap: 6px; z-index: 20; }
+  .dot { width: 8px; height: 8px; border-radius: 50%; background: rgba(255,255,255,.25); cursor: pointer; }
+  .dot.active { background: #5ee1c7; }
+
+  @media print {
+    body { overflow: visible; height: auto; }
+    .deck { height: auto; overflow: visible; }
+    .slide { position: relative; display: flex !important; height: 100vh; page-break-after: always; -webkit-print-color-adjust: exact; print-color-adjust: exact; }
+    .nav, .dots { display: none; }
+  }
+
+  /* v2.9 drill-down structure */
+  .big3 { display:grid; grid-template-columns: repeat(3, 1fr); gap:18px; margin-top:14px; }
+  .big3 .stat-card { padding:18px 20px; }
+  .big3 .stat-num { font-size:46px; }
+  .big3 .stat-num.pend { font-size:30px; color:#cbd6ea; }
+  .big3 .k { font-size:12px; letter-spacing:.08em; text-transform:uppercase; color:#cbd6ea; font-weight:800; margin-bottom:8px; }
+  .big3 .ln { font-size:13px; color:#cbd6ea; line-height:1.45; margin-top:4px; }
+  .big3 .ln b { color:#fff; }
+  .wk-note { font-size:12.5px; color:#ffc454; margin-top:12px; }
+  table.tbl.dd td, table.tbl.dd th { font-size:11.5px; padding:6px 8px; line-height:1.35; vertical-align:top; }
+  table.tbl.n3 td, table.tbl.n3 th { font-size:13px; padding:8px 10px; }
+  table.tbl.n3 tr.net td { border-top:2px solid rgba(255,255,255,.35); font-weight:800; color:#fff; }
+  table.tbl.n3 tr.excl td { opacity:.75; }
+  table.tbl.fx td, table.tbl.fx th { font-size:10.5px; padding:2px 6px; line-height:1.2; }
+  .sub { font-size:11px; color:#9fb0cc; }
+  .bluf-sub { font-size:13px; color:#cbd6ea; margin:-4px 0 0 0; padding-left:14px; }
+  .bluf-sub b { color:#ff9f7a; }
+  table.tbl.mi.tight td, table.tbl.mi.tight th { font-size:11px; padding:4px 7px; line-height:1.3; }
+
+  /* ===== v3.0 broadcast patterns (comms/html-deck-style.md "Broadcast patterns") ===== */
+  .slide.has-ticker { padding-bottom: 124px; padding-top: 52px; }
+  .slide.has-ticker .fn { font-size:11px; line-height:1.4; }
+  /* 1 scorebug */
+  .scorebug { flex:none; display:flex; align-items:stretch; height:58px; margin-bottom:10px; border-radius:6px; overflow:hidden;
+    box-shadow:0 8px 22px rgba(0,0,0,.45); font-weight:900; position:relative; }
+  .scorebug::after { content:""; position:absolute; left:0; right:0; bottom:0; height:4px; background:linear-gradient(90deg,#5ee1c7,#7ab8ff 55%,#ffc454); }
+  .sb-seg { display:flex; align-items:center; padding:0 14px; gap:8px; background:#13213a; border-right:2px solid #0b1220; white-space:nowrap; }
+  .sb-title { flex:1 1 auto; min-width:0; flex-direction:column; align-items:flex-start; justify-content:center; gap:3px; background:#0f1a2e; }
+  .sb-title .t { font-size:15px; color:#fff; letter-spacing:.02em; } .sb-title .m { font-size:11px; color:#9fb0cc; font-weight:700; }
+  .sb-team { background:linear-gradient(180deg,#1d3a60,#14263f); font-size:13px; letter-spacing:.12em; color:#cbd6ea; text-transform:uppercase; font-style:italic; }
+  .sb-team .arr { color:#ff9f7a; font-style:normal; font-size:15px; }
+  .sb-score { font-size:32px; min-width:110px; justify-content:center; background:#0c1729; color:#5ee1c7; letter-spacing:-.01em; }
+  .sb-score.tgt { color:#e8ecf4; background:#1a2a45; min-width:92px; font-size:24px; }
+  .sb-score.tgt small, .sb-score small { font-size:11px; color:#9fb0cc; letter-spacing:.1em; margin-left:4px; }
+  .sb-clock { flex-direction:column; justify-content:center; align-items:flex-end; background:#0b1220; gap:2px; }
+  .sb-clock .q { font-size:13px; color:#ffc454; letter-spacing:.08em; } .sb-clock .dn { font-size:11.5px; color:#fff; letter-spacing:.06em; }
+  /* 3 ring gauges + 4 WAI bar card */
+  .big3b { flex:none; display:grid; grid-template-columns:1fr 1.15fr 1fr; gap:14px; margin-top:10px; }
+  .gcard { display:grid; grid-template-columns:100px 1fr; gap:10px; align-items:center; padding:12px 14px !important; }
+  .ring-wrap { position:relative; width:100px; height:100px; }
+  svg.ring { width:100px; height:100px; display:block; }
+  svg.ring .ring-bg { fill:none; stroke:rgba(255,255,255,.10); stroke-width:10; }
+  svg.ring .ring-val { fill:none; stroke-width:10; stroke-linecap:round; transform:rotate(-90deg); transform-origin:56px 56px; }
+  svg.ring .ring-tgt { stroke:#fff; stroke-width:3; stroke-linecap:round; }
+  .ring-num { position:absolute; inset:0; display:flex; flex-direction:column; align-items:center; justify-content:center; font-weight:900; font-size:19px; color:#fff; line-height:1; }
+  .ring-num small { font-size:9.5px; color:#9fb0cc; letter-spacing:.1em; margin-top:4px; font-weight:800; }
+  .gcard .k, .wai .k { font-size:11px; letter-spacing:.08em; text-transform:uppercase; color:#cbd6ea; font-weight:800; margin-bottom:5px; }
+  .gcard .ln, .wai .ln { font-size:12px; color:#cbd6ea; line-height:1.4; margin-top:3px; } .gcard .ln b, .wai .ln b { color:#fff; }
+  .wai { background:linear-gradient(170deg,#132544 0%,#0d1a30 100%); border:1px solid rgba(122,184,255,.30); border-radius:12px; padding:12px 14px; position:relative; overflow:hidden; }
+  .wai { overflow:visible; } .wai .deco { position:absolute; right:0; bottom:0; width:40px; height:70px; overflow:hidden; border-radius:0 0 12px 0; }
+  .wai .deco::after { content:""; position:absolute; right:-18px; bottom:-30px; width:44px; height:110px; background:#ffc454; opacity:.85; transform:skewX(-22deg); }
+  .wai .kick { display:inline-block; background:#ffc454; color:#0b1220; font-size:10.5px; font-weight:900; letter-spacing:.1em; padding:2px 8px; transform:skewX(-12deg); text-transform:uppercase; }
+  .wai h4 { margin:6px 0 6px; font-size:19px; font-weight:900; font-style:italic; color:#fff; text-transform:uppercase; letter-spacing:.01em; line-height:1.05; }
+  .wrow { margin:5px 30px 0 0; } .wrow .lab { display:flex; justify-content:space-between; align-items:baseline; font-size:12px; color:#cbd6ea; font-weight:800; }
+  .wrow .lab .v { font-size:20px; font-weight:900; font-style:italic; color:#ffc454; }
+  .wbar { position:relative; height:9px; background:rgba(255,255,255,.08); border-radius:2px; margin-top:2px; }
+  .wbar > span { position:absolute; left:0; top:0; bottom:0; background:#ffc454; border-radius:2px; transform-origin:left center; }
+  .wbar > i { position:absolute; top:-4px; bottom:-4px; width:3px; background:#fff; border-radius:1px; }
+  .wai .take { font-size:12px; color:#fff; font-weight:700; margin-top:7px; padding-right:34px; }
+  /* 5 status pills */
+  .pill { display:inline-block; font-size:10.5px; font-weight:900; letter-spacing:.08em; padding:2px 7px; border-radius:3px; text-transform:uppercase; white-space:nowrap; vertical-align:middle; line-height:1.35; font-style:normal; }
+  .pill-miss { background:#ff9f7a; color:#0b1220; } .pill-risk { background:#ffc454; color:#0b1220; }
+  .pill-unv { background:rgba(255,159,122,.12); color:#ff9f7a; border:1px dashed #ff9f7a; }
+  .pill-pend { background:rgba(159,176,204,.16); color:#e8ecf4; border:1px solid rgba(159,176,204,.45); }
+  .pill-ok { background:rgba(94,225,199,.18); color:#5ee1c7; border:1px solid rgba(94,225,199,.45); }
+  .pill-cut { background:rgba(122,184,255,.14); color:#7ab8ff; border:1px solid #7ab8ff; }
+  .pill-delay { background:rgba(255,196,84,.12); color:#ffc454; border:1px solid #ffc454; }
+  .pill-nl { background:rgba(159,176,204,.10); color:#9fb0cc; border:1px dashed #9fb0cc; }
+  /* 6 ticker */
+  .ticker { position:absolute; left:0; right:0; bottom:62px; min-height:30px; display:flex; align-items:stretch; background:#08111f; border-top:2px solid #5ee1c7; border-bottom:1px solid rgba(255,255,255,.08); z-index:5; overflow:hidden; }
+  .ticker .tk-lbl { flex:none; background:#5ee1c7; color:#0b1220; font-weight:900; font-size:12px; letter-spacing:.14em; padding:0 12px; display:flex; align-items:center; font-style:italic; }
+  .ticker .tk-win { flex:1; overflow:hidden; display:flex; align-items:center; }
+  .ticker .tk-track { display:inline-flex; white-space:nowrap; font-size:12.5px; color:#e8ecf4; font-weight:700; }
+  .ticker .tk-copy { display:inline-flex; padding-left:18px; }
+  .ticker .it { padding-right:44px; } .ticker .it b { color:#ffc454; letter-spacing:.08em; margin-right:6px; }
+  /* 2 leaderboard (SailGP standings) */
+  table.lb { width:100%; border-collapse:separate; border-spacing:0 4px; font-size:13px; }
+  table.lb th { font-size:10.5px; letter-spacing:.12em; text-transform:uppercase; color:#9fb0cc; text-align:left; padding:2px 10px; font-weight:800; }
+  table.lb td { background:rgba(19,33,58,.92); padding:6px 10px; color:#e8ecf4; vertical-align:middle; }
+  table.lb td:first-child { border-radius:4px 0 0 4px; } table.lb td:last-child { border-radius:0 4px 4px 0; }
+  table.lb td.rk { font-size:18px; font-weight:900; font-style:italic; color:#fff; width:40px; text-align:center; }
+  .chip { display:inline-flex; align-items:center; gap:8px; font-weight:900; font-style:italic; letter-spacing:.05em; text-transform:uppercase; color:#fff; }
+  .chip i { display:inline-block; width:6px; height:22px; background:var(--c,#7ab8ff); border-radius:1px; }
+  table.lb td.sc { font-size:21px; font-weight:900; } table.lb td.sc.ok { color:#5ee1c7; } table.lb td.sc.miss { color:#ff9f7a; }
+  table.lb tr.leader td { background:linear-gradient(90deg, rgba(94,225,199,.30), rgba(94,225,199,.07)); }
+  table.lb tr.leader td:first-child { box-shadow: inset 4px 0 0 #5ee1c7; }
+  table.lb tr.net td { background:rgba(122,184,255,.10); font-weight:800; color:#fff; }
+  table.lb tr.unr td { background:rgba(19,33,58,.55); color:#b7c3da; }
+  table.lb td .sub { font-size:11px; }
+  /* 7 leader tables (appendix drivers/owners) */
+  table.tbl.leader { border-collapse:separate; border-spacing:0; }
+  table.tbl.leader th { background:#050b16; color:#fff; border:none; border-bottom:2px solid #5ee1c7; letter-spacing:.1em; font-weight:900; }
+  table.tbl.leader td { border:none; border-bottom:1px solid rgba(255,255,255,.07); }
+  table.tbl.leader tbody tr:nth-child(odd) td { background:rgba(255,255,255,.035); }
+  table.tbl.compact.leader td { padding:5px 9px; }
+  table.tbl.leader td.metric { font-weight:900; letter-spacing:.02em; }
+  /* 8 scoring-summary timeline */
+  .tl-wrap { margin-top:14px; }
+  .tl-head { display:inline-block; font-size:14px; font-weight:900; font-style:italic; letter-spacing:.08em; text-transform:uppercase; color:#fff; border-bottom:2px solid #5ee1c7; margin-bottom:6px; }
+  table.tl { width:100%; border-collapse:collapse; font-size:12.5px; }
+  table.tl th { background:#050b16; color:#9fb0cc; font-size:10.5px; letter-spacing:.12em; text-transform:uppercase; text-align:left; padding:5px 10px; }
+  table.tl td { padding:6px 10px; border-bottom:1px solid rgba(255,255,255,.07); color:#e8ecf4; }
+  table.tl td.when { font-weight:900; color:#fff; white-space:nowrap; width:150px; }
+  table.tl td.site { width:90px; }
+  /* network map (SailGP course overlay) */
+  .mapgrid { display:grid; grid-template-columns: 1fr 280px; gap:14px; align-items:start; margin-top:6px; }
+  .mapwrap { position:relative; border-radius:10px; overflow:hidden; border:1px solid rgba(94,225,199,.25); background:radial-gradient(ellipse at 50% 40%, #10264a 0%, #0b1730 55%, #08111f 100%); }
+  svg.map { width:100%; display:block; }
+  svg.map .land { fill:#16304f; stroke:#24507d; stroke-width:1; }
+  svg.map .grat { stroke:rgba(94,225,199,.10); stroke-width:1; fill:none; }
+  svg.map .conn { fill:none; stroke:#5ee1c7; stroke-width:1.6; stroke-dasharray:5 6; opacity:.55; }
+  svg.map .conn.pipe { stroke:#9fb0cc; opacity:.45; }
+  svg.map .lane { fill:none; stroke:#5ee1c7; stroke-width:2; stroke-dasharray:9 7; opacity:.85; }
+  svg.map .lead { stroke:rgba(232,236,244,.55); stroke-width:1; }
+  svg.map .pin-core { stroke:#0b1220; stroke-width:1.5; }
+  svg.map .pin-glow { opacity:.35; }
+  svg.map .pin-pulse { fill:none; stroke-width:2; transform-box:fill-box; transform-origin:center; opacity:0; }
+  svg.map .mdot { fill:#fff; }
+  .btag { position:absolute; transform:translate(-50%,-100%); background:rgba(8,17,31,.94); border:1px solid var(--c); border-left:4px solid var(--c); padding:3px 7px 4px; border-radius:3px; white-space:nowrap; box-shadow:0 4px 12px rgba(0,0,0,.5); line-height:1.25; }
+  .btag .code { font-size:11.5px; font-weight:900; font-style:italic; color:#fff; letter-spacing:.04em; }
+  .btag .v { font-size:14px; font-weight:900; color:var(--c); margin-left:5px; }
+  .btag .rg { display:block; font-size:9.5px; color:#9fb0cc; letter-spacing:.08em; text-transform:uppercase; }
+  .btag .pill { font-size:9px; padding:1px 5px; margin-left:3px; }
+  .map-inset { background:rgba(8,17,31,.9); border:1px solid rgba(255,255,255,.10); border-radius:10px; padding:10px 10px 8px; }
+  .map-inset h4 { margin:0 0 2px; font-size:13px; font-weight:900; font-style:italic; letter-spacing:.08em; text-transform:uppercase; color:#fff; }
+  .map-inset .s { font-size:10.5px; color:#9fb0cc; margin-bottom:4px; }
+  .map-inset table.lb { font-size:12px; } .map-inset table.lb td { padding:5px 8px; } .map-inset table.lb td.sc { font-size:17px; } .map-inset table.lb td.rk { font-size:15px; width:26px; }
+  .map-inset .unr { font-size:11px; color:#b7c3da; margin-top:6px; line-height:1.45; }
+  .map-legend { font-size:11.5px; color:#b7c3da; margin-top:6px; display:flex; gap:6px 14px; flex-wrap:wrap; align-items:center; }
+  .map-legend .sw { display:inline-block; width:10px; height:10px; border-radius:50%; margin-right:4px; vertical-align:-1px; }
+  /* ===== motion components (comms/html-deck-style.md "Motion components") ===== */
+  .cu { position:relative; white-space:nowrap; }
+  .cu.counting { color:transparent !important; }
+  .cu.counting::after { content:attr(data-show); position:absolute; left:0; top:0; color:var(--cu-color,#fff); white-space:nowrap; }
+  @keyframes tkScroll { from { transform:translateX(0); } to { transform:translateX(-50%); } }
+  @keyframes lbIn { from { opacity:0; transform:translateX(-28px); } to { opacity:1; transform:none; } }
+  @keyframes pillBlink { 0%,100% { opacity:1; } 25% { opacity:.25; } 50% { opacity:1; } 75% { opacity:.45; } }
+  @keyframes pinPulse { 0% { transform:scale(1); opacity:.9; } 100% { transform:scale(3.4); opacity:0; } }
+  @keyframes laneFlow { to { stroke-dashoffset:-32; } }
+  @keyframes barGrow { from { transform:scaleX(0); } to { transform:scaleX(1); } }
+  @media (prefers-reduced-motion: no-preference) {
+    .slide.active .tk-track { animation: tkScroll var(--tk-dur,42s) linear infinite; }
+    .slide.active table.lb tr.anim > td { animation: lbIn .55s cubic-bezier(.2,.8,.2,1) both; animation-delay: calc(var(--i,0) * 120ms); }
+    .slide.active .pill { animation: pillBlink 1.3s ease-in-out .5s 1 both; }
+    .slide.active svg.map .pin-pulse { animation: pinPulse 2s ease-out infinite; }
+    .slide.active svg.map .pin-pulse.risk { animation-duration: 1.3s; }
+    .slide.active svg.map .lane { animation: laneFlow 1.1s linear infinite; }
+    .slide.active .wbar > span { animation: barGrow 1.1s cubic-bezier(.2,.8,.2,1) both; }
+  }
+  @media (prefers-reduced-motion: reduce) {
+    .ticker .tk-copy.tk-dup, svg.map .mdot { display:none; }
+    .ticker .tk-track { white-space:normal; display:block; font-size:11.5px; padding:5px 0; } .ticker .tk-copy { display:inline; padding-left:14px; }
+    .ticker .it { padding-right:22px; }
+  }
+  @media print {
+    *, *::before, *::after { animation:none !important; transition:none !important; }
+    .cu.counting { color:inherit !important; } .cu.counting::after { display:none !important; }
+    .ticker .tk-dup, svg.map .mdot { display:none !important; }
+    .ticker .tk-track { white-space:normal; display:block; font-size:11.5px; padding:5px 0; } .ticker .tk-copy { display:inline; padding-left:14px; }
+  }
+
+  /* v3.1 sourced EXAMPLE lanes by mode (freight/example-lanes.csv) */
+  svg.map .lane { opacity:.9; }
+  svg.map .lane.ocean { stroke:#7ab8ff; stroke-dasharray:14 6; stroke-width:2.2; }
+  svg.map .lane.air { stroke:#ffc454; stroke-dasharray:2 6; stroke-width:2.4; stroke-linecap:round; }
+  svg.map .lane.road { stroke:#5ee1c7; stroke-dasharray:8 5; stroke-width:2.2; }
+  svg.map .lane.parcel { stroke:#5ee1c7; stroke-dasharray:4 4; stroke-width:1.3; opacity:.65; }
+  svg.map .lane.pipe { stroke:#9fb0cc; opacity:.4; }
+  .map-legend { margin-top:3px; gap:3px 12px; }
+  svg.map .node { fill:#0b1220; stroke:#cbd6ea; stroke-width:1.5; }
+  svg.map .node-lbl { fill:#b7c3da; font-size:13px; font-weight:700; letter-spacing:.04em; }
+  .map-legend .ls { display:inline-block; width:26px; height:0; border-top:2.5px dashed; vertical-align:3px; margin-right:4px; }
+  @keyframes flowOcean { to { stroke-dashoffset:-40; } } @keyframes flowAir { to { stroke-dashoffset:-32; } }
+  @keyframes flowRoad { to { stroke-dashoffset:-26; } } @keyframes flowParcel { to { stroke-dashoffset:-32; } }
+  @media (prefers-reduced-motion: no-preference) {
+    .slide.active svg.map .lane.ocean { animation: flowOcean 1.6s linear infinite; }
+    .slide.active svg.map .lane.air { animation: flowAir 1.0s linear infinite; }
+    .slide.active svg.map .lane.road { animation: flowRoad 1.2s linear infinite; }
+    .slide.active svg.map .lane.parcel { animation: flowParcel 1.4s linear infinite; }
+    .slide.active svg.map .lane.pipe { animation-duration: 2.6s; }
+  }
+  /* ===== v3.2 Fits any screen (comms/html-deck-style.md "Fits any screen") =====
+     Wide / landscape: one fixed 1280x720 design stage, scaled to fit the visible viewport and letterboxed in navy.
+     Narrow portrait (<=700px wide, portrait): the stage unwraps into a vertically scrolling, reflowed page. */
+  html, body { height: 100%; }
+  body { overflow: hidden; height: 100%; overscroll-behavior: none; -webkit-text-size-adjust: 100%; text-size-adjust: 100%; }
+  .viewport { position: fixed; left: 0; top: 0; width: 100%; height: 100%; overflow: hidden; background: #0b1220; touch-action: pan-y pinch-zoom; }
+  .stage { position: absolute; left: 0; top: 0; width: 1280px; height: 720px; transform-origin: 0 0; overflow: hidden;
+    box-shadow: 0 0 0 1px rgba(94,225,199,.10), 0 10px 40px rgba(0,0,0,.45); }
+  .stage .deck { position: absolute; inset: 0; width: 1280px; height: 720px; overflow: hidden; }
+  /* vw-based sizes frozen at their 1280px values so the stage renders identically on every screen */
+  .stage .slide { padding: 64px 88px 40px; }
+  .stage .slide.bo-slide { padding-left: 40px; padding-right: 40px; }
+  .stage .slide.has-ticker { padding-top: 52px; padding-bottom: 54px; }
+  .stage .kicker { font-size: 13px; } .stage h1.big { font-size: 58px; } .stage h2.title { font-size: 36px; }
+  .stage .subtitle { font-size: 19px; } .stage .stat-num { font-size: 42px; } .stage .big3 .stat-num { font-size: 46px; }
+  .stage .big3 .stat-num.pend { font-size: 30px; } .stage .bluf-item p { font-size: 20px; } .stage .quote-block { font-size: 18px; }
+  /* ticker gets its own band at the bottom of the stage; nav lives in the letterbox, outside the stage */
+  .stage .ticker { bottom: 0; }
+  .stage .dots { position: absolute; top: 18px; right: 22px; }
+  .tscroll { display: contents; }
+  .nav { position: fixed; top: auto; bottom: auto; left: 0; right: auto; width: 100%; height: 48px; }
+  .nav.nav-bottom { display: flex; }
+  .nav.nav-side { display: block; height: 100%; top: 0; }
+  .nav.nav-side button { position: absolute; top: 50%; transform: translateY(-50%); width: 56px; padding: 12px 4px; line-height: 1.25; white-space: normal; }
+  .nav.nav-side #prevBtn { left: 4px; } .nav.nav-side #nextBtn { right: 4px; }
+  .nav.nav-side .counter { position: absolute; right: 0; bottom: 14px; width: 64px; min-width: 0; }
+  .nav button { touch-action: manipulation; }
+
+  @media screen and (max-width: 700px) and (orientation: portrait) {
+    html, body { height: auto; }
+    body { overflow-x: hidden; overflow-y: auto; overscroll-behavior: auto; }
+    .viewport { position: static; width: auto; height: auto !important; overflow: visible; touch-action: auto; }
+    .stage { position: static; width: auto; height: auto; transform: none !important; overflow: visible; box-shadow: none; }
+    .stage .deck { position: static; width: auto; height: auto; overflow: visible; }
+    .nav { display: none !important; }
+    .stage .dots { position: static; right: auto; flex-wrap: wrap; justify-content: center; gap: 0;
+      padding: 4px 8px; background: rgba(11,18,32,.96); border-bottom: 1px solid rgba(94,225,199,.25); }
+    .stage .dot { width: 10px; height: 10px; margin: 6px 4px; box-sizing: content-box; background-clip: content-box; padding: 2px; }
+    .stage .slide, .stage .slide.has-ticker, .stage .slide.bo-slide { position: relative; inset: auto; display: flex !important; justify-content: flex-start;
+      padding: 18px 16px 28px; overflow: visible; min-height: 0; scroll-margin-top: 0; border-bottom: 2px solid rgba(94,225,199,.30); }
+    .stage .slide.has-ticker { padding-bottom: 0; }
+    .ex-banner { position: static; align-self: flex-start; white-space: normal; margin: 0 0 12px; line-height: 1.35; max-width: 100%; }
+    .stage h1.big { font-size: 34px; } .stage h2.title, .stage h2.title[style] { font-size: 22px !important; line-height: 1.25; }
+    .stage .subtitle { font-size: 16px; } .stage .stat-num { font-size: 34px; } .stage .big3 .stat-num { font-size: 38px; }
+    .stage .bluf-item p { font-size: 17px; } .stage .quote-block { font-size: 16px; }
+    .grid-2, .grid-3, .big3, .big3b, .star-cols, .qa, .sources, .declog, .declog.appx4, .declog-heads, .gate-parts, .mapgrid { grid-template-columns: 1fr !important; }
+    .slide [style*="grid-template-columns"] { grid-template-columns: 1fr !important; }
+    .slide [style*="grid-template-columns"] > * { min-width: 0; }
+    .grid-4 { grid-template-columns: repeat(2, minmax(0, 1fr)) !important; }
+    .step { min-width: 100%; }
+    .gcard { grid-template-columns: 136px 1fr; }
+    .ring-wrap, svg.ring { width: 136px; height: 136px; }
+    .ring-num { font-size: 24px; } .ring-num small { font-size: 12px; letter-spacing: .02em; }
+    .legend { display: block; }
+    .gate-line { white-space: normal; overflow: visible; }
+    /* scorebug wraps into rows */
+    .scorebug { height: auto; flex-wrap: wrap; }
+    .sb-seg { padding: 8px 12px; white-space: normal; border-bottom: 2px solid #0b1220; }
+    .sb-title { flex: 1 1 100%; border-right: none; }
+    .sb-team, .sb-score, .sb-score.tgt { flex: 1 1 auto; justify-content: center; min-width: 0; }
+    .sb-clock { flex: 1 1 100%; align-items: flex-start; border-right: none; padding-bottom: 12px; }
+    /* tables: scroll sideways inside their own box, first column fixed */
+    .tscroll { display: block; overflow-x: auto; -webkit-overflow-scrolling: touch; max-width: 100%; flex: none; }
+    .tscroll.wide > table { width: max-content; min-width: max(100%, calc(var(--cols, 4) * 128px)); }
+    .tscroll.wide > table th, .tscroll.wide > table td { max-width: 260px; }
+    .tscroll.wide > table tr > :first-child { position: sticky; left: 0; z-index: 2; background-color: #111c31; box-shadow: 2px 0 0 rgba(94,225,199,.25); }
+    .tscroll.wide > table.lb tr > :first-child { box-shadow: none; }
+    .tscroll.wide > table.lb tr > :nth-child(2) { position: sticky; left: 40px; z-index: 2; background-color: #13213a; box-shadow: 2px 0 0 rgba(94,225,199,.25); }
+    .tscroll.wide > table.lb tr > td:nth-child(2) { width: 120px; min-width: 120px; max-width: 120px; }
+    .tscroll.wide > table.lb tr.leader > td:nth-child(-n+2) { background: #1d4b55; }
+    .tscroll.wide > table.lb tr > td:nth-child(2) { width: 120px; min-width: 120px; max-width: 120px; }
+    .tscroll.wide > table.lb tr.leader > td:first-child { box-shadow: inset 4px 0 0 #5ee1c7; }
+    .tscroll.wide > table.lb thead th { background-color: #0b1220; }
+    /* map: full width, pins stay on the map, labels become a compact list underneath */
+    .mapwrap { overflow: visible; display: flex; flex-wrap: wrap; gap: 6px; padding-bottom: 8px; }
+    .mapwrap svg.map { flex: 1 1 100%; }
+    svg.map .lead { display: none; }
+    .mapwrap .btag { position: static; transform: none; flex: 1 1 calc(50% - 6px); margin: 0 4px; white-space: normal; min-width: 0; }
+    .mapwrap .btag .pill { margin: 2px 2px 0 0; }
+    /* ticker: slim bar at the bottom of its own section, in the flow */
+    .stage .ticker { position: relative; bottom: auto; margin: 16px -16px 0; flex: none; }
+    /* small print floor: body text >= 14px, labels >= 12px */
+    .stage .slide [data-rf="b"] { font-size: 14px !important; }
+    .stage .slide [data-rf="t"] { font-size: 12px !important; }
+  }
+  @media print {
+    @page { size: 13.333in 7.5in; margin: 0; }
+    html, body { height: auto; overflow: visible; }
+    .viewport, .stage, .stage .deck { position: static !important; transform: none !important; width: 1280px; height: auto; overflow: visible; box-shadow: none; }
+    .stage .slide { position: relative; display: flex !important; width: 1280px; height: 720px; page-break-after: always; break-after: page; }
+    .nav, .dots, .stage .dots { display: none !important; }
+  }
+  /* ===== v3.3 full-loop pages (2026-11-03): At a glance, Top 3 risks, Did you know, Appendix K. Clean layout: thin rules, no decorative shapes ===== */
+  .gl6 { display:grid; grid-template-columns:repeat(6,1fr); border-top:1px solid rgba(255,255,255,.16); border-bottom:1px solid rgba(255,255,255,.16); margin:6px 0 14px; }
+  .gl6 .t { padding:10px 12px 11px; border-left:1px solid rgba(255,255,255,.08); }
+  .gl6 .t:first-child { border-left:none; padding-left:0; }
+  .gl6 .k { font-size:10.5px; letter-spacing:.14em; text-transform:uppercase; color:#9fb0cc; font-weight:700; }
+  .gl6 .v { font-size:28px; font-weight:700; color:#fff; line-height:1.1; margin:4px 0 3px; font-variant-numeric:tabular-nums; }
+  .gl6 .v small { font-size:13px; color:#9fb0cc; font-weight:600; }
+  .gl6 .s { font-size:11.5px; color:#b7c3da; line-height:1.35; }
+  a.lnk { color:#7ab8ff; text-decoration:none; font-weight:700; white-space:nowrap; }
+  a.lnk:hover { text-decoration:underline; }
+  .sec-h { font-size:11px; letter-spacing:.14em; text-transform:uppercase; color:#9fb0cc; font-weight:800; margin:0 0 6px; }
+  table.tbl.fl td, table.tbl.fl th { font-size:12px; padding:5px 8px; line-height:1.3; }
+  table.tbl.fl th { font-size:10.5px; }
+  table.tbl.fl td.n { font-variant-numeric:tabular-nums; white-space:nowrap; }
+  table.tbl.fl td b { color:#fff; }
+  .r3 { display:grid; grid-template-columns:repeat(3,1fr); gap:0; border-top:1px solid rgba(255,255,255,.16); }
+  .r3 .c { padding:14px 18px 6px; border-left:1px solid rgba(255,255,255,.08); }
+  .r3 .c:first-child { border-left:none; padding-left:0; }
+  .r3 .no { font-size:40px; font-weight:300; color:#fff; line-height:1; }
+  .r3 h3 { font-size:17px; color:#fff; margin:8px 0 6px; line-height:1.3; }
+  .r3 p { font-size:12.5px; color:#cbd6ea; line-height:1.45; margin:0 0 6px; }
+  .r3 p b { color:#fff; }
+  .r3 .own { font-size:11px; letter-spacing:.1em; text-transform:uppercase; color:#9fb0cc; font-weight:800; margin-top:8px; }
+  .dyk4 { display:grid; grid-template-columns:repeat(4,1fr); border-top:1px solid rgba(255,255,255,.16); border-bottom:1px solid rgba(255,255,255,.16); margin-top:8px; }
+  .dyk4 .t { padding:16px 16px 14px; border-left:1px solid rgba(255,255,255,.08); }
+  .dyk4 .t:first-child { border-left:none; padding-left:0; }
+  .dyk4 .k { font-size:11px; letter-spacing:.16em; text-transform:uppercase; color:#9fb0cc; font-weight:800; }
+  .dyk4 .v { font-size:46px; font-weight:300; color:#fff; line-height:1.25; margin:8px 0 4px; font-variant-numeric:tabular-nums; letter-spacing:-.01em; }
+  .dyk4 .s { font-size:12px; color:#b7c3da; }
+  .rec { display:grid; grid-template-columns:1fr 1fr; gap:0 40px; margin-top:16px; }
+  .rec .row { display:flex; justify-content:space-between; align-items:baseline; padding:9px 0; border-bottom:1px solid rgba(255,255,255,.08); }
+  .rec .l { font-size:11.5px; letter-spacing:.14em; text-transform:uppercase; color:#cbd6ea; font-weight:800; }
+  .rec .l small { display:block; letter-spacing:.02em; text-transform:none; color:#9fb0cc; font-weight:600; font-size:11.5px; margin-top:2px; }
+  .rec .v { font-size:24px; font-weight:600; color:#fff; font-variant-numeric:tabular-nums; white-space:nowrap; }
+  .hb { display:inline-block; height:8px; background:#7ab8ff; vertical-align:middle; margin-right:6px; }
+  .hb.c3 { background:#ff9f7a; }
+  .k2 { display:grid; grid-template-columns:1.05fr 1fr; gap:22px; } .k2 > * { min-width:0; }
+  .ports { display:grid; grid-template-columns:repeat(3,1fr); border-top:1px solid rgba(255,255,255,.16); border-bottom:1px solid rgba(255,255,255,.16); margin:4px 0 10px; }
+  .ports .t { padding:8px 12px; border-left:1px solid rgba(255,255,255,.08); }
+  .ports .t:first-child { border-left:none; padding-left:0; }
+  .ports .k { font-size:10.5px; letter-spacing:.12em; text-transform:uppercase; color:#9fb0cc; font-weight:800; }
+  .ports .v { font-size:22px; font-weight:700; color:#fff; margin:2px 0; }
+  .ports .s { font-size:11.5px; color:#b7c3da; }
+  @media screen and (max-width: 700px) and (orientation: portrait) {
+    .gl6, .dyk4, .ports { grid-template-columns: repeat(2, minmax(0,1fr)) !important; }
+    .gl6 .t, .dyk4 .t, .ports .t { border-left:none; padding-left:0; }
+    .r3, .rec, .k2 { grid-template-columns: 1fr !important; }
+    .k2 > *, .gl6 > *, .dyk4 > * { min-width:0; }
+    .dyk4 .v { font-size:30px; }
+    .r3 .c { border-left:none; padding-left:0; }
+  }
+  /* ===== v3.4 graphics (2026-11-03): thin-line charts, Tron-style cyan on navy, no decorative shapes ===== */
+  svg.spk, svg.mring { display:inline-block; vertical-align:middle; }
+  .gl6 .v svg.spk { margin-left:6px; vertical-align:2px; }
+  .gl6 .v svg.mring { margin-right:6px; vertical-align:-3px; }
+  .gl6 .v svg { margin-top:-8px; margin-bottom:-6px; }
+  .gl6 .v { white-space:nowrap; }
+  .gl6 .v svg.spk { width:44px; height:16px; margin-left:4px; }
+  .chart { width:100%; display:block; }
+  .chart text { font-family:-apple-system, BlinkMacSystemFont, "Segoe UI", system-ui, sans-serif; }
+  .cause-row { display:flex; align-items:center; gap:12px; margin:8px 0 2px; font-size:12px; color:#cbd6ea; }
+  .cause-row svg.stk { flex:1; height:10px; }
+  .lg { display:inline-flex; align-items:center; gap:5px; margin-right:10px; font-size:11.5px; color:#b7c3da; white-space:nowrap; }
+  .lg i { display:inline-block; width:10px; height:10px; }
+  .loop { display:grid; grid-template-columns:repeat(8,1fr); gap:4px; margin:4px 0 12px; }
+  .loop div { border-top:3px solid; padding:5px 6px 0; font-size:11.5px; color:#e8ecf4; font-weight:700; line-height:1.3; }
+  .loop div span { display:block; font-size:10.5px; color:#9fb0cc; font-weight:600; }
+  @media screen and (max-width: 700px) and (orientation: portrait) {
+    .loop { grid-template-columns: repeat(2, minmax(0,1fr)) !important; }
+    .cause-row { flex-wrap:wrap; }
+    .cause-row svg.stk { flex:0 0 100%; width:100%; }
+  }
+</style>
+</head>
+<body>
+<!-- MODE: SANITIZED (M-01 open) -->
+
+<div class="viewport" id="viewport"><div class="stage" id="stage">
+<div class="dots" id="dots" aria-label="Slide navigation"></div>
+
+<div class="deck" id="deck">
+
+  
+  <section class="slide" data-title="At a glance">
+    <div class="ex-banner" title="All names and numbers in this deck are made up">MODE: SANITIZED (M-01 open) · EXAMPLE · made-up names &amp; numbers · not Verkada data</div>
+    <div class="kicker">0 · At a glance <span class="tag tag-example">EXAMPLE</span></div>
+    <h2 class="title" style="font-size:26px">One OTIF miss · 3 of 78 customers at risk · 6 containers exposed at LA/LB</h2>
+    <div class="gl6">
+      <div class="t"><div class="k">OTIF · network</div><div class="v">98.20%<svg class="spk" viewBox="0 0 56 18" width="56" height="18" role="img" aria-label="OTIF last 12 EXAMPLE weeks, falling; dashed line = 98.0% SLA"><line x1="0" x2="56" y1="16.0" y2="16.0" stroke="#9fb0cc" stroke-width="1" stroke-dasharray="2 2"/><polyline points="2.0,6.7 6.7,2.5 11.5,2.0 16.2,2.3 20.9,3.5 25.6,4.5 30.4,5.0 35.1,7.0 39.8,8.0 44.5,9.0 49.3,9.8 54.0,11.0" fill="none" stroke="#ff9f7a" stroke-width="1.6" stroke-linejoin="round"/><circle cx="54.0" cy="11.0" r="2.2" fill="#ff9f7a"/></svg></div><div class="s">total · <b style="color:#fff">99.20%</b> controllable<br><span class="pill pill-ok">Meets SLA</span> <span class="tr down">▼</span> 9 wk</div></div>
+      <div class="t"><div class="k">In-stock · network</div><div class="v">96.09%<svg class="spk" viewBox="0 0 56 18" width="56" height="18" role="img" aria-label="In-stock last 12 EXAMPLE weeks, rising"><polyline points="2.0,16.0 6.7,14.7 11.5,13.1 16.2,10.9 20.9,9.1 25.6,8.5 30.4,7.4 35.1,5.8 39.8,4.9 44.5,4.2 49.3,3.1 54.0,2.0" fill="none" stroke="#5ee1c7" stroke-width="1.6" stroke-linejoin="round"/><circle cx="54.0" cy="2.0" r="2.2" fill="#5ee1c7"/></svg></div><div class="s">total · <b style="color:#fff">98.48%</b> controllable<br><span class="pill pill-risk">Below target</span></div></div>
+      <div class="t"><div class="k">Customers on track</div><div class="v"><svg class="mring" viewBox="0 0 26 26" width="26" height="26" role="img" aria-label="75 of 78 customers on track"><circle cx="13.0" cy="13.0" r="11.00" fill="none" stroke="rgba(255,255,255,.14)" stroke-width="4"/><circle cx="13.0" cy="13.0" r="11.00" fill="none" stroke="#5ee1c7" stroke-width="4" stroke-dasharray="69.12" stroke-dashoffset="2.66" transform="rotate(-90 13.0 13.0)" stroke-linecap="butt"/></svg>75 <small>of 78</small></div><div class="s">3 at risk (7 orders) · 1 from 3PL causes<br><a class="lnk" href="#21">K1 Orders →</a></div></div>
+      <div class="t"><div class="k">Containers clear</div><div class="v"><svg class="mring" viewBox="0 0 26 26" width="26" height="26" role="img" aria-label="17 of 26 containers clear"><circle cx="13.0" cy="13.0" r="11.00" fill="none" stroke="rgba(255,255,255,.14)" stroke-width="4"/><circle cx="13.0" cy="13.0" r="11.00" fill="none" stroke="#5ee1c7" stroke-width="4" stroke-dasharray="69.12" stroke-dashoffset="23.92" transform="rotate(-90 13.0 13.0)" stroke-linecap="butt"/></svg>17 <small>of 26</small></div><div class="s">9 flagged · 6 at LA/LB · 2 late<br><a class="lnk" href="#22">K2 Containers →</a></div></div>
+      <div class="t"><div class="k">Return rate · 4 wk</div><div class="v">2.0%</div><div class="s">total · 0.40% controllable · 2 SKUs need action<br><a class="lnk" href="#24">K3 Returns →</a></div></div>
+      <div class="t"><div class="k">Big orders</div><div class="v">2</div><div class="s">priority flag · 1 on watch<br><a class="lnk" href="#25">K4 Customers →</a></div></div>
+    </div>
+    <p class="note-line" style="margin:0 0 8px"><b>Potential moves:</b> 12 on the list · 4 would fit the D-010 limit once caps are set · 2 need Mike · 3 windows close 11-04 17:00 PT · <a class="lnk" href="#27">K6 Moves →</a></p>
+    <div class="sec-h">What is red or at risk, and who owns the fix</div>
+    <table class="tbl leader fl"><thead><tr><th style="width:11%">Status</th><th style="width:38%">What</th><th style="width:27%">Fix</th><th style="width:16%">Owner</th><th style="width:8%">Detail</th></tr></thead><tbody>
+      <tr><td><span class="pill pill-miss">Miss</span></td><td><b>EX-USE OTIF 97.25%</b> vs 98.0% SLA, worse 8 wk (controllable 98.63%)</td><td>Split misses by stage; CAPA-EX-003 plan due 2027-03-22</td><td>3PL site lead, EX-USE</td><td><a class="lnk" href="#6">Slide 3</a></td></tr>
+      <tr><td><span class="pill pill-miss">Port risk</span></td><td><b>6 containers at LA/LB</b>; watchmen strike deadline 2026-11-04 17:00 PT (real event, outcome pending)</td><td>Pull 3 boxes before the deadline; reroute plan for 3 on the water</td><td>Freight &amp; Trade; cost: C&amp;F</td><td><a class="lnk" href="#22">K2</a></td></tr>
+      <tr><td><span class="pill pill-risk">At risk</span></td><td><b>3 customers, 7 orders</b> projected past the promised date (2 orders caused by the 3PL)</td><td>Work each order by cause; tell the rep the same day</td><td>3PL Ops Lead; F&amp;T (port, carrier)</td><td><a class="lnk" href="#21">K1</a></td></tr>
+      <tr><td><span class="pill pill-risk">At risk</span></td><td><b>EX-SG class-A stockout</b>: 11.5 d of supply vs 16.1 d to replenish</td><td>Expedite open POs or rebalance stock</td><td>Supply planning + 3PL Ops Lead</td><td><a class="lnk" href="#8">Slide 5</a></td></tr>
+      <tr><td><span class="pill pill-risk">Action</span></td><td><b>2 SKUs returned at high rates</b>: EX-SKU-CAM-07 6.8% (defect, supplier) · EX-SKU-ACC-12 5.1% (wrong item, 3PL)</td><td>Supplier quality review · CAPA review at the shipping site</td><td>3PL Ops Lead</td><td><a class="lnk" href="#24">K3</a></td></tr>
+      <tr><td><span class="pill pill-pend">Priority</span></td><td><b>2 big orders</b>: EX-C15 (4.2× its average order) on track · EX-C03 (3.4×) on watch</td><td>Pre-allocate stock; confirm carrier capacity</td><td>3PL Ops Lead; F&amp;T</td><td><a class="lnk" href="#25">K4</a></td></tr>
+    </tbody></table>
+    <p class="fn">KPIs: EXAMPLE data week 2027-03-14 (slides 1–5); controllable = 3PL-coded misses only, from <code>ops/weekly-data-example.csv</code> (<code>otif_misses</code>, <code>in_stock_gaps</code>, segment 3pl); same denominators (D-007). Dashboards: EXAMPLE snapshot 2026-11-03 (Appendix K1–K6; spec <a class="lnk" href="full-loop-dashboards.html">dashboards spec</a>; thresholds adopted, D-012). Also: 3 other contract-SLA misses (Appendix D). Decision: approve the G5 evidence request to EX-USE (slide 1).</p>
+  </section>
+
+  
+  <section class="slide" data-title="Top 3 risks">
+    <div class="ex-banner" title="All names and numbers in this deck are made up">MODE: SANITIZED (M-01 open) · EXAMPLE · made-up names &amp; numbers · not Verkada data</div>
+    <div class="kicker">0b · Top 3 risks <span class="tag tag-example">EXAMPLE</span></div>
+    <h2 class="title" style="font-size:26px">Three risks hit our top-4 customers; one needs action before Wednesday 17:00 PT</h2>
+    <p class="data-note">Ranked by customer impact and time left to act. Each risk counts in the total score; the tag says whether the 3PL controls it.</p>
+    <div class="r3">
+      <div class="c"><div class="no">1</div><h3>LA/LB watchmen strike deadline, Wed 2026-11-04 17:00 PT</h3>
+        <p>Real public event: talks extended to the deadline, wage gap still open (<code>freight/watchtower-log.md</code>, rechecked 2026-11-03).</p>
+        <p><b>EXAMPLE exposure:</b> 6 containers (3 at the terminal, 3 on the water). Linked: 2 at-risk orders for <b>EX-C07 (#1 customer)</b> and the EX-C03 big order (on watch).</p>
+        <p><b>Move:</b> pull EX-CNTR-014, -015, -016 before the deadline; ask the carrier for an unaffected terminal for the 3 on the water; C&amp;F prices an Oakland diversion.</p>
+        <p><span class="pill pill-nl">Outside 3PL control · port</span></p>
+        <div class="own">Owner: Freight &amp; Trade · cost: C&amp;F</div></div>
+      <div class="c"><div class="no">2</div><h3>EX-SG class-A stockout</h3>
+        <p>11.5 d of supply vs 16.1 d to replenish (Proactive panel, data week 2027-03-14).</p>
+        <p><b>EXAMPLE link:</b> 2 orders for <b>EX-C41 (#4 customer)</b> projected 5 days past the promised date; supplier PO shipped late (EX-CNTR-040).</p>
+        <p><b>Move:</b> air top-up on lane EX-L06 (cost from C&amp;F) or rebalance stock from another 3PL.</p>
+        <p><span class="pill pill-nl">Outside 3PL control · supplier</span></p>
+        <div class="own">Owner: Supply planning + 3PL Ops Lead</div></div>
+      <div class="c"><div class="no">3</div><h3>EX-USE OTIF below SLA, worse 8 weeks in a row</h3>
+        <p>97.25% vs 98.0% SLA total; 98.63% controllable (data week 2027-03-14).</p>
+        <p><b>EXAMPLE link:</b> 3 orders for <b>EX-C22 (#2 customer)</b> at risk; 2 caused by the 3PL (release hold, short pick), 1 by the carrier.</p>
+        <p><b>Move:</b> release the held order today; recount the short-pick location; CAPA-EX-003 plan due 2027-03-22.</p>
+        <p><span class="pill pill-miss">3PL controllable · 2 of 3</span></p>
+        <div class="own">Owner: 3PL site lead, EX-USE · 3PL Ops Lead</div></div>
+    </div>
+    <div class="sec-h" style="margin-top:12px">Time left to act (EXAMPLE dates, real port event)</div><svg class="chart" viewBox="0 0 1104 78" role="img" aria-label="Timeline of the three risks from today to 11-12"><line x1="20" x2="1084" y1="40" y2="40" stroke="rgba(94,225,199,.45)" stroke-width="1"/><line x1="20.0" x2="20.0" y1="36" y2="44" stroke="rgba(255,255,255,.25)"/><text x="23.0" y="56" fill="#9fb0cc" font-size="10">11-03</text><line x1="138.2" x2="138.2" y1="36" y2="44" stroke="rgba(255,255,255,.25)"/><text x="141.2" y="56" fill="#9fb0cc" font-size="10">11-04</text><line x1="256.4" x2="256.4" y1="36" y2="44" stroke="rgba(255,255,255,.25)"/><text x="259.4" y="56" fill="#9fb0cc" font-size="10">11-05</text><line x1="374.7" x2="374.7" y1="36" y2="44" stroke="rgba(255,255,255,.25)"/><text x="377.7" y="56" fill="#9fb0cc" font-size="10">11-06</text><line x1="492.9" x2="492.9" y1="36" y2="44" stroke="rgba(255,255,255,.25)"/><text x="495.9" y="56" fill="#9fb0cc" font-size="10">11-07</text><line x1="611.1" x2="611.1" y1="36" y2="44" stroke="rgba(255,255,255,.25)"/><text x="614.1" y="56" fill="#9fb0cc" font-size="10">11-08</text><line x1="729.3" x2="729.3" y1="36" y2="44" stroke="rgba(255,255,255,.25)"/><text x="732.3" y="56" fill="#9fb0cc" font-size="10">11-09</text><line x1="847.6" x2="847.6" y1="36" y2="44" stroke="rgba(255,255,255,.25)"/><text x="850.6" y="56" fill="#9fb0cc" font-size="10">11-10</text><line x1="965.8" x2="965.8" y1="36" y2="44" stroke="rgba(255,255,255,.25)"/><text x="968.8" y="56" fill="#9fb0cc" font-size="10">11-11</text><line x1="1084.0" x2="1084.0" y1="36" y2="44" stroke="rgba(255,255,255,.25)"/><text x="1087.0" y="56" fill="#9fb0cc" font-size="10">11-12</text><circle cx="113.6" cy="40" r="4.5" fill="#9fb0cc"/><line x1="113.6" x2="113.6" y1="26" y2="36" stroke="#9fb0cc" stroke-width="1"/><text x="117.6" y="22" fill="#9fb0cc" font-size="11.5" font-weight="700" text-anchor="start">Today 19:00 ET</text><circle cx="236.7" cy="40" r="4.5" fill="#ff9f7a"/><line x1="236.7" x2="236.7" y1="46" y2="62" stroke="#ff9f7a" stroke-width="1"/><text x="240.7" y="72" fill="#ff9f7a" font-size="11.5" font-weight="700" text-anchor="start">11-04 17:00 PT · LA/LB deadline (risk 1)</text><circle cx="552.0" cy="40" r="4.5" fill="#ffc454"/><line x1="552.0" x2="552.0" y1="26" y2="36" stroke="#ffc454" stroke-width="1"/><text x="556.0" y="22" fill="#ffc454" font-size="11.5" font-weight="700" text-anchor="start">11-07 · last flight for EX-C41 top-up (risk 2)</text><circle cx="788.4" cy="40" r="4.5" fill="#ffc454"/><line x1="788.4" x2="788.4" y1="46" y2="62" stroke="#ffc454" stroke-width="1"/><text x="792.4" y="72" fill="#ffc454" font-size="11.5" font-weight="700" text-anchor="start">11-09 · EX-C22 promised (risk 3)</text><circle cx="1024.9" cy="40" r="4.5" fill="#ffc454"/><line x1="1024.9" x2="1024.9" y1="26" y2="36" stroke="#ffc454" stroke-width="1"/><text x="1020.9" y="22" fill="#ffc454" font-size="11.5" font-weight="700" text-anchor="end">11-11 · EX-C41 promised · Spain strike</text></svg>
+    <p class="fn">Also watching (Appendix E): Spain general strike 2026-11-11 (EX-NL; 1 EXAMPLE container transships at Valencia 11-10); trade dates 11-09/11-10; Lunar New Year 2027. Customer-service signals stay background early warning only.</p>
+  </section>
+
+  
+  <section class="slide has-ticker" data-title="BLUF + North Star">
+    <div class="ex-banner" title="All names and numbers in this deck are made up">MODE: SANITIZED (M-01 open) · EXAMPLE WEEK · made-up names &amp; numbers · not Verkada data</div>
+    <div class="scorebug" role="group" aria-label="Scorebug: network OTIF vs contract SLA">
+      <div class="sb-seg sb-title"><span class="t">Friday Weekly Report · Week ending 2026-11-06 <span class="tag tag-example">EXAMPLE</span></span><span class="m">Verkada Supply Chain · Mike Feliciano · draft, not sent · network excl. EX-UK</span></div>
+      <div class="sb-seg sb-team">OTIF <span class="arr">▼</span></div>
+      <div class="sb-seg sb-score"><span class="cu">98.20%</span></div>
+      <div class="sb-seg sb-score tgt">98.0%<small>SLA</small></div>
+      <div class="sb-seg sb-clock"><span class="q">DATA WK 2027-03-14</span><span class="dn">DOWN 9 WEEKS IN A ROW</span></div>
+    </div>
+    <p class="bluf-head"><span class="lbl">BLUF</span>OTIF 98.20% holds the contract SLA but has fallen 9 weeks in a row, led by EX-USE (97.25%, below SLA). In-stock 96.09% is up but below the 99.0% 12-month target. Risk: EX-SG class-A stockout. Decision: approve the G5 evidence request to EX-USE.</p>
+    <p class="bluf-sub"><b>Also:</b> 3 contract-SLA misses on other KPIs: EX-USE inventory accuracy; dock-to-stock at EX-USE and EX-SG (Appendix D).</p>
+    <div class="big3b">
+      <div class="stat-card gcard"><div class="ring-wrap"><svg class="ring" viewBox="0 0 112 112" aria-hidden="true"><circle class="ring-bg" cx="56" cy="56" r="46"/><circle class="ring-val" cx="56" cy="56" r="46" stroke="#5ee1c7" stroke-dasharray="289.03" data-c="289.03" data-off="5.20" style="stroke-dashoffset:5.20"/><line class="ring-tgt" x1="51.2" y1="18.3" x2="49.2" y2="2.4"/></svg><div class="ring-num"><span class="cu">98.20%</span><small>SLA ≥98.0%</small></div></div>
+        <div><div class="k">OTIF (customer) · network excl. EX-UK <span class="tag tag-unverified">UNVERIFIED</span></div>
+        <div><span class="pill pill-ok">Meets SLA</span> <span class="pill pill-risk">▼ 9 weeks</span></div>
+        <div class="ln"><span class="tr down">▼</span> from 98.25% (03-07) · down 9 weeks in a row</div>
+        <div class="ln">All sites incl. EX-UK (dashboard): 98.23%</div>
+        <div class="ln"><b>Contract SLA ≥98.0% · glide ≥98.0%:</b> meets SLA</div></div></div>
+      <div class="wai"><span class="deco" aria-hidden="true"></span><span class="kick">Lead time</span> <span class="tag tag-unverified">UNVERIFIED</span>
+        <h4>Order-to-delivery · network excl. EX-UK</h4>
+        <div class="wrow"><div class="lab"><span>Median vs ≤2.5 d</span><span class="v cu">3.8 d</span></div><div class="wbar"><span style="width:48.1%"></span><i style="left:31.6%"></i></div></div>
+        <div class="wrow"><div class="lab"><span>P90 vs ≤5.0 d</span><span class="v cu">7.9 d</span></div><div class="wbar"><span style="width:100%"></span><i style="left:63.3%"></i></div></div>
+        <div class="take">Above the 12-month glide target on both <span class="pill pill-risk">Above target</span></div>
+        <div class="ln">All sites incl. EX-UK: 3.9 d · 8.2 d · Day-0: 5.3 d · 11.3 d (all sites 5.6 d · 12.0 d)</div></div>
+      <div class="stat-card gcard"><div class="ring-wrap"><svg class="ring" viewBox="0 0 112 112" aria-hidden="true"><circle class="ring-bg" cx="56" cy="56" r="46"/><circle class="ring-val" cx="56" cy="56" r="46" stroke="#ffc454" stroke-dasharray="289.03" data-c="289.03" data-off="11.30" style="stroke-dashoffset:11.30"/><line class="ring-tgt" x1="53.6" y1="18.1" x2="52.6" y2="2.1"/></svg><div class="ring-num"><span class="cu">96.09%</span><small>TARGET ≥99.0%</small></div></div>
+        <div><div class="k">In-stock · network excl. EX-UK <span class="tag tag-unverified">UNVERIFIED</span></div>
+        <div><span class="pill pill-risk">Below target</span></div>
+        <div class="ln"><span class="tr up">▲</span> from 95.96% (03-07)</div>
+        <div class="ln">All sites incl. EX-UK (dashboard): 95.59%</div>
+        <div class="ln"><b>12-month glide target ≥99.0%:</b> below target (never a breach)</div></div></div>
+    </div>
+    <p class="wk-note">Data week: the same 2027 EXAMPLE week as the 10-30 report, 2027-03-14 to 03-20 (still the dashboard's latest EXAMPLE week; new week pending Ops). Not Verkada data.</p>
+    <p class="fn"><b>EX-UK excluded: UNVERIFIED (G1).</b> Network = EX-NL + EX-SG + EX-USE + EX-USW. % = Σ numerator ÷ Σ denominator of raw counts in <code>ops/weekly-data-example.csv</code>, shown at the dashboard's 2 dp. Lead time: order-weighted means of site statistics, an approximation; a true pooled P90 can't be derived (3PL Ops Lead pack §5, EXAMPLE). Ring = % of 100, bars to scale; white tick = target. Rule 12 (exclude UNVERIFIED sites; all-sites value beside): APPROVED (hypothesis to test, 2026-10-26). Counts and formulas: Appendix A, A2. Detail: slides 2a–5.</p>
+    <div class="ticker" style="--tk-dur:42s"><div class="tk-lbl">BLUF</div><div class="tk-win"><div class="tk-track"><span class="tk-copy"><span class="it"><b>RISK</b>EX-SG class-A stockout: 11.5 d of supply vs 16.1 d to replenish</span><span class="it"><b>DECISION</b>Approve the G5 evidence request to EX-USE (evidence due 2027-03-30)</span><span class="it"><b>WATCH</b>EX-USE OTIF 97.25% vs 98.00% contract SLA, worse 8 wk in a row</span><span class="it"><b>EXAMPLE</b>Data week 2027-03-14 (same week as 10-30; new week pending Ops) · not Verkada data</span></span><span class="tk-copy tk-dup" aria-hidden="true"><span class="it"><b>RISK</b>EX-SG class-A stockout: 11.5 d of supply vs 16.1 d to replenish</span><span class="it"><b>DECISION</b>Approve the G5 evidence request to EX-USE (evidence due 2027-03-30)</span><span class="it"><b>WATCH</b>EX-USE OTIF 97.25% vs 98.00% contract SLA, worse 8 wk in a row</span><span class="it"><b>EXAMPLE</b>Data week 2027-03-14 (same week as 10-30; new week pending Ops) · not Verkada data</span></span></div></div></div>
+  </section>
+
+  
+  <section class="slide has-ticker" data-title="Network at a glance (map)">
+    <div class="ex-banner" title="All names and numbers in this deck are made up">MODE: SANITIZED (M-01 open) · EXAMPLE WEEK · made-up names &amp; numbers · not Verkada data</div>
+    <div class="kicker">2a · Network at a glance: OTIF by site <span class="tag tag-example">EXAMPLE</span></div>
+    <h2 class="title" style="font-size:24px">EX-USE is the one OTIF miss; EX-SG is at risk; EX-UK is unverified</h2>
+    <div class="mapgrid">
+      <div class="mapwrap"><svg class="map" viewBox="0 0 1040 468" role="img" aria-label="EXAMPLE network map: Ops sites by broad region with EXAMPLE lanes"><defs><filter id="glow" x="-80%" y="-80%" width="260%" height="260%"><feGaussianBlur stdDeviation="4"/></filter><marker id="arr-ocean" viewBox="0 0 10 10" refX="12" refY="5" markerWidth="5" markerHeight="5" orient="auto-start-reverse"><path d="M0,0 L10,5 L0,10 z" fill="#7ab8ff"/></marker><marker id="arr-air" viewBox="0 0 10 10" refX="12" refY="5" markerWidth="5" markerHeight="5" orient="auto-start-reverse"><path d="M0,0 L10,5 L0,10 z" fill="#ffc454"/></marker><marker id="arr-road" viewBox="0 0 10 10" refX="12" refY="5" markerWidth="5" markerHeight="5" orient="auto-start-reverse"><path d="M0,0 L10,5 L0,10 z" fill="#5ee1c7"/></marker><marker id="arr-parcel" viewBox="0 0 10 10" refX="14" refY="5" markerWidth="6" markerHeight="6" orient="auto-start-reverse"><path d="M0,0 L10,5 L0,10 z" fill="#5ee1c7"/></marker><marker id="arr-pipe" viewBox="0 0 10 10" refX="12" refY="5" markerWidth="5" markerHeight="5" orient="auto-start-reverse"><path d="M0,0 L10,5 L0,10 z" fill="#9fb0cc"/></marker></defs><line class="grat" x1="60" y1="0" x2="60" y2="468"/><line class="grat" x1="180" y1="0" x2="180" y2="468"/><line class="grat" x1="300" y1="0" x2="300" y2="468"/><line class="grat" x1="420" y1="0" x2="420" y2="468"/><line class="grat" x1="540" y1="0" x2="540" y2="468"/><line class="grat" x1="660" y1="0" x2="660" y2="468"/><line class="grat" x1="780" y1="0" x2="780" y2="468"/><line class="grat" x1="900" y1="0" x2="900" y2="468"/><line class="grat" x1="1020" y1="0" x2="1020" y2="468"/><line class="grat" x1="0" y1="48" x2="1040" y2="48"/><line class="grat" x1="0" y1="168" x2="1040" y2="168"/><line class="grat" x1="0" y1="288" x2="1040" y2="288"/><line class="grat" x1="0" y1="408" x2="1040" y2="408"/><path class="land" d="M-132,24 L-100,4 L-20,8 L40,0 L160,-4 L220,-4 L292,20 L320,80 L276,108 L260,120 L236,148 L216,164 L220,184 L212,172 L180,172 L152,180 L152,200 L172,216 L192,204 L188,228 L208,252 L228,256 L204,248 L172,232 L120,208 L92,172 L72,160 L44,128 L44,96 L20,68 L-20,48 L-68,52 L-120,44 Z"/><path class="land" d="M340,48 L372,48 L452,8 L460,-16 L300,-16 L320,16 Z"/><path class="land" d="M220,252 L252,240 L292,248 L340,288 L400,312 L384,348 L348,392 L308,440 L280,456 L268,496 L244,488 L252,428 L256,360 L232,328 L216,304 L228,280 Z"/><path class="land" d="M500,144 L504,116 L532,112 L520,96 L548,84 L572,72 L580,60 L560,48 L580,36 L620,8 L660,8 L700,20 L780,8 L860,-4 L940,-16 L1020,-4 L1100,0 L1180,8 L1260,16 L1180,48 L1100,68 L1080,116 L1048,136 L1028,168 L1020,200 L980,208 L964,248 L956,282 L940,260 L932,224 L908,200 L892,200 L860,228 L848,256 L828,208 L804,188 L768,188 L748,180 L732,168 L760,200 L776,200 L748,240 L712,236 L680,176 L676,164 L684,144 L660,144 L648,140 L644,128 L632,144 L620,128 L600,136 L612,128 L588,112 L572,112 L552,120 Z"/><path class="land" d="M472,204 L472,228 L492,256 L520,268 L572,272 L580,296 L588,348 L600,400 L620,428 L652,420 L672,392 L700,348 L700,308 L744,244 L712,240 L688,208 L672,168 L640,160 L584,140 L536,144 L516,148 L500,168 Z"/><path class="land" d="M520,88 L544,84 L548,76 L536,64 L528,54 L516,56 L520,68 L528,72 L520,80 Z"/><path class="land" d="M500,80 L516,80 L516,68 L508,68 Z"/><path class="land" d="M996,376 L1028,360 L1060,336 L1088,336 L1108,332 L1124,364 L1152,392 L1140,436 L1100,440 L1064,412 L1000,424 Z"/><path class="land" d="M920,268 L932,272 L964,300 L964,312 L996,320 L964,320 L944,300 Z"/><path class="land" d="M976,284 L1008,260 L1016,284 L1004,304 L980,300 Z"/><path class="land" d="M1060,164 L1080,152 L1104,136 L1108,108 L1100,124 L1072,148 Z"/><text class="node-lbl" x="1034" y="88" text-anchor="end">to EX-USW (Pacific) →</text><text class="node-lbl" x="6" y="74">→ from EX-ASIA-FACTORY (Pacific)</text><path class="lane ocean" d="M980,172 Q1008,143 1044,124"><title>EX-L01 EX-ASIA-FACTORY → EX-USW · Ocean FCL · Inbound (EXAMPLE)</title></path><path class="lane ocean" d="M-4,124 Q27,125 56,136" marker-end="url(#arr-ocean)"><title>EX-L01 EX-ASIA-FACTORY → EX-USW · Ocean FCL · Inbound (EXAMPLE)</title></path><circle class="mdot" r="3"><animateMotion dur="5.5s" repeatCount="indefinite" path="M-4,124 Q27,125 56,136"/></circle><path class="lane air" d="M980,172 Q1008,143 1044,124"><title>EX-L02 EX-ASIA-FACTORY → EX-USW · Air · Inbound (EXAMPLE)</title></path><path class="lane air" d="M-4,124 Q27,125 56,136" marker-end="url(#arr-air)"><title>EX-L02 EX-ASIA-FACTORY → EX-USW · Air · Inbound (EXAMPLE)</title></path><circle class="mdot" r="3"><animateMotion dur="3.2s" repeatCount="indefinite" path="M-4,124 Q27,125 56,136"/></circle><path class="lane ocean" d="M980,172 Q779,84 560,80" marker-end="url(#arr-ocean)"><title>EX-L03 EX-ASIA-FACTORY → EX-NL · Ocean FCL · Inbound (EXAMPLE)</title></path><circle class="mdot" r="3"><animateMotion dur="5.5s" repeatCount="indefinite" path="M980,172 Q779,84 560,80"/></circle><path class="lane air" d="M980,172 Q798,0 560,80" marker-end="url(#arr-air)"><title>EX-L04 EX-ASIA-FACTORY → EX-NL · Air · Inbound (EXAMPLE)</title></path><circle class="mdot" r="3"><animateMotion dur="3.2s" repeatCount="indefinite" path="M980,172 Q798,0 560,80"/></circle><path class="lane ocean" d="M980,172 Q957,225 956,283" marker-end="url(#arr-ocean)"><title>EX-L05 EX-ASIA-FACTORY → EX-SG · Ocean LCL · Inbound (EXAMPLE)</title></path><circle class="mdot" r="3"><animateMotion dur="5.5s" repeatCount="indefinite" path="M980,172 Q957,225 956,283"/></circle><path class="lane air" d="M980,172 Q935,220 956,283" marker-end="url(#arr-air)"><title>EX-L06 EX-ASIA-FACTORY → EX-SG · Air · Inbound (EXAMPLE)</title></path><circle class="mdot" r="3"><animateMotion dur="3.2s" repeatCount="indefinite" path="M980,172 Q935,220 956,283"/></circle><path class="lane road" d="M56,136 Q145,114 236,128" marker-end="url(#arr-road)"><title>EX-L07 EX-USW → EX-USE · FTL · Transfer (EXAMPLE)</title></path><circle class="mdot" r="3"><animateMotion dur="3.8s" repeatCount="indefinite" path="M56,136 Q145,114 236,128"/></circle><path class="lane road pipe" d="M56,136 Q105,162 140,204" marker-end="url(#arr-pipe)"><title>EX-L08 EX-USW → EX-MX · LTL · Outbound (EXAMPLE)</title></path><path class="lane road" d="M560,80 Q548,63 532,76" marker-end="url(#arr-road)"><title>EX-L10 EX-NL → EX-UK · LTL · Transfer (EXAMPLE)</title></path><circle class="mdot" r="3"><animateMotion dur="3.8s" repeatCount="indefinite" path="M560,80 Q548,63 532,76"/></circle><path class="lane parcel" d="M56,136 Q50,103 84,100" marker-end="url(#arr-parcel)"><title>EX-L11 EX-USW → EX-AMER-W · Parcel · Outbound (EXAMPLE)</title></path><path class="lane parcel" d="M236,128 Q197,116 188,156" marker-end="url(#arr-parcel)"><title>EX-L12 EX-USE → EX-AMER-E · Parcel · Outbound (EXAMPLE)</title></path><path class="lane parcel" d="M560,80 Q597,70 604,108" marker-end="url(#arr-parcel)"><title>EX-L13 EX-NL → EX-EMEA · Parcel · Outbound (EXAMPLE)</title></path><path class="lane parcel" d="M532,76 Q571,85 604,108" marker-end="url(#arr-parcel)"><title>EX-L14 EX-UK → EX-EMEA · Parcel · Outbound (EXAMPLE)</title></path><path class="lane parcel" d="M956,283 Q1004,271 1012,320" marker-end="url(#arr-parcel)"><title>EX-L15 EX-SG → EX-APAC-S · Parcel · Outbound (EXAMPLE)</title></path><path class="lane air" d="M956,283 Q949,186 1020,120" marker-end="url(#arr-air)"><title>EX-L16 EX-SG → EX-APAC-N · Air · Outbound (EXAMPLE)</title></path><path class="lane parcel" d="M188,156 Q190,104 236,128" marker-end="url(#arr-parcel)"><title>EX-L17 EX-AMER-E → EX-USE · Parcel · Returns (EXAMPLE)</title></path><path class="lane parcel" d="M604,108 Q604,59 560,80" marker-end="url(#arr-parcel)"><title>EX-L18 EX-EMEA → EX-NL · Parcel · Returns (EXAMPLE)</title></path><rect class="node" x="975" y="167" width="10" height="10" transform="rotate(45 980 172)"/><text class="node-lbl" x="970" y="177" text-anchor="end">EX-ASIA-FACTORY (node)</text><rect class="node" x="79" y="95" width="10" height="10" transform="rotate(45 84 100)"/><text class="node-lbl" x="93" y="94" text-anchor="start">EX-AMER-W (node)</text><rect class="node" x="183" y="151" width="10" height="10" transform="rotate(45 188 156)"/><text class="node-lbl" x="179" y="172" text-anchor="end">EX-AMER-E (node)</text><rect class="node" x="599" y="103" width="10" height="10" transform="rotate(45 604 108)"/><text class="node-lbl" x="613" y="122" text-anchor="start">EX-EMEA (node)</text><rect class="node" x="1007" y="315" width="10" height="10" transform="rotate(45 1012 320)"/><text class="node-lbl" x="1003" y="338" text-anchor="end">EX-APAC-S (node)</text><rect class="node" x="1015" y="115" width="10" height="10" transform="rotate(45 1020 120)"/><text class="node-lbl" x="1010" y="110" text-anchor="end">EX-APAC-N (node)</text><line class="lead" x1="56" y1="136" x2="156" y2="296"/><line class="lead" x1="236" y1="128" x2="320" y2="236"/><line class="lead" x1="140" y1="204" x2="150" y2="380"/><line class="lead" x1="532" y1="76" x2="430" y2="320"/><line class="lead" x1="560" y1="80" x2="470" y2="60"/><line class="lead" x1="956" y1="283" x2="850" y2="400"/><circle class="pin-glow" cx="56" cy="136" r="13" fill="#5ee1c7" filter="url(#glow)"/><circle class="pin-pulse" cx="56" cy="136" r="7" stroke="#5ee1c7"/><circle class="pin-core" cx="56" cy="136" r="6" fill="#5ee1c7"/><circle class="pin-glow" cx="236" cy="128" r="13" fill="#ff9f7a" filter="url(#glow)"/><circle class="pin-pulse risk" cx="236" cy="128" r="7" stroke="#ff9f7a"/><circle class="pin-core" cx="236" cy="128" r="6" fill="#ff9f7a"/><circle class="pin-core" cx="140" cy="204" r="6" fill="#0b1220" style="stroke:#9fb0cc; stroke-width:2"/><circle class="pin-glow" cx="532" cy="76" r="13" fill="#9fb0cc" filter="url(#glow)"/><circle class="pin-pulse" cx="532" cy="76" r="7" stroke="#9fb0cc"/><circle class="pin-core" cx="532" cy="76" r="6" fill="#9fb0cc"/><circle class="pin-glow" cx="560" cy="80" r="13" fill="#5ee1c7" filter="url(#glow)"/><circle class="pin-pulse" cx="560" cy="80" r="7" stroke="#5ee1c7"/><circle class="pin-core" cx="560" cy="80" r="6" fill="#5ee1c7"/><circle class="pin-glow" cx="956" cy="283" r="13" fill="#5ee1c7" filter="url(#glow)"/><circle class="pin-pulse risk" cx="956" cy="283" r="7" stroke="#5ee1c7"/><circle class="pin-core" cx="956" cy="283" r="6" fill="#5ee1c7"/></svg><div class="btag" style="--c:#5ee1c7; left:15.00%; top:63.25%"><span class="code">EX-USW</span><span class="v cu">98.69%</span><span class="pill pill-delay">Delay risk</span><span class="rg">Americas-W</span></div><div class="btag" style="--c:#ff9f7a; left:30.77%; top:50.43%"><span class="code">EX-USE</span><span class="v cu">97.25%</span><span class="pill pill-miss">Miss</span><span class="rg">Americas-E</span></div><div class="btag" style="--c:#9fb0cc; left:14.42%; top:81.20%"><span class="code">EX-MX</span><span class="pill pill-nl">not live, no data</span><span class="rg">Americas-LatAm · pipeline</span></div><div class="btag" style="--c:#9fb0cc; left:41.35%; top:68.38%"><span class="code">EX-UK</span><span class="pill pill-unv">UNVERIFIED</span><span class="rg">EMEA</span></div><div class="btag" style="--c:#5ee1c7; left:45.19%; top:12.82%"><span class="code">EX-NL</span><span class="v cu">98.47%</span><span class="pill pill-delay">Delay risk</span><span class="rg">EMEA</span></div><div class="btag" style="--c:#5ee1c7; left:81.73%; top:85.43%"><span class="code">EX-SG</span><span class="v cu">98.37%</span><span class="pill pill-risk">At risk</span><span class="pill pill-cut">Cutoff missing</span><span class="rg">APAC</span></div></div>
+      <div class="map-inset"><h4>OTIF standings</h4><div class="s">EXAMPLE ranking, week 2027-03-14 (contract SLA ≥98.0%)</div>
+        <table class="lb"><tbody>
+          <tr class="leader anim" style="--i:0"><td class="rk">1</td><td><span class="chip" style="--c:#5ee1c7"><i></i>EX-USW</span></td><td class="sc ok"><span class="cu">98.69%</span></td><td><span class="tr down">▼</span></td></tr>
+          <tr class="anim" style="--i:1"><td class="rk">2</td><td><span class="chip" style="--c:#5ee1c7"><i></i>EX-NL</span></td><td class="sc ok"><span class="cu">98.47%</span></td><td><span class="tr up">▲</span></td></tr>
+          <tr class="anim" style="--i:2"><td class="rk">3</td><td><span class="chip" style="--c:#5ee1c7"><i></i>EX-SG</span></td><td class="sc ok"><span class="cu">98.37%</span></td><td><span class="tr down">▼</span></td></tr>
+          <tr class="anim" style="--i:3"><td class="rk">4</td><td><span class="chip" style="--c:#ff9f7a"><i></i>EX-USE</span></td><td class="sc miss"><span class="cu">97.25%</span></td><td><span class="tr down">▼</span></td></tr>
+        </tbody></table>
+        <div class="unr"><b>Unranked:</b> EX-UK <span class="pill pill-unv">UNVERIFIED</span> (G1) · EX-MX pipeline, not live, no data.<br>Real sites get no league-table rank until Eligible to score (<code>ops/network-map-template.md</code>).</div></div>
+    </div>
+    <div class="map-legend"><span><span class="sw" style="background:#5ee1c7"></span>meets SLA</span><span><span class="sw" style="background:#ff9f7a"></span>MISS vs contract SLA</span><span><span class="sw" style="background:#9fb0cc"></span>UNVERIFIED / not live</span><span>pulse = at risk or missed</span><span><b>EXAMPLE lanes (freight/example-lanes.csv)</b> →</span><span><span class="ls" style="border-color:#7ab8ff"></span>ocean</span><span><span class="ls" style="border-color:#ffc454;border-top-style:dotted"></span>air</span><span><span class="ls" style="border-color:#5ee1c7"></span>FTL / LTL</span><span><span class="ls" style="border-color:#5ee1c7;border-top-width:1.5px;opacity:.7"></span>parcel</span><span><span class="ls" style="border-color:#9fb0cc;opacity:.5"></span>EX-MX (dim)</span><span>◆ node, not site</span></div>
+    <p class="fn">Pins mark the broad region only (<code>ops/network-map-template.md</code>), not addresses. OTIF: <code>ops/weekly-data-example.csv</code>, week 2027-03-14 (as slide 2b). DELAY RISK (watchtower, run 2026-11-02): EX-USW, LA/LB watchmen talks extended to 2026-11-04 17:00 PT, no strike on 11-01; EX-NL, Spain 24-hour general strike 2026-11-11 (Appendix E). AT RISK: EX-SG OTIF AT RISK, 4.38% of orders due in the next 7 days (Proactive panel). CUTOFF MISSING: rule 13. Ranking is EXAMPLE only; EX-UK excluded: UNVERIFIED (G1). Lanes: EXAMPLE, illustrative only (freight/example-lanes.csv, 17 lanes); ◆ = node, not a site; volumes not shown.</p>
+    <div class="ticker" style="--tk-dur:42s"><div class="tk-lbl">NETWORK</div><div class="tk-win"><div class="tk-track"><span class="tk-copy"><span class="it"><b>EXCLUDED</b>EX-UK: UNVERIFIED (G1)</span><span class="it"><b>PIPELINE</b>EX-MX: not live, no data</span><span class="it"><b>DELAY RISK</b>EX-USW: LA/LB watchmen talks extended to 2026-11-04 17:00 PT · EX-NL: Spain general strike 2026-11-11</span><span class="it"><b>WATCH</b>EX-SG OTIF AT RISK: 4.38% of orders due in the next 7 days</span><span class="it"><b>LANES</b>EXAMPLE lanes (freight/example-lanes.csv): ocean and air inbound from EX-ASIA-FACTORY, transfers, parcel out to customer-region nodes, returns</span></span><span class="tk-copy tk-dup" aria-hidden="true"><span class="it"><b>EXCLUDED</b>EX-UK: UNVERIFIED (G1)</span><span class="it"><b>PIPELINE</b>EX-MX: not live, no data</span><span class="it"><b>DELAY RISK</b>EX-USW: LA/LB watchmen talks extended to 2026-11-04 17:00 PT · EX-NL: Spain general strike 2026-11-11</span><span class="it"><b>WATCH</b>EX-SG OTIF AT RISK: 4.38% of orders due in the next 7 days</span><span class="it"><b>LANES</b>EXAMPLE lanes (freight/example-lanes.csv): ocean and air inbound from EX-ASIA-FACTORY, transfers, parcel out to customer-region nodes, returns</span></span></div></div></div>
+  </section>
+
+  
+  <section class="slide" data-title="North Star by 3PL">
+    <div class="ex-banner" title="All names and numbers in this deck are made up">MODE: SANITIZED (M-01 open) · EXAMPLE WEEK · made-up names &amp; numbers · not Verkada data</div>
+    <div class="kicker">2b · What makes up the network figure <span class="tag tag-example">EXAMPLE</span></div>
+    <h2 class="title" style="font-size:24px">EX-USE is the only site below the OTIF SLA; every site is short of the 12-month lead-time and in-stock targets</h2>
+    <p class="data-note">Week 2027-03-14 to 03-20 vs 2027-03-07, per-site values as given in <code>ops/weekly-data-example.csv</code> (the dashboard's latest EXAMPLE week). Ranked by OTIF (contract SLA); EXAMPLE ranking. Small print = numerator / denominator.</p>
+    <table class="lb">
+      <thead><tr><th>#</th><th>3PL</th><th>OTIF · SLA ≥98.0% + glide ≥98.0%</th><th>Δ vs 03-07</th><th>Lead time median · P90 · glide ≤2.5 d · ≤5.0 d</th><th>In-stock · glide ≥99.0%</th><th>Status</th></tr></thead>
+      <tbody>
+        <tr class="leader anim" style="--i:0"><td class="rk">1</td><td><span class="chip" style="--c:#5ee1c7"><i></i>EX-USW</span></td><td class="sc ok"><span class="cu">98.69%</span> <span class="sub">3905 / 3957</span></td><td style="white-space:nowrap"><span class="tr down">▼</span> −0.06 pts</td><td class="c behind">3.2 d <span class="tr flat">▬</span> · 6.8 d <span class="tr down">▼</span></td><td class="c behind">96.76% <span class="tr up">▲</span> <span class="sub">12192 / 12600</span></td><td><span class="pill pill-ok">Meets SLA</span></td></tr>
+        <tr class="anim" style="--i:1"><td class="rk">2</td><td><span class="chip" style="--c:#5ee1c7"><i></i>EX-NL</span></td><td class="sc ok"><span class="cu">98.47%</span> <span class="sub">3996 / 4058</span></td><td><span class="tr up">▲</span></td><td class="c behind">4.2 d <span class="tr down">▼</span> · 8.8 d <span class="tr up">▲</span></td><td class="c behind">95.6% <span class="tr up">▲</span> <span class="sub">12046 / 12600</span></td><td><span class="pill pill-ok">Meets SLA</span></td></tr>
+        <tr class="anim" style="--i:2"><td class="rk">3</td><td><span class="chip" style="--c:#5ee1c7"><i></i>EX-SG</span></td><td class="sc ok"><span class="cu">98.37%</span> <span class="sub">3797 / 3860</span></td><td><span class="tr down">▼</span></td><td class="c behind">4 d <span class="tr flat">▬</span> · 8.3 d <span class="tr down">▼</span></td><td class="c behind">96.17% <span class="tr up">▲</span> <span class="sub">12117 / 12600</span></td><td><span class="pill pill-risk">At risk</span></td></tr>
+        <tr class="anim" style="--i:3"><td class="rk">4</td><td><span class="chip" style="--c:#ff9f7a"><i></i>EX-USE</span></td><td class="sc miss"><span class="cu">97.25%</span> <span class="sub">3750 / 3856</span></td><td><span class="tr down">▼</span></td><td class="c behind">3.6 d <span class="tr up">▲</span> · 7.5 d <span class="tr up">▲</span></td><td class="c behind">95.84% <span class="tr down">▼</span> <span class="sub">12076 / 12600</span></td><td><span class="pill pill-miss">Miss</span></td></tr>
+        <tr class="net"><td class="rk">Σ</td><td>Network excl. EX-UK</td><td>98.20% <span class="tr down">▼</span> <span class="sub">15448 / 15731</span></td><td><span class="tr down">▼</span></td><td>3.8 d · 7.9 d <span class="sub">order-weighted, approx. (Ops pack)</span></td><td>96.09% <span class="tr up">▲</span> <span class="sub">48431 / 50400</span></td><td></td></tr>
+        <tr class="unr"><td class="rk">–</td><td>EX-UK (excluded, unranked)</td><td>98.34% <span class="tr nd">trend: no data</span></td><td><span class="tr nd">no data</span></td><td>4.6 d · 9.7 d <span class="tr nd">trend: no data</span></td><td>93.59% <span class="tr nd">trend: no data</span></td><td><span class="pill pill-unv">UNVERIFIED</span></td></tr>
+      </tbody>
+    </table>
+    <div class="legend"><span style="color:#5ee1c7;font-weight:800">teal</span> meets target · <span style="color:#ff9f7a;font-weight:800">coral</span> MISS vs contract SLA · <span style="color:#ffc454;font-weight:800">amber</span> below 12-month target (no breach) · ▲ better ▼ worse ▬ same vs 2027-03-07 · leader highlighted (OTIF only; lead time and in-stock are below target at every site)</div>
+    <p class="fn"><b>EX-UK excluded: UNVERIFIED (G1).</b> EX-MX is pipeline (not live): no data. Real sites are Observe only until walked + 4 weeks of data, with no league-table rank (<code>ops/network-map-template.md</code>); this ranking is EXAMPLE. Δ: arrows from the CSV; −0.06 pts from the 3PL Ops Lead pack §5. AT RISK: EX-SG OTIF AT RISK (Proactive panel).</p>
+  </section>
+
+  
+  <section class="slide" data-title="Drill-down · OTIF">
+    <div class="ex-banner" title="All names and numbers in this deck are made up">MODE: SANITIZED (M-01 open) · EXAMPLE WEEK · made-up names &amp; numbers · not Verkada data</div>
+    <div class="kicker">3 · Drill-down: OTIF <span class="tag tag-example">EXAMPLE</span></div>
+    <h2 class="title" style="font-size:24px">OTIF: EX-USE is below SLA; EX-SG and EX-USW slipped but stay above it</h2>
+    <p class="data-note">Why this slide: network OTIF meets the SLA but is down 9 weeks in a row (98.20% from 98.25%). EX-NL meets the SLA and improved (98.47% ▲), so it is not drilled.</p>
+    <table class="tbl dd leader"><thead><tr><th style="width:8%">3PL</th><th style="width:15%">Actual vs target</th><th style="width:19%">Root-cause tag</th><th style="width:24%">Driver (source)</th><th style="width:21%">Fix</th><th style="width:13%">Owner</th></tr></thead><tbody>
+      <tr><td class="metric">EX-USE</td><td><b>97.25%</b> vs 98.00% contract SLA · <span class="pill pill-miss">Miss</span> worse 8 wk in a row</td><td><span class="tag tag-unverified">unconfirmed</span> U-00<br><span class="sub">3PL-coded misses: 3pl 53 · carrier 27 · supply 21 · unattributed 5</span></td><td>Backlog aging: 15% of 667 open orders are &gt; 5 days old (33 are 11+ d). OTIF risk rising: 2.15%, up 3 wk in a row (Proactive panel). Likely drivers (dashboard): Stockouts (not in full), late release/ship, or carrier transit misses</td><td>Split misses into not-on-time vs not-in-full and by stage; fix the largest bucket. CAPA-EX-003: awaiting plan, due 2027-03-22</td><td>3PL site lead, EX-USE</td></tr><tr><td class="metric">EX-SG</td><td><b>98.37%</b> vs 98.00% · meets SLA · ▼ from 98.43%</td><td><span class="tag tag-unverified">unconfirmed</span> U-00<br><span class="sub">3PL-coded misses: 3pl 16 · carrier 9 · supply 35 · unattributed 3</span></td><td><span class="pill pill-risk">At risk</span> OTIF AT RISK: 4.38% of orders due in the next 7 days. PROJECTED STOCKOUT, class A: 11.5 d of supply vs 16.1 d (Proactive panel)</td><td>Work the at-risk list daily: expedite, split-ship with consent, or reset dates with the customer</td><td>3PL site lead, EX-SG</td></tr><tr><td class="metric">EX-USW</td><td><b>98.69%</b> (3905 / 3957) · ▼ −0.06 pts from 98.75% · still <b>above</b> the 98.0% SLA; ahead of glide (plan now 98.33%)</td><td><span class="tag tag-unverified">unconfirmed</span> No <code>root_cause</code> value applies (not a contract-SLA miss row)<br><span class="sub">Misses by cause (% of orders due): 3PL 0.66 (26 orders), carrier 0.33 (13), supply 0.25 (10), unattributed 0.08 (3)</span></td><td><i>Likely, unconfirmed:</i> Stockouts, late release/ship, or carrier transit. The 3PL share is largest; 3PL and carrier misses each rose by 1 order</td><td>Split misses into not-on-time vs not-in-full and by stage; fix the largest bucket</td><td>3PL site lead, EX-USW; Freight &amp; Trade (carrier evidence)</td></tr>
+    </tbody></table>
+    <p class="fn">Tags stay unconfirmed until Freight &amp; Trade evidence is in (<code>ops/3pl-accountability/miss-attribution.md</code>); 3PL-coded splits from the CSV (<code>otif_misses</code>). Drivers, fixes and owners: <code>ops/kpi-dashboard.html</code> exceptions and Proactive panel, week 2027-03-14.</p>
+  </section>
+
+  
+  <section class="slide" data-title="Drill-down · Lead time">
+    <div class="ex-banner" title="All names and numbers in this deck are made up">MODE: SANITIZED (M-01 open) · EXAMPLE WEEK · made-up names &amp; numbers · not Verkada data</div>
+    <div class="kicker">4 · Drill-down: Lead time <span class="tag tag-example">EXAMPLE</span></div>
+    <h2 class="title" style="font-size:24px">Lead time: every site is above the 2.5 d / 5.0 d 12-month targets</h2>
+    <p class="data-note">Why this slide: all four sites are above the 12-month targets on median and P90 (never a breach). Network excl. EX-UK: 3.8 d · 7.9 d (Ops pack, approx.). EX-SG and EX-USW are ahead of or on the glide path (Ops pack). Values as given in the CSV; ▲ better ▼ worse ▬ same vs 2027-03-07.</p>
+    <table class="tbl dd leader"><thead><tr><th style="width:8%">3PL</th><th style="width:15%">Actual vs target</th><th style="width:19%">Root-cause tag</th><th style="width:24%">Driver (source)</th><th style="width:21%">Fix</th><th style="width:13%">Owner</th></tr></thead><tbody>
+      <tr><td class="metric">EX-NL</td><td><b>4.2 d</b> ▼ · P90 <b>8.8 d</b> ▲ · median TREND worse 2 wk; P90 behind glide-path 8.7 d</td><td><span class="tag tag-unverified">unconfirmed</span> U-00</td><td>stage medians: release→ship 0.9 d · ship→deliver 2.9 d (stage targets 0.5 d · 2.0 d, ASSUMPTIONS)</td><td>Check stage split: release-to-ship vs ship-to-deliver. List the slowest 10% of orders; tag the cause (hold, backorder, lane)</td><td>3PL site lead, EX-NL</td></tr><tr><td class="metric">EX-SG</td><td>Median <b>4.0 d</b> ▬ · P90 <b>8.3 d</b> ▼ · above the 12-month targets; median ahead of the glide path (plan now 4.1 d), P90 on it (plan now 8.3 d)</td><td><span class="tag tag-unverified">unconfirmed</span> U-00</td><td>Stages: release-to-ship 0.9 / 2.5 d; ship-to-deliver 2.8 / 5.7 d. <i>Likely, unconfirmed:</i> Order holds before release, slow pick/ship, or slow lanes. Ship-to-deliver is the larger stage, so carrier lanes are the likely main driver</td><td>Check the stage split; carrier lane review on the slowest P90 lanes (turnaround plan)</td><td>3PL site lead, EX-SG; Freight &amp; Trade (lanes)</td></tr><tr><td class="metric">EX-USE</td><td><b>3.6 d</b> ▲ · P90 <b>7.5 d</b> ▲</td><td><span class="tag tag-unverified">unconfirmed</span> U-00</td><td>stage medians: release→ship 0.8 d · ship→deliver 2.5 d (stage targets 0.5 d · 2.0 d, ASSUMPTIONS). Backlog aging: 15% of 667 open orders &gt; 5 days ("Aged orders become OTIF misses and long-tail lead time (P90)")</td><td>Daily aged-order review: release holds, allocate stock, or set a new date with the customer</td><td>3PL site lead, EX-USE</td></tr><tr><td class="metric">EX-USW</td><td>Median <b>3.2 d</b> ▬ · P90 <b>6.8 d</b> ▼ · above the 12-month targets; ahead of the glide path (plan now 3.3 / 6.9 d)</td><td><span class="tag tag-unverified">unconfirmed</span> U-00</td><td>Stages: release-to-ship 0.7 / 2.0 d; ship-to-deliver 2.2 / 4.6 d. <i>Likely, unconfirmed:</i> as EX-SG ("Same; ship-to-deliver is the larger stage")</td><td>As EX-SG: check the stage split; carrier lane review on the slowest P90 lanes (turnaround plan)</td><td>3PL site lead, EX-USW; Freight &amp; Trade (lanes)</td></tr>
+    </tbody></table>
+    <p class="fn">No source tags lead-time causes, so every row is unconfirmed. Stage medians: CSV <code>lt_release_to_ship_median</code>, <code>lt_ship_to_deliver_median</code>; stage targets and flags: <code>ops/kpi-dashboard.html</code>. Stage medians do not add up to the end-to-end median.</p>
+  </section>
+
+  
+  <section class="slide" data-title="Drill-down · In-stock">
+    <div class="ex-banner" title="All names and numbers in this deck are made up">MODE: SANITIZED (M-01 open) · EXAMPLE WEEK · made-up names &amp; numbers · not Verkada data</div>
+    <div class="kicker">5 · Drill-down: In-stock <span class="tag tag-example">EXAMPLE</span></div>
+    <h2 class="title" style="font-size:24px">In-stock: every site is below the 99.0% 12-month target; EX-USE slipped</h2>
+    <p class="data-note">Why this slide: network in-stock improved (96.09% from 95.96%) but every site is below the 99.0% 12-month target. The dashboard flags only EX-USE as behind this week's glide-path point.</p>
+    <table class="tbl dd leader"><thead><tr><th style="width:8%">3PL</th><th style="width:15%">Actual vs target</th><th style="width:19%">Root-cause tag</th><th style="width:24%">Driver (source)</th><th style="width:21%">Fix</th><th style="width:13%">Owner</th></tr></thead><tbody>
+      <tr><td class="metric">EX-USE</td><td><b>95.84%</b> ▼ from 96.02% · behind glide-path 95.94%, worse 1 wk</td><td><span class="tag tag-unverified">unconfirmed</span> U-00<br><span class="sub">3PL-coded gap SKU-days: 3pl 236 · supply 236 · unattributed 52</span></td><td>Dashboard likely cause (unconfirmed): replenishment late vs demand, stock stuck in receiving/QC, or allocation to the wrong region</td><td>Review projected stockouts (Proactive panel); expedite or rebalance A-class</td><td>3PL site lead, EX-USE</td></tr><tr><td class="metric">EX-SG</td><td><b>96.17%</b> ▲ from 95.89%</td><td><span class="tag tag-unverified">unconfirmed</span> U-00<br><span class="sub">3PL-coded gap SKU-days: 3pl 97 · supply 362 · unattributed 24</span></td><td>PROJECTED STOCKOUT, class A: 11.5 d of supply vs 16.1 d to replenish (Proactive panel)</td><td>Expedite open POs or rebalance stock from another 3PL; confirm allocation rules</td><td>Supply planning + 3PL Ops Lead</td></tr><tr><td class="metric">EX-NL</td><td><b>95.6%</b> ▲ from 95.51%</td><td><span class="tag tag-unverified">unconfirmed</span> U-00<br><span class="sub">3PL-coded gap SKU-days: 3pl 249 · supply 249 · unattributed 56</span></td><td>STOCKOUT WATCH, class B: 25 d vs 21.5 d. ASN LATE: 13.33% of inbound ("Blind receiving, so slower dock-to-stock, then in-stock gaps")</td><td>Check open PO ETAs and the next 2 weeks of demand; supplier ASN compliance review</td><td>Supply planning + 3PL Ops Lead; Procurement + 3PL Ops Lead</td></tr><tr><td class="metric">EX-USW</td><td><b>96.76%</b> (12192 / 12600) ▲ from 96.42% · below the 99.0% 12-month target; ahead of the glide path (plan now 96.48%)</td><td><span class="tag tag-unverified">unconfirmed</span> U-00<br><span class="sub">Gaps by cause (pts): 3PL 1.46, supply 1.46, unattributed 0.32. Class A 98.10%, B 97.24%, C 96.00%</span></td><td><i>Likely, unconfirmed:</i> Late replenishment vs demand, stock stuck in receiving/QC, or allocation to the wrong region</td><td>Review projected stockouts (Proactive panel); expedite or rebalance A-class</td><td>3PL site lead, EX-USW; supply planning (supply-coded gaps)</td></tr>
+    </tbody></table>
+    <p class="fn">Tags stay unconfirmed until evidence is in (<code>miss-attribution.md</code>); 3PL-coded splits from the CSV (<code>in_stock_gaps</code>). Drivers, fixes and owners: <code>ops/kpi-dashboard.html</code>, week 2027-03-14.</p>
+  </section>
+
+  
+  <section class="slide" data-title="Did you know">
+    <div class="ex-banner" title="All names and numbers in this deck are made up">MODE: SANITIZED (M-01 open) · EXAMPLE · made-up names &amp; numbers · not Verkada data</div>
+    <div class="kicker">6 · Did you know <span class="tag tag-example">EXAMPLE</span></div>
+    <h2 class="title" style="font-size:30px">Fiscal year to date: 1.28 million units out the door to 74 countries</h2>
+    <div class="dyk4">
+      <div class="t"><div class="k">Revenue to date</div><div class="v"><span class="cu">104</span></div><div class="s">index · plan to date = 100 · C&amp;F</div></div>
+      <div class="t"><div class="k">Orders placed</div><div class="v"><span class="cu">61,480</span></div><div class="s">FYTD</div></div>
+      <div class="t"><div class="k">Orders fulfilled</div><div class="v"><span class="cu">60,912</span></div><div class="s">FYTD · 412 open, 156 cancelled</div></div>
+      <div class="t"><div class="k">Units shipped</div><div class="v"><span class="cu">1,284,600</span></div><div class="s">FYTD · carrier pickup scans</div></div>
+    </div>
+    <div class="rec">
+      <div class="row"><div class="l">Countries shipped to<small>FYTD, distinct ship-to countries</small></div><div class="v">74</div></div>
+      <div class="row"><div class="l">Most orders in a day<small>Record · quarter-end, week of 2026-09-28</small></div><div class="v">1,146</div></div>
+      <div class="row"><div class="l">Longest on-time streak<small>EX-USW, ship days with zero OTIF misses</small></div><div class="v">23 d <span class="sub">controllable</span> · 9 d <span class="sub">total</span></div></div>
+      <div class="row"><div class="l">Largest order vs average<small>Record this quarter · EX-C15, this week</small></div><div class="v">4.2×</div></div>
+    </div>
+    <div class="sec-h" style="margin-top:14px">Orders placed by fiscal month (EXAMPLE) · sums to 61,480</div><svg class="chart" viewBox="0 0 1104 96" role="img" aria-label="Orders placed per fiscal month, months 1 to 9, EXAMPLE"><rect x="22.1" y="28.5" width="78.5" height="41.5" fill="rgba(94,225,199,.45)"/><text x="61.3" y="24.5" fill="#e8ecf4" font-size="11" text-anchor="middle">6,020</text><text x="61.3" y="86" fill="#9fb0cc" font-size="10.5" text-anchor="middle">M1</text><rect x="144.7" y="26.5" width="78.5" height="43.5" fill="rgba(94,225,199,.45)"/><text x="184.0" y="22.5" fill="#e8ecf4" font-size="11" text-anchor="middle">6,310</text><text x="184.0" y="86" fill="#9fb0cc" font-size="10.5" text-anchor="middle">M2</text><rect x="267.4" y="24.8" width="78.5" height="45.2" fill="rgba(94,225,199,.45)"/><text x="306.7" y="20.8" fill="#e8ecf4" font-size="11" text-anchor="middle">6,550</text><text x="306.7" y="86" fill="#9fb0cc" font-size="10.5" text-anchor="middle">M3</text><rect x="390.1" y="25.4" width="78.5" height="44.6" fill="rgba(94,225,199,.45)"/><text x="429.3" y="21.4" fill="#e8ecf4" font-size="11" text-anchor="middle">6,480</text><text x="429.3" y="86" fill="#9fb0cc" font-size="10.5" text-anchor="middle">M4</text><rect x="512.7" y="22.5" width="78.5" height="47.5" fill="rgba(94,225,199,.45)"/><text x="552.0" y="18.5" fill="#e8ecf4" font-size="11" text-anchor="middle">6,890</text><text x="552.0" y="86" fill="#9fb0cc" font-size="10.5" text-anchor="middle">M5</text><rect x="635.4" y="20.3" width="78.5" height="49.7" fill="rgba(94,225,199,.45)"/><text x="674.7" y="16.3" fill="#e8ecf4" font-size="11" text-anchor="middle">7,210</text><text x="674.7" y="86" fill="#9fb0cc" font-size="10.5" text-anchor="middle">M6</text><rect x="758.1" y="22.2" width="78.5" height="47.8" fill="rgba(94,225,199,.45)"/><text x="797.3" y="18.2" fill="#e8ecf4" font-size="11" text-anchor="middle">6,940</text><text x="797.3" y="86" fill="#9fb0cc" font-size="10.5" text-anchor="middle">M7</text><rect x="880.7" y="19.5" width="78.5" height="50.5" fill="rgba(94,225,199,.45)"/><text x="920.0" y="15.5" fill="#e8ecf4" font-size="11" text-anchor="middle">7,330</text><text x="920.0" y="86" fill="#9fb0cc" font-size="10.5" text-anchor="middle">M8</text><rect x="1003.4" y="16.6" width="78.5" height="53.4" fill="#5ee1c7"/><text x="1042.7" y="12.6" fill="#e8ecf4" font-size="11" text-anchor="middle">7,750</text><text x="1042.7" y="86" fill="#9fb0cc" font-size="10.5" text-anchor="middle">M9</text><line x1="0" x2="1104" y1="70.5" y2="70.5" stroke="rgba(255,255,255,.18)"/></svg>
+    <p class="fn">All figures EXAMPLE (made up), snapshot 2026-11-03; not Verkada data. Revenue is an index, never dollars, and is owned by Contracts &amp; Finance. Records come from closed days only. Definitions and owners: <a class="lnk" href="full-loop-dashboards.html">dashboards spec</a> §5.</p>
+  </section>
+
+  
+  <section class="slide" data-title="Appendix A · Network figures and formulas">
+    <div class="ex-banner" title="All names and numbers in this deck are made up">MODE: SANITIZED (M-01 open) · EXAMPLE WEEK · made-up names &amp; numbers · not Verkada data</div>
+    <div class="kicker appendix-kicker">Appendix A · Network ex-UK: every % and how it is computed <span class="tag tag-example">EXAMPLE</span></div>
+    <h2 class="title" style="font-size:22px">Σ numerator ÷ Σ denominator over EX-NL + EX-SG + EX-USE + EX-USW, week 2027-03-14</h2>
+    <table class="tbl fx">
+      <thead><tr><th style="width:11%">KPI</th><th style="width:9%">Label</th><th class="num" style="width:7%">03-14</th><th>Formula (NL + SG + USE + USW)</th><th class="num" style="width:13%">03-07</th><th class="num" style="width:4%">Trend</th><th style="width:10%">Target</th><th style="width:14%">Status</th></tr></thead>
+      <tbody>
+        <tr><td class="metric">OTIF (customer)</td><td>Contract SLA + glide</td><td class="num"><b>98.20%</b></td><td>(3996 + 3797 + 3750 + 3905) ÷ (4058 + 3860 + 3856 + 3957) = 15448 / 15731</td><td class="num">98.25% <span class="sub">15310 / 15583</span></td><td class="num"><span class="tr down">▼</span></td><td>≥98.0% SLA · ≥98.0% glide</td><td>Meets SLA; EX-USE MISS inside</td></tr>
+        <tr><td class="metric">In-stock</td><td>Glide only</td><td class="num"><b>96.09%</b></td><td>(12046 + 12117 + 12076 + 12192) ÷ (12600 + 12600 + 12600 + 12600) = 48431 / 50400</td><td class="num">95.96% <span class="sub">48364 / 50400</span></td><td class="num"><span class="tr up">▲</span></td><td>≥99.0% glide</td><td>Below 12-month target</td></tr>
+        <tr><td class="metric">Order accuracy</td><td>Contract SLA + glide</td><td class="num"><b>99.85%</b></td><td>(4235 + 4038 + 4043 + 4139) ÷ (4245 + 4047 + 4043 + 4144) = 16455 / 16479</td><td class="num">99.86% <span class="sub">16308 / 16331</span></td><td class="num"><span class="tr down">▼</span></td><td>≥99.5% SLA (EXAMPLE) · ≥99.7% glide</td><td><span class="tag tag-pending">PENDING: evidence</span> EX-USE G5 weeks in pool</td></tr>
+        <tr><td class="metric">Inventory accuracy</td><td>Contract SLA + glide</td><td class="num"><b>99.60%</b></td><td>(2724 + 2524 + 2511 + 2626) ÷ (2732 + 2534 + 2530 + 2631) = 10385 / 10427</td><td class="num">99.57% <span class="sub">11031 / 11079</span></td><td class="num"><span class="tr up">▲</span></td><td>≥99.5% SLA · ≥99.9% glide</td><td>Meets SLA, below 12-month target; EX-USE MISS inside</td></tr>
+        <tr><td class="metric">Dock-to-stock (hours ÷ receipts)</td><td>Contract SLA + glide</td><td class="num"><b>18.7 h</b></td><td>(6080.5 + 4460.3 + 4393.6 + 3258.8) ÷ (369 + 171 + 167 + 268) = 18193.2 / 975</td><td class="num">21.7 h <span class="sub">35350.4 / 1627</span></td><td class="num"><span class="tr up">▲</span></td><td>≤24 h SLA · ≤3 h glide</td><td>Meets SLA, below 12-month target; EX-SG, EX-USE MISS inside</td></tr>
+        <tr><td class="metric">Same-day rel.-to-ship vs cutoff¹</td><td>Diagnostic (SLA PENDING SOWs)</td><td class="num"><b>99.34%</b>³</td><td>(3629 + 3505 + 3586) ÷ (3656 + 3538 + 3597) = 10,720 / 10,791 (NL + USE + USW; excl. EX-SG (CUTOFF MISSING); excl. EX-UK (UNVERIFIED)). <b>Ops network base</b> (NL, UK, USE, USW): 99.07% (14,371 / 14,506)³, excl. EX-SG (CUTOFF MISSING)²</td><td class="num nd">no data</td><td class="num nd">no data</td><td>≥99.0% (EXAMPLE, not active)</td><td>Diagnostic only. EX-SG not measured (CUTOFF MISSING)</td></tr>
+        <tr><td class="metric">ASN compliance</td><td>Leading, glide only</td><td class="num"><b>98.63%</b></td><td>(176 + 232 + 176 + 208) ÷ (178 + 236 + 180 + 209) = 792 / 803</td><td class="num">98.39% <span class="sub">794 / 807</span></td><td class="num"><span class="tr up">▲</span></td><td>≥99% glide</td><td>Below 12-month target</td></tr>
+        <tr><td class="metric">Tracking coverage</td><td>Leading, glide only</td><td class="num"><b>99.30%</b></td><td>(3849 + 4041 + 3685 + 3817) ÷ (3872 + 4086 + 3718 + 3825) = 15392 / 15501</td><td class="num">99.19% <span class="sub">15379 / 15505</span></td><td class="num"><span class="tr up">▲</span></td><td>≥99.5% glide</td><td>Below 12-month target</td></tr>
+        <tr><td class="metric">Lead time median · P90</td><td>Glide only</td><td class="num"><b>3.8 d · 7.9 d</b></td><td>Order-weighted mean of site statistics, an approximation (Ops pack §5.1; site inputs: Appendix A2)</td><td class="num"><span class="nd">no data</span></td><td></td><td>≤2.5 d · ≤5.0 d 12-month</td><td>Above 12-month target</td></tr>
+        <tr><td class="metric">MOB ★ score · data completeness</td><td>Leading, glide only</td><td class="num"><b>71 / 72 = 98.6% · 559 / 560 = 99.8%</b></td><td>Ops pack §5.2 (Y of 18 × 4; 7 KPIs × 20 weeks × 4). All sites incl. EX-UK: 97.8% · 95.3% (Appendix A2)</td><td class="num"><span class="nd">no data</span></td><td></td><td>100% · 100%</td><td>Below 12-month target</td></tr>
+      </tbody>
+    </table>
+    <p class="fn"><b>EX-UK excluded: UNVERIFIED (G1).</b> % shown at the dashboard's 2 dp (dock-to-stock at its 1 dp, in hours). Release-to-ship: rule 13 APPROVED (hypothesis to test, 2026-10-26); values from CSV v2.9.2 (3PL Ops Lead); ³EXAMPLE; values relabelled to the cutoff basis, not recomputed; cutoffs are EXAMPLE <span class="tag tag-unverified">UNVERIFIED</span> F&amp;T template has no real rows; no prior-week values on that basis, so trend: no data (full rule text: Appendix B). ¹Same-day release-to-ship % vs site carrier cutoff (diagnostic only), approved (decisions.md 2026-10-26). ²Ops confirmed 2026-11-02 (relayed by CoS): slide base excludes EX-UK (UNVERIFIED, G1) and EX-SG (CUTOFF MISSING, not G1). Mike to decide if EX-UK stays out of diagnostic KPIs. Weekly OTIF series behind "down 9 weeks in a row": md source trace. Lead time, MOB ★ and completeness: 3PL Ops Lead pack §5, EXAMPLE.</p>
+  </section>
+
+  
+  <section class="slide" data-title="Appendix A2 · Ops pack figures">
+    <div class="ex-banner" title="All names and numbers in this deck are made up">MODE: SANITIZED (M-01 open) · EXAMPLE WEEK · made-up names &amp; numbers · not Verkada data</div>
+    <div class="kicker appendix-kicker">Appendix A2 · Figures from the 3PL Ops Lead pack (quoted exactly) <span class="tag tag-example">EXAMPLE</span></div>
+    <h2 class="title" style="font-size:22px">Lead time, Day-0, critical basics and completeness: base named on every row</h2>
+    <p class="data-note">Source: <code>ops/handoffs/exec-comms-1030-pack.md</code> (3PL Ops Lead, 2026-10-26), week 2027-03-14. All EXAMPLE. Slide-1 base = network excl. EX-UK <span class="tag tag-unverified">UNVERIFIED</span>; all-sites values are shown beside it for reference (rule 12, approved (decisions.md 2026-10-26)).</p>
+    <table class="tbl fx">
+      <thead><tr><th style="width:24%">Figure</th><th style="width:20%">Base</th><th>Latest (wk 2027-03-14)</th><th>Last 4 received weeks, mean*</th><th>Day-0 baseline</th><th style="width:20%">Note</th></tr></thead>
+      <tbody>
+        <tr><td class="metric">Network lead time median · P90</td><td>Excl. EX-UK <span class="tag tag-unverified">UNVERIFIED</span></td><td class="num"><b>3.8 d · 7.9 d</b></td><td class="num">—</td><td class="num">5.3 d · 11.3 d</td><td>Order-weighted means of site statistics (approximation)†</td></tr>
+        <tr><td class="metric">Network lead time median · P90</td><td>All sites incl. EX-UK (reference)</td><td class="num">3.9 d · 8.2 d</td><td class="num">—</td><td class="num">5.6 d · 12.0 d</td><td>12-month target ≤ 2.5 d · ≤ 5.0 d</td></tr>
+        <tr><td class="metric">EX-UK lead time median · P90</td><td>EX-UK only (single site)</td><td class="num">4.6 d · 9.7 d</td><td class="num">5.1 d · 10.6 d*</td><td class="num">7.0 d · 15.0 d</td><td>EX-UK KPIs stay out of the network (G1)</td></tr>
+        <tr><td class="metric">Critical basics (MOB ★ score)</td><td>Excl. EX-UK <span class="tag tag-unverified">UNVERIFIED</span></td><td class="num"><b>71 / 72 = 98.6%</b></td><td class="num">—</td><td class="num">—</td><td>NL 18, SG 18, USW 18, USE 17 (cycle counting at P)</td></tr>
+        <tr><td class="metric">Critical basics (MOB ★ score)</td><td>All sites incl. EX-UK (reference)</td><td class="num">88 / 90 = 97.8%</td><td class="num">—</td><td class="num">—</td><td>UK 17 (data channel N)</td></tr>
+        <tr><td class="metric">Data completeness (7 KPIs × 20 weeks)</td><td>Excl. EX-UK <span class="tag tag-unverified">UNVERIFIED</span></td><td class="num"><b>559 / 560 = 99.8%</b></td><td class="num">—</td><td class="num">—</td><td>NL, SG and USW 140 each; USE 139</td></tr>
+        <tr><td class="metric">Data completeness (7 KPIs × 20 weeks)</td><td>All sites incl. EX-UK (reference)</td><td class="num">667 / 700 = 95.3%</td><td class="num">—</td><td class="num">—</td><td>EX-UK 77.1% (<b>Watch</b>, below 90%)</td></tr>
+      </tbody>
+    </table>
+    <p class="fn">†Sites, median (orders): NL 4.2 (3820), SG 4.0 (3962), USE 3.6 (3678), USW 3.2 (3749). Sites, P90: NL 8.8, SG 8.3, USE 7.5, USW 6.8. "A true pooled median or P90 can't be derived from site medians. These are order-weighted means of the site statistics (weight = orders delivered in the week), which is the dashboard's own method." Day-0: "a simple mean of the sites' EXAMPLE Day-0 values (dashboard method), not order-weighted." *EX-UK's 4-week figures cover 6 calendar weeks and include a stale repeat: "The last 4 received weeks are 2027-02-07, 02-14 (stale repeat), 02-21 and 03-14." <span class="tag tag-unverified">UNVERIFIED</span> (pack, as written): "all figures are EXAMPLE, not real 3PL data; the Day-0 baseline is EXAMPLE (real window/freeze pending M-01/M-08); averaging weekly medians/P90s and order-weighting site medians/P90s (section 5) are approximations; section 5 drivers are likely, unconfirmed; the rule 12 exclusion is DRAFT, pending Mike confirmation; root causes on the 4 rows are unconfirmed pending Freight &amp; Trade evidence" [rule 12 since approved (decisions.md 2026-10-26)].</p>
+  </section>
+
+  
+  <section class="slide bo-slide b-tight" data-title="Appendix B · Other KPIs by 3PL">
+    <div class="ex-banner" title="All names and numbers in this deck are made up">MODE: SANITIZED (M-01 open) · EXAMPLE WEEK · made-up names &amp; numbers · not Verkada data</div>
+    <div class="kicker appendix-kicker">Appendix B · Other KPIs by 3PL <span class="tag tag-example">EXAMPLE</span></div>
+    <h2 class="title" style="font-size:24px">Other KPIs: EX-USE and EX-SG miss contract SLAs; EX-UK is UNVERIFIED</h2>
+    <p class="data-note">Week 2027-03-14 to 03-20 from <code>ops/weekly-data-example.csv</code> (= dashboard latest EXAMPLE week); trend vs 2027-03-07. OTIF repeats slide 2b. Tier and MOB ★ from <code>ops/kpi-dashboard.html</code> (EXAMPLE simulation). Real sites are <b>Observe only</b>: no tier until walked + 4 weeks (<code>ops/network-map-template.md</code>).</p>
+    <table class="tbl bo">
+      <thead><tr><th>3PL</th><th style="width:17%">EXAMPLE tier · score · scoring</th><th>OTIF<br>SLA ≥98.0</th><th>Order acc.<br>SLA ≥99.5</th><th>Inv. acc.<br>SLA ≥99.5</th><th>Dock-to-stock<br>SLA ≤24 h</th><th>Same-day rel.-to-ship vs cutoff³<br>diag. ≥99.0 · CSV v2.9.2</th><th>ASN<br>glide ≥99</th><th>Tracking<br>glide ≥99.5</th><th>Gate</th></tr></thead>
+      <tbody>
+        <tr><td class="metric">EX-USW</td><td><span class="tier tier-green">Green</span> MOB ★ 18/18 · Observe only</td><td class="c ok">98.69% <span class="tr down">▼</span></td><td class="c ok">99.88% <span class="tr up">▲</span></td><td class="c ok">99.81% <span class="tr up">▲</span></td><td class="c ok">12.2&nbsp;h <span class="tr down">▼</span></td><td class="c ok">99.69% (Los Angeles 17:00) <span class="tr nd">trend: no data</span></td><td class="c ok">99.52% <span class="tr up">▲</span></td><td class="c ok">99.79% <span class="tr up">▲</span></td><td><span class="tag tag-pass">PASSED</span></td></tr>
+        <tr><td class="metric">EX-USE</td><td><span class="tier tier-watch">Watch</span> MOB ★ 17/18 · Observe only</td><td class="c miss">97.25% <span class="tr down">▼</span></td><td class="c pend">100% <span class="tr flat">▬</span> <span class="tag tag-pending">PENDING: evidence</span></td><td class="c miss">99.25% <span class="tr down">▼</span></td><td class="c miss">26.3&nbsp;h <span class="tr up">▲</span></td><td class="c ok">99.07% (New York 17:00) <span class="tr nd">trend: no data</span></td><td class="c behind">97.78% <span class="tr up">▲</span></td><td class="c behind">99.11% <span class="tr up">▲</span></td><td><span class="tag tag-pass">PASSED</span></td></tr>
+        <tr><td class="metric">EX-NL</td><td><span class="tier tier-green">Green</span> MOB ★ 18/18 · Observe only</td><td class="c ok">98.47% <span class="tr up">▲</span></td><td class="c ok">99.76% <span class="tr down">▼</span></td><td class="c ok">99.71% <span class="tr up">▲</span></td><td class="c ok">16.5&nbsp;h <span class="tr up">▲</span></td><td class="c ok">99.26% (Amsterdam 14:00) <span class="tr nd">trend: no data</span></td><td class="c behind">98.88% <span class="tr up">▲</span></td><td class="c behind">99.41% <span class="tr up">▲</span></td><td><span class="tag tag-pass">PASSED</span></td></tr>
+        <tr><td class="metric">EX-SG</td><td><span class="tier tier-watch">Watch</span> MOB ★ 18/18 · Observe only</td><td class="c ok">98.37% <span class="tr down">▼</span></td><td class="c ok">99.78% <span class="tr down">▼</span></td><td class="c ok">99.61% <span class="tr up">▲</span></td><td class="c miss">26.1&nbsp;h <span class="tr down">▼</span></td><td class="c nd">not measured <span class="tag tag-miss">CUTOFF MISSING</span></td><td class="c behind">98.31% <span class="tr down">▼</span></td><td class="c behind">98.9% <span class="tr down">▼</span></td><td><span class="tag tag-pass">PASSED</span></td></tr>
+        <tr><td class="metric">EX-UK</td><td><span class="tier tier-watch">Watch</span> MOB ★ 17/18 · Observe only</td><td class="c unv">98.34% <span class="tr nd">trend: no data</span> <span class="tag tag-unverified">UNVERIFIED</span></td><td class="c unv">99.75% <span class="tr nd">trend: no data</span> <span class="tag tag-unverified">UNVERIFIED</span></td><td class="c unv">99.58% <span class="tr nd">trend: no data</span> <span class="tag tag-unverified">UNVERIFIED</span></td><td class="c unv">19.2&nbsp;h <span class="tr nd">trend: no data</span> <span class="tag tag-unverified">UNVERIFIED</span></td><td class="c behind">98.28% (London 16:45) <span class="tr nd">trend: no data</span></td><td class="c behind">96.62% <span class="tr nd">trend: no data</span></td><td class="c behind">97.21% <span class="tr nd">trend: no data</span></td><td><span class="tag tag-miss">FAILING</span></td></tr>
+        <tr><td class="metric">EX-MX</td><td><span class="tier tier-na">Not live</span> MOB ★ 16/18 · Observe only</td><td class="nd">no data</td><td class="nd">no data</td><td class="nd">no data</td><td class="nd">no data</td><td class="nd">no data · <span class="tag tag-miss">CUTOFF MISSING</span></td><td class="nd">no data</td><td class="nd">no data</td><td><span class="tag tag-blocked">BLOCKED</span></td></tr>
+      </tbody>
+    </table>
+    <div class="legend"><span style="color:#5ee1c7;font-weight:800">teal</span> meets target · <span style="color:#ff9f7a;font-weight:800">coral</span> MISS vs contract SLA · <span style="color:#ffc454;font-weight:800">amber</span> below 12-month target (no breach) · ▲ better ▼ worse ▬ same vs 2027-03-07 · <span class="tag tag-unverified">UNVERIFIED</span> G1 · <span class="tag tag-pending">PENDING: evidence</span> G5</div>
+    <p class="fn r13">Rule 13, quoted exactly from <code>ops/data-rules.md</code> (v2.9.1; 3PL Ops Lead): "<b>Same-day release-to-ship % in the weekly CSV (v2.6.1, APPROVED (hypothesis to test, 2026-10-26); decisions.md):</b> metric <code>release_to_ship_sameday</code> (definition: <code>ops/3pl-metric-definitions.md</code> "Release-to-ship SLA"; target row in <code>ops/targets.md</code>). Diagnostic only until the SOWs set it: no tier, no credit, no breach, not in the rule 1 completeness list. <b>v2.9.1 (Mike approved, decisions.md 2026-10-26): cutoff timing.</b> An order is in scope when it is released on a business day by the site's <b>effective cutoff = carrier pickup time − the site's buffer, in the site's local time zone</b>, from <code>freight/carrier-cutoff-template.md</code> (Freight &amp; Trade owns it). It counts as same-day when its carrier pickup scan falls on the same local date. Orders released after the effective cutoff are due the next business day and are not in that day's denominator. <b>A site with no cutoff row is flagged "CUTOFF MISSING" and is not measured; there is no default cutoff.</b> Still diagnostic only. The lead-time stage rows (<code>lt_release_to_ship_median</code> / <code>_p90</code>, days, glide) stay separate and unchanged." <span class="tag tag-unverified">UNVERIFIED</span> per-site cutoffs are EXAMPLE; F&amp;T's template has no real site rows. No cutoff row (dashboard SITE_CUTOFFS, EXAMPLE): EX-SG, EX-MX = CUTOFF MISSING. Label: rule 13 APPROVED (hypothesis to test, 2026-10-26). Values: CSV v2.9.2 (3PL Ops Lead); ³EXAMPLE; values relabelled to the cutoff basis, not recomputed; trend: no data.</p>
+  </section>
+
+  
+  <section class="slide" data-title="Appendix C · Wins">
+    <div class="ex-banner" title="All names and numbers in this deck are made up">MODE: SANITIZED (M-01 open) · EXAMPLE WEEK · made-up names &amp; numbers · not Verkada data</div>
+    <div class="kicker appendix-kicker">Appendix C · Wins <span class="tag tag-example">EXAMPLE</span></div>
+    <h2 class="title">Two sites clean, one site ahead on the leading signals, four CAPAs closed</h2>
+    <p class="subtitle">From the dashboard EXAMPLE week 2027-03-14 (accountability view, CAPA log as of 2027-03-20) and the CSV.</p>
+    <div class="grid-3">
+      <div class="card" style="border-color: rgba(94,225,199,.35);"><h3>✅ EX-NL and EX-USW: Green</h3><p>No rule fired this week (EXAMPLE tier; real sites stay Observe only).</p></div>
+      <div class="card" style="border-color: rgba(94,225,199,.35);"><h3>📦 EX-USW ahead on leading KPIs</h3><p>ASN compliance 99.52% and tracking coverage 99.79%, both at or above glide.</p></div>
+      <div class="card" style="border-color: rgba(122,184,255,.35);"><h3>🔧 4 CAPAs closed (verified) <span class="tag tag-basics">Basics</span></h3><p>CAPA log: Closed 4; none overdue.</p></div>
+    </div>
+  </section>
+
+  
+  <section class="slide" data-title="Appendix D · Misses we own">
+    <div class="ex-banner" title="All names and numbers in this deck are made up">MODE: SANITIZED (M-01 open) · EXAMPLE WEEK · made-up names &amp; numbers · not Verkada data</div>
+    <div class="kicker appendix-kicker">Appendix D · Misses we own <span class="tag tag-example">EXAMPLE</span></div>
+    <h2 class="title" style="font-size:22px">Four contract-SLA misses and one overdue basic. Shown in full.</h2>
+    <p class="data-note">Every miss, in full, not netted out (EX-USE OTIF is also drilled on slide 3). Likely drivers: Ops pack, quoted exactly. Evidence requests to a 3PL need Mike's approval. Root-cause tag stays "unconfirmed" until Freight &amp; Trade evidence is in.</p>
+    <table class="tbl compact mi tight leader">
+      <thead><tr><th style="width:27%">What happened (week 2027-03-14)</th><th style="width:31%">Cause code · tag · likely drivers</th><th>Fix (dashboard next action)</th><th style="width:16%">Owner · date</th></tr></thead>
+      <tbody>
+        <tr><td class="metric">EX-USE OTIF 97.25% vs 98.00% contract SLA, worse 8 wk in a row</td><td>U-00 · unconfirmed (pending F&amp;T evidence)<br><span class="sub">Likely drivers (dashboard): Stockouts (not in full), late release/ship, or carrier transit misses</span></td><td>Split misses into not-on-time vs not-in-full and by stage; fix the largest bucket</td><td>3PL site lead, EX-USE; evidence: Freight &amp; Trade · CAPA-EX-003 plan due 2027-03-22</td></tr>
+        <tr><td class="metric">EX-USE inventory accuracy 99.25% vs 99.50%, worse 8 wk in a row</td><td>U-00 · unconfirmed (pending F&amp;T evidence)<br><span class="sub">Likely drivers (dashboard): Putaway errors, skipped cycle counts, or unreconciled adjustments (MOB cycle counting is P)</span></td><td>Recount affected locations; review adjustment reason codes</td><td>3PL site lead, EX-USE</td></tr>
+        <tr><td class="metric">EX-USE dock-to-stock 26.3 h vs 24.0 h, breach, not worsening (26.4 → 26.3)</td><td>U-00 · unconfirmed (pending F&amp;T evidence)<br><span class="sub">Likely drivers (dashboard): Missing/late ASNs, receiving backlog, or putaway labor short</span></td><td>Check ASN compliance by supplier; 3PL to confirm receiving labor plan</td><td>3PL site lead, EX-USE</td></tr>
+        <tr><td class="metric">EX-SG dock-to-stock 26.1 h vs 24.0 h, worse 2 wk in a row</td><td>U-00 · unconfirmed (pending F&amp;T evidence)<br><span class="sub">Likely drivers (dashboard): Missing/late ASNs, receiving backlog, or putaway labor short</span></td><td>Check ASN compliance by supplier; 3PL to confirm receiving labor plan</td><td>3PL site lead, EX-SG</td></tr>
+        <tr><td class="metric">EX-UK ★ data channel at N: 30-day fix window OVERDUE 17 days (due 2027-03-03) <span class="tag tag-unverified">UNVERIFIED</span> KPIs</td><td>D-01 · 3PL</td><td>CAPA-EX-007: plan submitted, fix in progress</td><td>3PL site lead, EX-UK</td></tr>
+        <tr><td>Carried over (EXAMPLE test chain, not in the dashboard week): EX-001, 40 units short-shipped to EMEA DC (BOL 400 vs ASN 440). Root cause not confirmed. <span class="tag tag-unverified">⚠ UNVERIFIED</span> "carrier claims shortage occurred at origin dock"</td><td>U-00 · unconfirmed</td><td>Count check at the dock before close-out</td><td>Mike + Acme site lead</td></tr>
+      </tbody>
+    </table>
+    <p class="note-line"><b>G4:</b> no live site has a compliance basic at N or P. D-01 owner-to-tag mapping confirmed by C&amp;F 2026-10-26.</p>
+  </section>
+
+  
+  <section class="slide" data-title="Appendix E · Next week's risks">
+    <div class="ex-banner" title="All names and numbers in this deck are made up">MODE: SANITIZED (M-01 open) · EXAMPLE WEEK · made-up names &amp; numbers · not Verkada data</div>
+    <div class="kicker appendix-kicker">Appendix E · Next week's risks (spotted early)</div>
+    <h2 class="title">Six obstacles, each with an owner</h2>
+    <p class="subtitle">Proactive-panel rows: dashboard EXAMPLE week 2027-03-14. Watchtower and seasonal rows: real public events as of the watchtower run 2026-11-02 08:0x ET (recheck before Friday send).</p>
+    <table class="tbl compact leader">
+      <thead><tr><th style="width:44%">Obstacle</th><th style="width:16%">Spotted by</th><th>Mitigation</th><th style="width:18%">Owner</th></tr></thead>
+      <tbody>
+        <tr><td class="metric">EX-SG PROJECTED STOCKOUT, class A: 11.5 d of supply vs 16.1 d to replenish</td><td><span class="src src-panel">Proactive panel</span></td><td>Expedite open POs or rebalance stock from another 3PL</td><td>Supply planning + 3PL Ops Lead</td></tr>
+        <tr><td class="metric"><span class="pill pill-risk">At risk</span> EX-SG OTIF AT RISK: 4.38% of orders due in the next 7 days</td><td><span class="src src-panel">Proactive panel</span></td><td>Work the at-risk list daily</td><td>3PL site lead, EX-SG</td></tr>
+        <tr><td class="metric"><span class="pill pill-delay">Delay risk</span> EX-USW: LA/LB watchmen (ILWU Local 26) talks extended to 2026-11-04 17:00 PT (Reuters: 11-05); no strike on 11-01 · CONFIRMED</td><td><span class="src src-watch">Watchtower</span></td><td>"Risk rescheduled, not removed; pull containers at affected LB/LA terminals before Wed pm"</td><td>Freight &amp; Trade lane</td></tr>
+        <tr><td class="metric"><span class="pill pill-delay">Delay risk</span> EX-NL: Spain 24-hour nationwide general strike, 2026-11-11 · CONFIRMED (planned)</td><td><span class="src src-watch">Watchtower</span></td><td>"Possible trucking, rail and port impact"; mitigation <span class="tag tag-pending">pending</span></td><td>Freight &amp; Trade lane</td></tr>
+        <tr><td class="metric">Trade dates: 178 Section 301 exclusions expire 2026-11-09; China Ann. 70 Li-battery/graphite suspension ends 11-10 <span class="tag tag-unverified">UNVERIFIED</span></td><td><span class="src src-watch">Watchtower</span></td><td>"Confirm supplier license needs for Nov shipments"</td><td>Freight &amp; Trade lane</td></tr>
+        <tr><td class="metric">Lunar New Year 2027 factory and port shutdowns · LNY date <span class="tag tag-unverified">UNVERIFIED</span></td><td><span class="src src-season">Seasonal calendar</span></td><td>Pull APAC POs forward; book ocean space early</td><td>Freight &amp; Trade lane + Mike</td></tr>
+      </tbody>
+    </table>
+    <p class="src-line"><span class="src src-panel">Proactive panel</span> <code>ops/kpi-dashboard.html</code> · <span class="src src-watch">Watchtower</span> <code>freight/watchtower-log.md</code> (trade/DG follow-ups: Freight &amp; Trade) · <span class="src src-season">Seasonal calendar</span> <code>freight/seasonal-calendar.md</code></p>
+  </section>
+
+  
+  <section class="slide" data-title="Appendix F · Questions you're about to ask">
+    <div class="ex-banner" title="All names and numbers in this deck are made up">MODE: SANITIZED (M-01 open) · EXAMPLE WEEK · made-up names &amp; numbers · not Verkada data</div>
+    <div class="kicker appendix-kicker">Appendix F · Questions you're about to ask <span class="tag tag-example">EXAMPLE</span></div>
+    <h2 class="title">Answered before you ask</h2>
+    <div class="qa" style="margin-top:14px">
+      <div class="card"><span class="aud aud-svp">SVP</span>
+        <div class="q">Did customers feel the misses?</div>
+        <p class="a">At EX-USE, yes: OTIF 97.25% vs 98.00%, worse 8 weeks in a row. CAPA-EX-003 plan is due 2027-03-22.</p></div>
+      <div class="card"><span class="aud aud-svp">SVP</span>
+        <div class="q">Where is lead time?</div>
+        <p class="a">Network excl. EX-UK: median 3.8 d, P90 7.9 d (Ops pack, approximation), both above the 2.5 d / 5.0 d 12-month targets. EX-NL is the flag: median 4.2 d vs 4.0 d glide, worse 2 weeks in a row.</p></div>
+      <div class="card"><span class="aud aud-vp">VP</span>
+        <div class="q">What did we catch before it hit us?</div>
+        <p class="a">EX-SG's class-A stockout (11.5 d of supply vs 16.1 d to replenish) and its 4.38% OTIF-at-risk orders.</p></div>
+      <div class="card"><span class="aud aud-dir">Director</span>
+        <div class="q">Are the basics in place?</div>
+        <p class="a">Not at EX-UK: ★ data channel is N and its fix is 17 days overdue, so its KPIs are UNVERIFIED. EX-USE cycle counting is P (fix list).</p></div>
+    </div>
+  </section>
+
+  
+  <section class="slide" data-title="Appendix G · Plan for next week">
+    <div class="ex-banner" title="All names and numbers in this deck are made up">MODE: SANITIZED (M-01 open) · EXAMPLE WEEK · made-up names &amp; numbers · not Verkada data</div>
+    <div class="kicker appendix-kicker">Appendix G · Plan for next week</div>
+    <h2 class="title">Three commitments for next week</h2>
+    <p class="subtitle">We own the misses, work the risk, and fix the basics. Actions from the dashboard.</p>
+    <div class="playbook">
+      <div class="step"><div class="circle">1</div><p>EX-USE: split OTIF misses by type and stage; get the CAPA-EX-003 plan by 2027-03-22.</p><div class="why">Miss we own</div></div>
+      <div class="step"><div class="circle">2</div><p>EX-SG: expedite open POs or rebalance class-A stock before it runs out.</p><div class="why">Risk ahead</div></div>
+      <div class="step"><div class="circle">3</div><p>EX-UK: land the data-channel fix (CAPA-EX-007) so its KPIs can be verified.</p><div class="why">Basics</div></div>
+    </div>
+    <div class="tl-wrap"><span class="tl-head">Scoring summary · the week's misses and dates on the clock</span>
+      <table class="tl"><thead><tr><th>When</th><th>3PL</th><th>Play</th><th>Status</th></tr></thead><tbody>
+        <tr><td class="when">2027-03-03</td><td class="site">EX-UK</td><td>★ data channel at N: 30-day fix window due; OVERDUE 17 days (CAPA-EX-007 in progress)</td><td><span class="pill pill-miss">Miss</span> <span class="pill pill-unv">UNVERIFIED</span> KPIs</td></tr>
+        <tr><td class="when">Week 2027-03-14</td><td class="site">EX-USE</td><td>OTIF 97.25% vs 98.00% · inventory accuracy 99.25% vs 99.50% · dock-to-stock 26.3 h vs 24.0 h</td><td><span class="pill pill-miss">Miss</span></td></tr>
+        <tr><td class="when">Week 2027-03-14</td><td class="site">EX-SG</td><td>Dock-to-stock 26.1 h vs 24.0 h · OTIF AT RISK: 4.38% of orders due in the next 7 days</td><td><span class="pill pill-miss">Miss</span> <span class="pill pill-risk">At risk</span></td></tr>
+        <tr><td class="when">2027-03-22</td><td class="site">EX-USE</td><td>CAPA-EX-003 plan due</td><td><span class="pill pill-pend">Pending</span></td></tr>
+        <tr><td class="when">2027-03-30</td><td class="site">EX-USE</td><td>G5 evidence due (order accuracy, exactly 100.0% for 3 consecutive weeks)</td><td><span class="pill pill-pend">Pending</span></td></tr>
+      </tbody></table></div>
+  </section>
+
+  
+  <section class="slide" data-title="Appendix H · Decisions or help needed">
+    <div class="ex-banner" title="All names and numbers in this deck are made up">MODE: SANITIZED (M-01 open) · EXAMPLE WEEK · made-up names &amp; numbers · not Verkada data</div>
+    <div class="kicker appendix-kicker">Appendix H · Decisions or help needed</div>
+    <h2 class="title">One decision needed. Three decision sets logged in decisions.md 10-26.</h2>
+    <div class="card ask compact">
+      <h3>Needed: approve the evidence request to EX-USE for order accuracy (G5: exactly 100.0% for 3 consecutive weeks)</h3>
+      <div class="meta">From: Mike (each evidence request to a 3PL needs his approval) · Evidence due: 2027-03-30 · Until then the held weeks are not scored for tiers or credits.</div>
+    </div>
+    <div class="declog-heads">
+      <div class="card"><div class="hd">"2026-10-26 (CoS) - v2.4 approved by Mike"</div><p>Items quoted word for word in Appendix J.</p></div>
+      <div class="card"><div class="hd">"2026-10-26 07:50 ET (CoS) - Mike: "run with your recommendations""</div><p>Items quoted word for word in Appendix J.</p></div>
+      <div class="card"><div class="hd">"2026-10-26 Mike approved all CoS picks (draft rules to test, not enforce)"</div><p>Items quoted word for word in Appendix J.</p></div>
+    </div>
+    <p class="footer-note">Headings quoted verbatim from <code>decisions.md</code> (relayed by an agent; logged in decisions.md 10-26). Item lists: Appendix J. The ask also leads the slide-1 BLUF. EXAMPLE week; draft for Mike, not sent.</p>
+  </section>
+
+  
+  <section class="slide" data-title="Appendix I · Go-live gate status per site">
+    <div class="ex-banner" title="All names and numbers in this deck are made up">MODE: SANITIZED (M-01 open) · EXAMPLE WEEK · made-up names &amp; numbers · not Verkada data</div>
+    <div class="kicker appendix-kicker">Appendix I · Go-live gate status per site <span class="tag tag-example">EXAMPLE</span></div>
+    <h2 class="title">EX-UK's gate is failing. EX-MX is blocked from go-live.</h2>
+    <div class="gate-parts">
+      <div class="card"><h3>1 · MOB site walk</h3><p>No ★ line at N. P lines go on the fix list.</p></div>
+      <div class="card"><h3>2 · Compliance checklist</h3><p>Every F&amp;T MUST item at Y. Any N or P fails.</p></div>
+      <div class="card"><h3>3 · Readiness</h3><p>L-01 to L-04 met. Mike approves go-live.</p></div>
+    </div>
+    <table class="tbl compact">
+      <thead><tr><th style="width:17%">Site</th><th style="width:25%">Status</th><th>1 · MOB walk</th><th>2 · F&amp;T MUST</th><th>3 · Readiness</th><th style="width:15%">Gate</th></tr></thead>
+      <tbody>
+        <tr><td class="metric">EX-UK (live)</td><td>Watch · <span class="tag tag-unverified">UNVERIFIED</span> KPIs (★ data channel = N; D-01, owner 3PL)</td><td>★ data channel N</td><td>all Y</td><td>all Y</td><td><span class="tag tag-miss">GATE FAILING</span></td></tr>
+        <tr><td class="metric">EX-MX (pipeline)</td><td>Not live · planned 2027-05-03</td><td>★ cycle counting N; SOPs P</td><td>A4 P, B3 N</td><td>L-03 P</td><td><span class="tag tag-blocked">BLOCKED</span></td></tr>
+        <tr><td class="metric">EX-USE, EX-SG</td><td>Watch (live)</td><td>pass (EX-USE cycle counting P, on the fix list)</td><td>all Y</td><td>all Y</td><td><span class="tag tag-pass">PASSED</span></td></tr>
+        <tr><td class="metric">EX-NL, EX-USW</td><td>Green (live)</td><td>pass</td><td>all Y</td><td>all Y</td><td><span class="tag tag-pass">PASSED</span></td></tr>
+      </tbody>
+    </table>
+    <p class="note-line"><b>G4:</b> if a compliance basic (DG, export screening, or any F&amp;T MUST item) is at N or P at a live site, that site goes on immediate Probation and its affected flows are held. No live site has one this week. <b>G2:</b> Onboarding lasts 8 weeks <span class="tag tag-example">EXAMPLE</span> from the recorded go-live date. After that, a KPI left blank for 4+ weeks is a material miss.</p>
+    <p class="footer-note">Site values come from the EXAMPLE data in <code>ops/kpi-dashboard.html</code> (its latest example week, 2027-03-14, the data week for this whole deck) · gate rules are in <code>ops/3pl-accountability/go-live-gate.md</code>.</p>
+  </section>
+
+  
+  <section class="slide" data-title="Appendix J · Decisions logged 10-26">
+    <div class="ex-banner" title="All names and numbers in this deck are made up">MODE: SANITIZED (M-01 open) · EXAMPLE WEEK · made-up names &amp; numbers · not Verkada data</div>
+    <div class="kicker appendix-kicker">Appendix J · Decisions logged in decisions.md 10-26 (quoted word for word)</div>
+    <h2 class="title">What was logged on 10-26</h2>
+    <div class="declog appx appx4">
+      <div class="card"><div class="hd">"2026-10-26 (CoS) - v2.4 approved by Mike"</div>
+        <p>"Mike approved G1-G4, G6, G7 from sim-nov16/rounds/round5-missing-basics.md (chat, 2026-10-26 06:34 ET)."</p></div>
+      <div class="card"><div class="hd">"2026-10-26 07:50 ET (CoS) - Mike: "run with your recommendations""</div>
+        <ul><li>"CSV ASN/tracking columns: yes."</li><li>"MVW fix deadline: 30 days (EXAMPLE)."</li><li>"APQP/PPAP: optional."</li><li>"DG shipper + trade counsel review before first go-live: yes."</li></ul></div>
+      <div class="card"><div class="hd">"2026-10-26 Mike approved all CoS picks (draft rules to test, not enforce)"</div>
+        <ul><li>"M-06: Option B (25 runs/wk, 5/day); install Script This Routine; watchtower script first."</li>
+        <li>"M-03 T-01/T-02 and M-05 tiers v2 + targets approved as test hypotheses."</li>
+        <li>"CAPA trigger: misses tagged 3PL only; all misses still logged with cause."</li>
+        <li>"Forklift roster and WMS holds location become critical basics."</li>
+        <li>"Security certs: CTPAT for US import sites, TAPA for high-value sites, ISO 28000 nice-to-have."</li>
+        <li>"Release-to-ship becomes a contract SLA once SOWs are in. Keep gainshare."</li>
+        <li>"Dashboard: warnings only for the 30-day window and DG/counsel review."</li>
+        <li>"Order-accuracy contract floor 99.5% (EXAMPLE); inventory 99.9% stays as glide/stretch; don't buy the WERC report yet."</li>
+        <li>"Still open: M-01, Legal owner for ITAR/EAR, naming the DG/trade-counsel reviewers (after Nov 16)."</li></ul></div>
+      <div class="card"><div class="hd">"2026-10-26 Mike approved v2.6.1 rules 12 and 13"</div>
+        <ul><li>"Rule 12: UNVERIFIED (G1) sites excluded from network rollup, with a flag naming the site. APPROVED."</li>
+        <li>"Rule 13: release-to-ship same-day % (diagnostic only, &gt;=99.0% EXAMPLE). APPROVED."</li></ul></div>
+    </div>
+    <p class="footer-note">Quoted verbatim from <code>decisions.md</code>; headings and status wording as logged there (relayed by an agent; logged in decisions.md 10-26). M-01 is still open, so the deck stays sanitized.</p>
+  </section>
+
+  
+  <section class="slide" data-title="Appendix K1 · Order status">
+    <div class="ex-banner" title="All names and numbers in this deck are made up">MODE: SANITIZED (M-01 open) · EXAMPLE · made-up names &amp; numbers · not Verkada data</div>
+    <div class="kicker appendix-kicker">Appendix K1 · Order status · exceptions first <span class="tag tag-example">EXAMPLE</span> <a class="lnk" href="#1">← At a glance</a></div>
+    <h2 class="title" style="font-size:26px">75 of 78 customers on track · 3 at risk</h2>
+    <div class="gl6" style="grid-template-columns:repeat(5,1fr)">
+      <div class="t"><div class="k">Customers on track</div><div class="v"><svg class="mring" viewBox="0 0 26 26" width="26" height="26" role="img" aria-label="75 of 78 customers on track"><circle cx="13.0" cy="13.0" r="11.00" fill="none" stroke="rgba(255,255,255,.14)" stroke-width="4"/><circle cx="13.0" cy="13.0" r="11.00" fill="none" stroke="#5ee1c7" stroke-width="4" stroke-dasharray="69.12" stroke-dashoffset="2.66" transform="rotate(-90 13.0 13.0)" stroke-linecap="butt"/></svg>75 <small>of 78</small></div><div class="s">total · 77 of 78 controllable</div></div>
+      <div class="t"><div class="k">Open orders</div><div class="v">412</div><div class="s">405 on track</div></div>
+      <div class="t"><div class="k">At risk</div><div class="v" style="color:#ffc454">7</div><div class="s">ETA past promised · 2 caused by 3PL</div></div>
+      <div class="t"><div class="k">On watch</div><div class="v">9</div><div class="s">&lt; 1 business day of buffer</div></div>
+      <div class="t"><div class="k">Oldest exception</div><div class="v">31 h</div><div class="s">EX-SO-10388, 3PL hold</div></div>
+    </div>
+    <table class="tbl leader fl"><thead><tr><th>Order</th><th>Customer · rep</th><th>Site</th><th>Promised</th><th>Proj. ETA</th><th>Slip</th><th>Cause</th><th>Next action</th><th>Owner</th><th>Open</th></tr></thead><tbody>
+      <tr><td class="n">EX-SO-10388</td><td>EX-C22 (#2) · EX-R05</td><td>EX-USE</td><td class="n">11-09</td><td class="n">11-11</td><td class="n"><b>+2 d</b></td><td><span class="pill pill-miss">3PL</span> release hold</td><td>Release today</td><td>3PL Ops Lead</td><td class="n">31 h</td></tr>
+      <tr><td class="n">EX-SO-10395</td><td>EX-C22 (#2) · EX-R05</td><td>EX-USE</td><td class="n">11-09</td><td class="n">11-10</td><td class="n"><b>+1 d</b></td><td><span class="pill pill-miss">3PL</span> short pick</td><td>Recount location; re-pick</td><td>3PL Ops Lead</td><td class="n">20 h</td></tr>
+      <tr><td class="n">EX-SO-10399</td><td>EX-C22 (#2) · EX-R05</td><td>EX-USE</td><td class="n">11-10</td><td class="n">11-11</td><td class="n"><b>+1 d</b></td><td><span class="pill pill-nl">Carrier</span> missed pickup</td><td>Rebook pickup</td><td>Freight &amp; Trade</td><td class="n">9 h</td></tr>
+      <tr><td class="n">EX-SO-10421</td><td>EX-C07 (#1) · EX-R03</td><td>EX-USW</td><td class="n">11-10</td><td class="n">11-13</td><td class="n"><b>+3 d</b></td><td><span class="pill pill-nl">Port</span> EX-CNTR-014 at LB</td><td>Pull box before 11-04 17:00 PT</td><td>Freight &amp; Trade</td><td class="n">22 h</td></tr>
+      <tr><td class="n">EX-SO-10433</td><td>EX-C07 (#1) · EX-R03</td><td>EX-USW</td><td class="n">11-12</td><td class="n">11-14</td><td class="n"><b>+2 d</b></td><td><span class="pill pill-nl">Port</span> EX-CNTR-014 at LB</td><td>Same; else split-ship from EX-USE</td><td>Freight &amp; Trade</td><td class="n">22 h</td></tr>
+      <tr><td class="n">EX-SO-10402</td><td>EX-C41 (#4) · EX-R01</td><td>EX-SG</td><td class="n">11-11</td><td class="n">11-16</td><td class="n"><b>+5 d</b></td><td><span class="pill pill-nl">Supplier</span> PO late</td><td>Air top-up (EX-L06) or rebalance</td><td>Supply planning</td><td class="n">27 h</td></tr>
+      <tr><td class="n">EX-SO-10410</td><td>EX-C41 (#4) · EX-R01</td><td>EX-SG</td><td class="n">11-11</td><td class="n">11-16</td><td class="n"><b>+5 d</b></td><td><span class="pill pill-nl">Supplier</span> PO late</td><td>Same; reset date with customer if no stock</td><td>Supply planning</td><td class="n">27 h</td></tr>
+    </tbody></table>
+    <div class="cause-row"><b style="color:#fff;white-space:nowrap">Why 7 orders are at risk</b><svg class="stk" viewBox="0 0 600 10" width="600" height="10" preserveAspectRatio="none" role="img" aria-label="Causes: 3PL 2, carrier 1, port 2, supplier 2"><rect x="0.0" y="0" width="169.4" height="10" fill="#ff9f7a"/><rect x="171.4" y="0" width="83.7" height="10" fill="#7ab8ff"/><rect x="257.1" y="0" width="169.4" height="10" fill="#ffc454"/><rect x="428.6" y="0" width="169.4" height="10" fill="#c48cff"/></svg><span class="lg"><i style="background:#ff9f7a"></i>3PL 2 (controllable)</span><span class="lg"><i style="background:#7ab8ff"></i>Carrier 1</span><span class="lg"><i style="background:#ffc454"></i>Port 2</span><span class="lg"><i style="background:#c48cff"></i>Supplier 2</span></div>
+    <p class="fn">At risk = projected ETA past the promised date (early warning, before the order is late). Watch = ETA on or before the promised date with less than 1 business day of buffer; the 9 watch orders include the EX-C03 big order (K4). Controllable counts only 3PL-caused rows (D-007); port, carrier and supplier rows count in the total, tagged outside 3PL control. Dates 2026 (EXAMPLE snapshot 2026-11-03). Thresholds adopted (D-012; review after month 1) (<a class="lnk" href="full-loop-dashboards.html">dashboards spec</a> §1).</p>
+  </section>
+
+  
+  <section class="slide" data-title="Appendix K2 · Containers and ports">
+    <div class="ex-banner" title="All names and numbers in this deck are made up">MODE: SANITIZED (M-01 open) · EXAMPLE · made-up names &amp; numbers · not Verkada data</div>
+    <div class="kicker appendix-kicker">Appendix K2 · Container visibility · exceptions first <span class="tag tag-example">EXAMPLE</span> <a class="lnk" href="#1">← At a glance</a> <a class="lnk" href="#23">Map →</a></div>
+    <h2 class="title" style="font-size:26px">17 of 26 containers clear · 9 flagged · 6 sit at or head to LA/LB</h2>
+    <div class="ports">
+      <div class="t"><div class="k">LA / Long Beach → EX-USW</div><div class="v">11 <small style="font-size:13px;color:#9fb0cc">boxes</small></div><div class="s"><span class="pill pill-miss">Port risk</span> 6 flagged · watchmen deadline 11-04 17:00 PT</div></div>
+      <div class="t"><div class="k">Rotterdam → EX-NL</div><div class="v">8 <small style="font-size:13px;color:#9fb0cc">boxes</small></div><div class="s"><span class="pill pill-delay">Watch</span> 1 transships Valencia (Spain strike 11-11) · 1 dock delay</div></div>
+      <div class="t"><div class="k">Singapore → EX-SG</div><div class="v">7 <small style="font-size:13px;color:#9fb0cc">boxes</small></div><div class="s"><span class="pill pill-risk">Late</span> 1 supplier PO late, +7 d</div></div>
+    </div>
+    <table class="tbl leader fl"><thead><tr><th>Container</th><th>Port</th><th>Status</th><th>ETA</th><th>Flag</th><th>Linked orders</th><th>Suggested move</th><th>Owner</th></tr></thead><tbody>
+      <tr><td class="n">EX-CNTR-014</td><td>Long Beach</td><td>Available since 11-01</td><td class="n">EX-USW 11-05</td><td><span class="pill pill-miss">Port risk</span></td><td>2 · EX-C07 (#1)</td><td><b>Pull before 11-04 17:00 PT</b></td><td>F&amp;T</td></tr>
+      <tr><td class="n">EX-CNTR-015</td><td>Long Beach</td><td>Available · LFD 11-05</td><td class="n">EX-USW 11-05</td><td><span class="pill pill-miss">Port risk</span></td><td>0</td><td>Pull before the deadline</td><td>F&amp;T</td></tr>
+      <tr><td class="n">EX-CNTR-016</td><td>Los Angeles</td><td>Discharged, not released</td><td class="n">EX-USW 11-06</td><td><span class="pill pill-miss">Port risk</span></td><td>1 · EX-C03 big order</td><td>Ask priority release; else fill from EX-USE</td><td>F&amp;T</td></tr>
+      <tr><td class="n">EX-CNTR-019</td><td>Long Beach</td><td>On water</td><td class="n">Port 11-05</td><td><span class="pill pill-miss">Port risk</span></td><td>0</td><td>Ask carrier for an unaffected terminal</td><td>F&amp;T</td></tr>
+      <tr><td class="n">EX-CNTR-020</td><td>Los Angeles</td><td>On water</td><td class="n">Port 11-07</td><td><span class="pill pill-miss">Port risk</span></td><td>0</td><td>Same</td><td>F&amp;T</td></tr>
+      <tr><td class="n">EX-CNTR-021</td><td>Long Beach</td><td>On water</td><td class="n">Port 11-09</td><td><span class="pill pill-miss">Port risk</span></td><td>0</td><td>Divert to Oakland if strike starts (C&amp;F prices)</td><td>F&amp;T · C&amp;F</td></tr>
+      <tr><td class="n">EX-CNTR-031</td><td>Rotterdam via Valencia</td><td>On water</td><td class="n">Valencia 11-10</td><td><span class="pill pill-delay">Watch</span></td><td>0</td><td>Get carrier's transship plan for 11-11</td><td>F&amp;T</td></tr>
+      <tr><td class="n">EX-CNTR-040</td><td>Singapore</td><td>Booked late (supplier)</td><td class="n">EX-SG 11-18 (+7 d)</td><td><span class="pill pill-risk">Late</span> supplier</td><td>2 · EX-C41 (#4)</td><td>Air top-up on EX-L06 for linked lines</td><td>Supply planning</td></tr>
+      <tr><td class="n">EX-CNTR-033</td><td>Rotterdam</td><td>At EX-NL door</td><td class="n">Received 11-05 (+2 d)</td><td><span class="pill pill-miss">3PL</span> dock appt pushed</td><td>0</td><td>Site to confirm dock capacity</td><td>3PL Ops Lead</td></tr>
+    </tbody></table>
+    <p class="fn">On plan (projected arrival at the 3PL by the planned date): <b>24 of 26 total · 25 of 26 controllable</b> (only EX-CNTR-033 is 3PL-caused). Port risk = active watchtower row for the port: LA/LB ILWU Local 26 watchmen, deadline 2026-11-04 17:00 PT, real public event, outcome pending (<code>freight/watchtower-log.md</code>; FreightWaves, read 2026-11-03); Spain general strike 2026-11-11 (watchtower). Containers, ETAs and links are EXAMPLE. Any reroute cost comes from C&amp;F first. Thresholds adopted (D-012; review after month 1) (§3).</p>
+  </section>
+  <section class="slide" data-title="Appendix K2b · Port and container map">
+    <div class="ex-banner" title="All names and numbers in this deck are made up">MODE: SANITIZED (M-01 open) · EXAMPLE · made-up names &amp; numbers · not Verkada data</div>
+    <div class="kicker appendix-kicker">Appendix K2b · Port and container map · schematic <span class="tag tag-example">EXAMPLE</span> <a class="lnk" href="#22">← K2 table</a> <a class="lnk" href="#1">← At a glance</a></div>
+    <h2 class="title" style="font-size:26px">Where the 9 flagged boxes are, and the moves on the table</h2>
+    <svg class="chart" viewBox="0 0 1104 300" role="img" aria-label="Schematic map of ports: LA/Long Beach 11 boxes 6 at risk; Rotterdam 8 boxes; Singapore 7 boxes; options Oakland, Valencia transship, stock transfer from EX-USE"><line x1="136.1" x2="136.1" y1="10" y2="280" stroke="rgba(122,184,255,.10)"/><line x1="252.1" x2="252.1" y1="10" y2="280" stroke="rgba(122,184,255,.10)"/><line x1="368.2" x2="368.2" y1="10" y2="280" stroke="rgba(122,184,255,.10)"/><line x1="484.3" x2="484.3" y1="10" y2="280" stroke="rgba(122,184,255,.10)"/><line x1="600.4" x2="600.4" y1="10" y2="280" stroke="rgba(122,184,255,.10)"/><line x1="716.4" x2="716.4" y1="10" y2="280" stroke="rgba(122,184,255,.10)"/><line x1="832.5" x2="832.5" y1="10" y2="280" stroke="rgba(122,184,255,.10)"/><line x1="948.6" x2="948.6" y1="10" y2="280" stroke="rgba(122,184,255,.10)"/><line x1="1064.7" x2="1064.7" y1="10" y2="280" stroke="rgba(122,184,255,.10)"/><line x1="10" x2="1094" y1="260.2" y2="260.2" stroke="rgba(122,184,255,.10)"/><text x="12" y="257.2" fill="#5f7090" font-size="9">0°N</text><line x1="10" x2="1094" y1="142.1" y2="142.1" stroke="rgba(122,184,255,.10)"/><text x="12" y="139.1" fill="#5f7090" font-size="9">30°N</text><line x1="10" x2="1094" y1="23.9" y2="23.9" stroke="rgba(122,184,255,.10)"/><text x="12" y="20.9" fill="#5f7090" font-size="9">60°N</text><line x1="143.0" y1="127.3" x2="170.9" y2="116.5" stroke="rgba(232,236,244,.5)" stroke-width="1.3"/><line x1="617.8" y1="55.8" x2="633.3" y2="53.0" stroke="rgba(232,236,244,.5)" stroke-width="1.3"/><line x1="1002.0" y1="255.1" x2="1018.2" y2="242.5" stroke="rgba(232,236,244,.5)" stroke-width="1.3"/><line x1="143.0" y1="127.3" x2="127.2" y2="111.3" stroke="#ffc454" stroke-width="1.3" stroke-dasharray="4 3"/><line x1="312.9" y1="100.7" x2="170.9" y2="116.5" stroke="#5ee1c7" stroke-width="1.3" stroke-dasharray="4 3"/><line x1="599.1" y1="104.8" x2="617.8" y2="55.8" stroke="#ffc454" stroke-width="1.3" stroke-dasharray="4 3"/><circle cx="143.0" cy="127.3" r="19" fill="#ff9f7a" fill-opacity=".18" stroke="#ff9f7a" stroke-width="1.5"/><circle cx="143.0" cy="127.3" r="2.5" fill="#ff9f7a"/><circle cx="127.2" cy="111.3" r="7" fill="#ffc454" fill-opacity=".18" stroke="#ffc454" stroke-width="1.5" stroke-dasharray="3 3"/><circle cx="127.2" cy="111.3" r="2.5" fill="#ffc454"/><circle cx="617.8" cy="55.8" r="16" fill="#ffc454" fill-opacity=".18" stroke="#ffc454" stroke-width="1.5"/><circle cx="617.8" cy="55.8" r="2.5" fill="#ffc454"/><circle cx="599.1" cy="104.8" r="6" fill="#ffc454" fill-opacity=".18" stroke="#ffc454" stroke-width="1.5" stroke-dasharray="3 3"/><circle cx="599.1" cy="104.8" r="2.5" fill="#ffc454"/><circle cx="1002.0" cy="255.1" r="15" fill="#ffc454" fill-opacity=".18" stroke="#ffc454" stroke-width="1.5"/><circle cx="1002.0" cy="255.1" r="2.5" fill="#ffc454"/><rect x="166.9" y="112.5" width="8" height="8" fill="none" stroke="#e8ecf4" stroke-width="1.3"/><text x="170.9" y="106.5" fill="#e8ecf4" font-size="10.5" text-anchor="middle">EX-USW</text><rect x="308.9" y="96.7" width="8" height="8" fill="none" stroke="#e8ecf4" stroke-width="1.3"/><text x="322.9" y="104.7" fill="#e8ecf4" font-size="10.5" text-anchor="start">EX-USE</text><rect x="629.3" y="49.0" width="8" height="8" fill="none" stroke="#e8ecf4" stroke-width="1.3"/><text x="641.3" y="57.0" fill="#e8ecf4" font-size="10.5" text-anchor="start">EX-NL</text><rect x="1014.2" y="238.5" width="8" height="8" fill="none" stroke="#e8ecf4" stroke-width="1.3"/><text x="1026.2" y="246.5" fill="#e8ecf4" font-size="10.5" text-anchor="start">EX-SG</text><text x="167.0" y="161.3" fill="#ff9f7a" font-size="12" font-weight="700" text-anchor="start">LA / Long Beach · 11 boxes</text><text x="167.0" y="175.3" fill="#ff9f7a" font-size="10.5" font-weight="600" text-anchor="start">6 port-risk · deadline 11-04 17:00 PT</text><text x="167.0" y="189.3" fill="#9fb0cc" font-size="10.5" font-weight="500" text-anchor="start">moves 1–3: pull or switch terminal</text><text x="117.2" y="77.3" fill="#ffc454" font-size="12" font-weight="700" text-anchor="start">Oakland (option)</text><text x="117.2" y="91.3" fill="#9fb0cc" font-size="10.5" font-weight="500" text-anchor="start">move 4: divert 021 if strike</text><text x="272.9" y="130.7" fill="#5ee1c7" font-size="12" font-weight="700" text-anchor="start">Stock transfer option</text><text x="272.9" y="144.7" fill="#9fb0cc" font-size="10.5" font-weight="500" text-anchor="start">move 6: EX-C03 from EX-USE</text><text x="639.8" y="25.8" fill="#ffc454" font-size="12" font-weight="700" text-anchor="start">Rotterdam · 8 boxes</text><text x="639.8" y="39.8" fill="#9fb0cc" font-size="10.5" font-weight="500" text-anchor="start">1 dock delay (3PL) · 033</text><text x="587.1" y="130.8" fill="#ffc454" font-size="12" font-weight="700" text-anchor="end">Valencia transship · 031</text><text x="587.1" y="144.8" fill="#9fb0cc" font-size="10.5" font-weight="500" text-anchor="end">Spain strike 11-11</text><text x="978.0" y="219.1" fill="#ffc454" font-size="12" font-weight="700" text-anchor="end">Singapore · 7 boxes</text><text x="978.0" y="233.1" fill="#9fb0cc" font-size="10.5" font-weight="500" text-anchor="end">040 supplier late +7 d</text><text x="978.0" y="247.1" fill="#9fb0cc" font-size="10.5" font-weight="500" text-anchor="end">move 5: air top-up</text></svg>
+    <div style="margin-top:4px"><div class="cause-row" style="margin:4px 0"><b style="color:#fff;width:150px;white-space:nowrap">LA / Long Beach</b><svg class="stk" viewBox="0 0 600 10" width="600" height="10" preserveAspectRatio="none" role="img" aria-label="LA / Long Beach: 5 clear, 6 flagged"><rect x="0.0" y="0" width="270.7" height="10" fill="#5ee1c7"/><rect x="272.7" y="0" width="325.3" height="10" fill="#ff9f7a"/></svg><span class="lg"><i style="background:#5ee1c7"></i>5 clear</span><span class="lg"><i style="background:#ff9f7a"></i>6 flagged</span></div><div class="cause-row" style="margin:4px 0"><b style="color:#fff;width:150px;white-space:nowrap">Rotterdam</b><svg class="stk" viewBox="0 0 600 10" width="600" height="10" preserveAspectRatio="none" role="img" aria-label="Rotterdam: 6 clear, 2 flagged"><rect x="0.0" y="0" width="448.0" height="10" fill="#5ee1c7"/><rect x="450.0" y="0" width="148.0" height="10" fill="#ffc454"/></svg><span class="lg"><i style="background:#5ee1c7"></i>6 clear</span><span class="lg"><i style="background:#ffc454"></i>2 flagged</span></div><div class="cause-row" style="margin:4px 0"><b style="color:#fff;width:150px;white-space:nowrap">Singapore</b><svg class="stk" viewBox="0 0 600 10" width="600" height="10" preserveAspectRatio="none" role="img" aria-label="Singapore: 6 clear, 1 flagged"><rect x="0.0" y="0" width="512.3" height="10" fill="#5ee1c7"/><rect x="514.3" y="0" width="83.7" height="10" fill="#ffc454"/></svg><span class="lg"><i style="background:#5ee1c7"></i>6 clear</span><span class="lg"><i style="background:#ffc454"></i>1 flagged</span></div></div>
+    <p class="fn">Circle size = boxes at or heading to the port; ring colour = worst flag (coral port risk, amber watch). Squares = EXAMPLE 3PL sites, placed for reading only. Dashed lines = options (moves in K6). Port events are real public events (LA/LB watchmen deadline 11-04 17:00 PT; Spain general strike 11-11); boxes, sites and moves are EXAMPLE.</p>
+  </section>
+  
+  <section class="slide" data-title="Appendix K3 · Returns">
+    <div class="ex-banner" title="All names and numbers in this deck are made up">MODE: SANITIZED (M-01 open) · EXAMPLE · made-up names &amp; numbers · not Verkada data</div>
+    <div class="kicker appendix-kicker">Appendix K3 · Returns · trailing 4 weeks <span class="tag tag-example">EXAMPLE</span> <a class="lnk" href="#1">← At a glance</a></div>
+    <h2 class="title" style="font-size:26px">2 SKUs need action: one supplier defect, one wrong-item problem we control</h2>
+    <div class="gl6" style="grid-template-columns:repeat(4,1fr)">
+      <div class="t"><div class="k">Return rate · total</div><div class="v">2.0%</div><div class="s">960 of 48,000 units shipped</div></div>
+      <div class="t"><div class="k">Return rate · controllable</div><div class="v">0.40%</div><div class="s">192 units: wrong item + packing damage</div></div>
+      <div class="t"><div class="k">Return value</div><div class="v">2.6%</div><div class="s">of shipped value · C&amp;F (no dollars)</div></div>
+      <div class="t"><div class="k">Flags</div><div class="v">2 · 1 · 1</div><div class="s">SKU action · SKU watch · customer review</div></div>
+    </div>
+    <div class="k2">
+      <div><div class="sec-h">Products returned most</div>
+        <table class="tbl leader fl"><thead><tr><th>SKU</th><th>Rate</th><th>× network</th><th>Top reason</th><th>Flag</th></tr></thead><tbody>
+          <tr><td class="n">EX-SKU-CAM-07 <span class="sub">camera</span></td><td class="n"><b>6.8%</b> <span class="sub">200 / 2,940</span></td><td class="n">3.4×</td><td>Defect, won't power on <span class="pill pill-nl">Supplier</span></td><td><span class="pill pill-miss">Action</span></td></tr>
+          <tr><td class="n">EX-SKU-ACC-12 <span class="sub">mount</span></td><td class="n"><b>5.1%</b> <span class="sub">100 / 1,960</span></td><td class="n">2.6×</td><td>Wrong item shipped <span class="pill pill-miss">3PL</span></td><td><span class="pill pill-miss">Action</span></td></tr>
+          <tr><td class="n">EX-SKU-SNS-03 <span class="sub">sensor</span></td><td class="n"><b>3.4%</b> <span class="sub">80 / 2,350</span></td><td class="n">1.7×</td><td>Ordered wrong <span class="pill pill-nl">Customer</span></td><td><span class="pill pill-risk">Watch</span></td></tr>
+          <tr><td class="n">EX-SKU-ACS-02 <span class="sub">controller</span></td><td class="n"><b>2.2%</b> <span class="sub">68 / 3,100</span></td><td class="n">1.1×</td><td>Damaged in transit <span class="pill pill-nl">Carrier</span></td><td><span class="pill pill-ok">OK</span></td></tr>
+        </tbody></table>
+        <div class="sec-h" style="margin-top:10px">Customers who return a lot</div>
+        <table class="tbl leader fl"><thead><tr><th>Customer</th><th>Returned</th><th>Reason</th><th>Flag · owner</th></tr></thead><tbody>
+          <tr><td>EX-C12 (#10) · EX-R04</td><td class="n"><b>14.0%</b> <span class="sub">59 / 420</span></td><td>Over-ordered</td><td><span class="pill pill-risk">Review</span> rep</td></tr>
+          <tr><td>EX-C33 · EX-R02</td><td class="n"><b>8.9%</b> <span class="sub">34 / 380</span></td><td>Damaged in transit</td><td><span class="pill pill-delay">Watch</span> F&amp;T claim</td></tr>
+        </tbody></table></div>
+      <div><div class="sec-h">Why things come back · Pareto (960 units)</div><svg class="chart" viewBox="0 0 520 210" role="img" aria-label="Returns Pareto: defect 34%, ordered wrong 27%, wrong item 16%, transit damage 13%, unknown 6%, packing damage 4%"><line x1="34" x2="514" y1="170.5" y2="170.5" stroke="rgba(255,255,255,.2)"/><text x="518" y="173.0" fill="#9fb0cc" font-size="9.5" text-anchor="end"></text><text x="518" y="95.0" fill="#9fb0cc" font-size="9.5" text-anchor="end">50%</text><text x="518" y="17.0" fill="#9fb0cc" font-size="9.5" text-anchor="end">100%</text><rect x="46.7" y="44.0" width="53.9" height="126.0" fill="#7ab8ff"/><text x="73.7" y="40.0" fill="#e8ecf4" font-size="11" text-anchor="middle" font-weight="700">34%</text><text x="73.7" y="184" fill="#cbd6ea" font-size="10.5" text-anchor="middle">Defect</text><rect x="126.0" y="70.0" width="53.9" height="100.0" fill="#7ab8ff"/><text x="153.0" y="66.0" fill="#e8ecf4" font-size="11" text-anchor="middle" font-weight="700">27%</text><text x="153.0" y="184" fill="#cbd6ea" font-size="10.5" text-anchor="middle">Ordered wrong</text><rect x="205.4" y="110.7" width="53.9" height="59.3" fill="#ff9f7a"/><text x="232.3" y="106.7" fill="#e8ecf4" font-size="11" text-anchor="middle" font-weight="700">16%</text><text x="232.3" y="184" fill="#cbd6ea" font-size="10.5" text-anchor="middle">Wrong item</text><rect x="284.7" y="121.8" width="53.9" height="48.2" fill="#7ab8ff"/><text x="311.7" y="117.8" fill="#e8ecf4" font-size="11" text-anchor="middle" font-weight="700">13%</text><text x="311.7" y="184" fill="#cbd6ea" font-size="10.5" text-anchor="middle">Transit dmg</text><rect x="364.0" y="147.8" width="53.9" height="22.2" fill="#9fb0cc"/><text x="391.0" y="143.8" fill="#e8ecf4" font-size="11" text-anchor="middle" font-weight="700">6%</text><text x="391.0" y="184" fill="#cbd6ea" font-size="10.5" text-anchor="middle">Unknown</text><rect x="443.4" y="155.2" width="53.9" height="14.8" fill="#ff9f7a"/><text x="470.3" y="151.2" fill="#e8ecf4" font-size="11" text-anchor="middle" font-weight="700">4%</text><text x="470.3" y="184" fill="#cbd6ea" font-size="10.5" text-anchor="middle">Packing dmg</text><polyline points="73.7,117.0 153.0,74.8 232.3,49.9 311.7,29.6 391.0,20.2 470.3,14.0" fill="none" stroke="#5ee1c7" stroke-width="1.5"/><circle cx="73.7" cy="117.0" r="2.5" fill="#5ee1c7"/><circle cx="153.0" cy="74.8" r="2.5" fill="#5ee1c7"/><circle cx="232.3" cy="49.9" r="2.5" fill="#5ee1c7"/><circle cx="311.7" cy="29.6" r="2.5" fill="#5ee1c7"/><circle cx="391.0" cy="20.2" r="2.5" fill="#5ee1c7"/><circle cx="470.3" cy="14.0" r="2.5" fill="#5ee1c7"/><text x="34" y="202" fill="#9fb0cc" font-size="10.5">Bars: share of 960 returned units · line: cumulative % · coral = 3PL-controllable</text></svg>
+        <p class="note-line"><b>Next:</b> supplier quality review on EX-SKU-CAM-07 (owner 3PL Ops Lead with supplier quality); CAPA review on EX-SKU-ACC-12 picks at the shipping site; rep review with EX-C12.</p>
+        <p class="note-line">Background only: customer-service contacts saying "won't power on" rose for EX-SKU-CAM-07. Early warning, not a KPI.</p></div>
+    </div>
+    <p class="fn">Action = SKU rate ≥ 2× network or ≥ 5% with ≥ 30 units shipped; watch ≥ 1.5×; customer review ≥ 10% of units (≥ 50 bought). Thresholds adopted (D-012; review after month 1) (§4). Coral = 3PL-controllable reasons; control tags: defect = supplier, ordered wrong = customer, transit damage = carrier, unknown = unconfirmed.</p>
+  </section>
+
+  
+  <section class="slide" data-title="Appendix K4 · Top customers and big orders">
+    <div class="ex-banner" title="All names and numbers in this deck are made up">MODE: SANITIZED (M-01 open) · EXAMPLE · made-up names &amp; numbers · not Verkada data</div>
+    <div class="kicker appendix-kicker">Appendix K4 · Top customers and big orders <span class="tag tag-example">EXAMPLE</span> <a class="lnk" href="#1">← At a glance</a></div>
+    <h2 class="title" style="font-size:26px;margin-bottom:14px">Three of our top four customers have orders at risk; two big orders get priority</h2>
+    <div class="k2" style="grid-template-columns:1.25fr 1fr">
+      <div><div class="sec-h"><svg class="mring" viewBox="0 0 22 22" width="22" height="22" role="img" aria-label="Top 10 customers = 46% of spend"><circle cx="11.0" cy="11.0" r="9.00" fill="none" stroke="rgba(255,255,255,.14)" stroke-width="4"/><circle cx="11.0" cy="11.0" r="9.00" fill="none" stroke="#7ab8ff" stroke-width="4" stroke-dasharray="56.55" stroke-dashoffset="30.54" transform="rotate(-90 11.0 11.0)" stroke-linecap="butt"/></svg> &nbsp;Top 10 by trailing-12-month spend · 46% of total spend</div>
+        <table class="tbl leader fl"><thead><tr><th>#</th><th>Customer</th><th>Spend index</th><th>OTIF 4 wk · total / ctrl</th><th>Open</th><th>At risk</th></tr></thead><tbody>
+          <tr><td class="n">1</td><td>EX-C07</td><td class="n"><span class="hb" style="width:80px"></span>100</td><td class="n">98.9% / 99.6%</td><td class="n">14</td><td><span class="pill pill-risk">2</span> port</td></tr>
+          <tr><td class="n">2</td><td>EX-C22</td><td class="n"><span class="hb" style="width:69px"></span>86</td><td class="n">97.6% / 98.4%</td><td class="n">11</td><td><span class="pill pill-risk">3</span> 3PL 2 · carrier 1</td></tr>
+          <tr><td class="n">3</td><td>EX-C03</td><td class="n"><span class="hb" style="width:57px"></span>71</td><td class="n">99.1% / 99.7%</td><td class="n">9</td><td>0 · big order on watch</td></tr>
+          <tr><td class="n">4</td><td>EX-C41</td><td class="n"><span class="hb" style="width:51px"></span>64</td><td class="n">98.2% / 99.5%</td><td class="n">8</td><td><span class="pill pill-risk">2</span> supplier</td></tr>
+          <tr><td class="n">5</td><td>EX-C15</td><td class="n"><span class="hb" style="width:42px"></span>52</td><td class="n">99.4% / 99.8%</td><td class="n">6</td><td>0 · big order</td></tr>
+          <tr><td class="n">6</td><td>EX-C09</td><td class="n"><span class="hb" style="width:38px"></span>47</td><td class="n">99.0% / 99.5%</td><td class="n">5</td><td>0</td></tr>
+          <tr><td class="n">7</td><td>EX-C55</td><td class="n"><span class="hb" style="width:33px"></span>41</td><td class="n">98.8% / 99.6%</td><td class="n">7</td><td>0</td></tr>
+          <tr><td class="n">8</td><td>EX-C18</td><td class="n"><span class="hb" style="width:30px"></span>38</td><td class="n">99.3% / 99.9%</td><td class="n">4</td><td>0</td></tr>
+          <tr><td class="n">9</td><td>EX-C30</td><td class="n"><span class="hb" style="width:26px"></span>33</td><td class="n">98.5% / 99.2%</td><td class="n">5</td><td>0</td></tr>
+          <tr><td class="n">10</td><td>EX-C12</td><td class="n"><span class="hb" style="width:23px"></span>29</td><td class="n">98.7% / 99.4%</td><td class="n">3</td><td>0 · returns review (K3)</td></tr>
+        </tbody></table></div>
+      <div><div class="sec-h">Big-order alerts this week</div>
+        <table class="tbl leader fl"><thead><tr><th>Order</th><th>Size</th><th>Promised · ETA</th><th>Status</th></tr></thead><tbody>
+          <tr><td>EX-SO-10450 · EX-C15 (#5) · EX-R02 · EX-USW</td><td class="n"><b>4.2×</b> avg</td><td class="n">11-20 · 11-18</td><td><span class="pill pill-ok">On track</span></td></tr>
+          <tr><td>EX-SO-10457 · EX-C03 (#3) · EX-R03 · EX-USW</td><td class="n"><b>3.4×</b> avg</td><td class="n">11-18 · 11-18</td><td><span class="pill pill-risk">Watch</span> stock on EX-CNTR-016 (LA)</td></tr>
+        </tbody></table>
+        <p class="note-line"><b>Priority handling:</b> pre-allocate stock at order entry, confirm carrier capacity, one named owner per order (3PL Ops Lead; capacity: Freight &amp; Trade).</p>
+        <p class="note-line"><b>Rule (D-009):</b> big order = ≥ 3× the customer's 12-month average order, or top 1% of order values network-wide, whichever triggers first. Any at-risk order for a top-10 customer goes to Mike and the rep the same day.</p>
+        <p class="note-line">Spend index: top customer = 100; spend and order size owned by Contracts &amp; Finance. No dollar figures.</p></div>
+    </div>
+    <p class="fn">OTIF columns: total (all misses) and controllable (3PL-caused only), same orders (D-007). All customers, reps and values EXAMPLE. Thresholds adopted (D-012; review after month 1) (§2).</p>
+  </section>
+
+  
+  <section class="slide" data-title="Appendix K5 · Coverage and proposed gaps">
+    <div class="ex-banner" title="All names and numbers in this deck are made up">MODE: SANITIZED (M-01 open) · EXAMPLE · made-up names &amp; numbers · not Verkada data</div>
+    <div class="kicker appendix-kicker">Appendix K5 · Full-loop coverage · gaps are notes; build order set (D-011) <a class="lnk" href="#1">← At a glance</a></div>
+    <h2 class="title" style="font-size:26px">Ordered → produced → shipped → delivered → returned: what we see now, and the gaps</h2>
+    <div class="loop" role="img" aria-label="Coverage by stage: teal covered, amber partial, coral gap"><div style="border-color:#5ee1c7">Plan · order<span>covered: K1, K4</span></div><div style="border-color:#ff9f7a">Produce · buy<span>gap: supplier POs</span></div><div style="border-color:#5ee1c7">Ship inbound<span>covered: K2</span></div><div style="border-color:#ffc454">Store<span>partial: SKU level next</span></div><div style="border-color:#5ee1c7">Ship outbound<span>covered: OTIF; lanes partial</span></div><div style="border-color:#5ee1c7">Return<span>covered: K3</span></div><div style="border-color:#ffc454">Cost<span>partial: cost-to-serve</span></div><div style="border-color:#9fb0cc">Customer voice<span>background only</span></div></div>
+    <table class="tbl leader fl"><thead><tr><th style="width:14%">Stage</th><th style="width:30%">Covered now</th><th style="width:44%">Proposed gaps (notes) · [Mike] named by Mike · [Added] added by the team</th><th style="width:12%">Owner</th></tr></thead><tbody>
+      <tr><td><b>Plan and order</b></td><td>Order status K1 · top customers and big orders K4</td><td>[Mike] Forecast vs actual · [Added] sales pipeline signal for big deals · [Added] orders on hold (credit, compliance, address)</td><td>3PL Ops Lead · C&amp;F</td></tr>
+      <tr><td><b>Produce and buy</b></td><td>—</td><td>[Mike] Production and supplier POs (confirmed vs requested date, PO aging)</td><td>Freight &amp; Trade</td></tr>
+      <tr><td><b>Ship inbound</b></td><td>Containers and port risk K2 · watchtower</td><td>[Added] Customs and trade holds · [Added] DG / battery shipment exceptions</td><td>Freight &amp; Trade</td></tr>
+      <tr><td><b>Store</b></td><td>In-stock KPI (slides 1–5) · Proactive panel</td><td>[Mike] Inventory and stockouts at SKU level · [Added] backorders and allocation · [Added] inter-3PL transfers · [Added] excess, obsolete and end-of-life stock</td><td>3PL Ops Lead</td></tr>
+      <tr><td><b>Ship outbound</b></td><td>OTIF, lead time (slides 1–5)</td><td>[Mike] Carrier performance by lane (partly built: <code>freight/carrier-lane-scorecard.md</code>) · [Added] claims recovery</td><td>Freight &amp; Trade</td></tr>
+      <tr><td><b>Return</b></td><td>Returns K3</td><td>[Added] Returns disposition and value recovered (restock, refurb, scrap, return to supplier)</td><td>3PL Ops Lead · C&amp;F</td></tr>
+      <tr><td><b>Cost</b></td><td>Freight cost tracker (C&amp;F)</td><td>[Mike] Cost-to-serve per order, customer and region (index)</td><td>C&amp;F</td></tr>
+      <tr><td><b>Customer voice</b></td><td>—</td><td>[Added] Delivery complaints and CS contacts: background early warning only, never a KPI</td><td>3PL Ops Lead</td></tr>
+    </tbody></table>
+    <p class="fn">Build order (D-011): backorders and allocation → supplier POs → returned-unit disposition. Full list with reasons: <a class="lnk" href="full-loop-dashboards.html">dashboards spec</a> §7. The six-screen control-tower wall mockup: <a class="lnk" href="control-tower-wall.html">control-tower wall</a>.</p>
+  </section>
+
+  
+  <section class="slide" data-title="Appendix K6 · Potential moves and opportunities">
+    <div class="ex-banner" title="All names and numbers in this deck are made up">MODE: SANITIZED (M-01 open) · EXAMPLE · made-up names &amp; numbers · not Verkada data</div>
+    <div class="kicker appendix-kicker">Appendix K6 · Potential moves &amp; opportunities · ranked <span class="tag tag-example">EXAMPLE</span> <a class="lnk" href="#1">← At a glance</a> <a class="lnk" href="#28">Charts →</a></div>
+    <h2 class="title" style="font-size:26px">12 moves · 2 need Mike · 3 windows close Wed 17:00 PT</h2>
+    <p class="data-note" style="margin-bottom:8px"><b style="color:#fff">12 moves</b>: 9 proposed · 1 approved · 1 done · 1 deferred &nbsp;·&nbsp; <b style="color:#fff">4</b> would fit the D-010 limit once caps are set &nbsp;·&nbsp; <b style="color:#ffc454">2 need Mike</b> &nbsp;·&nbsp; spend moves: avoided exposure <b style="color:#fff">157</b> vs est. cost <b style="color:#fff">90</b> (index pts) &nbsp;·&nbsp; caps: TBD Day 1 (C&amp;F)</p>
+    <table class="tbl leader fl" style="font-size:11px"><thead><tr><th>#</th><th>Move</th><th>Trigger</th><th>Avoided exp.</th><th>Est. cost</th><th style="white-space:nowrap">D-010 test</th><th>Owner</th><th>Status</th><th>Window expires</th></tr></thead><tbody>
+      <tr><td class="n">1</td><td><b>Pull-forward</b> EX-CNTR-014, Long Beach</td><td>LA/LB · 2 EX-C07 orders</td><td class="n">18</td><td class="n">4</td><td style="white-space:nowrap"><span class="pill pill-ok">Within*</span> <span class="sub">50% = 9</span></td><td>F&amp;T</td><td><span class="pill pill-ok">Approved</span></td><td class="n"><b>11-04 17:00 PT</b></td></tr>
+      <tr><td class="n">2</td><td><b>Pull-forward</b> EX-CNTR-015, Long Beach</td><td>LA/LB · LFD 11-05</td><td class="n">15</td><td class="n">4</td><td style="white-space:nowrap"><span class="pill pill-ok">Within*</span> <span class="sub">50% = 7.5</span></td><td>F&amp;T</td><td><span class="pill pill-pend">Proposed</span></td><td class="n"><b>11-04 17:00 PT</b></td></tr>
+      <tr><td class="n">3</td><td><b>Terminal switch</b> EX-CNTR-019 (on water)</td><td>LA/LB · ETA 11-05</td><td class="n">24</td><td class="n">6</td><td style="white-space:nowrap"><span class="pill pill-ok">Within*</span> <span class="sub">50% = 12</span></td><td>F&amp;T</td><td><span class="pill pill-pend">Proposed</span></td><td class="n"><b>11-04 17:00 PT</b></td></tr>
+      <tr><td class="n">4</td><td><b>Divert</b> EX-CNTR-021 to Oakland if strike</td><td>LA/LB · ETA 11-09</td><td class="n">70</td><td class="n">38</td><td style="white-space:nowrap"><span class="pill pill-risk">Needs Mike</span> <span class="sub">50% = 35</span></td><td>F&amp;T · C&amp;F</td><td><span class="pill pill-pend">Proposed</span></td><td class="n">11-06 notice</td></tr>
+      <tr><td class="n">5</td><td><b>Air top-up</b> EX-C41 lines on EX-L06</td><td>EX-CNTR-040 +7 d</td><td class="n">0 <span class="sub">no figure</span></td><td class="n">26</td><td style="white-space:nowrap"><span class="pill pill-risk">Needs Mike</span> <span class="sub">limit 0</span></td><td>Supply · F&amp;T</td><td><span class="pill pill-pend">Proposed</span></td><td class="n">11-07 flight</td></tr>
+      <tr><td class="n">6</td><td><b>Stock transfer</b>: EX-C03 from EX-USE</td><td>EX-CNTR-016 at LA</td><td class="n">30</td><td class="n">12</td><td style="white-space:nowrap"><span class="pill pill-ok">Within*</span> <span class="sub">50% = 15</span></td><td>3PL Ops · F&amp;T</td><td><span class="pill pill-pend">Proposed</span></td><td class="n">11-12 ship-by</td></tr>
+      <tr><td class="n">7</td><td><b>Rate relief</b>: re-quote EX-L03 (Suez return)</td><td>Watchtower 11-03 (real)</td><td colspan="2">−12% rate · 1–2 wk faster</td><td><span class="pill pill-nl">Not a spend</span></td><td>C&amp;F · F&amp;T</td><td><span class="pill pill-pend">Proposed</span></td><td class="n">11-13 bookings</td></tr>
+      <tr><td class="n">8</td><td><b>Returns recovery</b>: CAM-07 to supplier</td><td>K3 action, 6.8%</td><td colspan="2">~60% of return value</td><td><span class="pill pill-nl">Not a spend</span></td><td>3PL Ops · C&amp;F</td><td><span class="pill pill-pend">Proposed</span></td><td class="n">12-03 RTV</td></tr>
+      <tr><td class="n">9</td><td><b>PO pull-forward</b>: APAC before LNY</td><td>Seasonal calendar</td><td colspan="2">LNY stockouts avoided</td><td><span class="pill pill-nl">Not a spend</span></td><td>F&amp;T · supply</td><td><span class="pill pill-pend">Proposed</span></td><td class="n">mid-Dec*</td></tr>
+      <tr><td class="n">10</td><td><b>Claim</b>: transit damage, EX-C33</td><td>K3 watch, 8.9%</td><td colspan="2">claim filed</td><td><span class="pill pill-nl">Not a spend</span></td><td>F&amp;T · C&amp;F</td><td><span class="pill pill-ok">Done</span></td><td class="n">filed 11-02</td></tr>
+      <tr><td class="n">11</td><td><b>Rate check</b>: EX-L01 spot vs contract</td><td>Nov 1 GRIs failed (real)</td><td colspan="2">−5% rate if spot holds</td><td><span class="pill pill-nl">Not a spend</span></td><td>C&amp;F · F&amp;T</td><td><span class="pill pill-pend">Proposed</span></td><td class="n">11-30 review</td></tr>
+      <tr><td class="n">12</td><td><b>Consolidation</b>: EX-L10, 3 LTL → 2 FTL/wk</td><td>Lane volume</td><td colspan="2">−15% lane cost</td><td><span class="pill pill-nl">Not a spend</span></td><td>F&amp;T</td><td><span class="pill pill-nl">Deferred</span></td><td class="n">after EX-UK verified</td></tr>
+    </tbody></table>
+    <p class="fn">Money = cost index points, EXAMPLE. D-010 (method approved by Mike): within if cost ≤ min(CAP, 50% × avoided exposure), cost &lt; exposure and month-to-date ≤ monthly cap; one container, logged within 24 h, never sign, pay or commit; limit 0 without a tariff, quote or C&amp;F exposure figure. <b>Caps are set on Day 1 (C&amp;F); until then every spend goes to Mike</b>, so Within* = passes the 50% test only. Ranked by window, then net benefit. Status never "rejected". Triggers marked real are public events (<code>freight/watchtower-log.md</code>); *LNY date UNVERIFIED. Spec §10.</p>
+  </section>
+  <section class="slide" data-title="Appendix K6b · Moves at a glance">
+    <div class="ex-banner" title="All names and numbers in this deck are made up">MODE: SANITIZED (M-01 open) · EXAMPLE · made-up names &amp; numbers · not Verkada data</div>
+    <div class="kicker appendix-kicker">Appendix K6b · Potential moves · charts <span class="tag tag-example">EXAMPLE</span> <a class="lnk" href="#27">← K6 table</a> <a class="lnk" href="#1">← At a glance</a></div>
+    <h2 class="title" style="font-size:26px">4 spend moves pass the 50% test · 2 need Mike · 3 windows close in 1 day</h2>
+    <div class="k2">
+      <div><div class="sec-h">Spend moves: avoided exposure vs est. cost (index)</div><svg class="chart" viewBox="0 0 540 244" role="img" aria-label="Spend moves: avoided exposure versus estimated cost with the 50 percent test"><line x1="150.0" x2="150.0" y1="6" y2="214" stroke="rgba(255,255,255,.08)"/><text x="150.0" y="228" fill="#9fb0cc" font-size="9.5" text-anchor="middle">0</text><line x1="260.0" x2="260.0" y1="6" y2="214" stroke="rgba(255,255,255,.08)"/><text x="260.0" y="228" fill="#9fb0cc" font-size="9.5" text-anchor="middle">25</text><line x1="370.0" x2="370.0" y1="6" y2="214" stroke="rgba(255,255,255,.08)"/><text x="370.0" y="228" fill="#9fb0cc" font-size="9.5" text-anchor="middle">50</text><line x1="480.0" x2="480.0" y1="6" y2="214" stroke="rgba(255,255,255,.08)"/><text x="480.0" y="228" fill="#9fb0cc" font-size="9.5" text-anchor="middle">75</text><text x="142" y="25" fill="#e8ecf4" font-size="11.5" text-anchor="end"><tspan fill="#9fb0cc">#1</tspan> Pull-forward 014</text><rect x="150" y="12" width="79.2" height="9" fill="none" stroke="#7ab8ff" stroke-width="1"/><rect x="150" y="23" width="17.6" height="9" fill="#5ee1c7"/><line x1="189.6" x2="189.6" y1="10" y2="34" stroke="#fff" stroke-width="1.5"/><text x="235.2" y="27" fill="#5ee1c7" font-size="10.5" font-weight="700">Within*</text><text x="142" y="59" fill="#e8ecf4" font-size="11.5" text-anchor="end"><tspan fill="#9fb0cc">#2</tspan> Pull-forward 015</text><rect x="150" y="46" width="66.0" height="9" fill="none" stroke="#7ab8ff" stroke-width="1"/><rect x="150" y="57" width="17.6" height="9" fill="#5ee1c7"/><line x1="183.0" x2="183.0" y1="44" y2="68" stroke="#fff" stroke-width="1.5"/><text x="222.0" y="61" fill="#5ee1c7" font-size="10.5" font-weight="700">Within*</text><text x="142" y="93" fill="#e8ecf4" font-size="11.5" text-anchor="end"><tspan fill="#9fb0cc">#3</tspan> Terminal switch 019</text><rect x="150" y="80" width="105.6" height="9" fill="none" stroke="#7ab8ff" stroke-width="1"/><rect x="150" y="91" width="26.4" height="9" fill="#5ee1c7"/><line x1="202.8" x2="202.8" y1="78" y2="102" stroke="#fff" stroke-width="1.5"/><text x="261.6" y="95" fill="#5ee1c7" font-size="10.5" font-weight="700">Within*</text><text x="142" y="127" fill="#e8ecf4" font-size="11.5" text-anchor="end"><tspan fill="#9fb0cc">#6</tspan> Stock transfer EX-C03</text><rect x="150" y="114" width="132.0" height="9" fill="none" stroke="#7ab8ff" stroke-width="1"/><rect x="150" y="125" width="52.8" height="9" fill="#5ee1c7"/><line x1="216.0" x2="216.0" y1="112" y2="136" stroke="#fff" stroke-width="1.5"/><text x="288.0" y="129" fill="#5ee1c7" font-size="10.5" font-weight="700">Within*</text><text x="142" y="161" fill="#e8ecf4" font-size="11.5" text-anchor="end"><tspan fill="#9fb0cc">#4</tspan> Divert 021 → Oakland</text><rect x="150" y="148" width="308.0" height="9" fill="none" stroke="#7ab8ff" stroke-width="1"/><rect x="150" y="159" width="167.2" height="9" fill="#ffc454"/><line x1="304.0" x2="304.0" y1="146" y2="170" stroke="#fff" stroke-width="1.5"/><text x="464.0" y="163" fill="#ffc454" font-size="10.5" font-weight="700">Needs Mike</text><text x="142" y="195" fill="#e8ecf4" font-size="11.5" text-anchor="end"><tspan fill="#9fb0cc">#5</tspan> Air top-up EX-C41</text><rect x="150" y="193" width="114.4" height="9" fill="#ffc454"/><text x="270.4" y="197" fill="#ffc454" font-size="10.5" font-weight="700">Needs Mike</text><text x="150" y="242" fill="#9fb0cc" font-size="10">index points · outline = avoided exposure · fill = est. cost · white tick = 50% test</text></svg></div>
+      <div><div class="sec-h">Time left before each window closes</div><svg class="chart" viewBox="0 0 540 238" role="img" aria-label="Days left before each move window closes"><text x="62" y="20" fill="#e8ecf4" font-size="11.5" text-anchor="end" font-weight="700">11-04</text><rect x="70" y="11" width="6.4" height="11" fill="#ff9f7a"/><text x="84.4" y="20" fill="#cbd6ea" font-size="11">#1 #2 #3 pull / switch · 1 d</text><text x="62" y="46" fill="#e8ecf4" font-size="11.5" text-anchor="end" font-weight="700">11-06</text><rect x="70" y="37" width="19.3" height="11" fill="#ffc454"/><text x="97.3" y="46" fill="#cbd6ea" font-size="11">#4 divert notice · 3 d</text><text x="62" y="72" fill="#e8ecf4" font-size="11.5" text-anchor="end" font-weight="700">11-07</text><rect x="70" y="63" width="25.8" height="11" fill="#ffc454"/><text x="103.8" y="72" fill="#cbd6ea" font-size="11">#5 last flight · 4 d</text><text x="62" y="98" fill="#e8ecf4" font-size="11.5" text-anchor="end" font-weight="700">11-12</text><rect x="70" y="89" width="58.0" height="11" fill="#5ee1c7"/><text x="136.0" y="98" fill="#cbd6ea" font-size="11">#6 ship-by · 9 d</text><text x="62" y="124" fill="#e8ecf4" font-size="11.5" text-anchor="end" font-weight="700">11-13</text><rect x="70" y="115" width="64.4" height="11" fill="#5ee1c7"/><text x="142.4" y="124" fill="#cbd6ea" font-size="11">#7 Suez re-quote · 10 d</text><text x="62" y="150" fill="#e8ecf4" font-size="11.5" text-anchor="end" font-weight="700">11-30</text><rect x="70" y="141" width="174.0" height="11" fill="#5ee1c7"/><text x="252.0" y="150" fill="#cbd6ea" font-size="11">#11 rate review · 27 d</text><text x="62" y="176" fill="#e8ecf4" font-size="11.5" text-anchor="end" font-weight="700">12-03</text><rect x="70" y="167" width="193.3" height="11" fill="#5ee1c7"/><text x="271.3" y="176" fill="#cbd6ea" font-size="11">#8 return to supplier · 30 d</text><text x="62" y="202" fill="#e8ecf4" font-size="11.5" text-anchor="end" font-weight="700">mid-Dec*</text><rect x="70" y="193" width="270.7" height="11" fill="#5ee1c7"/><text x="348.7" y="202" fill="#cbd6ea" font-size="11">#9 PO pull-forward · 42 d</text><text x="70" y="234" fill="#9fb0cc" font-size="10">days left from 11-03 · *LNY date UNVERIFIED</text></svg></div>
+    </div>
+    <div class="cause-row"><b style="color:#fff;white-space:nowrap">Status of 12</b><svg class="stk" viewBox="0 0 600 10" width="600" height="10" preserveAspectRatio="none" role="img" aria-label="9 proposed, 1 approved, 1 done, 1 deferred"><rect x="0.0" y="0" width="448.0" height="10" fill="#7ab8ff"/><rect x="450.0" y="0" width="48.0" height="10" fill="#5ee1c7"/><rect x="500.0" y="0" width="48.0" height="10" fill="#3aa17e"/><rect x="550.0" y="0" width="48.0" height="10" fill="#9fb0cc"/></svg><span class="lg"><i style="background:#7ab8ff"></i>9 proposed</span><span class="lg"><i style="background:#5ee1c7"></i>1 approved</span><span class="lg"><i style="background:#3aa17e"></i>1 done</span><span class="lg"><i style="background:#9fb0cc"></i>1 deferred</span></div>
+    <p class="fn">Money = cost index points, EXAMPLE. Within* = passes the D-010 50% test; caps are set on Day 1 (C&amp;F), so until then every spend still goes to Mike. #5 has no exposure figure, so its limit is 0. Not-a-spend moves (#7–#12) are listed in K6.</p>
+  </section>
+  </div>
+</div></div>
+
+<div class="nav">
+  <button id="prevBtn" aria-label="Previous slide">◀ Prev</button>
+  <div class="counter" id="counter" aria-live="polite">1 / 28</div>
+  <button id="nextBtn" aria-label="Next slide">Next ▶</button>
+</div>
+
+<script>
+/* MODE: SANITIZED (M-01 open). Navigation + "Fits any screen" (comms/html-deck-style.md):
+   wide/landscape = fixed 1280x720 stage scaled to the visible viewport, nav in the letterbox, swipe left/right;
+   narrow portrait (<=700px, portrait) = reflowed, vertically scrolling page, dots jump to a slide. */
+(function () {
+  var slides = [].slice.call(document.querySelectorAll('.slide'));
+  var total = slides.length, current = 0;
+  var dotsEl = document.getElementById('dots');
+  var counter = document.getElementById('counter');
+  var prevBtn = document.getElementById('prevBtn');
+  var nextBtn = document.getElementById('nextBtn');
+  var vp = document.getElementById('viewport'), stage = document.getElementById('stage');
+  var nav = document.querySelector('.nav');
+  var RF = window.matchMedia('screen and (max-width: 700px) and (orientation: portrait)');
+  var DW = 1280, DH = 720, SIDE = 64, BOTTOM = 48;
+
+  /* tables get a scroll box (inert on the stage, scrolls sideways in the portrait reflow) */
+  [].forEach.call(document.querySelectorAll('.slide table'), function (t) {
+    var w = document.createElement('div'); w.className = 'tscroll';
+    var cols = 0; [].forEach.call(t.rows, function (r) { var n = 0; [].forEach.call(r.cells, function (c) { n += c.colSpan || 1; }); cols = Math.max(cols, n); });
+    w.style.setProperty('--cols', cols);
+    if (cols >= 4 && !t.closest('.map-inset')) w.className += ' wide';
+    t.parentNode.insertBefore(w, t); w.appendChild(t);
+  });
+  /* portrait small-print floor: tag text that is set below 14px (labels and pills below 12px) */
+  var BADGE = '.tag,.pill,.tr,.aud,.src,.tier,.kick,.tk-lbl,.sub,small,.rg,.code';
+  [].forEach.call(document.querySelectorAll('.slide *'), function (el) {
+    if (el.closest('svg') || el.closest('.ring-num')) return;
+    var own = false; for (var n = el.firstChild; n; n = n.nextSibling) if (n.nodeType === 3 && /\S/.test(n.nodeValue)) { own = true; break; }
+    if (!own) return;
+    var fs = parseFloat(getComputedStyle(el).fontSize), badge = !!el.closest(BADGE);
+    if (badge ? fs < 12 : fs < 14) el.setAttribute('data-rf', badge ? 't' : 'b');
+  });
+
+  slides.forEach(function (s, i) {
+    var d = document.createElement('div');
+    d.className = 'dot';
+    d.title = (i + 1) + ' · ' + (s.getAttribute('data-title') || 'Slide');
+    d.setAttribute('role', 'button'); d.setAttribute('aria-label', d.title);
+    d.addEventListener('click', function () { goTo(i, true); });
+    dotsEl.appendChild(d);
+  });
+  var dots = [].slice.call(dotsEl.children);
+
+  function render() {
+    slides.forEach(function (s, i) { s.classList.toggle('active', i === current); });
+    dots.forEach(function (d, i) { d.classList.toggle('active', i === current); });
+    counter.textContent = (current + 1) + ' / ' + total;
+    prevBtn.disabled = current === 0;
+    nextBtn.disabled = current === total - 1;
+    if (location.hash !== '#' + (current + 1)) {
+      try { history.replaceState(null, '', '#' + (current + 1)); } catch (e) { /* file:// edge cases */ }
+    }
+  }
+  function goTo(i, scroll) {
+    current = Math.max(0, Math.min(total - 1, i)); render();
+    if (scroll && RF.matches) slides[current].scrollIntoView({ block: 'start' });
+  }
+  function fromHash() {
+    var n = parseInt(location.hash.slice(1), 10);
+    if (n >= 1) goTo(n - 1, true); else render();
+  }
+
+  /* fit the stage to the visible viewport (visualViewport respects the iOS browser bars; never plain 100vh) */
+  function fit() {
+    if (RF.matches) { vp.style.height = ''; stage.style.transform = ''; nav.className = 'nav'; nav.style.top = ''; return; }
+    var vv = window.visualViewport, zoomed = vv && Math.abs(vv.scale - 1) > 0.01;
+    var W = document.documentElement.clientWidth || window.innerWidth;
+    var H = (vv && !zoomed) ? vv.height : window.innerHeight;
+    if (zoomed) return; /* leave a pinch-zoomed page alone */
+    vp.style.height = H + 'px';
+    var sSide = Math.min((W - 2 * SIDE) / DW, H / DH), sBot = Math.min(W / DW, (H - BOTTOM) / DH);
+    var side = sSide > sBot, s = Math.max(0.05, side ? sSide : sBot);
+    var w = DW * s, h = DH * s, left = (W - w) / 2, top = side ? (H - h) / 2 : Math.max(0, (H - BOTTOM - h) / 2);
+    stage.style.transform = 'translate(' + left + 'px,' + top + 'px) scale(' + s + ')';
+    nav.className = 'nav ' + (side ? 'nav-side' : 'nav-bottom');
+    nav.style.top = side ? '0px' : (top + h) + 'px';
+  }
+  var fitT; function refit() { fit(); clearTimeout(fitT); fitT = setTimeout(fit, 250); }
+  window.addEventListener('resize', refit);
+  window.addEventListener('orientationchange', refit);
+  if (window.visualViewport) window.visualViewport.addEventListener('resize', refit);
+  if (RF.addEventListener) RF.addEventListener('change', function () { refit(); if (RF.matches) slides[current].scrollIntoView({ block: 'start' }); });
+
+  /* portrait reflow: the slide most in view is the active one (drives the motion and the hash) */
+  if ('IntersectionObserver' in window) {
+    var ratio = slides.map(function () { return 0; });
+    var io = new IntersectionObserver(function (es) {
+      es.forEach(function (e) { ratio[slides.indexOf(e.target)] = e.intersectionRatio * e.boundingClientRect.height; });
+      if (!RF.matches) return;
+      var best = 0; ratio.forEach(function (r, i) { if (r > ratio[best]) best = i; });
+      if (ratio[best] > 0 && best !== current) { current = best; render(); }
+    }, { threshold: [0, .1, .2, .3, .4, .5, .6, .7, .8, .9, 1] });
+    slides.forEach(function (s) { io.observe(s); });
+  }
+
+  prevBtn.addEventListener('click', function () { goTo(current - 1); });
+  nextBtn.addEventListener('click', function () { goTo(current + 1); });
+  document.addEventListener('keydown', function (e) {
+    if (e.target && /INPUT|TEXTAREA|SELECT/.test(e.target.tagName)) return;
+    if (e.altKey || e.ctrlKey || e.metaKey) return;
+    if (RF.matches && /^(ArrowDown|ArrowUp|PageDown|PageUp| )$/.test(e.key)) return; /* let the reflowed page scroll */
+    var k = e.key;
+    if (k === 'ArrowRight' || k === 'ArrowDown' || k === 'PageDown' || (k === ' ' && !e.shiftKey)) { e.preventDefault(); goTo(current + 1, true); }
+    else if (k === 'ArrowLeft' || k === 'ArrowUp' || k === 'PageUp' || (k === ' ' && e.shiftKey)) { e.preventDefault(); goTo(current - 1, true); }
+    else if (k === 'Home') { e.preventDefault(); goTo(0, true); }
+    else if (k === 'End') { e.preventDefault(); goTo(total - 1, true); }
+  });
+  /* swipe left/right on the stage */
+  var x0 = null, y0 = 0, t0 = 0, multi = false;
+  vp.addEventListener('touchstart', function (e) {
+    if (e.touches.length > 1) { multi = true; x0 = null; return; }
+    multi = false; x0 = e.touches[0].clientX; y0 = e.touches[0].clientY; t0 = Date.now();
+  }, { passive: true });
+  vp.addEventListener('touchend', function (e) {
+    if (multi || x0 === null || RF.matches) { x0 = null; return; }
+    var vv = window.visualViewport; if (vv && vv.scale > 1.05) { x0 = null; return; }
+    var t = e.changedTouches[0], dx = t.clientX - x0, dy = t.clientY - y0; x0 = null;
+    if (Math.abs(dx) > 40 && Math.abs(dx) > 1.4 * Math.abs(dy) && Date.now() - t0 < 900) goTo(current + (dx < 0 ? 1 : -1));
+  }, { passive: true });
+  window.addEventListener('hashchange', fromHash);
+  fit();
+  fromHash();
+})();
+</script>
+
+<script>
+/* MODE: SANITIZED (M-01 open). v3.0 motion controller: runs when a slide becomes active. Count-ups paint a ::after overlay;
+   the real (sourced) text never leaves the DOM, and the overlay ends on that exact text. Reduced motion / print = static final state. */
+(function () {
+  var RM = window.matchMedia && window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+  var NUM = /-?\d[\d,]*(?:\.\d+)?/;
+  function countUp(el) {
+    var txt = el.textContent, m = txt.match(NUM); if (!m) return;
+    var raw = m[0], dec = raw.indexOf('.') >= 0 ? raw.split('.')[1].length : 0, comma = raw.indexOf(',') >= 0;
+    var target = parseFloat(raw.replace(/,/g, '')), pre = txt.slice(0, m.index), post = txt.slice(m.index + raw.length);
+    var tok = (el._cuTok || 0) + 1; el._cuTok = tok;
+    el.classList.remove('counting'); el.style.setProperty('--cu-color', getComputedStyle(el).color);
+    el.setAttribute('data-show', pre + (0).toFixed(dec) + post); el.classList.add('counting');
+    var t0 = null, D = 1100;
+    function fmt(v) { var s = v.toFixed(dec); if (comma) s = Number(s).toLocaleString('en-US', { minimumFractionDigits: dec, maximumFractionDigits: dec }); return pre + s + post; }
+    function step(ts) {
+      if (el._cuTok !== tok) return;
+      if (t0 === null) t0 = ts;
+      var p = Math.min(1, (ts - t0) / D), e = 1 - Math.pow(1 - p, 3);
+      if (p < 1) { el.setAttribute('data-show', fmt(target * e)); requestAnimationFrame(step); }
+      else { el.setAttribute('data-show', txt); el.classList.remove('counting'); }
+    }
+    requestAnimationFrame(step);
+  }
+  function sweep(c) {
+    var C = parseFloat(c.getAttribute('data-c')), fin = c.getAttribute('data-off');
+    c.style.transition = 'none'; c.style.strokeDashoffset = C; c.getBoundingClientRect();
+    requestAnimationFrame(function () { requestAnimationFrame(function () {
+      c.style.transition = 'stroke-dashoffset 1.25s cubic-bezier(.2,.8,.2,1)'; c.style.strokeDashoffset = fin; }); });
+  }
+  function play(s) {
+    if (RM) return;
+    [].forEach.call(s.querySelectorAll('.cu'), countUp);
+    [].forEach.call(s.querySelectorAll('svg.ring .ring-val'), sweep);
+  }
+  var slides = [].slice.call(document.querySelectorAll('.slide'));
+  slides.forEach(function (s) {
+    var was = s.classList.contains('active');
+    new MutationObserver(function () { var now = s.classList.contains('active'); if (now && !was) play(s); was = now; })
+      .observe(s, { attributes: true, attributeFilter: ['class'] });
+  });
+  var a = document.querySelector('.slide.active'); if (a) play(a);
+  if (RM) [].forEach.call(document.querySelectorAll('svg.map'), function (m) { if (m.pauseAnimations) m.pauseAnimations(); });
+})();
+</script>
+</body>
+</html>
