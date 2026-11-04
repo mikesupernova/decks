@@ -69,7 +69,7 @@
   <filter id="gl2" x="-50%" y="-50%" width="200%" height="200%"><feGaussianBlur stdDeviation="7" result="b"/><feMerge><feMergeNode in="b"/><feMergeNode in="b"/><feMergeNode in="SourceGraphic"/></feMerge></filter>
 </defs></svg>
 <div class="top"><b>GALLERY · DATA IS BEAUTIFUL</b><span class="ex">EXAMPLE DATA</span>
-  <nav><a href="#c1">01 FLOW</a><a href="#c2">02 BUBBLES</a><a href="#c3">03 CALENDAR</a><a href="#c4">04 CLOCK</a><a href="#c5">05 CHORD</a><a href="#c6">06 RIDGES</a><a href="#c7">07 TREEMAP</a><a href="#c8">08 GLOBE</a></nav>
+  <nav><a href="#c1">01 FLOW</a><a href="#c2">02 BUBBLES</a><a href="#c3">03 CALENDAR</a><a href="#c4">04 CLOCK</a><a href="#c5">05 CHORD</a><a href="#c6">06 RIDGES</a><a href="#c7">07 TREEMAP</a><a href="#c8">08 GLOBE</a><a href="#c9">09 RADAR</a><a href="#c10">10 CAPSULES</a><a href="#c11">11 BUTTERFLY</a><a href="#c12">12 9-BOX</a><a href="#c13">13 BOW-TIE</a><a href="#c14">14 FUNNEL</a></nav>
   <nav><a href="control-tower-wall.html#map/3pl">MAP SELECTOR</a><a href="control-tower-wall.html">WALL</a><a href="index.html">INDEX</a></nav></div>
 <p class="intro">EXAMPLE data only, derived from the same EXAMPLE feeds as the map selector (ops/feeds). Invented figures, not real results. Money appears only as an index. Hover any mark for detail; click to isolate; Esc clears. Keys 1–8 open a chart full-screen (wall mode), G opens the globe, Esc exits.</p>
 <section class="ch" id="c1"><header><span class="num">01</span><h2>ORDER → RETURN FLOW</h2><span class="ex">EXAMPLE</span><p class="cap">Sankey of 7 days of EXAMPLE orders: 3PL site → outcome (controllable vs outside-3PL misses) → kept / returned → return reason. Hover a band; click a node to isolate.</p><div class="ctl"><button id="skf">FOCUS: RETURNS</button><a class="b" href="#solo/1">⛶ 1</a><a class="b soloexit" href="#c1">EXIT · ESC</a></div></header><div class="fig"><svg id="v1" viewBox="0 0 1600 760" preserveAspectRatio="xMidYMid meet" role="img" aria-label="Sankey"></svg></div></section>
@@ -80,6 +80,14 @@
 <section class="ch" id="c6"><header><span class="num">06</span><h2>LEAD-TIME RIDGELINES</h2><span class="ex">EXAMPLE</span><p class="cap">Ridgeline plot of order-to-delivery lead time per lane (30-day EXAMPLE sample) with P50 and P90. Pick a 3PL; click a ridge to isolate.</p><div class="ctl"><button data-rg="TOP" class="on">TOP 12</button><button data-rg="EX-3PL-USW">USW</button><button data-rg="EX-3PL-USE">USE</button><button data-rg="EX-3PL-NL">NL</button><button data-rg="EX-3PL-UK">UK</button><button data-rg="EX-3PL-SG">SG</button><a class="b" href="#solo/6">⛶ 6</a><a class="b soloexit" href="#c6">EXIT · ESC</a></div></header><div class="fig"><svg id="v6" viewBox="0 0 1600 760" preserveAspectRatio="xMidYMid meet" role="img" aria-label="Ridgeline plot"></svg></div></section>
 <section class="ch" id="c7"><header><span class="num">07</span><h2>REVENUE & RETURNS · TREEMAP</h2><span class="ex">EXAMPLE</span><p class="cap">Zoomable treemap, family → SKU. Size = revenue index (network = 1,000, no dollars) or returns index; colour = return rate. Click a family to zoom; click a SKU to isolate.</p><div class="ctl"><button data-tms="rev" class="on">SIZE: REVENUE INDEX</button><button data-tms="ret">SIZE: RETURNS INDEX</button><a class="b" href="#solo/7">⛶ 7</a><a class="b soloexit" href="#c7">EXIT · ESC</a></div></header><div class="fig"><svg id="v7" viewBox="0 0 1600 760" preserveAspectRatio="xMidYMid meet" role="img" aria-label="Treemap"></svg></div></section>
 <section class="ch" id="c8"><header><span class="num">08</span><h2>NIGHT-LIGHTS GLOBE</h2><span class="ex">EXAMPLE</span><p class="cap">3D globe mode for the map: 3PL sites and destinations as night lights with streaming lanes. Drag to spin; click a site to isolate. Open full-screen (G or #globe) for the centre wall screen.</p><div class="ctl"><a class="b" href="#globe">⛶ CENTRE-SCREEN MODE</a><a class="b" href="#solo/8">⛶ 8</a><a class="b soloexit" href="#c8">EXIT · ESC</a></div></header><div class="fig"><canvas id="v8" aria-label="Night-lights globe"></canvas><div class="hud" id="ghud"></div></div></section>
+
+<div class="intro" id="inspired"><b style="color:#6fd3ff;letter-spacing:.12em">INSPIRED SET · 09–14</b><br>Original rebuilds of chart techniques seen in third-party slide templates (inspiration only, no slides, data, images or logos reused). Same EXAMPLE feed data as charts 01–08. Open full-screen at #solo/9 … #solo/14.</div>
+<section class="ch ins" id="c9"><header><span class="num">09</span><h2>INSPIRED SET · 3PL SCORECARD RADAR</h2><span class="ex">EXAMPLE</span><p class="cap">Inspired by: radar / spider chart (self vs peers comparison). One 3PL’s 8 scorecard axes, each a 0–100 score, against the network average (dashed). Click a 3PL to compare; hover a vertex.</p><div class="ctl" id="rdc"></div><div class="ctl"><a class="b" href="#solo/9">⛶ 9</a><a class="b soloexit" href="#c9">EXIT · ESC</a></div></header><div class="fig"><svg id="v9" viewBox="0 0 1600 760" preserveAspectRatio="xMidYMid meet" role="img" aria-label="Radar chart"></svg></div></section>
+<section class="ch ins" id="c10"><header><span class="num">10</span><h2>INSPIRED SET · KPI CAPSULES</h2><span class="ex">EXAMPLE</span><p class="cap">Inspired by: grouped capsule (pill) bar chart with value badges. Three KPI groups, one glowing capsule per 3PL, value badge on the cap. Click a capsule to isolate that 3PL across groups.</p><div class="ctl"><a class="b" href="#solo/10">⛶ 10</a><a class="b soloexit" href="#c10">EXIT · ESC</a></div></header><div class="fig"><svg id="v10" viewBox="0 0 1600 760" preserveAspectRatio="xMidYMid meet" role="img" aria-label="Capsule bar chart"></svg></div></section>
+<section class="ch ins" id="c11"><header><span class="num">11</span><h2>INSPIRED SET · RETURN REASONS · BUTTERFLY</h2><span class="ex">EXAMPLE</span><p class="cap">Inspired by: diverging back-to-back bar chart (two cohorts, shared category axis). Share of returns by reason, Americas 3PLs (left) vs EMEA/APAC 3PLs (right). Red = 3PL-controllable reason. Click a row to isolate.</p><div class="ctl"><a class="b" href="#solo/11">⛶ 11</a><a class="b soloexit" href="#c11">EXIT · ESC</a></div></header><div class="fig"><svg id="v11" viewBox="0 0 1600 760" preserveAspectRatio="xMidYMid meet" role="img" aria-label="Butterfly chart"></svg></div></section>
+<section class="ch ins" id="c12"><header><span class="num">12</span><h2>INSPIRED SET · SKU 9-BOX</h2><span class="ex">EXAMPLE</span><p class="cap">Inspired by: 3×3 performance matrix (9-box grid). Each EXAMPLE SKU placed by revenue index (x) and return rate (y); cell glow = how many SKUs land there. Top-right = high revenue, low returns. Click a SKU to isolate.</p><div class="ctl"><a class="b" href="#solo/12">⛶ 12</a><a class="b soloexit" href="#c12">EXIT · ESC</a></div></header><div class="fig"><svg id="v12" viewBox="0 0 1600 760" preserveAspectRatio="xMidYMid meet" role="img" aria-label="Nine-box matrix"></svg></div></section>
+<section class="ch ins" id="c13"><header><span class="num">13</span><h2>INSPIRED SET · BOW-TIE NETWORK</h2><span class="ex">EXAMPLE</span><p class="cap">Inspired by: bow-tie / hourglass funnel diagram (many in → one gate → many out). EXAMPLE supplier lanes converge on the 3PL network and fan out to destination regions; stream width = 7-day order share. Click a strand to isolate.</p><div class="ctl"><a class="b" href="#solo/13">⛶ 13</a><a class="b soloexit" href="#c13">EXIT · ESC</a></div></header><div class="fig"><svg id="v13" viewBox="0 0 1600 760" preserveAspectRatio="xMidYMid meet" role="img" aria-label="Bow-tie diagram"></svg></div></section>
+<section class="ch ins" id="c14"><header><span class="num">14</span><h2>INSPIRED SET · FULFILMENT FUNNEL + DROP-OFF TABLE</h2><span class="ex">EXAMPLE</span><p class="cap">Inspired by: smooth staged funnel with a stage table beside it. 7 days of EXAMPLE orders from released → delivered first-time-right, with where each stage’s leakage went. Pick a 3PL; click a stage to isolate.</p><div class="ctl" id="fnc"></div><div class="ctl"><a class="b" href="#solo/14">⛶ 14</a><a class="b soloexit" href="#c14">EXIT · ESC</a></div></header><div class="fig"><svg id="v14" viewBox="0 0 1600 760" preserveAspectRatio="xMidYMid meet" role="img" aria-label="Funnel"></svg></div></section>
 
 <footer>MODE: SANITIZED (M-01 open) · EXAMPLE DATA EVERYWHERE · EX- CODES · MONEY AS AN INDEX ONLY · DATA AS OF <span id="asof"></span> · NO LIBRARIES LOADED FROM THE NETWORK (ALL CODE INLINE)</footer>
 <div id="tip"></div>
@@ -543,7 +551,7 @@
       if (out) { tm.zoom = null; ISO.v7 = null; treemap(true); } else if (z && !tm.zoom) { tm.zoom = z.getAttribute('data-zoom'); ISO.v7 = null; treemap(true); } });
     /* solo mode / keys */
     function route() {
-      var h = location.hash, m = h.match(/^#solo\/(\d)$/), n = h === '#globe' ? 8 : (m ? +m[1] : 0);
+      var h = location.hash, m = h.match(/^#solo\/(\d{1,2})$/), n = h === '#globe' ? 8 : (m ? +m[1] : 0);
       document.body.classList.toggle('solo', n > 0);
       [].forEach.call(document.querySelectorAll('section.ch'), function (s, i) { s.classList.toggle('on', i + 1 === n); });
       if (gb.redraw) gb.redraw();
@@ -566,5 +574,136 @@
 })();
 
 </script>
+<script>
+/* MODE: SANITIZED. Inspired set (09–14): original charts, EXAMPLE data derived from the gallery's EXAMPLE feed block. No libraries. */
+(function () {
+  var D = JSON.parse(document.getElementById('gdata').textContent);
+  var C = { tx: '#f2f2f2', dim: '#8a96a6', cy: '#6fd3ff', amb: '#ffb000', red: '#ff4d4d', ok: '#3ddc84', line: '#1a2028' };
+  function esc(s) { return String(s).replace(/&/g, '&amp;').replace(/</g, '&lt;').replace(/"/g, '&quot;'); }
+  function T(x, y, t, fs, col, a, w) { return '<text x="' + (+x).toFixed(1) + '" y="' + (+y).toFixed(1) + '" font-size="' + fs + '" fill="' + (col || C.tx) + '" text-anchor="' + (a || 'start') + '" font-weight="' + (w || 700) + '" letter-spacing="0.04em">' + esc(t) + '</text>'; }
+  function tp(l) { return ' data-tip="' + esc(l.join('\n')) + '"'; }
+  var ISO = {};
+  function iso(id) { var s = document.getElementById(id), k = ISO[id]; [].forEach.call(s.querySelectorAll('[data-k]'), function (e) { e.classList.toggle('dim', !!k && e.getAttribute('data-k').split(' ').indexOf(k) < 0); }); }
+  function bind(id) { document.getElementById(id).addEventListener('click', function (e) { var el = e.target.closest('[data-k]'), k = el ? el.getAttribute('data-k').split(' ')[0] : null; ISO[id] = (k && ISO[id] !== k) ? k : null; iso(id); }); }
+  window.addEventListener('keydown', function (e) { if (e.key === 'Escape') Object.keys(ISO).forEach(function (id) { ISO[id] = null; iso(id); }); });
+  var sites = D.sites, links = D.sankey.links;
+  function L(s, t) { for (var i = 0; i < links.length; i++) if (links[i][0] === s && links[i][1] === t) return links[i][2]; return 0; }
+  var ST = {}; sites.forEach(function (s, i) {
+    var otif = L(s.id, 'OTIF'), c = L(s.id, 'MISS · 3PL (CONTROLLABLE)'), car = L(s.id, 'MISS · CARRIER (OUTSIDE 3PL)'), sup = L(s.id, 'MISS · SUPPLIER (OUTSIDE 3PL)'), un = L(s.id, 'MISS · UNCONFIRMED'), tot = otif + c + car + sup + un;
+    var h = function (k) { return ((i * 37 + k * 53) % 17) / 17; }; /* deterministic EXAMPLE jitter */
+    ST[s.id] = { tot: tot, otif: otif / tot * 100, ctrl: (tot - c) / tot * 100, c: c, car: car, sup: sup, un: un, color: s.color, verified: s.verified, h: h };
+  });
+  var AX = ['OTIF', 'CONTROLLABLE OTIF', 'PICK ACCURACY', 'DOCK-TO-STOCK', 'CUTOFF HIT', 'DAMAGE-FREE', 'DATA TIMELINESS', 'COST INDEX'];
+  function scores(id) { var s = ST[id], h = s.h; return [
+    (s.otif - 97) * 33, (s.ctrl - 98) * 50, 70 + h(1) * 28, 55 + h(2) * 40, 62 + h(3) * 35, 75 + h(4) * 22, 50 + h(5) * 48, 58 + h(6) * 38
+  ].map(function (v) { return Math.max(20, Math.min(99, Math.round(v))); }); }
+  /* ---------- 09 radar ---------- */
+  var rd = { sel: sites[0].id };
+  function radar() {
+    var cx = 540, cy = 400, R = 270, n = AX.length, o = '', net = AX.map(function (_, j) { var a = 0, m = 0; sites.forEach(function (s) { if (s.verified) { a += scores(s.id)[j]; m++; } }); return Math.round(a / m); });
+    function P(j, v) { var a = -Math.PI / 2 + j * 2 * Math.PI / n; return [cx + Math.cos(a) * R * v / 100, cy + Math.sin(a) * R * v / 100]; }
+    [20, 40, 60, 80, 100].forEach(function (r) { o += '<polygon points="' + AX.map(function (_, j) { return P(j, r).join(','); }).join(' ') + '" fill="none" stroke="' + (r === 100 ? '#2a3a4a' : '#141c24') + '" stroke-width="1.2"/>'; o += T(cx + 6, cy - R * r / 100 + 14, r, 11, '#4a5866', 'start'); });
+    AX.forEach(function (a, j) { var p = P(j, 100), q = P(j, 116); o += '<line x1="' + cx + '" y1="' + cy + '" x2="' + p[0] + '" y2="' + p[1] + '" stroke="#141c24"/>' + T(q[0], q[1] + 5, a, 14, C.dim, q[0] < cx - 10 ? 'end' : q[0] > cx + 10 ? 'start' : 'middle', 800); });
+    o += '<polygon points="' + net.map(function (v, j) { return P(j, v).join(','); }).join(' ') + '" fill="none" stroke="#e6e6e6" stroke-dasharray="6 6" stroke-width="2" opacity=".7"/>';
+    var s = ST[rd.sel], sc = scores(rd.sel);
+    o += '<polygon points="' + sc.map(function (v, j) { return P(j, v).join(','); }).join(' ') + '" fill="' + s.color + '" fill-opacity=".14" stroke="' + s.color + '" stroke-width="3" filter="url(#gl)"/>';
+    sc.forEach(function (v, j) { var p = P(j, v); o += '<circle cx="' + p[0] + '" cy="' + p[1] + '" r="7" fill="#000" stroke="' + s.color + '" stroke-width="3" filter="url(#gl)"' + tp([AX[j], rd.sel + ': ' + v, 'Network avg: ' + net[j], (v >= net[j] ? '+' : '') + (v - net[j]) + ' vs network', 'EXAMPLE score, 0–100']) + '/>'; });
+    var X = 1090; o += T(X, 120, rd.sel + (s.verified ? '' : ' · UNVERIFIED'), 30, s.color, 'start', 800) + T(X, 150, 'vs NETWORK AVERAGE (verified sites, dashed)', 14, C.dim, 'start', 700);
+    sc.forEach(function (v, j) { var d = v - net[j], y = 200 + j * 50; o += T(X, y, AX[j], 13, C.dim, 'start', 800) + '<rect x="' + X + '" y="' + (y + 8) + '" width="300" height="6" fill="#111820"/><rect x="' + X + '" y="' + (y + 8) + '" width="' + v * 3 + '" height="6" fill="' + s.color + '" filter="url(#gl)"/><line x1="' + (X + net[j] * 3) + '" x2="' + (X + net[j] * 3) + '" y1="' + (y + 2) + '" y2="' + (y + 20) + '" stroke="#fff"/>' + T(X + 420, y + 16, (d >= 0 ? '+' : '') + d, 18, d >= 0 ? C.ok : C.red, 'end', 800) + T(X + 340, y + 16, v, 18, C.tx, 'end', 800); });
+    document.getElementById('v9').innerHTML = o;
+    document.getElementById('rdc').innerHTML = sites.map(function (x) { return '<button data-rd="' + x.id + '"' + (x.id === rd.sel ? ' class="on"' : '') + '>' + x.id.replace('EX-3PL-', '') + '</button>'; }).join('');
+  }
+  document.getElementById('rdc').addEventListener('click', function (e) { var b = e.target.closest('[data-rd]'); if (b) { rd.sel = b.getAttribute('data-rd'); radar(); } });
+  /* ---------- 10 capsules ---------- */
+  function capsules() {
+    var G = [['OTIF %', function (s) { return s.otif; }, 96, 100, 2], ['CONTROLLABLE OTIF %', function (s) { return s.ctrl; }, 97, 100, 2], ['CUTOFF HIT %', function (s, id) { return 88 + s.h(3) * 11; }, 85, 100, 1]];
+    var o = '', base = 640, top = 150, gw = 480, x0 = 110;
+    o += '<line x1="60" x2="1560" y1="' + base + '" y2="' + base + '" stroke="#1a2028"/>';
+    G.forEach(function (g, gi) { var gx = x0 + gi * gw, bw = 58, gap = 22;
+      sites.forEach(function (s, i) { var st = ST[s.id], v = g[1](st, s.id), f = (v - g[2]) / (g[3] - g[2]), h = 60 + f * (base - top - 60), x = gx + i * (bw + gap), y = base - h;
+        o += '<g data-k="' + s.id + '"' + tp([s.id + (s.verified ? '' : ' · UNVERIFIED'), g[0] + ': ' + v.toFixed(g[4]), 'EXAMPLE']) + '><rect x="' + x + '" y="' + y + '" width="' + bw + '" height="' + h + '" rx="29" fill="' + s.color + '" fill-opacity=".22" stroke="' + s.color + '" stroke-width="2"' + (s.verified ? '' : ' stroke-dasharray="5 5"') + '/><rect x="' + (x + 8) + '" y="' + (y + 8) + '" width="' + (bw - 16) + '" height="' + Math.max(0, h - 16) + '" rx="21" fill="' + s.color + '" opacity=".55" filter="url(#gl)"/>' +
+          '<circle cx="' + (x + bw / 2) + '" cy="' + (y + 29) + '" r="25" fill="#000" stroke="' + s.color + '" stroke-width="2.5" filter="url(#gl)"/>' + T(x + bw / 2, y + 35, v.toFixed(g[4] > 1 ? 1 : g[4]), 15, C.tx, 'middle', 800) +
+          '<circle cx="' + (x + bw / 2) + '" cy="' + (base + 30) + '" r="16" fill="none" stroke="#2a323c"/>' + T(x + bw / 2, base + 35, s.id.replace('EX-3PL-', ''), 11, s.color, 'middle', 800) + '</g>'; });
+      o += T(gx + 2.5 * (bw + gap) - gap / 2, base + 85, g[0], 17, C.tx, 'middle', 800) + T(gx + 2.5 * (bw + gap) - gap / 2, base + 106, 'axis ' + g[2] + '–' + g[3], 12, C.dim, 'middle', 700); });
+    o += T(60, 60, 'THREE KPIs · FIVE 3PLs · CAPSULE HEIGHT = VALUE WITHIN EACH GROUP’S AXIS', 15, C.dim, 'start', 800) + T(60, 84, 'Dashed outline = EX-3PL-UK, unverified feed', 13, C.amb, 'start', 700);
+    document.getElementById('v10').innerHTML = o;
+  }
+  /* ---------- 11 butterfly ---------- */
+  function butterfly() {
+    var R = ['DEFECT', 'ORDERED WRONG', 'WRONG ITEM (3PL)', 'TRANSIT DAMAGE', 'UNKNOWN', 'PACKING (3PL)'], tot = R.map(function (r) { return L('RETURNED', r); });
+    var A = { 'DEFECT': 1.05, 'ORDERED WRONG': 1.2, 'WRONG ITEM (3PL)': 0.8, 'TRANSIT DAMAGE': 1.15, 'UNKNOWN': 0.9, 'PACKING (3PL)': 0.7 };
+    var left = tot.map(function (v, i) { return v * A[R[i]]; }), right = tot.map(function (v, i) { return v * (2 - A[R[i]]); });
+    var sl = left.reduce(function (a, b) { return a + b; }), sr = right.reduce(function (a, b) { return a + b; });
+    var o = '', cx = 800, top = 150, rh = 82, sc = 15, mid = 140;
+    o += T(cx - mid - 10, 110, '◀ AMERICAS 3PLs (USW · USE)', 16, '#4fc3ff', 'end', 800) + T(cx + mid + 10, 110, 'EMEA / APAC 3PLs (NL · UK · SG) ▶', 16, '#ff7ac8', 'start', 800) + T(cx, 60, '% OF RETURNS BY REASON · 7-DAY EXAMPLE WINDOW', 15, C.dim, 'middle', 800);
+    R.forEach(function (r, i) { var y = top + i * rh, l = left[i] / sl * 100, rr = right[i] / sr * 100, ctl = /3PL/.test(r), col = ctl ? C.red : C.cy;
+      o += '<g data-k="r' + i + '"' + tp([r, 'Americas: ' + l.toFixed(1) + '% of returns', 'EMEA/APAC: ' + rr.toFixed(1) + '%', ctl ? '3PL-controllable' : 'Outside 3PL / customer', 'EXAMPLE']) + '>' +
+        '<rect x="' + (cx - mid - l * sc) + '" y="' + y + '" width="' + l * sc + '" height="44" fill="' + col + '" opacity=".75" filter="url(#gl)"/><rect x="' + (cx + mid) + '" y="' + y + '" width="' + rr * sc + '" height="44" fill="' + col + '" opacity=".45" filter="url(#gl)"/>' +
+        T(cx, y + 28, r, 13, ctl ? C.red : C.tx, 'middle', 800) + T(cx - mid - l * sc - 10, y + 29, l.toFixed(1) + '%', 17, C.tx, 'end', 800) + T(cx + mid + rr * sc + 10, y + 29, rr.toFixed(1) + '%', 17, C.tx, 'start', 800) + '</g>'; });
+    o += T(cx, top + R.length * rh + 30, 'Red rows = reasons the 3PL controls. Split by region is an EXAMPLE allocation of the feed totals.', 13, C.dim, 'middle', 700);
+    document.getElementById('v11').innerHTML = o;
+  }
+  /* ---------- 12 nine-box ---------- */
+  function ninebox() {
+    var sk = []; D.treemap.children.forEach(function (f) { f.children.forEach(function (s) { sk.push({ id: s.id, fam: f.id, rev: s.rev, ret: s.ret }); }); });
+    var x0 = 300, y0 = 70, cw = 300, chh = 205, o = '', col = function (c) { return c === 0 ? 40 : c === 1 ? 70 : 110; };
+    var bx = function (v) { return v < 60 ? 0 : v < 90 ? 1 : 2; }, by = function (r) { return r > 3 ? 0 : r > 1.25 ? 1 : 2; };
+    var cnt = {}; sk.forEach(function (s) { var k = bx(s.rev) + '' + by(s.ret); cnt[k] = (cnt[k] || 0) + 1; });
+    var NM = [['WATCH', 'FIX RETURNS', 'FIX RETURNS · PRIORITY'], ['TAIL', 'CORE', 'GROW'], ['TAIL · HEALTHY', 'CORE · HEALTHY', 'STARS']];
+    for (var r = 0; r < 3; r++) for (var c = 0; c < 3; c++) { var n = cnt[c + '' + r] || 0, hue = r === 0 ? '255,77,77' : r === 2 && c === 2 ? '61,220,132' : '111,211,255';
+      o += '<rect x="' + (x0 + c * cw + 6) + '" y="' + (y0 + r * chh + 6) + '" width="' + (cw - 12) + '" height="' + (chh - 12) + '" rx="18" fill="rgba(' + hue + ',' + (0.04 + n * 0.05) + ')" stroke="rgba(' + hue + ',.55)" stroke-width="1.5"' + (n ? ' filter="url(#gl)"' : '') + '/>' + T(x0 + c * cw + 24, y0 + r * chh + 34, NM[r][c], 13, 'rgb(' + hue + ')', 'start', 800) + T(x0 + c * cw + cw - 24, y0 + r * chh + 36, n, 22, C.tx, 'end', 800); }
+    var fcol = { 'FAMILY CAM': '#4fc3ff', 'FAMILY SNS': '#a98bff', 'FAMILY ACC': '#5ff0e0', 'FAMILY ACS': '#ff7ac8' }, seen = {};
+    sk.forEach(function (s) { var c = bx(s.rev), r = by(s.ret), k = c + '' + r, i = seen[k] = (seen[k] || 0) + 1, px = x0 + c * cw + 40 + ((i - 1) % 4) * 62, py = y0 + r * chh + 90 + Math.floor((i - 1) / 4) * 52;
+      o += '<g data-k="' + s.id + '"' + tp([s.id, s.fam, 'Revenue index: ' + s.rev, 'Return rate: ' + s.ret + '%', 'EXAMPLE']) + '><circle cx="' + px + '" cy="' + py + '" r="16" fill="#000" stroke="' + fcol[s.fam] + '" stroke-width="3" filter="url(#gl)"/>' + T(px, py + 36, s.id.replace('EX-SKU-', ''), 10, C.dim, 'middle', 700) + '</g>'; });
+    o += T(x0 + 1.5 * cw, y0 + 3 * chh + 34, 'REVENUE INDEX →   (<60 · 60–90 · ≥90, network = 1,000)', 14, C.dim, 'middle', 800);
+    o += '<g transform="translate(' + (x0 - 30) + ',' + (y0 + 1.5 * chh) + ') rotate(-90)">' + T(0, 0, '← RETURN RATE (high top · low bottom)', 14, C.dim, 'middle', 800) + '</g>';
+    var ly = 120; Object.keys(fcol).forEach(function (f) { o += '<circle cx="1260" cy="' + ly + '" r="9" fill="#000" stroke="' + fcol[f] + '" stroke-width="3"/>' + T(1280, ly + 5, f, 14, fcol[f], 'start', 800); ly += 32; });
+    document.getElementById('v12').innerHTML = o;
+  }
+  /* ---------- 13 bow-tie ---------- */
+  function bowtie() {
+    var SUP = [['EX-SUP-A', .24], ['EX-SUP-B', .19], ['EX-SUP-C', .16], ['EX-SUP-D', .14], ['EX-SUP-E', .11], ['EX-SUP-F', .09], ['EX-SUP-G', .07]];
+    var reg = {}; D.globe.destinations.forEach(function (d) { var s = D.sankey.links.filter(function (l) { return l[0] === d.from && l[1] === 'OTIF'; })[0][2], r = d.from === 'EX-3PL-USW' || d.from === 'EX-3PL-USE' ? (d.lon < -90 ? 'AMERICAS W' : 'AMERICAS E') : d.from === 'EX-3PL-SG' ? 'APAC' : (d.city === 'Dubai' ? 'MIDDLE EAST' : 'EUROPE'); reg[r] = (reg[r] || 0) + s * d.share; });
+    var tot = 0; Object.keys(reg).forEach(function (k) { tot += reg[k]; }); var OUT = Object.keys(reg).map(function (k) { return [k, reg[k] / tot]; }).sort(function (a, b) { return b[1] - a[1]; });
+    var o = '<defs><linearGradient id="btL" x1="0" x2="1"><stop offset="0" stop-color="#4fc3ff" stop-opacity=".15"/><stop offset="1" stop-color="#6fd3ff" stop-opacity=".9"/></linearGradient><linearGradient id="btR" x1="0" x2="1"><stop offset="0" stop-color="#5ff0e0" stop-opacity=".9"/><stop offset="1" stop-color="#5ff0e0" stop-opacity=".15"/></linearGradient></defs>';
+    var cx = 800, cy = 400, gh = 90, H = 600;
+    function side(arr, dir, grad) { var y = cy - H / 2, gy = cy - gh / 2; arr.forEach(function (a, i) { var h = a[1] * H, g = a[1] * gh, xo = cx - dir * 600, xi = cx - dir * 130, m = (xo + xi) / 2;
+      var p = 'M' + xo + ',' + y + ' C' + m + ',' + y + ' ' + m + ',' + gy + ' ' + xi + ',' + gy + ' L' + xi + ',' + (gy + g) + ' C' + m + ',' + (gy + g) + ' ' + m + ',' + (y + h) + ' ' + xo + ',' + (y + h) + 'Z';
+      o += '<g data-k="' + a[0].replace(/\W/g, '') + '"' + tp([a[0], Math.round(a[1] * 100) + '% of 7-day orders', dir > 0 ? 'Inbound to 3PL network' : 'Outbound from 3PL network', 'EXAMPLE']) + '><path class="band" d="' + p + '" fill="url(#' + grad + ')" stroke="#000" stroke-width="2"/>' + T(xo - dir * 14, y + h / 2 + 5, a[0], 14, C.tx, dir > 0 ? 'end' : 'start', 800) + T(xo - dir * 14, y + h / 2 + 23, Math.round(a[1] * 100) + '%', 12, C.dim, dir > 0 ? 'end' : 'start', 700) + '</g>';
+      y += h; gy += g; }); }
+    side(SUP, 1, 'btL'); side(OUT, -1, 'btR');
+    o += '<rect x="' + (cx - 130) + '" y="' + (cy - gh / 2 - 6) + '" width="260" height="' + (gh + 12) + '" rx="' + (gh / 2 + 6) + '" fill="#061016" stroke="#6fd3ff" stroke-width="2.5" filter="url(#gl2)"/>' + T(cx, cy - 4, '3PL NETWORK', 20, C.tx, 'middle', 800) + T(cx, cy + 20, fmt(D.sankey.total) + ' orders · 7 days', 13, C.cy, 'middle', 700);
+    o += T(200, 60, 'INBOUND · SUPPLIER LANES', 14, C.dim, 'middle', 800) + T(1400, 60, 'OUTBOUND · DESTINATION REGIONS', 14, C.dim, 'middle', 800);
+    document.getElementById('v13').innerHTML = o;
+  }
+  function fmt(n) { return Math.round(n).toLocaleString('en-US'); }
+  /* ---------- 14 funnel ---------- */
+  var fn = { sel: 'NETWORK' };
+  function funnel() {
+    var ids = fn.sel === 'NETWORK' ? sites.map(function (s) { return s.id; }) : [fn.sel], a = { tot: 0, c: 0, car: 0, sup: 0, un: 0 };
+    ids.forEach(function (id) { var s = ST[id]; a.tot += s.tot; a.c += s.c; a.car += s.car; a.sup += s.sup; a.un += s.un; });
+    var ret = ids.reduce(function (t, id) { return t + Math.round(ST[id].tot / D.sankey.total * D.sankey.returned); }, 0);
+    var stg = [['RELEASED', a.tot, ''], ['PICKED ON TIME', a.tot - Math.round(a.c * .55), 'pick/pack (3PL)'], ['SHIPPED BY CUTOFF', a.tot - a.c - a.sup, 'supplier short + late pack'], ['DELIVERED ON TIME', a.tot - a.c - a.sup - a.car - a.un, 'carrier + unconfirmed'], ['KEPT (NO RETURN)', a.tot - a.c - a.sup - a.car - a.un - ret, 'returns']];
+    var o = '<defs><linearGradient id="fnG" x1="0" x2="1"><stop offset="0" stop-color="#3ddc84" stop-opacity=".55"/><stop offset="1" stop-color="#4fc3ff" stop-opacity=".6"/></linearGradient></defs>';
+    var x0 = 60, x1 = 980, cy = 430, Hm = 420, n = stg.length, w = (x1 - x0) / n, lo = stg[n - 1][1] / stg[0][1], amp = function (v) { return Hm / 2 * (0.25 + 0.75 * ((v / stg[0][1]) - lo * .98) / (1 - lo * .98)); };
+    var up = 'M' + x0 + ',' + (cy - amp(stg[0][1])), dn = '';
+    stg.forEach(function (s, i) { var xm = x0 + (i + .5) * w, xe = x0 + (i + 1) * w, h = amp(s[1]); up += ' S' + (xm - w * .3) + ',' + (cy - h) + ' ' + xe + ',' + (cy - h); });
+    for (var i = n - 1; i >= 0; i--) { var xs = x0 + i * w, h = amp(stg[i][1]); dn += ' S' + (xs + w * .3) + ',' + (cy + h) + ' ' + xs + ',' + (cy + (i ? amp(stg[i - 1][1]) : h)); }
+    o += '<path d="' + up + ' L' + x1 + ',' + (cy + amp(stg[n - 1][1])) + dn + 'Z" fill="url(#fnG)" filter="url(#gl)" opacity=".9"/>';
+    stg.forEach(function (s, i) { var x = x0 + i * w; o += (i ? '<line x1="' + x + '" x2="' + x + '" y1="130" y2="700" stroke="#2a323c"/>' : '') + '<rect data-k="s' + i + '" x="' + x + '" y="130" width="' + w + '" height="570" fill="transparent"' + tp([s[0], fmt(s[1]) + ' orders', (s[1] / stg[0][1] * 100).toFixed(2) + '% of released', i ? 'Lost here: ' + fmt(stg[i - 1][1] - s[1]) + ' (' + s[2] + ')' : '', 'EXAMPLE']) + '/>' +
+      '<g data-k="s' + i + '">' + T(x + w / 2, 160, s[0], 12, C.dim, 'middle', 800) + T(x + w / 2, cy - 6, (s[1] / stg[0][1] * 100).toFixed(1) + '%', 18, C.tx, 'middle', 800) + T(x + w / 2, cy + 22, fmt(s[1]), 22, C.tx, 'middle', 800) + '</g>'; });
+    var X = 1040, Y = 170; o += T(X, Y, 'STAGE', 12, C.dim, 'start', 800) + T(X + 250, Y, 'ORDERS', 12, C.dim, 'end', 800) + T(X + 340, Y, 'LOST', 12, C.dim, 'end', 800) + T(X + 350, Y, 'WHERE IT WENT', 12, C.dim, 'start', 800);
+    stg.forEach(function (s, i) { var y = Y + 26 + i * 64, lost = i ? stg[i - 1][1] - s[1] : 0, bw = 250 * s[1] / stg[0][1];
+      o += '<g data-k="s' + i + '"><rect x="' + X + '" y="' + y + '" width="' + bw + '" height="44" fill="' + (i === n - 1 ? '#2f6f8a' : '#14463a') + '" stroke="#3ddc84" stroke-opacity=".35"/>' + T(X + 10, y + 27, s[0], 13, C.tx, 'start', 800) + T(X + 250, y + 28, fmt(s[1]), 14, C.tx, 'end', 800) + T(X + 340, y + 28, lost ? fmt(lost) : '—', 16, lost ? C.amb : C.dim, 'end', 800) + T(X + 350, y + 28, s[2] || '', 12, C.dim, 'start', 700) + '</g>'; });
+    o += T(X, Y + 26 + n * 64 + 20, 'Bar width = share of released orders. EXAMPLE stage split of the feed’s miss categories.', 12, C.dim, 'start', 700);
+    document.getElementById('v14').innerHTML = o;
+    document.getElementById('fnc').innerHTML = ['NETWORK'].concat(sites.map(function (s) { return s.id; })).map(function (x) { return '<button data-fn="' + x + '"' + (x === fn.sel ? ' class="on"' : '') + '>' + x.replace('EX-3PL-', '') + '</button>'; }).join('');
+  }
+  document.getElementById('fnc').addEventListener('click', function (e) { var b = e.target.closest('[data-fn]'); if (b) { fn.sel = b.getAttribute('data-fn'); ISO.v14 = null; funnel(); } });
+  radar(); capsules(); butterfly(); ninebox(); bowtie(); funnel();
+  ['v10', 'v11', 'v12', 'v13', 'v14'].forEach(bind);
+})();
+</script>
+
 </body>
 </html>
