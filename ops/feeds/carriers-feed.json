@@ -1,0 +1,985 @@
+{
+ "meta": {
+  "mode": "MODE: SANITIZED (M-01 open)",
+  "example": true,
+  "label": "EXAMPLE \u00b7 made-up data",
+  "asOf": "2026-11-03",
+  "days": [
+   "2026-10-05",
+   "2026-10-06",
+   "2026-10-07",
+   "2026-10-08",
+   "2026-10-09",
+   "2026-10-10",
+   "2026-10-11",
+   "2026-10-12",
+   "2026-10-13",
+   "2026-10-14",
+   "2026-10-15",
+   "2026-10-16",
+   "2026-10-17",
+   "2026-10-18",
+   "2026-10-19",
+   "2026-10-20",
+   "2026-10-21",
+   "2026-10-22",
+   "2026-10-23",
+   "2026-10-24",
+   "2026-10-25",
+   "2026-10-26",
+   "2026-10-27",
+   "2026-10-28",
+   "2026-10-29",
+   "2026-10-30",
+   "2026-10-31",
+   "2026-11-01",
+   "2026-11-02",
+   "2026-11-03"
+  ],
+  "levelsFrom": "EXAMPLE KPI week 2027-03-14 (ops weekly-data-example) scaled onto the 2026-11-03 snapshot window",
+  "feed": "carriers",
+  "onTimeTarget": 95.0,
+  "onTimeFloor": 92.0,
+  "damageTarget": 0.5,
+  "damageFloor": 1.0,
+  "targetNote": "EXAMPLE targets: on-time 95% (floor 92%), damage 0.5% (floor 1.0%)"
+ },
+ "carriers": [
+  {
+   "id": "EX-CAR-A",
+   "mode": "parcel",
+   "daily": [
+    {
+     "onTime": 96.12,
+     "damage": 0.19,
+     "shipments": 507
+    },
+    {
+     "onTime": 96.4,
+     "damage": 0.25,
+     "shipments": 420
+    },
+    {
+     "onTime": 96.0,
+     "damage": 0.27,
+     "shipments": 470
+    },
+    {
+     "onTime": 96.36,
+     "damage": 0.23,
+     "shipments": 430
+    },
+    {
+     "onTime": 96.02,
+     "damage": 0.22,
+     "shipments": 562
+    },
+    {
+     "onTime": 96.8,
+     "damage": 0.25,
+     "shipments": 389
+    },
+    {
+     "onTime": 96.41,
+     "damage": 0.24,
+     "shipments": 476
+    },
+    {
+     "onTime": 96.41,
+     "damage": 0.23,
+     "shipments": 383
+    },
+    {
+     "onTime": 96.77,
+     "damage": 0.21,
+     "shipments": 523
+    },
+    {
+     "onTime": 95.98,
+     "damage": 0.21,
+     "shipments": 395
+    },
+    {
+     "onTime": 96.29,
+     "damage": 0.27,
+     "shipments": 607
+    },
+    {
+     "onTime": 96.7,
+     "damage": 0.21,
+     "shipments": 436
+    },
+    {
+     "onTime": 96.82,
+     "damage": 0.22,
+     "shipments": 487
+    },
+    {
+     "onTime": 96.25,
+     "damage": 0.26,
+     "shipments": 497
+    },
+    {
+     "onTime": 96.63,
+     "damage": 0.18,
+     "shipments": 434
+    },
+    {
+     "onTime": 96.74,
+     "damage": 0.25,
+     "shipments": 392
+    },
+    {
+     "onTime": 96.74,
+     "damage": 0.18,
+     "shipments": 564
+    },
+    {
+     "onTime": 96.35,
+     "damage": 0.24,
+     "shipments": 492
+    },
+    {
+     "onTime": 96.6,
+     "damage": 0.2,
+     "shipments": 390
+    },
+    {
+     "onTime": 96.7,
+     "damage": 0.22,
+     "shipments": 445
+    },
+    {
+     "onTime": 96.26,
+     "damage": 0.19,
+     "shipments": 515
+    },
+    {
+     "onTime": 96.15,
+     "damage": 0.24,
+     "shipments": 572
+    },
+    {
+     "onTime": 96.41,
+     "damage": 0.17,
+     "shipments": 591
+    },
+    {
+     "onTime": 96.16,
+     "damage": 0.25,
+     "shipments": 510
+    },
+    {
+     "onTime": 96.74,
+     "damage": 0.2,
+     "shipments": 547
+    },
+    {
+     "onTime": 96.01,
+     "damage": 0.21,
+     "shipments": 551
+    },
+    {
+     "onTime": 96.59,
+     "damage": 0.27,
+     "shipments": 396
+    },
+    {
+     "onTime": 96.77,
+     "damage": 0.15,
+     "shipments": 593
+    },
+    {
+     "onTime": 96.46,
+     "damage": 0.26,
+     "shipments": 551
+    },
+    {
+     "onTime": 96.4,
+     "damage": 0.21,
+     "shipments": 490
+    }
+   ]
+  },
+  {
+   "id": "EX-CAR-B",
+   "mode": "LTL",
+   "daily": [
+    {
+     "onTime": 94.01,
+     "damage": 0.67,
+     "shipments": 383
+    },
+    {
+     "onTime": 94.58,
+     "damage": 0.61,
+     "shipments": 557
+    },
+    {
+     "onTime": 93.87,
+     "damage": 0.65,
+     "shipments": 435
+    },
+    {
+     "onTime": 93.7,
+     "damage": 0.65,
+     "shipments": 384
+    },
+    {
+     "onTime": 94.41,
+     "damage": 0.67,
+     "shipments": 506
+    },
+    {
+     "onTime": 94.35,
+     "damage": 0.65,
+     "shipments": 511
+    },
+    {
+     "onTime": 93.82,
+     "damage": 0.62,
+     "shipments": 590
+    },
+    {
+     "onTime": 94.01,
+     "damage": 0.67,
+     "shipments": 506
+    },
+    {
+     "onTime": 94.45,
+     "damage": 0.66,
+     "shipments": 601
+    },
+    {
+     "onTime": 93.82,
+     "damage": 0.65,
+     "shipments": 600
+    },
+    {
+     "onTime": 94.5,
+     "damage": 0.64,
+     "shipments": 462
+    },
+    {
+     "onTime": 94.22,
+     "damage": 0.62,
+     "shipments": 580
+    },
+    {
+     "onTime": 94.01,
+     "damage": 0.61,
+     "shipments": 594
+    },
+    {
+     "onTime": 94.03,
+     "damage": 0.62,
+     "shipments": 566
+    },
+    {
+     "onTime": 94.43,
+     "damage": 0.64,
+     "shipments": 452
+    },
+    {
+     "onTime": 94.27,
+     "damage": 0.67,
+     "shipments": 445
+    },
+    {
+     "onTime": 93.68,
+     "damage": 0.66,
+     "shipments": 519
+    },
+    {
+     "onTime": 93.8,
+     "damage": 0.65,
+     "shipments": 395
+    },
+    {
+     "onTime": 94.27,
+     "damage": 0.67,
+     "shipments": 400
+    },
+    {
+     "onTime": 94.02,
+     "damage": 0.64,
+     "shipments": 544
+    },
+    {
+     "onTime": 94.09,
+     "damage": 0.6,
+     "shipments": 447
+    },
+    {
+     "onTime": 93.78,
+     "damage": 0.67,
+     "shipments": 543
+    },
+    {
+     "onTime": 94.08,
+     "damage": 0.6,
+     "shipments": 443
+    },
+    {
+     "onTime": 94.5,
+     "damage": 0.58,
+     "shipments": 441
+    },
+    {
+     "onTime": 93.81,
+     "damage": 0.66,
+     "shipments": 519
+    },
+    {
+     "onTime": 93.82,
+     "damage": 0.57,
+     "shipments": 494
+    },
+    {
+     "onTime": 93.75,
+     "damage": 0.61,
+     "shipments": 497
+    },
+    {
+     "onTime": 93.83,
+     "damage": 0.56,
+     "shipments": 582
+    },
+    {
+     "onTime": 94.18,
+     "damage": 0.6,
+     "shipments": 522
+    },
+    {
+     "onTime": 94.1,
+     "damage": 0.62,
+     "shipments": 492
+    }
+   ]
+  },
+  {
+   "id": "EX-CAR-C",
+   "mode": "LTL",
+   "daily": [
+    {
+     "onTime": 95.47,
+     "damage": 0.34,
+     "shipments": 429
+    },
+    {
+     "onTime": 95.48,
+     "damage": 0.37,
+     "shipments": 473
+    },
+    {
+     "onTime": 96.14,
+     "damage": 0.29,
+     "shipments": 447
+    },
+    {
+     "onTime": 95.32,
+     "damage": 0.3,
+     "shipments": 510
+    },
+    {
+     "onTime": 96.23,
+     "damage": 0.36,
+     "shipments": 495
+    },
+    {
+     "onTime": 96.17,
+     "damage": 0.3,
+     "shipments": 487
+    },
+    {
+     "onTime": 95.61,
+     "damage": 0.32,
+     "shipments": 502
+    },
+    {
+     "onTime": 95.96,
+     "damage": 0.39,
+     "shipments": 468
+    },
+    {
+     "onTime": 95.81,
+     "damage": 0.32,
+     "shipments": 408
+    },
+    {
+     "onTime": 95.83,
+     "damage": 0.37,
+     "shipments": 510
+    },
+    {
+     "onTime": 96.18,
+     "damage": 0.3,
+     "shipments": 618
+    },
+    {
+     "onTime": 95.42,
+     "damage": 0.33,
+     "shipments": 510
+    },
+    {
+     "onTime": 95.42,
+     "damage": 0.29,
+     "shipments": 399
+    },
+    {
+     "onTime": 96.29,
+     "damage": 0.37,
+     "shipments": 566
+    },
+    {
+     "onTime": 96.09,
+     "damage": 0.33,
+     "shipments": 591
+    },
+    {
+     "onTime": 95.65,
+     "damage": 0.35,
+     "shipments": 501
+    },
+    {
+     "onTime": 95.99,
+     "damage": 0.38,
+     "shipments": 599
+    },
+    {
+     "onTime": 95.99,
+     "damage": 0.36,
+     "shipments": 439
+    },
+    {
+     "onTime": 96.07,
+     "damage": 0.31,
+     "shipments": 464
+    },
+    {
+     "onTime": 95.72,
+     "damage": 0.34,
+     "shipments": 408
+    },
+    {
+     "onTime": 96.24,
+     "damage": 0.33,
+     "shipments": 384
+    },
+    {
+     "onTime": 95.98,
+     "damage": 0.31,
+     "shipments": 497
+    },
+    {
+     "onTime": 96.11,
+     "damage": 0.37,
+     "shipments": 496
+    },
+    {
+     "onTime": 95.84,
+     "damage": 0.37,
+     "shipments": 393
+    },
+    {
+     "onTime": 95.36,
+     "damage": 0.36,
+     "shipments": 524
+    },
+    {
+     "onTime": 95.83,
+     "damage": 0.28,
+     "shipments": 515
+    },
+    {
+     "onTime": 95.53,
+     "damage": 0.39,
+     "shipments": 421
+    },
+    {
+     "onTime": 95.55,
+     "damage": 0.3,
+     "shipments": 486
+    },
+    {
+     "onTime": 95.37,
+     "damage": 0.4,
+     "shipments": 466
+    },
+    {
+     "onTime": 95.8,
+     "damage": 0.34,
+     "shipments": 504
+    }
+   ]
+  },
+  {
+   "id": "EX-CAR-D",
+   "mode": "parcel",
+   "daily": [
+    {
+     "onTime": 92.68,
+     "damage": 0.26,
+     "shipments": 551
+    },
+    {
+     "onTime": 92.73,
+     "damage": 0.26,
+     "shipments": 568
+    },
+    {
+     "onTime": 92.86,
+     "damage": 0.25,
+     "shipments": 431
+    },
+    {
+     "onTime": 93.06,
+     "damage": 0.3,
+     "shipments": 398
+    },
+    {
+     "onTime": 92.37,
+     "damage": 0.29,
+     "shipments": 389
+    },
+    {
+     "onTime": 92.28,
+     "damage": 0.23,
+     "shipments": 444
+    },
+    {
+     "onTime": 92.18,
+     "damage": 0.29,
+     "shipments": 402
+    },
+    {
+     "onTime": 92.24,
+     "damage": 0.26,
+     "shipments": 441
+    },
+    {
+     "onTime": 92.27,
+     "damage": 0.22,
+     "shipments": 527
+    },
+    {
+     "onTime": 92.95,
+     "damage": 0.31,
+     "shipments": 613
+    },
+    {
+     "onTime": 92.73,
+     "damage": 0.33,
+     "shipments": 600
+    },
+    {
+     "onTime": 92.55,
+     "damage": 0.32,
+     "shipments": 402
+    },
+    {
+     "onTime": 91.88,
+     "damage": 0.22,
+     "shipments": 543
+    },
+    {
+     "onTime": 92.71,
+     "damage": 0.27,
+     "shipments": 532
+    },
+    {
+     "onTime": 92.48,
+     "damage": 0.34,
+     "shipments": 394
+    },
+    {
+     "onTime": 91.91,
+     "damage": 0.3,
+     "shipments": 533
+    },
+    {
+     "onTime": 91.86,
+     "damage": 0.33,
+     "shipments": 587
+    },
+    {
+     "onTime": 92.15,
+     "damage": 0.24,
+     "shipments": 523
+    },
+    {
+     "onTime": 91.52,
+     "damage": 0.23,
+     "shipments": 493
+    },
+    {
+     "onTime": 91.54,
+     "damage": 0.27,
+     "shipments": 583
+    },
+    {
+     "onTime": 92.06,
+     "damage": 0.23,
+     "shipments": 487
+    },
+    {
+     "onTime": 92.05,
+     "damage": 0.29,
+     "shipments": 423
+    },
+    {
+     "onTime": 92.23,
+     "damage": 0.32,
+     "shipments": 489
+    },
+    {
+     "onTime": 92.16,
+     "damage": 0.25,
+     "shipments": 488
+    },
+    {
+     "onTime": 91.58,
+     "damage": 0.31,
+     "shipments": 549
+    },
+    {
+     "onTime": 91.94,
+     "damage": 0.31,
+     "shipments": 561
+    },
+    {
+     "onTime": 91.68,
+     "damage": 0.32,
+     "shipments": 472
+    },
+    {
+     "onTime": 91.24,
+     "damage": 0.27,
+     "shipments": 461
+    },
+    {
+     "onTime": 91.9,
+     "damage": 0.25,
+     "shipments": 443
+    },
+    {
+     "onTime": 91.4,
+     "damage": 0.28,
+     "shipments": 431
+    }
+   ]
+  },
+  {
+   "id": "EX-CAR-E",
+   "mode": "FTL",
+   "daily": [
+    {
+     "onTime": 98.03,
+     "damage": 0.08,
+     "shipments": 554
+    },
+    {
+     "onTime": 98.0,
+     "damage": 0.11,
+     "shipments": 407
+    },
+    {
+     "onTime": 97.95,
+     "damage": 0.13,
+     "shipments": 380
+    },
+    {
+     "onTime": 98.02,
+     "damage": 0.12,
+     "shipments": 527
+    },
+    {
+     "onTime": 97.14,
+     "damage": 0.08,
+     "shipments": 482
+    },
+    {
+     "onTime": 97.76,
+     "damage": 0.13,
+     "shipments": 446
+    },
+    {
+     "onTime": 97.2,
+     "damage": 0.15,
+     "shipments": 517
+    },
+    {
+     "onTime": 97.72,
+     "damage": 0.18,
+     "shipments": 445
+    },
+    {
+     "onTime": 97.48,
+     "damage": 0.12,
+     "shipments": 465
+    },
+    {
+     "onTime": 97.17,
+     "damage": 0.08,
+     "shipments": 601
+    },
+    {
+     "onTime": 97.21,
+     "damage": 0.17,
+     "shipments": 589
+    },
+    {
+     "onTime": 97.7,
+     "damage": 0.1,
+     "shipments": 505
+    },
+    {
+     "onTime": 98.03,
+     "damage": 0.14,
+     "shipments": 440
+    },
+    {
+     "onTime": 97.19,
+     "damage": 0.07,
+     "shipments": 486
+    },
+    {
+     "onTime": 98.01,
+     "damage": 0.16,
+     "shipments": 602
+    },
+    {
+     "onTime": 97.97,
+     "damage": 0.08,
+     "shipments": 565
+    },
+    {
+     "onTime": 97.78,
+     "damage": 0.06,
+     "shipments": 412
+    },
+    {
+     "onTime": 97.29,
+     "damage": 0.1,
+     "shipments": 398
+    },
+    {
+     "onTime": 97.31,
+     "damage": 0.13,
+     "shipments": 616
+    },
+    {
+     "onTime": 97.46,
+     "damage": 0.14,
+     "shipments": 519
+    },
+    {
+     "onTime": 97.14,
+     "damage": 0.16,
+     "shipments": 421
+    },
+    {
+     "onTime": 97.92,
+     "damage": 0.09,
+     "shipments": 497
+    },
+    {
+     "onTime": 98.07,
+     "damage": 0.14,
+     "shipments": 514
+    },
+    {
+     "onTime": 97.23,
+     "damage": 0.15,
+     "shipments": 602
+    },
+    {
+     "onTime": 97.95,
+     "damage": 0.16,
+     "shipments": 576
+    },
+    {
+     "onTime": 97.66,
+     "damage": 0.07,
+     "shipments": 384
+    },
+    {
+     "onTime": 97.43,
+     "damage": 0.16,
+     "shipments": 394
+    },
+    {
+     "onTime": 97.84,
+     "damage": 0.13,
+     "shipments": 438
+    },
+    {
+     "onTime": 97.53,
+     "damage": 0.08,
+     "shipments": 481
+    },
+    {
+     "onTime": 97.6,
+     "damage": 0.12,
+     "shipments": 537
+    }
+   ]
+  },
+  {
+   "id": "EX-CAR-F",
+   "mode": "air-parcel",
+   "daily": [
+    {
+     "onTime": 95.21,
+     "damage": 0.43,
+     "shipments": 527
+    },
+    {
+     "onTime": 95.57,
+     "damage": 0.38,
+     "shipments": 509
+    },
+    {
+     "onTime": 95.21,
+     "damage": 0.38,
+     "shipments": 440
+    },
+    {
+     "onTime": 94.95,
+     "damage": 0.38,
+     "shipments": 415
+    },
+    {
+     "onTime": 94.78,
+     "damage": 0.44,
+     "shipments": 492
+    },
+    {
+     "onTime": 95.49,
+     "damage": 0.42,
+     "shipments": 605
+    },
+    {
+     "onTime": 95.1,
+     "damage": 0.45,
+     "shipments": 394
+    },
+    {
+     "onTime": 94.83,
+     "damage": 0.45,
+     "shipments": 394
+    },
+    {
+     "onTime": 95.05,
+     "damage": 0.41,
+     "shipments": 618
+    },
+    {
+     "onTime": 95.27,
+     "damage": 0.4,
+     "shipments": 496
+    },
+    {
+     "onTime": 95.14,
+     "damage": 0.36,
+     "shipments": 610
+    },
+    {
+     "onTime": 95.19,
+     "damage": 0.42,
+     "shipments": 431
+    },
+    {
+     "onTime": 95.68,
+     "damage": 0.43,
+     "shipments": 609
+    },
+    {
+     "onTime": 95.65,
+     "damage": 0.41,
+     "shipments": 510
+    },
+    {
+     "onTime": 95.06,
+     "damage": 0.42,
+     "shipments": 409
+    },
+    {
+     "onTime": 95.51,
+     "damage": 0.37,
+     "shipments": 395
+    },
+    {
+     "onTime": 95.23,
+     "damage": 0.4,
+     "shipments": 449
+    },
+    {
+     "onTime": 95.26,
+     "damage": 0.39,
+     "shipments": 521
+    },
+    {
+     "onTime": 95.37,
+     "damage": 0.44,
+     "shipments": 564
+    },
+    {
+     "onTime": 95.32,
+     "damage": 0.41,
+     "shipments": 437
+    },
+    {
+     "onTime": 94.81,
+     "damage": 0.37,
+     "shipments": 572
+    },
+    {
+     "onTime": 94.94,
+     "damage": 0.41,
+     "shipments": 444
+    },
+    {
+     "onTime": 95.59,
+     "damage": 0.42,
+     "shipments": 613
+    },
+    {
+     "onTime": 95.23,
+     "damage": 0.45,
+     "shipments": 436
+    },
+    {
+     "onTime": 95.5,
+     "damage": 0.46,
+     "shipments": 503
+    },
+    {
+     "onTime": 95.09,
+     "damage": 0.46,
+     "shipments": 539
+    },
+    {
+     "onTime": 95.03,
+     "damage": 0.42,
+     "shipments": 454
+    },
+    {
+     "onTime": 95.16,
+     "damage": 0.37,
+     "shipments": 478
+    },
+    {
+     "onTime": 95.32,
+     "damage": 0.37,
+     "shipments": 541
+    },
+    {
+     "onTime": 95.2,
+     "damage": 0.41,
+     "shipments": 575
+    }
+   ]
+  }
+ ]
+}

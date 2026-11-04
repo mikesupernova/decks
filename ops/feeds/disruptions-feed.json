@@ -1,0 +1,157 @@
+{
+ "meta": {
+  "mode": "MODE: SANITIZED (M-01 open)",
+  "example": true,
+  "label": "EXAMPLE \u00b7 made-up data",
+  "asOf": "2026-11-03",
+  "days": [
+   "2026-10-05",
+   "2026-10-06",
+   "2026-10-07",
+   "2026-10-08",
+   "2026-10-09",
+   "2026-10-10",
+   "2026-10-11",
+   "2026-10-12",
+   "2026-10-13",
+   "2026-10-14",
+   "2026-10-15",
+   "2026-10-16",
+   "2026-10-17",
+   "2026-10-18",
+   "2026-10-19",
+   "2026-10-20",
+   "2026-10-21",
+   "2026-10-22",
+   "2026-10-23",
+   "2026-10-24",
+   "2026-10-25",
+   "2026-10-26",
+   "2026-10-27",
+   "2026-10-28",
+   "2026-10-29",
+   "2026-10-30",
+   "2026-10-31",
+   "2026-11-01",
+   "2026-11-02",
+   "2026-11-03"
+  ],
+  "levelsFrom": "EXAMPLE KPI week 2027-03-14 (ops weekly-data-example) scaled onto the 2026-11-03 snapshot window",
+  "feed": "disruptions",
+  "rules": "Critical = deadline within 24 h or a strike/closure active at a port holding our boxes; warning = active event touching our boxes or orders; info = status only."
+ },
+ "events": [
+  {
+   "id": "EV-01",
+   "type": "strike",
+   "name": "LA/LB watchmen strike deadline",
+   "lat": 33.75,
+   "lon": -118.2,
+   "start": "2026-10-28",
+   "end": "2026-11-04",
+   "deadline": "2026-11-05T01:00:00Z",
+   "status": "deadline 11-04 17:00 PT, outcome pending",
+   "containers": 6,
+   "orders": 3,
+   "source": "real public event (watchtower log, read 2026-11-03)",
+   "label": {
+    "dx": -14,
+    "dy": 44,
+    "anchor": "start"
+   }
+  },
+  {
+   "id": "EV-02",
+   "type": "strike",
+   "name": "Spain general strike (Valencia transship)",
+   "lat": 39.45,
+   "lon": -0.32,
+   "start": "2026-10-30",
+   "end": "2026-11-11",
+   "deadline": "2026-11-12T00:00:00Z",
+   "status": "called for 11-11",
+   "containers": 1,
+   "orders": 0,
+   "source": "real public event (watchtower log)",
+   "label": {
+    "dx": 14,
+    "dy": 34,
+    "anchor": "start"
+   }
+  },
+  {
+   "id": "EV-03",
+   "type": "chokepoint",
+   "name": "Suez / Red Sea",
+   "lat": 30.0,
+   "lon": 32.5,
+   "start": "2026-10-20",
+   "end": "2026-11-03",
+   "status": "carriers returning (opportunity: rate relief, move #7)",
+   "containers": 0,
+   "orders": 0,
+   "source": "real public event (watchtower log, 2026-11-03)",
+   "tier": "info",
+   "label": {
+    "dx": 12,
+    "dy": 26,
+    "anchor": "start"
+   }
+  },
+  {
+   "id": "EV-04",
+   "type": "weather",
+   "name": "Winter storm watch, US Midwest",
+   "lat": 42.5,
+   "lon": -90.0,
+   "start": "2026-11-02",
+   "end": "2026-11-05",
+   "status": "watch",
+   "containers": 0,
+   "orders": 14,
+   "source": "EXAMPLE",
+   "label": {
+    "dx": 0,
+    "dy": 52,
+    "anchor": "start"
+   }
+  },
+  {
+   "id": "EV-05",
+   "type": "congestion",
+   "name": "Port yard congestion, Singapore",
+   "lat": 1.2,
+   "lon": 103.6,
+   "start": "2026-10-25",
+   "end": "2026-11-03",
+   "status": "moderate (EXAMPLE)",
+   "containers": 1,
+   "orders": 2,
+   "source": "EXAMPLE",
+   "label": {
+    "dx": -16,
+    "dy": 40,
+    "anchor": "end"
+   }
+  },
+  {
+   "id": "EV-06",
+   "type": "chokepoint",
+   "name": "Panama Canal",
+   "lat": 9.1,
+   "lon": -79.7,
+   "start": "2026-10-05",
+   "end": "2026-11-03",
+   "status": "normal (EXAMPLE status)",
+   "containers": 0,
+   "orders": 0,
+   "source": "EXAMPLE",
+   "tier": "info",
+   "label": {
+    "dx": 12,
+    "dy": 18,
+    "anchor": "start"
+   }
+  }
+ ]
+}
